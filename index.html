@@ -196,6 +196,17 @@ table.dt{width:100%;min-width:440px;border-collapse:collapse;font-size:13px}
 .dt .fix{background:var(--ok-soft);color:var(--ok);transition:background .4s}
 .dt td.fix{color:var(--ink)}
 .dt-note{margin:0;padding:8px 12px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink-2)}
+@media (max-width:600px){
+  table.dt{min-width:0}
+  .dt thead{display:none}
+  .dt,.dt tbody,.dt tr,.dt td{display:block;width:100%}
+  .dt tr{border-top:1px solid var(--rule);padding:6px 0}
+  .dt tbody tr:first-child{border-top:0}
+  .dt td{display:flex;justify-content:space-between;gap:12px;border-top:0;padding:4px 12px;text-align:right}
+  .dt td::before{content:attr(data-l);color:var(--ink-3);font-size:12px;text-align:left}
+  .dt td.n{justify-content:flex-start;gap:4px;font-family:var(--f-body);font-size:12px;font-weight:600;color:var(--ink-2)}
+  .dt td.n::before{content:"Rule";color:var(--ink-2)}
+}
 .dt-wait{margin:0;padding:14px 12px;font-size:13px;color:var(--ink-3)}
 pre.code{margin:0;font-family:var(--f-mono);font-size:12.5px;line-height:1.6;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto;white-space:pre;color:var(--ink)}
 pre.code .kw{color:var(--accent);font-weight:500}
@@ -488,7 +499,9 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .ra .evals i{width:10px;height:10px;aspect-ratio:auto;border-radius:2px}
 .btn:disabled{opacity:.45;cursor:default}
 .btn.done{background:var(--ok-soft);border-color:var(--ok);color:var(--ok);opacity:1}
-@media (max-width:600px){ .ra-crumb{display:none} .ra-bar{justify-content:space-between} .ra-box{flex-direction:column;align-items:stretch} }
+@media (max-width:900px){ .build-body.ra{grid-template-columns:1fr} }
+@media (max-width:600px){ .ra-crumb{display:none} .ra-bar{justify-content:space-between} .ra-box{flex-direction:column;align-items:stretch} .ra-foot .btn{width:100%;justify-content:center} }
+#ev-text{white-space:nowrap}
 
 /* ——— product brief ——— */
 .brief{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr) minmax(0,1.5fr);margin:0;border-bottom:1px solid var(--rule);background:var(--paper)}
@@ -1070,7 +1083,8 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
     const T = p.table, fixed = v2 && T.fix >= 0;
     const head = T.in.map((h, i) => i === T.fix ? `<th class="${fixed ? 'fix' : ''}">${esc(fixed ? T.fixed : T.orig)}</th>` : `<th>${esc(h)}</th>`).join('')
       + T.out.map(h => `<th class="o">${esc(h)}</th>`).join('');
-    const body = T.rows.map((r, ri) => `<tr><td class="n">${ri + 1}</td>${r.map((c, ci) => `<td class="${ci >= T.in.length ? 'o' : ''}${ci === T.fix && fixed ? ' fix' : ''}">${esc(c)}</td>`).join('')}</tr>`).join('');
+    const labels = T.in.map((h, i) => i === T.fix ? (fixed ? T.fixed : T.orig) : h).concat(T.out);
+    const body = T.rows.map((r, ri) => `<tr><td class="n">${ri + 1}</td>${r.map((c, ci) => `<td data-l="${esc(labels[ci])}" class="${ci >= T.in.length ? 'o' : ''}${ci === T.fix && fixed ? ' fix' : ''}">${esc(c)}</td>`).join('')}</tr>`).join('');
     return `<div class="dt-cap"><span>Decision table · first matching row wins</span><span>${fixed ? 'v2' : 'v1'}</span></div>`
       + `<div class="dt-scroll"><table class="dt"><thead><tr><th class="n">#</th>${head}</tr></thead><tbody>${body}</tbody></table></div>`
       + (fixed && T.note ? `<p class="dt-note">${esc(T.note)}</p>` : '');
