@@ -478,12 +478,10 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 @media (max-width:480px){ .impact{grid-template-columns:1fr} .imp + .imp{padding-left:0;border-left:0;border-top:1px solid var(--rule);margin-top:14px} }
 
 /* ——— contact / title block ——— */
-.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,260px);gap:40px;align-items:end}
-.portrait{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:12px;border:1px solid var(--rule)}
-@media (max-width:720px){ .contact-grid{grid-template-columns:1fr} .portrait{max-width:220px;grid-row:1} }
 .contact{padding-block:96px 40px}
 .contact h2{font-size:clamp(2rem,5vw,3.5rem);max-width:18ch}
 .contact .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;align-items:center}
+.contact-line{font-size:var(--t-lg);color:var(--ink-2);max-width:52ch;margin:16px 0 0}
 .email{font-family:var(--f-mono);font-size:var(--t-lg);padding:10px 14px;border:1px solid var(--ink);border-radius:8px;user-select:all;background:var(--panel)}
 .titleblock{display:grid;grid-template-columns:2fr repeat(4,minmax(0,1fr));border:1.5px solid var(--ink);margin-top:72px;font-size:var(--t-sm)}
 .titleblock > div{padding:10px 12px;border-left:1px solid var(--ink);min-width:0}
@@ -857,24 +855,20 @@ chrome.runtime.onMessage.addListener(
 
 <!-- ═══════════ CONTACT ═══════════ -->
 <section class="contact wrap" id="contact" aria-labelledby="h-contact">
-  <div class="contact-grid">
-    <div>
   <span class="tag"><b>Sheet 04</b> Contact</span>
-  <h2 id="h-contact" style="margin-top:14px">Building AI products at scale? Let's talk.</h2>
+  <h2 id="h-contact" style="margin-top:14px">Let's compare notes.</h2>
+  <p class="contact-line">I'm always glad to talk product, agents and where AI is heading. Email is the fastest way to reach me.</p>
   <div class="row">
     <span class="email" id="email">ishirv00@gmail.com</span>
     <button class="btn" type="button" id="copy">Copy email</button>
     <a class="btn" href="https://www.linkedin.com/in/ishirvasavada" target="_blank" rel="noopener">LinkedIn ↗</a>
     <!--resume-link-->
   </div>
-    </div>
-    <img class="portrait" src="media/ishir-portrait.webp" alt="Ishir Vasavada" width="480" height="600" loading="lazy">
-  </div>
 
   <div class="titleblock" aria-label="Site details">
     <div><span class="k">Project</span><span class="v">Ishir Vasavada · Product</span></div>
     <div><span class="k">Location</span><span class="v">Atlanta, GA</span></div>
-    <div><span class="k">Revision</span><span class="v">01 · Nov 2026</span></div>
+    <div><span class="k">Revision</span><span class="v">02 · Nov 2026</span></div>
     <div><span class="k">Built with</span><span class="v">AI coding agents</span></div>
     <div><span class="k">Sheet</span><span class="v">04 of 04</span></div>
   </div>
