@@ -19,7 +19,7 @@ body = body
   .replace(/<meta name="claude:[^>]*>\n?/, '')
   .replace(/<!--resume-link-->/g, hasResume ? '<a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>' : '');
 
-const shareTitle = 'Ishir Vasavada · AI product leader';
+const shareTitle = 'Ishir Vasavada · Product leader';
 const head = `<!doctype html>
 <html lang="en">
 <head>
