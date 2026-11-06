@@ -13,7 +13,10 @@
   --ink-2:#525A64;
   --ink-3:#737B85;
   --band:#E6E9E3;      /* solid section band */
-  --c-rules:#1E43D6; --c-eco:#1C7A4B; --c-rec:#6D3FC4; --c-plan:#B0570C; --c-jc:#0E7A86; --c-risk:#B4235A;  /* one color per product */
+  --c-eco:#1C7A4B; --c-rec:#6D3FC4; --c-plan:#B0570C; --c-jc:#0E7A86;
+  --c-rules:#007A6B; --f-rules:#00D2B9; --on-rules:#103425;   /* Zuora: Teal, Bush */
+  --c-risk:#008665; --f-risk:#6CEEAD; --on-risk:#000000;     /* OneTrust: Jade, Mint, black */
+  --danger:#B4235A;  /* one color per product */
   --rule:#D2D6D0;
   --grid:rgba(20,24,29,.045);
   --accent:#1E43D6;     /* blue-line print */
@@ -29,11 +32,11 @@
   --wrap:1480px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --paper:#0B1019; --panel:#111826; --ink:#E6EAF1; --ink-2:#A2ABBA; --ink-3:#8590A3; --rule:#243045; --band:#0E1420; --c-rules:#86A0FF; --c-eco:#54C78E; --c-rec:#B392F0; --c-plan:#F0A660; --c-jc:#4CC3D1; --c-risk:#F27BA3;
+  --paper:#0B1019; --panel:#111826; --ink:#E6EAF1; --ink-2:#A2ABBA; --ink-3:#8590A3; --rule:#243045; --band:#0E1420; --c-rules:#00D2B9; --c-eco:#54C78E; --c-rec:#B392F0; --c-plan:#F0A660; --c-jc:#4CC3D1; --c-risk:#6CEEAD; --danger:#F27BA3;
   --grid:rgba(140,170,235,.055); --accent:#86A0FF; --accent-ink:#0B1019; --accent-soft:rgba(134,160,255,.11); --accent-mid:rgba(134,160,255,.26);
   --ok:#54C78E; --ok-soft:rgba(84,199,142,.14); --warn:#F0A660; --warn-soft:rgba(240,166,96,.14); color-scheme:dark }}
 :root[data-theme="dark"]{
-  --paper:#0B1019; --panel:#111826; --ink:#E6EAF1; --ink-2:#A2ABBA; --ink-3:#8590A3; --rule:#243045; --band:#0E1420; --c-rules:#86A0FF; --c-eco:#54C78E; --c-rec:#B392F0; --c-plan:#F0A660; --c-jc:#4CC3D1; --c-risk:#F27BA3;
+  --paper:#0B1019; --panel:#111826; --ink:#E6EAF1; --ink-2:#A2ABBA; --ink-3:#8590A3; --rule:#243045; --band:#0E1420; --c-rules:#00D2B9; --c-eco:#54C78E; --c-rec:#B392F0; --c-plan:#F0A660; --c-jc:#4CC3D1; --c-risk:#6CEEAD; --danger:#F27BA3;
   --grid:rgba(140,170,235,.055); --accent:#86A0FF; --accent-ink:#0B1019; --accent-soft:rgba(134,160,255,.11); --accent-mid:rgba(134,160,255,.26);
   --ok:#54C78E; --ok-soft:rgba(84,199,142,.14); --warn:#F0A660; --warn-soft:rgba(240,166,96,.14); color-scheme:dark }
 
@@ -479,15 +482,15 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .ra-side{background:var(--paper)}
 .ra-bar{display:flex;align-items:center;gap:12px;margin:-22px -24px 20px;padding:11px 24px;border-bottom:1px solid var(--rule);background:var(--paper)}
 .ra-app{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:13.5px}
-.ra-app i{width:16px;height:16px;border-radius:4px;background:var(--pc);box-shadow:inset 0 0 0 3px color-mix(in srgb,var(--paper) 55%,transparent)}
+.ra-app i{width:16px;height:16px;border-radius:4px;background:var(--pf,var(--pc));box-shadow:inset 0 0 0 3px color-mix(in srgb,var(--paper) 55%,transparent)}
 .ra-crumb{margin-right:auto;font-size:12.5px;color:var(--ink-3)}
 .ra-label{margin:0 0 6px;font-size:12.5px;font-weight:500;color:var(--ink-2)}
 .ra-box{display:flex;gap:10px;align-items:center;border:1.5px solid var(--pc);border-radius:12px;padding:8px 8px 8px 14px;background:var(--paper);box-shadow:0 0 0 4px color-mix(in srgb,var(--pc) 10%,transparent)}
 .ra-input{flex:1;min-width:0;font-size:15.5px;line-height:1.45;color:var(--ink)}
 .ra-input::after{content:"";display:inline-block;width:1.5px;height:1.05em;margin-left:2px;vertical-align:-.15em;background:var(--pc);animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.btn.ra-gen{background:var(--pc);border-color:var(--pc);color:var(--accent-ink);white-space:nowrap}
-.btn.ra-gen:hover{filter:brightness(1.08);background:var(--pc);border-color:var(--pc)}
+.btn.ra-gen{background:var(--pf,var(--pc));border-color:var(--pf,var(--pc));color:var(--pon,var(--accent-ink));white-space:nowrap}
+.btn.ra-gen:hover{filter:brightness(1.06);background:var(--pf,var(--pc));border-color:var(--pf,var(--pc));color:var(--pon,var(--accent-ink))}
 .ra-chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 18px}
 .ra-try{font-size:12px;color:var(--ink-3);margin-right:2px}
 .ra-chip{border:1px solid var(--rule);background:var(--panel);border-radius:999px;padding:5px 12px;font-size:12.5px;color:var(--ink-2);cursor:pointer}
@@ -522,7 +525,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .rk-out{margin-top:14px;font-size:var(--t-sm);border-radius:10px;padding:11px 14px;border:1px solid var(--rule)}
 .rk-out.lo{border-color:var(--ok);background:var(--ok-soft)}
 .rk-out.me{border-color:var(--warn);background:var(--warn-soft)}
-.rk-out.hi{border-color:var(--c-risk);background:color-mix(in srgb,var(--c-risk) 12%,transparent)}
+.rk-out.hi{border-color:var(--danger);background:color-mix(in srgb,var(--danger) 12%,transparent)}
 .rk-map-wrap{display:grid;grid-template-columns:16px minmax(0,1fr);grid-template-rows:auto auto;gap:4px 6px;margin:12px 0 14px}
 .rk-ylab{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;color:var(--ink-3);text-align:center}
 .rk-xlab{grid-column:2;font-size:11px;color:var(--ink-3);text-align:center}
@@ -530,7 +533,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .rk-map > div{border-radius:4px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:3px;padding:3px}
 .rk-map .lo{background:var(--ok-soft)}
 .rk-map .me{background:var(--warn-soft)}
-.rk-map .hi{background:color-mix(in srgb,var(--c-risk) 16%,transparent)}
+.rk-map .hi{background:color-mix(in srgb,var(--danger) 16%,transparent)}
 .rk-dot{width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:11px;font-weight:600;display:inline-grid;place-items:center;flex:none}
 .rk-reg{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .rk-reg li{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px;padding:7px 10px;border:1px solid var(--rule);border-radius:9px;background:var(--paper)}
@@ -541,7 +544,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .lv{font-family:var(--f-mono);font-size:11.5px;padding:2px 6px;border-radius:5px}
 .lv.lo{background:var(--ok-soft);color:var(--ok)}
 .lv.me{background:var(--warn-soft);color:var(--warn)}
-.lv.hi{background:color-mix(in srgb,var(--c-risk) 16%,transparent);color:var(--c-risk)}
+.lv.hi{background:color-mix(in srgb,var(--danger) 16%,transparent);color:var(--danger)}
 @media (max-width:520px){ .rk-q{flex-direction:column;align-items:flex-start} .rk-flow{gap:8px 20px} }
 
 /* ——— product brief ——— */
@@ -554,14 +557,14 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 
 /* ——— work tabs ——— */
 .wtabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-bottom:16px}
-.wtab{text-align:left;border:1px solid var(--rule);border-top:3px solid var(--pc);background:color-mix(in srgb,var(--pc) 6%,var(--panel));border-radius:12px;padding:14px 14px 13px;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-width:0;transition:border-color .15s}
+.wtab{text-align:left;border:1px solid var(--rule);border-top:3px solid var(--pf,var(--pc));background:color-mix(in srgb,var(--pc) 6%,var(--panel));border-radius:12px;padding:14px 14px 13px;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-width:0;transition:border-color .15s}
 .wtab:hover{border-color:var(--ink-3)}
 .wtab .wk{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--pc)}
 .wtab .wn{font-weight:600;font-size:var(--t-md);letter-spacing:-.01em}
 .wtab .wo{font-size:12.5px;color:var(--ink-2);line-height:1.4}
-.wtab[aria-selected="true"]{background:var(--pc);border-color:var(--pc);color:var(--accent-ink)}
-.wtab[aria-selected="true"] .wk,.wtab[aria-selected="true"] .wo{color:var(--accent-ink);opacity:.8}
-.wpanel .build{margin-bottom:12px;border-top:3px solid var(--pc)}
+.wtab[aria-selected="true"]{background:var(--pf,var(--pc));border-color:var(--pf,var(--pc));color:var(--pon,var(--accent-ink))}
+.wtab[aria-selected="true"] .wk,.wtab[aria-selected="true"] .wo{color:var(--pon,var(--accent-ink));opacity:.8}
+.wpanel .build{margin-bottom:12px;border-top:3px solid var(--pf,var(--pc))}
 .wpanel .chip.a{color:var(--pc);border-color:color-mix(in srgb,var(--pc) 35%,transparent);background:color-mix(in srgb,var(--pc) 9%,transparent)}
 .wpanel .brief dt{color:var(--pc)}
 @media (max-width:900px){ .wtabs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(200px,62%);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory} .wtab{scroll-snap-align:start} }
@@ -644,15 +647,15 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   </div>
 
   <div class="wtabs" id="work-tabs" role="tablist" aria-label="Products">
-    <button class="wtab" role="tab" id="wt-rules" style="--pc:var(--c-rules)" aria-controls="wp-rules" aria-selected="true" type="button"><span class="wk">Enterprise platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span></button>
-    <button class="wtab" role="tab" id="wt-risk" style="--pc:var(--c-risk)" aria-controls="wp-risk" aria-selected="false" type="button"><span class="wk">Enterprise · risk</span><span class="wn">Risk assessment workflows</span><span class="wo">Routes every assessment by its risk</span></button>
+    <button class="wtab" role="tab" id="wt-rules" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)" aria-controls="wp-rules" aria-selected="true" type="button"><span class="wk">Enterprise platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span></button>
+    <button class="wtab" role="tab" id="wt-risk" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)" aria-controls="wp-risk" aria-selected="false" type="button"><span class="wk">Enterprise · risk</span><span class="wn">Risk assessment workflows</span><span class="wo">Routes every assessment by its risk</span></button>
     <button class="wtab" role="tab" id="wt-eco" style="--pc:var(--c-eco)" aria-controls="wp-eco" aria-selected="false" type="button"><span class="wk">Startup · vision</span><span class="wn">Ecodrop Technologies</span><span class="wo">Thousands of users, Techstars-backed</span></button>
     <button class="wtab" role="tab" id="wt-rec" style="--pc:var(--c-rec)" aria-controls="wp-rec" aria-selected="false" type="button"><span class="wk">Speech search</span><span class="wn">Recognito</span><span class="wo">Jump to the second a word is said</span></button>
     <button class="wtab" role="tab" id="wt-plan" style="--pc:var(--c-plan)" aria-controls="wp-plan" aria-selected="false" type="button"><span class="wk">Multimodal agent</span><span class="wn">Blueprint vision agent</span><span class="wo">Reads drawings into an estimate-ready schedule</span></button>
     <button class="wtab" role="tab" id="wt-jc" style="--pc:var(--c-jc)" aria-controls="wp-jc" aria-selected="false" type="button"><span class="wk">Multi-agent system</span><span class="wn">Cost-control agent crew</span><span class="wo">Catches duplicates and overruns before they post</span></button>
   </div>
 
-  <div class="wpanel" style="--pc:var(--c-rules)" role="tabpanel" id="wp-rules" aria-labelledby="wt-rules">
+  <div class="wpanel" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)" role="tabpanel" id="wp-rules" aria-labelledby="wt-rules">
   <!-- Rules -->
   <article class="build" aria-labelledby="h-rules">
     <div class="build-head">
@@ -684,7 +687,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     </div>
   </article>
   </div>
-  <div class="wpanel" style="--pc:var(--c-risk)" role="tabpanel" id="wp-risk" aria-labelledby="wt-risk">
+  <div class="wpanel" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)" role="tabpanel" id="wp-risk" aria-labelledby="wt-risk">
   <!-- Risk workflows -->
   <article class="build" aria-labelledby="h-risk">
     <div class="build-head">
