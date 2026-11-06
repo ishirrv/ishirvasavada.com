@@ -1,6 +1,6 @@
 <title>Ishir Vasavada</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Ishir Vasavada: product leader for platforms, data and AI, with a background in finance, consulting and founding a startup. Try five of his products in the browser.">
+<meta name="description" content="Ishir Vasavada: product leader and Techstars founder across enterprise software, startups and AI. Five of his products run right in the browser.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
@@ -77,7 +77,7 @@ h2{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:600;margin-top:12px}
 
 /* ——— hero ——— */
 .hero{padding-block:64px 32px}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:start}
+.hero-grid{display:block;max-width:820px}
 .hero h1{font-size:var(--t-2xl);font-weight:600;letter-spacing:-.035em;margin-top:18px}
 .hero h1 em{font-style:normal;color:var(--accent)}
 .hero p.intro{font-size:var(--t-lg);color:var(--ink-2);max-width:54ch;margin:22px 0 0}
@@ -419,7 +419,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 }
 
 .lessons-h{font-size:var(--t-xl);font-weight:600;margin:44px 0 16px}
-.lessons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+.lessons{margin-top:4px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
 .lesson{background:var(--panel);padding:18px 20px;min-width:0}
 .lesson .lk{font-weight:600;font-size:var(--t-md);letter-spacing:-.01em}
 .lesson p{margin:6px 0 0;font-size:var(--t-sm);color:var(--ink-2)}
@@ -514,7 +514,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     <nav class="nav" aria-label="Sections">
       <a href="#work">Work</a>
       <a href="#method">Method</a>
-      <a href="#path">Path</a>
+      <a href="#journey">Journey</a>
       <a class="cta" href="#contact">Contact</a>
     </nav>
   </div>
@@ -527,39 +527,24 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     <div>
       <div class="who">
         <img class="avatar" src="media/ishir-avatar.webp" alt="" width="56" height="56">
-        <div><div class="name">Ishir Vasavada</div><div class="sub">Product leader · Platforms, data &amp; AI · Techstars founder</div></div>
+        <div><div class="name">Ishir Vasavada</div><div class="sub">Product leader · Builder · Techstars founder</div></div>
       </div>
-      <h1 id="h-hero">I build the products other teams build on: <em>platforms, data and AI.</em></h1>
-      <p class="intro">I've spent 6+ years on enterprise platform and data products used by thousands of companies, and today I own a <strong>$20MM ARR</strong> developer platform. I started in finance, worked as a technology consultant and co-founded a Techstars-backed startup, so I'm as comfortable with the P&amp;L and the architecture as I am with customers.</p>
+      <h1 id="h-hero">I turn messy problems into <em>products people rely on.</em></h1>
+      <p class="intro">6+ years across enterprise software, startups and finance. I've owned a <strong>$20MM ARR</strong> product portfolio, co-founded a Techstars-backed startup, and I still build hands-on, AI included.</p>
       <div class="hero-actions">
-        <a class="btn primary" href="#work">Try the products ↓</a>
+        <a class="btn primary" href="#work">See the work ↓</a>
         <a class="btn" href="https://www.linkedin.com/in/ishirvasavada" target="_blank" rel="noopener">LinkedIn ↗</a>
         <!--resume-link-->
       </div>
     </div>
 
-    <div class="console" aria-label="Recent agent runs">
-      <div class="console-bar"><span>~/agents · demo runs</span><span class="live">running</span></div>
-      <ol id="console">
-        <li class="task"><span class="k">▸</span><span>Turn a billing policy into a rule</span><span class="r">rules agent</span></li>
-        <li><span class="k">│</span><span>read data model → drafted rule</span><span class="r">v1</span></li>
-        <li><span class="k">│</span><span>tested 12 cases → 1 failed → fixed it</span><span class="r">v2</span></li>
-        <li><span class="k">└</span><span>12 of 12 pass · <span class="ok">waiting for approval</span></span><span class="r">9.8s</span></li>
-        <li class="task"><span class="k">▸</span><span>Is this pizza box recyclable?</span><span class="r">vision model</span></li>
-        <li><span class="k">│</span><span>photo + program rules → model</span><span class="r">88% sure</span></li>
-        <li><span class="k">└</span><span>lid yes · greasy base <span class="wn">no</span> · +10 pts</span><span class="r">1.2s</span></li>
-        <li class="task"><span class="k">▸</span><span>Find "what do you see" in a video</span><span class="r">Recognito</span></li>
-        <li><span class="k">│</span><span>searched every spoken word</span><span class="r">48 words</span></li>
-        <li><span class="k">└</span><span>2 hits · <span class="ok">0:09.8 and 0:20.6</span></span><span class="r">0.02s</span></li>
-      </ol>
-    </div>
   </div>
 
-  <div class="stats" aria-label="Enterprise impact">
-    <div class="stat"><div class="v num">$20MM</div><div class="l">ARR developer platform I own, including the agentic rules engine: wide adoption, 3× faster customer setup.</div></div>
-    <div class="stat"><div class="v num">Millions</div><div class="l">of records in the metadata repository I built, the data model behind every product team's objects.</div></div>
-    <div class="stat"><div class="v num">$15MM</div><div class="l">in deals opened by a new in-country data-center region, launched with Security and Infrastructure.</div></div>
-    <div class="stat"><div class="v num">3,500+</div><div class="l">enterprise customers on the Responsible AI and data governance products I launched.</div></div>
+  <div class="stats" aria-label="Impact">
+    <div class="stat"><div class="v num">$20MM</div><div class="l">ARR product portfolio I own</div></div>
+    <div class="stat"><div class="v num">$15MM</div><div class="l">in deals from a new data-center launch</div></div>
+    <div class="stat"><div class="v num">3,500+</div><div class="l">enterprise customers on products I launched</div></div>
+    <div class="stat"><div class="v num">10,000+</div><div class="l">users on the startup I co-founded</div></div>
   </div>
 </section>
 
@@ -567,7 +552,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 <section class="sheet wrap" id="work" aria-labelledby="h-work">
   <div class="sheet-head">
     <div><span class="tag"><b>Sheet 01</b> Work</span><h2 id="h-work">Five products you can try</h2></div>
-    <p class="lede">An enterprise platform, a startup, a side project and two agent systems for a construction business I support on technology and product. Each one runs here in the browser. Pick one.</p>
+    <p class="lede">Things I've built or shipped. Each one runs right here in the browser.</p>
   </div>
 
   <div class="wtabs" id="work-tabs" role="tablist" aria-label="Products">
@@ -582,7 +567,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   <!-- Rules -->
   <article class="build" aria-labelledby="h-rules">
     <div class="build-head">
-      <div><h3 id="h-rules">Agentic rules engine</h3><p>The pattern behind the agentic rules engine I launched and scaled across enterprise customers: describe a billing policy, and an agent drafts the rule, tests it against known cases, fixes what fails, and waits for an admin to approve. Pick a policy.</p></div>
+      <div><h3 id="h-rules">Agentic rules engine</h3><p>Based on the agentic rules engine I launched. Describe a billing policy and an agent drafts the rule, tests it, fixes what fails, then waits for approval.</p></div>
       <div class="meta"><span class="chip a">MCP context</span><span class="chip a">evals</span><span class="chip">guardrails</span></div>
     </div>
     <dl class="brief">
@@ -600,7 +585,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
       <div class="pane">
         <p class="small-h">Agent trace</p>
         <ol class="trace" id="rule-trace"></ol>
-        <p class="note">An illustration of the pattern, written for this site. Not my employer's code, data or UI.</p>
+        <p class="note">An illustration of the pattern, not my employer's code or data.</p>
       </div>
     </div>
   </article>
@@ -609,7 +594,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   <!-- Ecodrop -->
   <article class="build" aria-labelledby="h-eco">
     <div class="build-head">
-      <div><h3 id="h-eco">Ecodrop Technologies</h3><p>The company I co-founded (it launched as Conserve). Snap a photo of an item, learn whether it's recyclable, and earn points toward partner rewards. A campus leaderboard and a live feed turned recycling into a game. Pick an item to scan and compare the computer-vision version we shipped with a multimodal LLM rebuild.</p></div>
+      <div><h3 id="h-eco">Ecodrop Technologies</h3><p>The recycling startup I co-founded. Scan an item to compare the computer vision we shipped with a multimodal LLM rebuild, and watch the leaderboard move.</p></div>
       <div class="meta"><span class="chip a">computer vision</span><span class="chip">React Native</span><span class="chip">Techstars · AWS</span><span class="chip">gamification</span></div>
     </div>
     <dl class="brief">
@@ -646,7 +631,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
         <ol class="trace" id="eco-trace"></ol>
         <p class="small-h">Rewards · <span class="mono num" id="eco-pts">140</span> points</p>
         <div class="ladder" id="eco-ladder"></div>
-        <p class="note" style="margin-top:12px">The computer-vision trace follows the app's own matching code: labels from a cloud vision API, split into words, checked against a materials list, then a product list. Vision labels and LLM outputs shown are representative examples. Reward ladder and 10 points per item are from the original partner deck.</p>
+        <p class="note" style="margin-top:12px">Vision labels and LLM outputs are representative examples. Reward tiers come from the original partner deck.</p>
       </div>
     </div>
     <div class="eco-social">
@@ -665,7 +650,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   <!-- Recognito -->
   <article class="build" aria-labelledby="h-rec">
     <div class="build-head">
-      <div><h3 id="h-rec">Recognito</h3><p>Search inside a video for the moment a word is spoken. The web app transcribed uploaded video with cloud machine-learning models built on recurrent neural networks, and a Chrome extension prototype brought search to any page's video player. Search the clip below, then jump to any hit.</p></div>
+      <div><h3 id="h-rec">Recognito</h3><p>A side project: search a video for the moment a word is spoken, then jump straight to it. The original transcribed video with recurrent neural networks.</p></div>
       <div class="meta"><span class="chip a">speech alignment</span><span class="chip a">search</span><span class="chip">browser extension</span></div>
     </div>
     <dl class="brief">
@@ -689,13 +674,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
       <div class="pane">
         <p class="small-h">Transcript · click any word</p>
         <div class="rec-tx" id="rec-tx"></div>
-        <ol class="rec-pipe" aria-label="How it works">
-          <li><b>Audio</b><span>16 kHz mono</span></li>
-          <li><b>Align</b><span>each word to the waveform</span></li>
-          <li><b>Index</b><span id="rec-nw">words</span></li>
-          <li><b>Search</b><span>word, prefix, phrase</span></li>
-        </ol>
-        <p class="note">Word times come from forced alignment of the clip's captions with CMU PocketSphinx, accurate to about a tenth of a second. Clip: <a href="https://orange.blender.org/" target="_blank" rel="noopener">Elephants Dream</a> (2006), Blender Foundation, CC BY 2.5.</p>
+        <p class="note">Word timings come from aligning the captions to the audio. Clip: <a href="https://orange.blender.org/" target="_blank" rel="noopener">Elephants Dream</a> (2006), Blender Foundation, CC BY 2.5.</p>
       </div>
     </div>
     <details class="rec-v0">
@@ -741,7 +720,7 @@ chrome.runtime.onMessage.addListener(
   <!-- Takeoff -->
   <article class="build" aria-labelledby="h-takeoff">
     <div class="build-head">
-      <div><h3 id="h-takeoff">Blueprint vision agent</h3><p>Built for a residential construction business I support on technology and product. A multimodal agent reads an architect's drawing and returns structured data: every room, its dimensions and square footage, ready for an estimate. It flags what it isn't sure about instead of guessing. Click any room, or reclassify one and watch the totals follow.</p></div>
+      <div><h3 id="h-takeoff">Blueprint vision agent</h3><p>Built for a residential construction business I support on technology and product. It reads an architect's drawing into an estimate-ready room schedule and flags anything it isn't sure about.</p></div>
       <div class="meta"><span class="chip a">vision</span><span class="chip a">document extraction</span><span class="chip">human review</span></div>
     </div>
     <dl class="brief">
@@ -785,7 +764,7 @@ chrome.runtime.onMessage.addListener(
   <!-- Job cost -->
   <article class="build" aria-labelledby="h-jc">
     <div class="build-head">
-      <div><h3 id="h-jc">Cost-control agent crew</h3><p>Built for the same construction business, where I lead the technology and product side. Type a cost the way you'd text it. An orchestrator hands it to a small crew of agents that file it, check for duplicate payments and test it against the budget. Clean entries post on their own. Anything risky waits for a person.</p></div>
+      <div><h3 id="h-jc">Cost-control agent crew</h3><p>Built for the same business. Text a cost and a small crew of agents files it, checks for duplicates and tests the budget. Anything risky waits for a person.</p></div>
       <div class="meta"><span class="chip a">multi-agent</span><span class="chip a">orchestration</span><span class="chip">human approval</span></div>
     </div>
     <dl class="brief">
@@ -823,11 +802,11 @@ chrome.runtime.onMessage.addListener(
             <button class="ex" type="button">Concrete for footings 6.2k, split both lots</button>
           </div>
         </div>
-        <p class="note">The shipped app replaced a spreadsheet that kept falling behind: crews log costs from the field, so the budget stays current. It turned a texted cost into a ledger row in one step. This demo shows the multi-agent version, with sample data.</p>
+        <p class="note">The shipped version turned a texted cost into a ledger row in one step. This shows the multi-agent version, with sample data.</p>
       </div>
     </div>
   </article>
-  <p class="note" style="margin:-8px 0 0">Also built: a code-to-spec tool that turns NFRC, NAFS and IRC glazing and egress requirements into supplier specs, used to qualify overseas window and door manufacturers. Direct sourcing saved $75K+.</p>
+
   </div>
 </section>
 
@@ -835,14 +814,10 @@ chrome.runtime.onMessage.addListener(
 <section class="sheet wrap" id="method" aria-labelledby="h-method">
   <div class="sheet-head">
     <div><span class="tag"><b>Sheet 02</b> Method</span><h2 id="h-method">How I build with agents</h2></div>
-    <p class="lede">The same loop for an enterprise platform or a field tool. The model is the cheap part. The context, the evals and the approval step are the product.</p>
+    <p class="lede">The model is the cheap part. What matters is what it can see, how it's tested and when a person steps in.</p>
   </div>
 
-  <div class="loop" role="tablist" aria-label="Agent build loop" id="loop"></div>
-  <svg class="loopback" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path d="M915 2 V24 H85 V2" vector-effect="non-scaling-stroke"/></svg>
-  <div class="detail" id="loop-detail" role="tabpanel"></div>
 
-  <h3 class="lessons-h">A few things I've learned building agents</h3>
   <div class="lessons">
     <div class="lesson"><div class="lk">One agent, until it isn't enough</div><p>Most problems need one good agent, not five. I split the work only when the pieces can truly run side by side, like the cost-control crew.</p></div>
     <div class="lesson"><div class="lk">Let the platform run it</div><p>Managed agent runtimes now handle sandboxes, memory and long sessions. Good. My time goes to what the agent can touch and when a person steps in.</p></div>
@@ -854,9 +829,9 @@ chrome.runtime.onMessage.addListener(
 </section>
 
 <!-- ═══════════ PATH ═══════════ -->
-<section class="sheet wrap" id="path" aria-labelledby="h-path">
+<section class="sheet wrap" id="journey" aria-labelledby="h-path">
   <div class="sheet-head">
-    <div><span class="tag"><b>Sheet 03</b> Path</span><h2 id="h-path">Finance, consulting, product</h2></div>
+    <div><span class="tag"><b>Sheet 03</b> Journey</span><h2 id="h-path">Finance, consulting, product</h2></div>
     <p class="lede">I started in finance, moved into technology consulting, then into product management. Co-founding a Techstars-backed startup taught me to build from zero, and I bring that to enterprise products.</p>
   </div>
 
@@ -870,7 +845,7 @@ chrome.runtime.onMessage.addListener(
   <div class="role" id="role" aria-live="polite"></div>
 
   <div class="creds">
-    <div><h4>Range</h4><p>Product strategy, discovery and go-to-market</p><p>Platform, API and data architecture</p><p>Pricing, packaging and unit economics</p><p>Hands-on prototyping, from mobile apps to agents</p></div>
+    <div><h4>Range</h4><p>Strategy, discovery and go-to-market</p><p>Technical depth, from architecture to data</p><p>Pricing and unit economics</p><p>Hands-on building, from apps to agents</p></div>
     <div><h4>AI credentials</h4><p>AWS Certified AI Practitioner</p><p>Azure AI Fundamentals (AI-900)</p><p>Agentic AI (Andrew Ng)</p><p>Google Cloud Generative AI Leader</p><p>AI Product Management Certification, Product School</p></div>
     <div><h4>Also</h4><p>U.S. Patent Pending 63/502,475</p><p>Certified Scrum Product Owner</p><p>Product Analytics, Product School</p><p>SAFe 5 Agile</p></div>
   </div>
@@ -1328,7 +1303,6 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
   CUES.forEach(([cs,ce,ws],li) => ws.forEach(([t,s,e]) => W.push({t, n:t.toLowerCase().replace(/[^a-z']/g,''), s, e, li})));
   const vid = $('#rec-video'), strip = $('#rec-strip'), head = $('#rec-head'), tx = $('#rec-tx'), hitsEl = $('#rec-hits'), q = $('#rec-q');
   const clock = s => `${Math.floor(s/60)}:${(s%60).toFixed(1).padStart(4,'0')}`;
-  $('#rec-nw').textContent = `${W.length} words, ${CUES.length} lines`;
   const dur = () => (vid.duration && isFinite(vid.duration)) ? vid.duration : DUR;
   // speech regions on the strip
   CUES.forEach(([cs,ce,ws]) => { const s = ws[0][1], e = ws[ws.length-1][2]; const d = document.createElement('div'); d.className='sp'; d.style.left = s/DUR*100+'%'; d.style.width = (e-s)/DUR*100+'%'; strip.appendChild(d); });
@@ -1397,32 +1371,6 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
   vid.addEventListener('play', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); });
   vid.addEventListener('seeked', tick); vid.addEventListener('pause', tick);
   render();
-}
-
-/* ───── method loop ───── */
-{
-  const N = [
-    ['Intent', 'Outcome and test first', 'Write the outcome and how you will check it before writing any prompt.', 'Takeoff:\nroom areas must match the architect\'s\nschedule before they reach an estimate.'],
-    ['Context', 'Connect where work lives', 'Agents are only as good as what they can see. I connect them to the real systems through MCP instead of pasting things into chat.', 'MCP servers for Drive, Sheets, Gmail\nand the plan-set folder.\nRules demo: billing object schemas.'],
-    ['Skills', 'Package the know-how', 'Repeat work becomes a skill, so the agent does it the same way every time and new people inherit it.', 'takeoff skill:\n  decimal feet, deducts,\n  open-to-below excluded,\n  flag anything under 90% confidence'],
-    ['Act', 'Tools, not text', 'The agent calls functions and writes to real systems. The output is a row, a rule or a file, never a paragraph someone has to retype.', 'rules.draft() → structured rule\nledger.append() → job-cost row\nsheet.write() → room schedule'],
-    ['Evaluate', 'Fixed cases, every change', 'Every change runs against the same case set. When a case fails, the loop revises and reruns before a person sees it.', 'evals.run(12) → 11/12\nrules.revise()\nevals.run(12) → 12/12'],
-    ['Approve', 'People own the irreversible', 'Anything that moves money, deletes data or reaches a customer waits for a person. Each approval or correction becomes a new eval case.', 'purge → archive first, 2 approvers\nlow-confidence room → asks you\ncorrection → saved as case 13'],
-  ];
-  const loop = $('#loop'), det = $('#loop-detail');
-  loop.innerHTML = N.map((n,i) => `<button class="node" role="tab" id="tab-${i}" aria-selected="${i===0}" aria-controls="loop-detail" data-i="${i}"><span class="dot">${i+1}</span><span class="nt">${n[0]}</span><span class="ns">${n[1]}</span></button>`).join('');
-  function show(i) {
-    loop.querySelectorAll('.node').forEach(b => b.setAttribute('aria-selected', b.dataset.i == i));
-    det.setAttribute('aria-labelledby', 'tab-'+i);
-    det.innerHTML = `<div><span class="tag"><b>${i+1} of 6</b> ${esc(N[i][0])}</span><h3 style="margin-top:12px">${esc(N[i][1])}</h3><p>${esc(N[i][2])}</p></div><div><div class="ex-k">In practice</div><div class="ex-v">${esc(N[i][3])}</div></div>`;
-  }
-  loop.addEventListener('click', e => { const b = e.target.closest('.node'); if (b) show(+b.dataset.i); });
-  loop.addEventListener('keydown', e => {
-    const cur = +document.activeElement.dataset.i; if (isNaN(cur)) return;
-    const nx = e.key==='ArrowRight'||e.key==='ArrowDown' ? (cur+1)%6 : e.key==='ArrowLeft'||e.key==='ArrowUp' ? (cur+5)%6 : -1;
-    if (nx >= 0) { e.preventDefault(); $('#tab-'+nx).focus(); show(nx); }
-  });
-  show(0);
 }
 
 /* ───── path timeline ───── */
