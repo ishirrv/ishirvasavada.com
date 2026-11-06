@@ -1,6 +1,6 @@
 <title>Ishir Vasavada</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Ishir Vasavada builds AI products at enterprise scale: agentic developer platforms, multi-agent systems and computer vision. Try five of them in the browser.">
+<meta name="description" content="Ishir Vasavada: product leader for platforms, data and AI, with a background in finance, consulting and founding a startup. Try five of his products in the browser.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
@@ -314,6 +314,24 @@ pre.code .cm{color:var(--ink-3)}
 .lad-bar{height:4px;border-radius:2px;background:var(--rule);margin-top:4px;overflow:hidden;grid-column:1/-1}
 .lad-bar i{display:block;height:100%;background:var(--accent);transition:width .5s}
 
+.eco-social{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:28px;padding:20px 24px;border-top:1px solid var(--rule)}
+.eco-social > *{min-width:0}
+.board{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.board li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:var(--t-sm);padding:6px 10px;border-radius:7px;border:1px solid transparent}
+.board li .rk{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3)}
+.board li .bp{font-family:var(--f-mono);font-size:12px;color:var(--ink-2)}
+.board li:nth-child(1) .rk{color:var(--accent);font-weight:500}
+.board li.me{border-color:var(--accent-mid);background:var(--accent-soft);font-weight:600}
+.feed{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.feed li{position:relative;font-size:13px;color:var(--ink-2);padding:7px 0 7px 16px;border-bottom:1px dashed var(--rule)}
+.feed li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.feed li.prize::before{background:var(--accent)}
+.feed li b{color:var(--ink);font-weight:600}
+.feed li .ft{float:right;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-left:8px}
+.feed li.me b{color:var(--accent)}
+.feed li.new{animation:flash 1.4s ease-out}
+@media (max-width:720px){ .eco-social{grid-template-columns:1fr} }
+
 /* recognito */
 .rec-video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;background:var(--ink);border-radius:10px;object-fit:cover}
 .rec-strip{position:relative;height:30px;margin:10px 0 14px;border-radius:6px;background:var(--paper);border:1px solid var(--rule);cursor:pointer;overflow:hidden}
@@ -330,6 +348,7 @@ pre.code .cm{color:var(--ink-3)}
 .rec-hits button:hover{border-color:var(--accent)}
 .rec-hits .ts{font-family:var(--f-mono);font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums}
 .rec-hits .empty{color:var(--ink-2);font-size:var(--t-sm);padding:6px 0}
+.relw{font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule);border-radius:999px;padding:1px 6px;margin-left:4px;white-space:nowrap}
 mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding:0 2px;font-weight:500}
 .rec-tx{position:relative;max-height:300px;overflow-y:auto;border:1px solid var(--rule);border-radius:10px;background:var(--paper);padding:6px 0;margin-bottom:16px}
 .rec-line{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;padding:5px 12px;font-size:var(--t-sm);line-height:1.6}
@@ -438,6 +457,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .creds h4{margin:0 0 8px;font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
 .creds p{margin:0;font-size:var(--t-sm);color:var(--ink)}
 .creds p + p{margin-top:4px}
+.inprog{display:inline-block;margin-left:6px;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);border:1px solid currentColor;border-radius:999px;padding:1px 6px;vertical-align:1px}
 @media (max-width:820px){ .creds{grid-template-columns:1fr} }
 
 /* ——— product brief ——— */
@@ -514,10 +534,10 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     <div>
       <div class="who">
         <img class="avatar" src="media/ishir-avatar.webp" alt="" width="56" height="56">
-        <div><div class="name">Ishir Vasavada</div><div class="sub">Product leader · Techstars founder · AI-native builder</div></div>
+        <div><div class="name">Ishir Vasavada</div><div class="sub">Product leader · Platforms, data &amp; AI · Techstars founder</div></div>
       </div>
-      <h1 id="h-hero">I build AI products that do real work, <em>at enterprise scale.</em></h1>
-      <p class="intro">I've spent 6+ years on enterprise platform and data products used by thousands of companies. I own a <strong>$20MM ARR</strong> developer platform, where I pitched in-app AI agents to leadership in <strong>January 2023</strong> and then shipped them. Before that I co-founded a computer-vision startup backed by Techstars and AWS. I lead cross-functional teams of up to 8, and I still build AI products hands-on.</p>
+      <h1 id="h-hero">I build the products other teams build on: <em>platforms, data and AI.</em></h1>
+      <p class="intro">I've spent 6+ years on enterprise platform and data products used by thousands of companies, and today I own a <strong>$20MM ARR</strong> developer platform. I started in finance, worked as a technology consultant and co-founded a Techstars-backed startup, so I'm as comfortable with the P&amp;L and the architecture as I am with customers. I lead cross-functional teams of up to 8, and I pitched in-app AI agents to leadership in <strong>January 2023</strong>, then shipped them.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#work">Try the products ↓</a>
         <a class="btn" href="https://www.linkedin.com/in/ishirvasavada" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -553,13 +573,13 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 <!-- ═══════════ WORK ═══════════ -->
 <section class="sheet wrap" id="work" aria-labelledby="h-work">
   <div class="sheet-head">
-    <div><span class="tag"><b>Sheet 01</b> Work</span><h2 id="h-work">Five AI products you can try</h2></div>
-    <p class="lede">From an agentic enterprise platform to a startup's computer vision. Every one runs here in the browser. Pick one.</p>
+    <div><span class="tag"><b>Sheet 01</b> Work</span><h2 id="h-work">Five products you can try</h2></div>
+    <p class="lede">An enterprise platform, a startup, a side project and two tools for construction crews. Each one runs here in the browser. Pick one.</p>
   </div>
 
   <div class="wtabs" id="work-tabs" role="tablist" aria-label="Products">
     <button class="wtab" role="tab" id="wt-rules" aria-controls="wp-rules" aria-selected="true" type="button"><span class="wk">Enterprise platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span></button>
-    <button class="wtab" role="tab" id="wt-eco" aria-controls="wp-eco" aria-selected="false" type="button"><span class="wk">Startup · vision</span><span class="wn">Ecodrop</span><span class="wo">10,000+ users, Techstars-backed</span></button>
+    <button class="wtab" role="tab" id="wt-eco" aria-controls="wp-eco" aria-selected="false" type="button"><span class="wk">Startup · vision</span><span class="wn">Ecodrop Technologies</span><span class="wo">10,000+ users, Techstars-backed</span></button>
     <button class="wtab" role="tab" id="wt-rec" aria-controls="wp-rec" aria-selected="false" type="button"><span class="wk">Speech search</span><span class="wn">Recognito</span><span class="wo">Jump to the second a word is said</span></button>
     <button class="wtab" role="tab" id="wt-plan" aria-controls="wp-plan" aria-selected="false" type="button"><span class="wk">Document AI</span><span class="wn">Floor plan reader</span><span class="wo">Drawings into structured data</span></button>
     <button class="wtab" role="tab" id="wt-jc" aria-controls="wp-jc" aria-selected="false" type="button"><span class="wk">Multi-agent</span><span class="wn">Job-cost agents</span><span class="wo">Catches duplicates and overruns before they post</span></button>
@@ -596,8 +616,8 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   <!-- Ecodrop -->
   <article class="build" aria-labelledby="h-eco">
     <div class="build-head">
-      <div><h3 id="h-eco">Ecodrop</h3><p>The company I co-founded (it launched as Conserve). Snap a photo of an item, learn whether it's recyclable, and earn points toward partner rewards. Pick an item to scan and compare the computer-vision version we shipped with a multimodal LLM rebuild.</p></div>
-      <div class="meta"><span class="chip a">computer vision</span><span class="chip">React Native</span><span class="chip">Techstars · AWS</span></div>
+      <div><h3 id="h-eco">Ecodrop Technologies</h3><p>The company I co-founded (it launched as Conserve). Snap a photo of an item, learn whether it's recyclable, and earn points toward partner rewards. A campus leaderboard and a live feed turned recycling into a game. Pick an item to scan and compare the computer-vision version we shipped with a multimodal LLM rebuild.</p></div>
+      <div class="meta"><span class="chip a">computer vision</span><span class="chip">React Native</span><span class="chip">Techstars · AWS</span><span class="chip">gamification</span></div>
     </div>
     <dl class="brief">
       <div><dt>Who it's for</dt><dd>University students and staff, plus local merchants who fund the rewards</dd></div>
@@ -633,7 +653,17 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
         <ol class="trace" id="eco-trace"></ol>
         <p class="small-h">Rewards · <span class="mono num" id="eco-pts">140</span> points</p>
         <div class="ladder" id="eco-ladder"></div>
-        <p class="note" style="margin-top:12px">The computer-vision trace follows the app's own matching code: Google Cloud Vision labels, split into words, checked against a materials list, then a product list. Vision labels and LLM outputs shown are representative examples. Reward ladder and 10 points per item are from the original partner deck.</p>
+        <p class="note" style="margin-top:12px">The computer-vision trace follows the app's own matching code: labels from a cloud vision API, split into words, checked against a materials list, then a product list. Vision labels and LLM outputs shown are representative examples. Reward ladder and 10 points per item are from the original partner deck.</p>
+      </div>
+    </div>
+    <div class="eco-social">
+      <div>
+        <p class="small-h">Campus leaderboard · this week</p>
+        <ol class="board" id="eco-board"></ol>
+      </div>
+      <div>
+        <p class="small-h">Live feed</p>
+        <ul class="feed" id="eco-feed" aria-live="polite"></ul>
       </div>
     </div>
   </article>
@@ -657,10 +687,10 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
         <form class="rec-search" id="rec-form" role="search" autocomplete="off">
           <label for="rec-q" class="sr">Search what is said in the video</label>
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6"/></svg>
-          <input id="rec-q" type="search" value="nothing" placeholder="Search a word or phrase">
+          <input id="rec-q" type="search" value="nothing" placeholder="Any word you hear: see, left, really…">
           <span class="rec-count mono" id="rec-count" aria-live="polite"></span>
         </form>
-        <div class="rec-try"><span class="note">TRY</span><button type="button" class="mini">nothing</button><button type="button" class="mini">right side</button><button type="button" class="mini">Emo</button><button type="button" class="mini">what do you see</button></div>
+        <div class="rec-try"><span class="note">TRY</span><button type="button" class="mini">nothing</button><button type="button" class="mini">right side</button><button type="button" class="mini">close your eyes</button><button type="button" class="mini">really</button><button type="button" class="mini">same</button><button type="button" class="mini">Proog</button><button type="button" class="mini" title="Finds the related word: see">look</button><button type="button" class="mini" title="Finds the related word: great">awesome</button></div>
         <ul class="rec-hits" id="rec-hits"></ul>
       </div>
       <div class="pane">
@@ -847,9 +877,10 @@ chrome.runtime.onMessage.addListener(
   <div class="role" id="role" aria-live="polite"></div>
 
   <div class="creds">
-    <div><h4>Education</h4><p>Georgia State University, Robinson College of Business</p><p style="color:var(--ink-2)">BBA, Finance &amp; Computer Information Systems. Finance Honors, President's List, Shulman Scholar.</p></div>
-    <div><h4>AI credentials</h4><p>AWS Certified AI Practitioner</p><p>Agentic AI (Andrew Ng)</p><p>Azure AI Fundamentals (AI-900)</p></div>
-    <div><h4>Also</h4><p>U.S. Patent Pending 63/502,475</p><p>Certified Scrum Product Owner</p><p>Product Analytics, Product School</p></div>
+    <div><h4>Range</h4><p>Product strategy, discovery and go-to-market</p><p>Platform, API and data architecture</p><p>Pricing, packaging and unit economics</p><p>Hands-on prototyping, from mobile apps to agents</p></div>
+    <div><h4>AI credentials</h4><p>AWS Certified AI Practitioner</p><p>Azure AI Fundamentals (AI-900)</p><p>Agentic AI (Andrew Ng)</p><p>AWS Certified Machine Learning Engineer – Associate <span class="inprog">in progress</span></p><p>Azure AI Engineer Associate (AI-102) <span class="inprog">in progress</span></p></div>
+    <div><h4>Also</h4><p>U.S. Patent Pending 63/502,475</p><p>Certified Scrum Product Owner</p><p>Product Analytics, Product School</p><p>SAFe 5 Agile</p></div>
+  </div>
   </div>
 </section>
 
@@ -857,7 +888,7 @@ chrome.runtime.onMessage.addListener(
 <section class="contact wrap" id="contact" aria-labelledby="h-contact">
   <span class="tag"><b>Sheet 04</b> Contact</span>
   <h2 id="h-contact" style="margin-top:14px">Let's compare notes.</h2>
-  <p class="contact-line">I'm always glad to talk product, agents and where AI is heading. Email is the fastest way to reach me.</p>
+  <p class="contact-line">I'm always glad to talk product, platforms and where AI is heading. Email is the fastest way to reach me.</p>
   <div class="row">
     <span class="email" id="email">ishirv00@gmail.com</span>
     <button class="btn" type="button" id="copy">Copy email</button>
@@ -868,7 +899,7 @@ chrome.runtime.onMessage.addListener(
   <div class="titleblock" aria-label="Site details">
     <div><span class="k">Project</span><span class="v">Ishir Vasavada · Product</span></div>
     <div><span class="k">Location</span><span class="v">Atlanta, GA</span></div>
-    <div><span class="k">Revision</span><span class="v">02 · Nov 2026</span></div>
+    <div><span class="k">Revision</span><span class="v">03 · Nov 2026</span></div>
     <div><span class="k">Built with</span><span class="v">AI coding agents</span></div>
     <div><span class="k">Sheet</span><span class="v">04 of 04</span></div>
   </div>
@@ -1276,8 +1307,25 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
       const before = pts; pts += add;
       const crossed = TIERS.findIndex(([p]) => before < p && pts >= p);
       ladder(crossed);
+      feed.unshift({who:'You', what: add ? `recycled a ${d.n.toLowerCase()} · +${add} pts` : `scanned a ${d.n.toLowerCase()} · not accepted`, t:'just now', me:true});
+      if (crossed >= 0) feed.unshift({who:'You', what:`unlocked ${TIERS[crossed][1]}`, t:'just now', me:true, prize:true});
+      social();
     } else ladder(-1);
   }
+  // Gamification: sample campus leaderboard and live feed (illustrative names)
+  const PEERS = [['Priya S.', 1240], ['Marcus T.', 980], ['Dana K.', 610], ['Jordan L.', 300], ['Alex R.', 120]];
+  const feed = [
+    {who:'Priya S.', what:'recycled 3 aluminum cans · +30 pts', t:'2m ago'},
+    {who:'Marcus T.', what:'unlocked 10% off coupon', t:'9m ago', prize:true},
+    {who:'Dana K.', what:'recycled a cardboard box · +10 pts', t:'14m ago'},
+    {who:'Jordan L.', what:'joined the weekly challenge', t:'21m ago'},
+  ];
+  function social() {
+    const rows = PEERS.map(([n, p]) => ({n, p})).concat([{n:'You', p:pts, me:true}]).sort((x, y) => y.p - x.p);
+    $('#eco-board').innerHTML = rows.map((r, i) => `<li class="${r.me ? 'me' : ''}"><span class="rk num">${i + 1}</span><span class="bn">${esc(r.n)}</span><span class="bp num">${fmt(r.p)}</span></li>`).join('');
+    $('#eco-feed').innerHTML = feed.slice(0, 5).map((f, i) => `<li class="${f.me ? 'me' : ''}${f.prize ? ' prize' : ''}${f.me && i === 0 ? ' new' : ''}"><b>${esc(f.who)}</b> ${esc(f.what)}<span class="ft">${esc(f.t)}</span></li>`).join('');
+  }
+  social();
   tray.addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i, true); });
   $('#eco-mode').addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return; mode = b.dataset.m;
@@ -1306,13 +1354,24 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
   tx.addEventListener('click', e => { const b = e.target.closest('.rec-w'); if (b) seek(W[+b.dataset.i].s); });
   strip.addEventListener('click', e => { const r = strip.getBoundingClientRect(); vid.currentTime = (e.clientX - r.left) / r.width * dur(); });
 
+  // Related words, so a search works on meaning as well as exact wording
+  const REL = {see:['look','looking','watch','view','spot','notice'], nothing:['none','nobody','empty','zero','anything'], close:['shut'],
+    eyes:['eye'], ok:['okay','sure','yes','alright','fine'], good:['nice','well'], great:['awesome','excellent','amazing','wonderful','perfect'],
+    same:['identical','alike'], exactly:['precisely','totally'], really:['truly','seriously'], left:['west'], right:['east'], now:['immediately','quickly']};
+  const relOf = t => Object.keys(REL).filter(k => REL[k].includes(t));
   function search(str) {
     const toks = (str.toLowerCase().match(/[a-z']+/g) || []);
     if (!toks.length) return [];
     const hits = [];
     for (let i = 0; i + toks.length <= W.length; i++) {
-      const ok = toks.every((t,k) => { const n = W[i+k].n; return k === toks.length-1 && t.length >= 3 ? n.startsWith(t) : n === t; });
-      if (ok) hits.push({i, len:toks.length});
+      let rel = false;
+      const ok = toks.every((t,k) => {
+        const n = W[i+k].n;
+        if (k === toks.length-1 && t.length >= 3 ? n.startsWith(t) : n === t) return true;
+        if (relOf(t).includes(n)) { rel = true; return true; }
+        return false;
+      });
+      if (ok) hits.push({i, len:toks.length, rel});
     }
     return hits;
   }
@@ -1328,8 +1387,8 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
     hitsEl.innerHTML = hits.length ? hits.map(h => {
       const li = W[h.i].li;
       const line = W.map((w,i) => w.li!==li ? null : (i>=h.i && i<h.i+h.len ? `<mark>${esc(w.t)}</mark>` : esc(w.t))).filter(x => x!==null).join(' ');
-      return `<li><button type="button" data-t="${W[h.i].s}"><span class="ts">${clock(W[h.i].s)}</span><span>${line}</span></button></li>`;
-    }).join('') : (q.value.trim() ? `<li class="empty">Not said in this clip. Try a word from the transcript.</li>` : '');
+      return `<li><button type="button" data-t="${W[h.i].s}"><span class="ts">${clock(W[h.i].s)}</span><span>${line}${h.rel ? ' <span class="relw">related word</span>' : ''}</span></button></li>`;
+    }).join('') : (q.value.trim() ? `<li class="empty">Not said in this clip. Try any word from the transcript on the right.</li>` : '');
   }
   hitsEl.addEventListener('click', e => { const b = e.target.closest('button'); if (b) seek(+b.dataset.t); });
   q.addEventListener('input', render);
@@ -1389,7 +1448,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
     {lane:'ent', n:'Capgemini', s:2020.84, e:2021.84, t:'Technology Consultant', y:'2020 – 2021', big:'$10MM+', bigl:'in project renewals secured', pts:['Directed technical strategy for the <strong>virginvoyages.com</strong> replatform to Next.js and GraphQL: <strong>2.2×</strong> faster site, lower churn','Managed client stakeholders through delivery with high CSAT scores']},
     {lane:'ent', n:'OneTrust', s:2021.84, e:2022.56, t:'Product Manager · Series C scale-up', y:'2021 – 2022', big:'$5MM+', bigl:'incremental revenue from tiered storage upsell', pts:['Launched Data Governance and <strong>Responsible AI</strong> products to <strong>3,500+</strong> enterprise customers','Improved team shipping velocity by <strong>35%</strong> with structured sprint planning and clearer technical requirements','Built the upsell strategy for the Privacy by Design Object Store within the <strong>$50MM</strong> OnePlatform offering']},
     {lane:'ent', n:'Zuora', s:2022.6, e:NOW, now:true, t:'Senior Product Manager · Platform Foundations', y:'2022 – now', big:'$20MM ARR', bigl:'developer platform portfolio I own', pts:['Own the developer-facing layer of the platform: custom logic, decision tables, JS functions and decision trees, supporting a <strong>Gartner Leader</strong> placement','Pitched in-app AI agents to senior leadership in <strong>January 2023</strong>, then launched <strong>Agentic Custom Objects, Custom Fields and Rules Engine</strong>: wide adoption, 3× faster implementation, less custom code and third-party decisioning software','Built the <strong>Central Metadata Repository</strong>: millions of records behind every product team\'s objects, including dynamic pricing','Data Retention suite: <strong>$2MM a year</strong> saved. Japan Data Center: <strong>$15MM</strong> in deal flow']},
-    {lane:'fnd', n:'Ecodrop', s:2019.6, e:2023.55, t:'Co-founder, Product & Strategy', y:'2019 – 2023', big:'$200K+', bigl:'raised through Techstars and AWS accelerators', pts:['Recycling marketplace: <strong>10,000+ users</strong>, 15+ merchant partners, 4 university customers, $8.5K MRR','Led a team of 5+ to build a React Native app with <strong>computer vision</strong>, a companion reverse vending machine and a merchant-funded rewards program','U.S. patent pending 63/502,475']},
+    {lane:'fnd', n:'Ecodrop Technologies', s:2019.6, e:2023.55, t:'Co-founder, Product & Strategy', y:'2019 – 2023', big:'$200K+', bigl:'raised through Techstars and AWS accelerators', pts:['Recycling marketplace: <strong>10,000+ users</strong>, 15+ merchant partners, 4 university customers, $8.5K MRR','Led a team of 5+ to build a React Native app with <strong>computer vision</strong>, a companion reverse vending machine and a merchant-funded rewards program','U.S. patent pending 63/502,475']},
   ];
   const pct = v => ((v - T0) / (T1 - T0)) * 100;
   const roleEl = $('#role');
