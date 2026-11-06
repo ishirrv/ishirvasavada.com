@@ -95,23 +95,6 @@ h2{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:600;margin-top:12px}
 .who .sub{font-family:var(--f-mono);font-size:var(--t-xs);color:var(--ink-2);letter-spacing:.04em}
 .avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none;background:var(--rule);border:1px solid var(--rule)}
 
-/* console */
-.console{border:1px solid var(--rule);background:var(--panel);border-radius:12px;overflow:hidden;box-shadow:0 1px 0 var(--rule),0 18px 40px -24px rgba(20,24,29,.35)}
-.console-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--rule);font-family:var(--f-mono);font-size:var(--t-xs);color:var(--ink-2)}
-.live{display:inline-flex;align-items:center;gap:6px;color:var(--ok)}
-.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pulse 1.6s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.3}}
-.console ol{list-style:none;margin:0;padding:8px 0;font-family:var(--f-mono);font-size:12.5px;line-height:1.5}
-.console li{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:8px;padding:5px 14px;color:var(--ink-2);transition:background .3s,color .3s}
-.console li .k{color:var(--ink-3)}
-.console li .r{color:var(--ink-3);white-space:nowrap}
-.console li.task{color:var(--ink);font-weight:500;padding-top:10px}
-.console li.task .k{color:var(--accent)}
-.console li.on{background:var(--accent-soft);color:var(--ink)}
-.console li.on .r{color:var(--accent)}
-.console li .ok{color:var(--ok)}
-.console li .wn{color:var(--warn)}
-.console li span{min-width:0;overflow-wrap:anywhere}
 
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);margin-top:56px}
 .stat{padding:18px 20px 0 0}
@@ -199,6 +182,20 @@ h2{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:600;margin-top:12px}
 .prompt:hover{border-color:var(--ink-3)}
 .prompt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
 .prompt .pk{display:block;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-bottom:3px;letter-spacing:.04em}
+.dtable{border:1px solid var(--rule);border-radius:10px;background:var(--paper);overflow:hidden}
+.dt-cap{display:flex;justify-content:space-between;gap:12px;padding:8px 12px;border-bottom:1px solid var(--rule);font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.dt-scroll{overflow-x:auto}
+table.dt{width:100%;min-width:440px;border-collapse:collapse;font-size:13px}
+.dt th{text-align:left;font-weight:600;font-size:12px;color:var(--ink-2);padding:8px 12px;background:var(--panel);border-bottom:1px solid var(--rule);vertical-align:bottom}
+.dt td{padding:8px 12px;border-top:1px solid var(--rule);vertical-align:top;color:var(--ink)}
+.dt tbody tr:first-child td{border-top:0}
+.dt .n{width:28px;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.dt th.o,.dt td.o{background:var(--accent-soft)}
+.dt th.o{color:var(--accent)}
+.dt .fix{background:var(--ok-soft);color:var(--ok);transition:background .4s}
+.dt td.fix{color:var(--ink)}
+.dt-note{margin:0;padding:8px 12px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink-2)}
+.dt-wait{margin:0;padding:14px 12px;font-size:13px;color:var(--ink-3)}
 pre.code{margin:0;font-family:var(--f-mono);font-size:12.5px;line-height:1.6;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto;white-space:pre;color:var(--ink)}
 pre.code .kw{color:var(--accent);font-weight:500}
 pre.code .st{color:var(--ok)}
@@ -574,7 +571,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   <!-- Rules -->
   <article class="build" aria-labelledby="h-rules">
     <div class="build-head">
-      <div><h3 id="h-rules">Agentic rules engine</h3><p>Based on the agentic rules engine I launched. Describe a billing policy and an agent drafts the rule, tests it, fixes what fails, then waits for approval.</p></div>
+      <div><h3 id="h-rules">Agentic rules engine</h3><p>Based on the agentic rules engine I launched. Describe a billing policy in plain English. An agent turns it into a decision table, tests it, fixes what fails, then waits for approval.</p></div>
       <div class="meta"><span class="chip a">MCP context</span><span class="chip a">evals</span><span class="chip">guardrails</span></div>
     </div>
     <dl class="brief">
@@ -585,7 +582,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     <div class="build-body">
       <div class="pane">
         <div class="prompts" id="prompts" role="group" aria-label="Billing policies"></div>
-        <pre class="code" id="rule-out" aria-live="polite"></pre>
+        <div class="dtable" id="rule-out" aria-live="polite"></div>
         <div class="evals" id="evals" aria-hidden="true"></div>
         <div class="evline"><span id="ev-text">12 / 12 cases passed</span><span id="ev-state" class="state ok">ready for approval</span></div>
       </div>
@@ -820,17 +817,17 @@ chrome.runtime.onMessage.addListener(
 <section class="sheet wrap band" id="method" aria-labelledby="h-method">
   <div class="sheet-head">
     <div><span class="tag"><b>Sheet 02</b> Method</span><h2 id="h-method">How I build with agents</h2></div>
-    <p class="lede">The model is the cheap part. What matters is what it can see, how it's tested and when a person steps in.</p>
+    <p class="lede">Anyone can call an AI model. The product work is deciding what it can see, how we know it's right and when a person signs off.</p>
   </div>
 
 
   <div class="lessons">
-    <div class="lesson"><div class="lk">One agent, until it isn't enough</div><p>Most problems need one good agent, not five. I split the work only when the pieces can run side by side, like the cost-control crew.</p></div>
-    <div class="lesson"><div class="lk">Let the platform run it</div><p>Managed agent runtimes now handle sandboxes, memory and long sessions. Good. My time goes to what the agent can touch and when a person steps in.</p></div>
-    <div class="lesson"><div class="lk">Evals come first</div><p>If I can't write the test cases, I don't understand the feature yet. Every miss in production becomes a new case.</p></div>
-    <div class="lesson"><div class="lk">Context beats prompts</div><p>Agents fail more from what they can't see than from bad wording. Few tools, clean context, and MCP for the plumbing.</p></div>
-    <div class="lesson"><div class="lk">Trust is earned</div><p>I start with a person approving everything and loosen it as the evals hold up. Anything you can't undo keeps a human.</p></div>
-    <div class="lesson"><div class="lk">Every task has a price</div><p>Finance taught me to price things, and I still do. Each task gets a cost and latency budget, and the cheaper model goes first.</p></div>
+    <div class="lesson"><div class="lk">Start with one agent</div><p>Most workflows need one capable agent. I add more only when steps can run independently, like checking a payment for duplicates and budget at the same time. Fewer agents means lower cost and easier fixes.</p></div>
+    <div class="lesson"><div class="lk">Buy the plumbing</div><p>Cloud platforms now host agents, their memory and long-running tasks. I use that and spend the team's time on what customers notice: what the agent can access and when it needs sign-off.</p></div>
+    <div class="lesson"><div class="lk">Define "correct" first</div><p>Before building, we write the test cases that describe a good answer. Every release must pass them, and every mistake found later becomes a new test, so quality only goes up.</p></div>
+    <div class="lesson"><div class="lk">Feed it the right information</div><p>Most AI mistakes come from missing information, not bad instructions. I connect agents to the systems where the data lives and keep what they see focused.</p></div>
+    <div class="lesson"><div class="lk">Earn autonomy step by step</div><p>Agents start with a person approving each action. As results prove reliable, approvals relax. Anything that can't be undone, like moving money or deleting data, keeps a person in the loop.</p></div>
+    <div class="lesson"><div class="lk">Budget every task</div><p>Each task gets a cost and speed target. Routine steps go to smaller, cheaper models and judgment calls go to the strongest one. It's the unit economics I learned in finance.</p></div>
   </div>
 </section>
 
@@ -879,13 +876,6 @@ const $ = (s, r=document) => r.querySelector(s);
 const fmt = n => n.toLocaleString('en-US');
 const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-/* ───── hero console: step a highlight through the trace ───── */
-{
-  const lis = [...document.querySelectorAll('#console li')];
-  let i = 0;
-  if (!reduce) setInterval(() => { lis.forEach(l => l.classList.remove('on')); lis[i].classList.add('on'); i = (i + 1) % lis.length; }, 1300);
-}
 
 /* ───── takeoff ───── */
 {
@@ -1009,54 +999,58 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
   const P = [
     { k:'Discount policy', q:'Give APAC accounts 10% off when they upgrade within 30 days of renewal.',
       fail:6,
-      trace:[['Read the billing data model','3 objects, 41 fields','schema.lookup(Account, Subscription, Order) via MCP'],['Worked out what the policy means','Trigger: an upgrade. Conditions: region and a 30-day window.','plan.intent()'],['Drafted the rule','Version 1','rules.draft()'],['Tested it against 12 known cases',"11 passed. Case 7 failed: the renewal date was read in UTC instead of the customer's timezone.",'evals.run(12)','warn'],['Fixed the failure',"Version 2 compares dates in the customer's timezone",'rules.revise()'],['Re-ran the tests','All 12 passed','evals.run(12)'],['Checked the safety rules','Reversible, touches no personal data, runs as a dry run first','guardrails.check()'],['Sent to a billing admin for approval','Waiting for a person','request_approval(billing_admin)']],
-      rule:`<span class="kw">WHEN</span> subscription.upgraded
-  <span class="kw">AND</span> account.region <span class="kw">IN</span> (<span class="st">"APAC"</span>)
-  <span class="kw">AND</span> days_between(event.date, subscription.renewal_date,
-        tz = account.timezone) <= 30   <span class="cm"># v2 fix</span>
-<span class="kw">THEN</span> apply_discount(percent = 10, scope = <span class="st">"upgrade_delta"</span>)
-<span class="kw">MODE</span> dry_run → requires_approval` },
+      trace:[['Read the billing data model','3 objects, 41 fields','schema.lookup(Account, Subscription, Order) via MCP'],['Worked out what the policy means','Trigger: an upgrade. Conditions: region and a 30-day window.','plan.intent()'],['Drafted the decision table','Version 1','rules.draft()'],['Tested it against 12 known cases',"11 passed. Case 7 failed: the renewal date was read in UTC instead of the customer's timezone.",'evals.run(12)','warn'],['Fixed the failure',"Version 2 compares dates in the customer's timezone",'rules.revise()'],['Re-ran the tests','All 12 passed','evals.run(12)'],['Checked the safety rules','Reversible, touches no personal data, runs as a dry run first','guardrails.check()'],['Sent to a billing admin for approval','Waiting for a person','request_approval(billing_admin)']],
+      table:{in:['Region','Event','Days before renewal'], fix:2, orig:'Days before renewal (UTC)', fixed:"Days before renewal (customer's timezone)",
+        out:['Discount','Applies to','Sign-off'],
+        rows:[['APAC','Upgrade','0–30','10%','Upgrade amount','Billing admin'],['APAC','Upgrade','31 or more','None','—','—'],['All other regions','Any','Any','None','—','—']],
+        note:"v2 counts days in the customer's timezone, so an upgrade late on day 30 still qualifies."} },
     { k:'Approval policy', q:'Hold any invoice over $50K for finance approval before it posts.',
       fail:-1,
-      trace:[['Read the billing data model','2 objects, 27 fields','schema.lookup(Invoice, Account) via MCP'],['Worked out what the policy means','Trigger: a new invoice. Gate: the total.','plan.intent()'],['Drafted the rule','Version 1','rules.draft()'],['Tested it against 12 known cases','All 12 passed','evals.run(12)'],['Checked the safety rules','Only pauses posting. Changes no data.','guardrails.check()'],['Sent to the finance lead for approval','Waiting for a person','request_approval(finance_lead)']],
-      rule:`<span class="kw">WHEN</span> invoice.created
-  <span class="kw">AND</span> invoice.total >= 50000 <span class="kw">IN</span> account.currency
-<span class="kw">THEN</span> set_status(<span class="st">"Pending Approval"</span>)
-     notify(role = <span class="st">"finance_lead"</span>)
-<span class="kw">MODE</span> dry_run → requires_approval` },
+      trace:[['Read the billing data model','2 objects, 27 fields','schema.lookup(Invoice, Account) via MCP'],['Worked out what the policy means','Trigger: a new invoice. Gate: the total.','plan.intent()'],['Drafted the decision table','Version 1','rules.draft()'],['Tested it against 12 known cases','All 12 passed','evals.run(12)'],['Checked the safety rules','Only pauses posting. Changes no data.','guardrails.check()'],['Sent to the finance lead for approval','Waiting for a person','request_approval(finance_lead)']],
+      table:{in:['Invoice total (account currency)'], fix:-1,
+        out:['Status','Notify'],
+        rows:[['50,000 or more','Hold for approval','Finance lead'],['Under 50,000','Post as normal','—']]} },
     { k:'Retention policy', q:'Purge usage records older than 7 years unless the account is on legal hold.',
       fail:9,
-      trace:[['Read the data model','3 objects, 33 fields','schema.lookup(Usage, Account, LegalHold) via MCP'],['Worked out what the policy means','Action: purge. Exception: legal hold.','plan.intent()'],['Drafted the rule','Version 1','rules.draft()'],['Tested it against 12 known cases',"11 passed. Case 10 failed: a legal hold on a parent account wasn't applied to its child accounts.",'evals.run(12)','warn'],['Fixed the failure','Version 2 checks for holds up the account hierarchy','rules.revise()'],['Re-ran the tests','All 12 passed','evals.run(12)'],['Checked the safety rules',"Deleted data can't come back, so it archives first and needs 2 approvers",'guardrails.check()'],['Sent to Legal and the data owner for approval','Waiting for two people','request_approval(legal, data_owner)']],
-      rule:`<span class="kw">EVERY</span> day <span class="kw">AT</span> 02:00 account.timezone
-<span class="kw">FOR</span> usage <span class="kw">WHERE</span> usage.date < today - 7y
-  <span class="kw">AND NOT</span> has_legal_hold(usage.account,
-        include_parents = true)        <span class="cm"># v2 fix</span>
-<span class="kw">THEN</span> archive(usage) → purge(usage)
-<span class="kw">MODE</span> dry_run → requires_approval(2)` },
+      trace:[['Read the data model','3 objects, 33 fields','schema.lookup(Usage, Account, LegalHold) via MCP'],['Worked out what the policy means','Action: purge. Exception: legal hold.','plan.intent()'],['Drafted the decision table','Version 1','rules.draft()'],['Tested it against 12 known cases',"11 passed. Case 10 failed: a legal hold on a parent account wasn't applied to its child accounts.",'evals.run(12)','warn'],['Fixed the failure','Version 2 checks for holds up the account hierarchy','rules.revise()'],['Re-ran the tests','All 12 passed','evals.run(12)'],['Checked the safety rules',"Deleted data can't come back, so it archives first and needs 2 approvers",'guardrails.check()'],['Sent to Legal and the data owner for approval','Waiting for two people','request_approval(legal, data_owner)']],
+      table:{in:['Record age','Legal hold'], fix:1, orig:'Legal hold (this account)', fixed:'Legal hold (this account or a parent)',
+        out:['Action','Sign-off'],
+        rows:[['Over 7 years','No','Archive, then purge','Legal and data owner'],['Over 7 years','Yes','Keep','—'],['7 years or less','Any','Keep','—']],
+        note:'v2 checks parent accounts too, so a hold at the top of a hierarchy protects every account under it.'} },
   ];
   const box = $('#prompts'), out = $('#rule-out'), tr = $('#rule-trace'), ev = $('#evals');
   for (let i = 0; i < 12; i++) ev.appendChild(document.createElement('i'));
   const cells = [...ev.children];
   box.innerHTML = P.map((p,i) => `<button class="prompt" type="button" aria-pressed="${i===0}" data-i="${i}"><span class="pk">${esc(p.k)}</span>${esc(p.q)}</button>`).join('');
+  // decision table: input columns, then outcome columns; one row per case, first match wins
+  function dt(p, v2) {
+    const T = p.table, fixed = v2 && T.fix >= 0;
+    const head = T.in.map((h, i) => i === T.fix ? `<th class="${fixed ? 'fix' : ''}">${esc(fixed ? T.fixed : T.orig)}</th>` : `<th>${esc(h)}</th>`).join('')
+      + T.out.map(h => `<th class="o">${esc(h)}</th>`).join('');
+    const body = T.rows.map((r, ri) => `<tr><td class="n">${ri + 1}</td>${r.map((c, ci) => `<td class="${ci >= T.in.length ? 'o' : ''}${ci === T.fix && fixed ? ' fix' : ''}">${esc(c)}</td>`).join('')}</tr>`).join('');
+    return `<div class="dt-cap"><span>Decision table · first matching row wins</span><span>${fixed ? 'v2' : 'v1'}</span></div>`
+      + `<div class="dt-scroll"><table class="dt"><thead><tr><th class="n">#</th>${head}</tr></thead><tbody>${body}</tbody></table></div>`
+      + (fixed && T.note ? `<p class="dt-note">${esc(T.note)}</p>` : '');
+  }
   // row: [plain step, result, technical call, warn?]
   const line = (s, cls, show) => `<li class="${cls}"><span class="d"></span><span><b>${esc(s[0])}</b>${show ? `<span class="o">${esc(s[1])}</span><code class="c">${esc(s[2])}</code>` : ''}</span></li>`;
   function final(p) {
     tr.innerHTML = p.trace.map(s => line(s, 'done' + (s[3]?' warn':''), true)).join('');
-    out.innerHTML = p.rule; cells.forEach(c => c.className = 'p');
+    out.innerHTML = dt(p, true); cells.forEach(c => c.className = 'p');
     $('#ev-text').textContent = '12 / 12 cases passed'; const st = $('#ev-state'); st.textContent = 'ready for approval'; st.className = 'state ok';
   }
   let token = 0;
   async function run(i) {
     const me = ++token, p = P[i];
     box.querySelectorAll('.prompt').forEach(b => b.setAttribute('aria-pressed', b.dataset.i == i));
-    out.innerHTML = '<span class="cm"># drafting…</span>'; cells.forEach(c => c.className = '');
+    out.innerHTML = '<p class="dt-wait">Drafting the decision table…</p>'; cells.forEach(c => c.className = '');
     const st = $('#ev-state'); st.textContent = 'working'; st.className = 'state'; $('#ev-text').textContent = '0 / 12 cases run';
     let evalRun = 0;
     for (let s = 0; s < p.trace.length; s++) {
       if (me !== token) return;
       tr.innerHTML = p.trace.map((x,j) => j < s ? line(x, 'done'+(x[3]?' warn':''), true) : j===s ? line(x,'run',false) : line(x,'',false)).join('');
       const name = p.trace[s][2];
-      if (name.startsWith('rules.draft') || name.startsWith('rules.revise')) { await sleep(450); out.innerHTML = p.rule.replace(/\s*<span class="cm"># v2 fix<\/span>/, name.startsWith('rules.revise') ? ' <span class="cm"># v2 fix</span>' : ''); }
+      if (name.startsWith('rules.draft') || name.startsWith('rules.revise')) { await sleep(450); out.innerHTML = dt(p, name.startsWith('rules.revise')); }
       if (name.startsWith('evals.run')) {
         evalRun++;
         for (let c = 0; c < 12; c++) { if (me !== token) return; const f = evalRun===1 && c===p.fail; cells[c].className = f ? 'f' : 'p'; $('#ev-text').textContent = `${c+1} / 12 cases run`; await sleep(60); }
