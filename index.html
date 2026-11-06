@@ -1,6 +1,6 @@
 <title>Ishir Vasavada</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Ishir Vasavada: product leader and Techstars founder across enterprise software, startups and AI. Five of his products run in the browser.">
+<meta name="description" content="Ishir Vasavada: product leader and Techstars founder across enterprise software, startups and AI. Six of his products run in the browser.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
@@ -13,7 +13,7 @@
   --ink-2:#525A64;
   --ink-3:#737B85;
   --band:#E6E9E3;      /* solid section band */
-  --c-rules:#1E43D6; --c-eco:#1C7A4B; --c-rec:#6D3FC4; --c-plan:#B0570C; --c-jc:#0E7A86;  /* one color per product */
+  --c-rules:#1E43D6; --c-eco:#1C7A4B; --c-rec:#6D3FC4; --c-plan:#B0570C; --c-jc:#0E7A86; --c-risk:#B4235A;  /* one color per product */
   --rule:#D2D6D0;
   --grid:rgba(20,24,29,.045);
   --accent:#1E43D6;     /* blue-line print */
@@ -29,11 +29,11 @@
   --wrap:1480px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --paper:#0B1019; --panel:#111826; --ink:#E6EAF1; --ink-2:#A2ABBA; --ink-3:#8590A3; --rule:#243045; --band:#0E1420; --c-rules:#86A0FF; --c-eco:#54C78E; --c-rec:#B392F0; --c-plan:#F0A660; --c-jc:#4CC3D1;
+  --paper:#0B1019; --panel:#111826; --ink:#E6EAF1; --ink-2:#A2ABBA; --ink-3:#8590A3; --rule:#243045; --band:#0E1420; --c-rules:#86A0FF; --c-eco:#54C78E; --c-rec:#B392F0; --c-plan:#F0A660; --c-jc:#4CC3D1; --c-risk:#F27BA3;
   --grid:rgba(140,170,235,.055); --accent:#86A0FF; --accent-ink:#0B1019; --accent-soft:rgba(134,160,255,.11); --accent-mid:rgba(134,160,255,.26);
   --ok:#54C78E; --ok-soft:rgba(84,199,142,.14); --warn:#F0A660; --warn-soft:rgba(240,166,96,.14); color-scheme:dark }}
 :root[data-theme="dark"]{
-  --paper:#0B1019; --panel:#111826; --ink:#E6EAF1; --ink-2:#A2ABBA; --ink-3:#8590A3; --rule:#243045; --band:#0E1420; --c-rules:#86A0FF; --c-eco:#54C78E; --c-rec:#B392F0; --c-plan:#F0A660; --c-jc:#4CC3D1;
+  --paper:#0B1019; --panel:#111826; --ink:#E6EAF1; --ink-2:#A2ABBA; --ink-3:#8590A3; --rule:#243045; --band:#0E1420; --c-rules:#86A0FF; --c-eco:#54C78E; --c-rec:#B392F0; --c-plan:#F0A660; --c-jc:#4CC3D1; --c-risk:#F27BA3;
   --grid:rgba(140,170,235,.055); --accent:#86A0FF; --accent-ink:#0B1019; --accent-soft:rgba(134,160,255,.11); --accent-mid:rgba(134,160,255,.26);
   --ok:#54C78E; --ok-soft:rgba(84,199,142,.14); --warn:#F0A660; --warn-soft:rgba(240,166,96,.14); color-scheme:dark }
 
@@ -503,6 +503,47 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 @media (max-width:600px){ .ra-crumb{display:none} .ra-bar{justify-content:space-between} .ra-box{flex-direction:column;align-items:stretch} .ra-foot .btn{width:100%;justify-content:center} }
 #ev-text{white-space:nowrap}
 
+/* ——— risk workflows ——— */
+.build-body.rk{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+@media (max-width:900px){ .build-body.rk{grid-template-columns:1fr} }
+.rk-qs{display:grid;gap:8px}
+.rk-q{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);font-size:var(--t-sm)}
+.rk-q .seg{margin:0;flex:none}
+.rk-q.off{opacity:.4;pointer-events:none}
+.rk-flow{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 24px}
+.rk-flow li{position:relative;border:1px solid var(--rule);border-top:2px solid var(--rule);border-radius:9px;padding:7px 10px;background:var(--paper);min-width:0}
+.rk-flow li::after{content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:13px}
+.rk-flow li:last-child::after{display:none}
+.rk-flow .sn{display:block;font-weight:600;font-size:13px}
+.rk-flow .sa{display:block;font-size:12px;color:var(--ink-2)}
+.rk-flow li.on{border-top-color:var(--pc)}
+.rk-flow li.skip{opacity:.45;border-style:dashed}
+.rk-flow li.new{animation:flash 1.2s ease-out}
+.rk-out{margin-top:14px;font-size:var(--t-sm);border-radius:10px;padding:11px 14px;border:1px solid var(--rule)}
+.rk-out.lo{border-color:var(--ok);background:var(--ok-soft)}
+.rk-out.me{border-color:var(--warn);background:var(--warn-soft)}
+.rk-out.hi{border-color:var(--c-risk);background:color-mix(in srgb,var(--c-risk) 12%,transparent)}
+.rk-map-wrap{display:grid;grid-template-columns:16px minmax(0,1fr);grid-template-rows:auto auto;gap:4px 6px;margin:12px 0 14px}
+.rk-ylab{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;color:var(--ink-3);text-align:center}
+.rk-xlab{grid-column:2;font-size:11px;color:var(--ink-3);text-align:center}
+.rk-map{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-rows:minmax(34px,auto);gap:3px}
+.rk-map > div{border-radius:4px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:3px;padding:3px}
+.rk-map .lo{background:var(--ok-soft)}
+.rk-map .me{background:var(--warn-soft)}
+.rk-map .hi{background:color-mix(in srgb,var(--c-risk) 16%,transparent)}
+.rk-dot{width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:11px;font-weight:600;display:inline-grid;place-items:center;flex:none}
+.rk-reg{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.rk-reg li{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px;padding:7px 10px;border:1px solid var(--rule);border-radius:9px;background:var(--paper)}
+.rk-reg li b{font-weight:600;display:block}
+.rk-reg .rk-c{display:block;font-size:12px;color:var(--ink-2)}
+.rk-reg .rk-s{font-size:12px;color:var(--ink-3);white-space:nowrap}
+.rk-reg li.rk-none{display:block;color:var(--ink-2)}
+.lv{font-family:var(--f-mono);font-size:11.5px;padding:2px 6px;border-radius:5px}
+.lv.lo{background:var(--ok-soft);color:var(--ok)}
+.lv.me{background:var(--warn-soft);color:var(--warn)}
+.lv.hi{background:color-mix(in srgb,var(--c-risk) 16%,transparent);color:var(--c-risk)}
+@media (max-width:520px){ .rk-q{flex-direction:column;align-items:flex-start} .rk-flow{gap:8px 20px} }
+
 /* ——— product brief ——— */
 .brief{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr) minmax(0,1.5fr);margin:0;border-bottom:1px solid var(--rule);background:var(--paper)}
 .brief > div{padding:14px 24px;min-width:0}
@@ -512,7 +553,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 @media (max-width:820px){ .brief{grid-template-columns:1fr} .brief > div + div{border-left:0;border-top:1px solid var(--rule)} }
 
 /* ——— work tabs ——— */
-.wtabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:16px}
+.wtabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-bottom:16px}
 .wtab{text-align:left;border:1px solid var(--rule);border-top:3px solid var(--pc);background:color-mix(in srgb,var(--pc) 6%,var(--panel));border-radius:12px;padding:14px 14px 13px;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-width:0;transition:border-color .15s}
 .wtab:hover{border-color:var(--ink-3)}
 .wtab .wk{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--pc)}
@@ -598,12 +639,13 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 <!-- ═══════════ WORK ═══════════ -->
 <section class="sheet wrap" id="work" aria-labelledby="h-work">
   <div class="sheet-head">
-    <div><span class="tag"><b>Sheet 01</b> Work</span><h2 id="h-work">Five products you can try</h2></div>
+    <div><span class="tag"><b>Sheet 01</b> Work</span><h2 id="h-work">Six products you can try</h2></div>
     <p class="lede">Things I've built or shipped. Each one runs in the browser.</p>
   </div>
 
   <div class="wtabs" id="work-tabs" role="tablist" aria-label="Products">
     <button class="wtab" role="tab" id="wt-rules" style="--pc:var(--c-rules)" aria-controls="wp-rules" aria-selected="true" type="button"><span class="wk">Enterprise platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span></button>
+    <button class="wtab" role="tab" id="wt-risk" style="--pc:var(--c-risk)" aria-controls="wp-risk" aria-selected="false" type="button"><span class="wk">Enterprise · risk</span><span class="wn">Risk assessment workflows</span><span class="wo">Routes every assessment by its risk</span></button>
     <button class="wtab" role="tab" id="wt-eco" style="--pc:var(--c-eco)" aria-controls="wp-eco" aria-selected="false" type="button"><span class="wk">Startup · vision</span><span class="wn">Ecodrop Technologies</span><span class="wo">Thousands of users, Techstars-backed</span></button>
     <button class="wtab" role="tab" id="wt-rec" style="--pc:var(--c-rec)" aria-controls="wp-rec" aria-selected="false" type="button"><span class="wk">Speech search</span><span class="wn">Recognito</span><span class="wo">Jump to the second a word is said</span></button>
     <button class="wtab" role="tab" id="wt-plan" style="--pc:var(--c-plan)" aria-controls="wp-plan" aria-selected="false" type="button"><span class="wk">Multimodal agent</span><span class="wn">Blueprint vision agent</span><span class="wo">Reads drawings into an estimate-ready schedule</span></button>
@@ -638,6 +680,39 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
         <p class="small-h">Agent activity</p>
         <ol class="trace" id="rule-trace"></ol>
         <p class="note">An illustration of the pattern, not my employer's code or data.</p>
+      </div>
+    </div>
+  </article>
+  </div>
+  <div class="wpanel" style="--pc:var(--c-risk)" role="tabpanel" id="wp-risk" aria-labelledby="wt-risk">
+  <!-- Risk workflows -->
+  <article class="build" aria-labelledby="h-risk">
+    <div class="build-head">
+      <div><h3 id="h-risk">Risk assessment workflows</h3><p>Based on the custom workflows for risk assessments from my time at OneTrust. Answer the intake questions and the workflow builds itself: risks get scored, stages are added or skipped by rule, and approval goes to the right person.</p></div>
+      <div class="meta"><span class="chip a">workflow rules</span><span class="chip a">risk scoring</span><span class="chip">approvals</span></div>
+    </div>
+    <dl class="brief">
+      <div><dt>Who it's for</dt><dd>Privacy, security and risk teams, plus the business owners who request new vendors and systems</dd></div>
+      <div><dt>Market</dt><dd>Privacy, GRC and responsible AI software</dd></div>
+      <div><dt>Problem</dt><dd>Every company assesses risk its own way. Fixed templates pushed routing and approvals back into email and spreadsheets, so reviews stalled and risks lived outside the system.</dd></div>
+    </dl>
+    <div class="build-body rk">
+      <div class="pane">
+        <p class="small-h">Intake · new AI vendor</p>
+        <div class="rk-qs" id="rk-qs"></div>
+        <p class="small-h" style="margin-top:22px">Workflow</p>
+        <ol class="rk-flow" id="rk-flow"></ol>
+        <div class="rk-out" id="rk-out" aria-live="polite"></div>
+      </div>
+      <div class="pane">
+        <div class="toolbar"><p class="small-h" style="margin:0">Risk heat map</p>
+          <div class="seg" id="rk-mode" role="group" aria-label="Risk view" style="margin:0"><button type="button" aria-pressed="true" data-m="in">Inherent</button><button type="button" aria-pressed="false" data-m="res">After controls</button></div>
+        </div>
+        <div class="rk-map-wrap"><span class="rk-ylab">Likelihood</span><div class="rk-map" id="rk-map" role="img" aria-label="Five by five risk heat map"></div><span class="rk-xlab">Impact</span></div>
+        <ol class="rk-reg" id="rk-reg"></ol>
+        <p class="small-h" style="margin-top:18px">Rules fired</p>
+        <ol class="trace" id="rk-rules"></ol>
+        <p class="note">Score = likelihood × impact: 12 and up is high, 5 to 11 medium. A simplified illustration of the pattern, not OneTrust's product or data.</p>
       </div>
     </div>
   </article>
@@ -1462,6 +1537,64 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
     roleEl.innerHTML = `<div><div class="rt">${esc(r.n)}</div><div class="rm">${esc(r.t)} · ${esc(r.y)}</div><div class="big num">${esc(r.big)}</div><div class="bigl">${esc(r.bigl)}</div></div><ul>${r.pts.map(p => `<li>${p}</li>`).join('')}</ul>`;
   }
   show(4);
+}
+
+/* ───── risk workflows ───── */
+{
+  const QS = [['pd', 'Will it process personal data?'], ['sens', 'Does that include sensitive data, like health or biometrics?'],
+              ['xfer', 'Will data move across borders?'], ['adm', 'Will its AI make decisions about people automatically?']];
+  const A = {pd:true, sens:true, xfer:true, adm:false};
+  const lvl = x => x >= 12 ? 'hi' : x >= 5 ? 'me' : 'lo';
+  const LV = {hi:'high', me:'medium', lo:'low'};
+  let mode = 'in', prev = null;
+  function model() {
+    const R = [];
+    if (A.pd && A.sens) R.push({n:'Sensitive data exposure', L:3, I:5, rL:2, rI:4, ctl:'encryption and quarterly access reviews', o:'Security'});
+    else if (A.pd) R.push({n:'Personal data handling', L:2, I:3, rL:1, rI:3, ctl:'data minimization', o:'Privacy'});
+    if (A.pd && A.xfer) R.push({n:'Cross-border transfer', L:3, I:4, rL:2, rI:3, ctl:'standard contractual clauses', o:'Legal'});
+    if (A.adm) R.push({n:'Automated decisions about people', L:4, I:4, rL:3, rI:4, ctl:'human review of every decision', o:'Responsible AI'});
+    const maxIn = Math.max(0, ...R.map(r => r.L * r.I)), maxRes = Math.max(0, ...R.map(r => r.rL * r.rI));
+    const approver = !R.length ? 'auto-approval' : maxRes >= 12 ? 'the CISO and DPO' : maxRes >= 5 ? 'the privacy lead' : 'the risk owner';
+    const dpia = A.pd && (A.sens || A.adm), legal = A.pd && A.xfer;
+    const S = [['Intake', 'Requester', true], ['Vendor questionnaire', 'Vendor', true], ['Privacy review', 'Privacy team', maxIn >= 5],
+               ['Impact assessment (DPIA)', 'Data protection officer', dpia], ['Legal review', 'Legal', legal],
+               ['Approval', R.length ? approver.replace(/^the /, '').replace(/^./, c => c.toUpperCase()) : 'Automatic', true],
+               ['Monitoring', 'Risk owners, every 12 months', R.length > 0]];
+    const rules = [];
+    if (maxIn >= 5) rules.push(['Added privacy review', 'At least one risk is medium or higher', 'if max(inherent) >= 5 → add_stage("privacy_review")']);
+    if (dpia) rules.push(['Added an impact assessment', A.sens ? 'Sensitive data is in scope' : 'Its AI decides about people', 'if sensitive or automated_decisions → add_stage("dpia")']);
+    if (legal) rules.push(['Added legal review', 'Data moves across borders', 'if cross_border → add_stage("legal_review")']);
+    rules.push(R.length ? [`Routed approval to ${approver}`, `Highest risk after controls is ${LV[lvl(maxRes)]}`, `route_approval(max(residual) = ${maxRes})`]
+                        : ['Auto-approved', 'No risks flagged, so review and monitoring are skipped', 'if risks.length == 0 → approve(); skip("monitoring")']);
+    return {R, S, rules, maxRes, approver};
+  }
+  $('#rk-qs').innerHTML = QS.map(([k, q]) => `<div class="rk-q" data-k="${k}"><span>${esc(q)}</span><div class="seg" role="group" aria-label="${esc(q)}"><button type="button" data-v="1">Yes</button><button type="button" data-v="0">No</button></div></div>`).join('');
+  function render() {
+    const m = model();
+    document.querySelectorAll('#rk-qs .rk-q').forEach(q => {
+      const k = q.dataset.k; q.classList.toggle('off', (k === 'sens' || k === 'xfer') && !A.pd);
+      q.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String((b.dataset.v === '1') === A[k])));
+    });
+    $('#rk-flow').innerHTML = m.S.map(([n, a, on], i) => `<li class="${on ? 'on' : 'skip'}${prev && prev[i] !== on ? ' new' : ''}"><span class="sn">${esc(n)}</span><span class="sa">${esc(on ? a : 'Skipped')}</span></li>`).join('');
+    prev = m.S.map(x => x[2]);
+    const cell = {};
+    m.R.forEach((r, i) => { const L = mode === 'in' ? r.L : r.rL, I = mode === 'in' ? r.I : r.rI; (cell[L + ',' + I] = cell[L + ',' + I] || []).push(i + 1); });
+    let h = '';
+    for (let L = 5; L >= 1; L--) for (let I = 1; I <= 5; I++) h += `<div class="${lvl(L * I)}" title="Likelihood ${L} × impact ${I} = ${L * I}">${(cell[L + ',' + I] || []).map(n => `<span class="rk-dot">${n}</span>`).join('')}</div>`;
+    $('#rk-map').innerHTML = h;
+    $('#rk-reg').innerHTML = m.R.length ? m.R.map((r, i) => { const a = r.L * r.I, b = r.rL * r.rI;
+      return `<li><span class="rk-dot">${i + 1}</span><span><b>${esc(r.n)}</b><span class="rk-c">${esc(r.o)} · control: ${esc(r.ctl)}</span></span><span class="rk-s"><span class="lv ${lvl(a)}">${a}</span> → <span class="lv ${lvl(b)}">${b}</span></span></li>`; }).join('')
+      : '<li class="rk-none">No risks flagged.</li>';
+    $('#rk-rules').innerHTML = m.rules.map(([t, o, c]) => `<li class="done"><span class="d"></span><span><b>${esc(t)}</b><span class="o">${esc(o)}</span><code class="c">${esc(c)}</code></span></li>`).join('');
+    const out = $('#rk-out'), L = lvl(m.maxRes);
+    out.className = 'rk-out ' + (m.R.length ? L : 'lo');
+    out.innerHTML = m.R.length
+      ? `<b>Routed to ${esc(m.approver)}.</b> ${m.R.length} ${m.R.length === 1 ? 'risk' : 'risks'} flagged. Highest after controls: ${LV[L]} (${m.maxRes}).`
+      : '<b>Auto-approved.</b> No risks flagged, so review and monitoring are skipped.';
+  }
+  $('#rk-qs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; A[b.closest('.rk-q').dataset.k] = b.dataset.v === '1'; render(); });
+  $('#rk-mode').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; mode = b.dataset.m; $('#rk-mode').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); render(); });
+  render();
 }
 
 /* ───── work tabs ───── */
