@@ -599,11 +599,12 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 }
 
 .lessons-h{font-size:var(--t-xl);font-weight:600;margin:44px 0 16px}
-.lessons{margin-top:4px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
-.lesson{background:var(--panel);padding:18px 20px;min-width:0}
+.lessons{margin-top:4px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+.lesson{display:flex;flex-direction:column;background:var(--panel);padding:18px 20px;min-width:0}
 .lesson .lk{font-weight:600;font-size:var(--t-md);letter-spacing:-.01em}
 .lesson p{margin:6px 0 0;font-size:var(--t-sm);color:var(--ink-2)}
-@media (max-width:900px){ .lessons{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.lesson .lt{margin-top:auto;padding-top:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.02em;color:var(--accent)}
+@media (max-width:1100px){ .lessons{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:560px){ .lessons{grid-template-columns:1fr} }
 
 /* ——— path / timeline ——— */
@@ -1093,17 +1094,19 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 <section class="sheet wrap band" id="method" aria-labelledby="h-method">
   <div class="sheet-head">
     <div><span class="tag"><b>Sheet 02</b> Method</span><h2 id="h-method">How I build with agents</h2></div>
-    <p class="lede">Anyone can call an AI model. The product work is deciding what it can see, how we know it's right and when a person signs off.</p>
+    <p class="lede">Anyone can call an AI model. The product work is the harness around it: what it can see, how we know it's right and when a person signs off.</p>
   </div>
 
 
   <div class="lessons">
-    <div class="lesson"><div class="lk">Start with one agent</div><p>Most workflows need one capable agent. I add more only when steps can run in parallel, like checking a payment for duplicates and against the budget at the same time. Fewer agents cost less and are easier to fix.</p></div>
-    <div class="lesson"><div class="lk">Use managed agent platforms</div><p>Cloud platforms now handle hosting, memory and long-running tasks for agents. I build on them, so the team's time goes to what users notice: what the agent can access and when it asks for approval.</p></div>
-    <div class="lesson"><div class="lk">Write the tests first</div><p>Before building, we write evals: test cases that define a good answer. Every release has to pass them, and every mistake found later becomes a new test.</p></div>
-    <div class="lesson"><div class="lk">Give agents the right context</div><p>Most AI mistakes come from missing context, not bad prompts. I connect agents to the systems that hold the data, often through MCP, and keep what they see focused.</p></div>
-    <div class="lesson"><div class="lk">Add autonomy gradually</div><p>Agents start with a person approving every action. Approvals loosen as results prove reliable. Anything that can't be undone, like moving money or deleting data, always needs a person.</p></div>
-    <div class="lesson"><div class="lk">Track cost per task</div><p>Each task has a cost and speed target. Routine steps use smaller, cheaper models, and harder calls use the strongest one.</p></div>
+    <div class="lesson"><div class="lk">Build the harness, not just the prompt</div><p>Reliability comes from what surrounds the model: tools, permissions, memory, context management, retries and evals. I design that harness first.</p><div class="lt">Claude Agent SDK · Claude Code hooks</div></div>
+    <div class="lesson"><div class="lk">Start with one agent</div><p>Most workflows need one capable agent. I add subagents only when steps can run in parallel, like checking a payment for duplicates and against the budget at the same time.</p><div class="lt">Subagents · orchestration</div></div>
+    <div class="lesson"><div class="lk">Package know-how as skills</div><p>Repeat work becomes a skill: instructions, scripts and examples an agent loads only when it needs them. Every agent and teammate gets the same playbook.</p><div class="lt">Agent Skills in Claude Code</div></div>
+    <div class="lesson"><div class="lk">Use managed agent platforms</div><p>Hosted runtimes now handle sandboxes, memory and long-running sessions. The team's time goes to what users notice: what the agent can access and when it asks for approval.</p><div class="lt">Claude Managed Agents · Amazon Bedrock</div></div>
+    <div class="lesson"><div class="lk">Give agents the right context</div><p>Most AI mistakes come from missing context, not bad prompts. I connect agents to the systems that hold the data and keep what they see focused.</p><div class="lt">MCP · Glean</div></div>
+    <div class="lesson"><div class="lk">Write the tests first</div><p>Before building, we write evals: test cases that define a good answer. Every release has to pass them, and every mistake found later becomes a new test.</p><div class="lt">Evals · guardrails · LLM-as-judge</div></div>
+    <div class="lesson"><div class="lk">Add autonomy gradually</div><p>Agents start with a person approving every action. Approvals loosen as results prove reliable. Anything that can't be undone, like moving money or deleting data, always needs a person.</p><div class="lt">Approval gates · permission modes</div></div>
+    <div class="lesson"><div class="lk">Pick the model per task</div><p>Routine steps use smaller, cheaper models and harder reasoning uses the strongest one. I compare models on our own evals before choosing, and track cost and speed per task.</p><div class="lt">Claude · Gemini · model routing</div></div>
   </div>
 </section>
 
