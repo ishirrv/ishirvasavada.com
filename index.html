@@ -811,11 +811,11 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 
   <div class="wtabs" id="work-tabs" role="tablist" aria-label="Products">
     <button class="wtab" role="tab" id="wt-rules" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)" aria-controls="wp-rules" aria-selected="true" type="button"><span class="wk">Enterprise platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span></button>
-    <button class="wtab" role="tab" id="wt-risk" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)" aria-controls="wp-risk" aria-selected="false" type="button"><span class="wk">Enterprise · risk</span><span class="wn">Risk assessment workflows</span><span class="wo">Routes every assessment by its risk</span></button>
+    <button class="wtab" role="tab" id="wt-risk" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)" aria-controls="wp-risk" aria-selected="false" type="button"><span class="wk">Enterprise · risk</span><span class="wn">Risk assessment workflows</span><span class="wo">Sends each review to the right approver</span></button>
     <button class="wtab" role="tab" id="wt-eco" style="--pc:var(--c-eco)" aria-controls="wp-eco" aria-selected="false" type="button"><span class="wk">Startup · vision</span><span class="wn">Ecodrop Technologies</span><span class="wo">Thousands of users, Techstars-backed</span></button>
     <button class="wtab" role="tab" id="wt-rec" style="--pc:var(--c-rec)" aria-controls="wp-rec" aria-selected="false" type="button"><span class="wk">Speech search</span><span class="wn">Recognito</span><span class="wo">Jump to the second a word is said</span></button>
-    <button class="wtab" role="tab" id="wt-plan" style="--pc:var(--c-plan)" aria-controls="wp-plan" aria-selected="false" type="button"><span class="wk">Multimodal agent</span><span class="wn">Blueprint vision agent</span><span class="wo">Reads drawings into an estimate-ready schedule</span></button>
-    <button class="wtab" role="tab" id="wt-jc" style="--pc:var(--c-jc)" aria-controls="wp-jc" aria-selected="false" type="button"><span class="wk">Multi-agent system</span><span class="wn">Cost-control agent crew</span><span class="wo">Catches duplicates and overruns before they post</span></button>
+    <button class="wtab" role="tab" id="wt-plan" style="--pc:var(--c-plan)" aria-controls="wp-plan" aria-selected="false" type="button"><span class="wk">Multimodal agent</span><span class="wn">Blueprint vision agent</span><span class="wo">Measures every room from a floor plan</span></button>
+    <button class="wtab" role="tab" id="wt-jc" style="--pc:var(--c-jc)" aria-controls="wp-jc" aria-selected="false" type="button"><span class="wk">Multi-agent system</span><span class="wn">Cost-control agent crew</span><span class="wo">Catches duplicate payments and budget overruns</span></button>
   </div>
 
   <div class="wpanel" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)" role="tabpanel" id="wp-rules" aria-labelledby="wt-rules">
@@ -828,7 +828,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     <dl class="brief">
       <div><dt>Who it's for</dt><dd>Billing admins and implementation teams at enterprise subscription companies</dd></div>
       <div><dt>Market</dt><dd>Enterprise subscription billing (B2B SaaS)</dd></div>
-      <div><dt>Problem</dt><dd>Every enterprise bills differently. Custom pricing and decision logic lived in custom code, services projects or white-labeled third-party decisioning software, which slowed every implementation and pushed key logic outside the platform.</dd></div>
+      <div><dt>Problem</dt><dd>Every company bills differently. Custom pricing rules lived in custom code, services projects or white-labeled third-party decisioning tools. That slowed every implementation and kept key logic outside the platform.</dd></div>
     </dl>
     <div class="build-body ra">
       <div class="pane ra-main">
@@ -859,8 +859,8 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     </div>
     <dl class="brief">
       <div><dt>Who it's for</dt><dd>Privacy, security and risk teams, plus the business owners who request new vendors and systems</dd></div>
-      <div><dt>Market</dt><dd>Privacy, GRC and responsible AI software</dd></div>
-      <div><dt>Problem</dt><dd>Every company assesses risk its own way. Fixed templates pushed routing and approvals back into email and spreadsheets, so reviews stalled and risks lived outside the system.</dd></div>
+      <div><dt>Market</dt><dd>Privacy, risk and compliance software</dd></div>
+      <div><dt>Problem</dt><dd>Every company assesses risk its own way. Fixed templates couldn't handle that, so routing and approvals moved to email and spreadsheets. Reviews stalled and risks went untracked.</dd></div>
     </dl>
     <div class="build-body rk">
       <div class="pane">
@@ -872,11 +872,11 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
       </div>
       <div class="pane">
         <div class="toolbar"><p class="small-h" style="margin:0">Risk heat map</p>
-          <div class="seg" id="rk-mode" role="group" aria-label="Risk view" style="margin:0"><button type="button" aria-pressed="true" data-m="in">Inherent</button><button type="button" aria-pressed="false" data-m="res">After controls</button></div>
+          <div class="seg" id="rk-mode" role="group" aria-label="Risk view" style="margin:0"><button type="button" aria-pressed="true" data-m="in">Before controls</button><button type="button" aria-pressed="false" data-m="res">After controls</button></div>
         </div>
         <div class="rk-map-wrap"><span class="rk-ylab">Likelihood</span><div class="rk-map" id="rk-map" role="img" aria-label="Five by five risk heat map"></div><span class="rk-xlab">Impact</span></div>
         <ol class="rk-reg" id="rk-reg"></ol>
-        <p class="small-h" style="margin-top:18px">Rules fired</p>
+        <p class="small-h" style="margin-top:18px">Rules applied</p>
         <div class="trace" id="rk-rules"></div>
         <p class="rep">Representational</p>
       </div>
@@ -887,7 +887,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   <!-- Ecodrop -->
   <article class="build" aria-labelledby="h-eco">
     <div class="build-head">
-      <div><h3 id="h-eco">Ecodrop Technologies</h3><p>The recycling startup I co-founded. Scan an item to compare the computer vision we shipped with a multimodal LLM rebuild, and watch the leaderboard move.</p></div>
+      <div><h3 id="h-eco">Ecodrop Technologies</h3><p>The recycling startup I co-founded. Scan an item to see how the computer vision we shipped compares with a rebuild on a multimodal LLM.</p></div>
       <div class="meta"><span class="chip a">computer vision</span><span class="chip">React Native</span><span class="chip">Techstars · AWS</span><span class="chip">gamification</span></div>
     </div>
     <dl class="brief">
@@ -998,7 +998,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   <!-- Takeoff -->
   <article class="build" aria-labelledby="h-takeoff">
     <div class="build-head">
-      <div><h3 id="h-takeoff">Blueprint vision agent</h3><p>Built for a residential construction business I support on technology and product. It reads an architect's drawing into an estimate-ready room schedule and flags anything it isn't sure about.</p></div>
+      <div><h3 id="h-takeoff">Blueprint vision agent</h3><p>Built for a residential construction business I support on technology and product. It reads an architect's floor plan, measures every room for the estimate and flags anything it isn't sure about.</p></div>
       <div class="meta"><span class="chip a">vision</span><span class="chip a">document extraction</span><span class="chip">human review</span></div>
     </div>
     <dl class="brief">
@@ -1043,7 +1043,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   <!-- Job cost -->
   <article class="build" aria-labelledby="h-jc">
     <div class="build-head">
-      <div><h3 id="h-jc">Cost-control agent crew</h3><p>Built for the same business. Text a cost and a crew of agents files it, checks for duplicates and tests the budget. Anything risky waits for a person.</p></div>
+      <div><h3 id="h-jc">Cost-control agent crew</h3><p>Built for the same business. Text a cost and a crew of agents files it, looks for duplicates and checks it against the budget. Anything risky waits for a person.</p></div>
       <div class="meta"><span class="chip a">multi-agent</span><span class="chip a">orchestration</span><span class="chip">human approval</span></div>
     </div>
     <dl class="brief">
@@ -1069,7 +1069,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
         </div>
       </div>
       <div class="crew">
-        <p class="small-h">Agent crew · runs on every entry</p>
+        <p class="small-h">Agents · run on every entry</p>
         <div class="crew-flow" id="crew" aria-live="polite"></div>
         <div class="crew-verdict" id="crew-verdict"></div>
         <div>
@@ -1098,12 +1098,12 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 
 
   <div class="lessons">
-    <div class="lesson"><div class="lk">Start with one agent</div><p>Most workflows need one capable agent. I add more only when steps can run independently, like checking a payment for duplicates and budget at the same time. Fewer agents means lower cost and easier fixes.</p></div>
-    <div class="lesson"><div class="lk">Buy the plumbing</div><p>Cloud platforms now host agents, their memory and long-running tasks. I use that and spend the team's time on what customers notice: what the agent can access and when it needs sign-off.</p></div>
-    <div class="lesson"><div class="lk">Define "correct" first</div><p>Before building, we write the test cases that describe a good answer. Every release must pass them, and every mistake found later becomes a new test, so quality only goes up.</p></div>
-    <div class="lesson"><div class="lk">Feed it the right information</div><p>Most AI mistakes come from missing information, not bad instructions. I connect agents to the systems where the data lives and keep what they see focused.</p></div>
-    <div class="lesson"><div class="lk">Earn autonomy step by step</div><p>Agents start with a person approving each action. As results prove reliable, approvals relax. Anything that can't be undone, like moving money or deleting data, keeps a person in the loop.</p></div>
-    <div class="lesson"><div class="lk">Budget every task</div><p>Each task gets a cost and speed target. Routine steps go to smaller, cheaper models and judgment calls go to the strongest one. It's the unit economics I learned in finance.</p></div>
+    <div class="lesson"><div class="lk">Start with one agent</div><p>Most workflows need one capable agent. I add more only when steps can run in parallel, like checking a payment for duplicates and against the budget at the same time. Fewer agents cost less and are easier to fix.</p></div>
+    <div class="lesson"><div class="lk">Use managed agent platforms</div><p>Cloud platforms now handle hosting, memory and long-running tasks for agents. I build on them, so the team's time goes to what users notice: what the agent can access and when it asks for approval.</p></div>
+    <div class="lesson"><div class="lk">Write the tests first</div><p>Before building, we write evals: test cases that define a good answer. Every release has to pass them, and every mistake found later becomes a new test.</p></div>
+    <div class="lesson"><div class="lk">Give agents the right context</div><p>Most AI mistakes come from missing context, not bad prompts. I connect agents to the systems that hold the data, often through MCP, and keep what they see focused.</p></div>
+    <div class="lesson"><div class="lk">Add autonomy gradually</div><p>Agents start with a person approving every action. Approvals loosen as results prove reliable. Anything that can't be undone, like moving money or deleting data, always needs a person.</p></div>
+    <div class="lesson"><div class="lk">Track cost per task</div><p>Each task has a cost and speed target. Routine steps use smaller, cheaper models, and harder calls use the strongest one.</p></div>
   </div>
 </section>
 
@@ -1179,7 +1179,7 @@ document.addEventListener('click', e => {
     {id:'mud',    n:'Mudroom',       x:24,y:0, w:8, h:10, cat:'Heated',   c:.96},
     {id:'kitchen',n:'Kitchen',       x:32,y:0, w:18,h:16, cat:'Heated',   c:.98},
     {id:'pantry', n:'Pantry',        x:50,y:0, w:10,h:10, cat:'Heated',   c:.95},
-    {id:'hall',   n:'Hall',          x:24,y:10,w:8, h:6,  cat:'Heated',   c:.62, flag:'Dimension string runs to wall center, not finish face. Is 8\'-0" × 6\'-0" right?'},
+    {id:'hall',   n:'Hall',          x:24,y:10,w:8, h:6,  cat:'Heated',   c:.62, flag:'The plan measures to the wall\'s center, not its inside face. Is 8\'-0" × 6\'-0" right?'},
     {id:'dining', n:'Dining',        x:50,y:10,w:10,h:14, cat:'Heated',   c:.94},
     {id:'foyer',  n:'Foyer + stair', x:24,y:16,w:8, h:24, cat:'Heated',   c:.88},
     {id:'great',  n:'Great room',    x:32,y:16,w:18,h:24, cat:'Heated',   c:.97},
@@ -1292,20 +1292,20 @@ document.addEventListener('click', e => {
   const P = [
     { k:'Discount policy', q:'Give APAC accounts 10% off when they upgrade within 30 days of renewal.',
       fail:6,
-      trace:[['Read data','Read the billing data model: 3 objects, 41 fields','schema.lookup(Account, Subscription, Order) via MCP'],['Intent','Trigger: an upgrade. Conditions: region and a 30-day window.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test',"11 of 12 cases passed. Case 7 failed: the renewal date was read in UTC instead of the customer's timezone.",'evals.run(12)','warn'],['Fix',"Version 2 compares dates in the customer's timezone",'rules.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Reversible, touches no personal data, runs as a dry run first','guardrails.check()'],['Approval','Waiting on a billing admin','request_approval(billing_admin)']],
+      trace:[['Read data','Read the billing data model: 3 objects, 41 fields','schema.lookup(Account, Subscription, Order) via MCP'],['Understand','Trigger: an upgrade. Conditions: region and a 30-day window.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test',"11 of 12 cases passed. Case 7 failed: the renewal date was read in UTC instead of the customer's timezone.",'evals.run(12)','warn'],['Fix',"Version 2 compares dates in the customer's timezone",'rules.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Reversible, touches no personal data, runs as a dry run first','guardrails.check()'],['Approval','Waiting on a billing admin','request_approval(billing_admin)']],
       table:{in:['Region','Event','Days before renewal'], fix:2, orig:'Days before renewal (UTC)', fixed:"Days before renewal (customer's timezone)",
         out:['Discount','Applies to','Sign-off'],
         rows:[['APAC','Upgrade','0–30','10%','Upgrade amount','Billing admin'],['APAC','Upgrade','31 or more','None','—','—'],['All other regions','Any','Any','None','—','—']],
         note:"v2 counts days in the customer's timezone, so an upgrade late on day 30 still qualifies."} },
     { k:'Approval policy', q:'Hold any invoice over $50K for finance approval before it posts.',
       fail:-1,
-      trace:[['Read data','Read the billing data model: 2 objects, 27 fields','schema.lookup(Invoice, Account) via MCP'],['Intent','Trigger: a new invoice. Gate: the total.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test','All 12 cases pass','evals.run(12)'],['Safety','Only pauses posting. Changes no data.','guardrails.check()'],['Approval','Waiting on the finance lead','request_approval(finance_lead)']],
+      trace:[['Read data','Read the billing data model: 2 objects, 27 fields','schema.lookup(Invoice, Account) via MCP'],['Understand','Trigger: a new invoice. Gate: the total.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test','All 12 cases pass','evals.run(12)'],['Safety','Only pauses posting. Changes no data.','guardrails.check()'],['Approval','Waiting on the finance lead','request_approval(finance_lead)']],
       table:{in:['Invoice total (account currency)'], fix:-1,
         out:['Status','Notify'],
         rows:[['50,000 or more','Hold for approval','Finance lead'],['Under 50,000','Post as normal','—']]} },
     { k:'Retention policy', q:'Purge usage records older than 7 years unless the account is on legal hold.',
       fail:9,
-      trace:[['Read data','Read the data model: 3 objects, 33 fields','schema.lookup(Usage, Account, LegalHold) via MCP'],['Intent','Action: purge. Exception: legal hold.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test',"11 of 12 cases passed. Case 10 failed: a legal hold on a parent account wasn't applied to its child accounts.",'evals.run(12)','warn'],['Fix','Version 2 checks for holds up the account hierarchy','rules.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety',"Deleted data can't come back, so it archives first and needs 2 approvers",'guardrails.check()'],['Approval','Waiting on Legal and the data owner','request_approval(legal, data_owner)']],
+      trace:[['Read data','Read the data model: 3 objects, 33 fields','schema.lookup(Usage, Account, LegalHold) via MCP'],['Understand','Action: purge. Exception: legal hold.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test',"11 of 12 cases passed. Case 10 failed: a legal hold on a parent account wasn't applied to its child accounts.",'evals.run(12)','warn'],['Fix','Version 2 checks for holds up the account hierarchy','rules.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety',"Deleted data can't come back, so it archives first and needs 2 approvers",'guardrails.check()'],['Approval','Waiting on Legal and the data owner','request_approval(legal, data_owner)']],
       table:{in:['Record age','Legal hold'], fix:1, orig:'Legal hold (this account)', fixed:'Legal hold (this account or a parent)',
         out:['Action','Sign-off'],
         rows:[['Over 7 years','No','Archive, then purge','Legal and data owner'],['Over 7 years','Yes','Keep','—'],['7 years or less','Any','Keep','—']],
@@ -1412,7 +1412,7 @@ document.addEventListener('click', e => {
     ['intake', 'Intake agent',      'Turns the message into a structured entry'],
     ['code',   'Cost-code agent',   'Files it to a cost code and lot'],
     ['dup',    'Duplicate checker', 'Compares it with recent payments'],
-    ['budget', 'Budget agent',      'Tests it against the budget line'],
+    ['budget', 'Budget agent',      'Checks it against the budget'],
     ['review', 'Reviewer',          'Posts it, or holds it for a person'],
   ];
   const agHtml = ([k,n,r]) => `<div class="ag" data-a="${k}"><span class="ag-d"></span><div><div class="ag-n">${n}</div><div class="ag-r">${r}</div><div class="ag-f"></div></div></div>`;
@@ -1758,9 +1758,9 @@ document.addEventListener('click', e => {
                ['Monitoring', 'Risk owners, every 12 months', R.length > 0]];
     const rules = [];
     if (maxIn >= 5) rules.push(['Privacy', 'Added a privacy review: at least one risk is medium or higher', 'if max(inherent) >= 5 → add_stage("privacy_review")']);
-    if (dpia) rules.push(['DPIA', 'Added an impact assessment: ' + (A.sens ? 'sensitive data is in scope' : 'its AI decides about people'), 'if sensitive or automated_decisions → add_stage("dpia")']);
+    if (dpia) rules.push(['Impact','Added an impact assessment: ' + (A.sens ? 'sensitive data is in scope' : 'its AI decides about people'), 'if sensitive or automated_decisions → add_stage("dpia")']);
     if (legal) rules.push(['Legal', 'Added a legal review: data moves across borders', 'if cross_border → add_stage("legal_review")']);
-    rules.push(R.length ? ['Route', `Approval goes to ${approver}: highest risk after controls is ${LV[lvl(maxRes)]}`, `route_approval(max(residual) = ${maxRes})`]
+    rules.push(R.length ? ['Approval',`Approval goes to ${approver}: highest risk after controls is ${LV[lvl(maxRes)]}`, `route_approval(max(residual) = ${maxRes})`]
                         : ['Approve', 'Auto-approved: no risks flagged, so review and monitoring are skipped', 'if risks.length == 0 → approve(); skip("monitoring")']);
     return {R, S, rules, maxRes, approver};
   }
