@@ -168,6 +168,32 @@ h2{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:600;margin-top:12px}
 .trace li .o{display:inline;font-size:13px;color:var(--ink-3)}
 .trace li .o::before{content:" · "}
 .trace li.done .o{color:var(--ink-2)}
+/* step rail: numbered steps on a line, one detail card below */
+.trace.rail{margin:0 0 14px}
+.rail-steps{list-style:none;margin:0;padding:2px 0 0;display:flex;overflow-x:auto;scrollbar-width:none}
+.rail-steps::-webkit-scrollbar{display:none}
+.trace.rail .rail-steps li{display:block;flex:1 1 0;min-width:46px;position:relative;padding:0;color:inherit}
+.rail-steps li::before{content:"";position:absolute;top:12px;left:-50%;right:50%;height:2px;background:var(--rule)}
+.rail-steps li:first-child::before{display:none}
+.rail-steps li.done::before,.rail-steps li.warn::before,.rail-steps li.run::before{background:var(--pf,var(--pc))}
+.rail-steps button{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding:0 2px;border:0;background:none;font:inherit;cursor:pointer}
+.rn{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:var(--panel);border:2px solid var(--rule);color:var(--ink-3);transition:box-shadow .15s}
+.rail-steps .done .rn{background:var(--pf,var(--pc));border-color:var(--pf,var(--pc));color:var(--pon,var(--accent-ink))}
+.rail-steps .warn .rn{background:var(--warn);border-color:var(--warn);color:#fff}
+.rail-steps .run .rn{border-color:var(--pf,var(--pc));color:var(--pc);animation:pulse .8s infinite}
+.rl{font-size:11px;line-height:1.25;text-align:center;color:var(--ink-3)}
+.rail-steps .done .rl,.rail-steps .warn .rl,.rail-steps .run .rl{color:var(--ink-2)}
+.rail-steps .sel .rl{color:var(--ink);font-weight:600}
+.rail-steps .sel .rn{box-shadow:0 0 0 4px color-mix(in srgb,var(--pf,var(--pc)) 22%,transparent)}
+.rail-steps .warn.sel .rn{box-shadow:0 0 0 4px var(--warn-soft)}
+.rail-steps button:hover .rl{color:var(--ink)}
+.rail-detail{margin-top:12px;padding:10px 12px;min-height:66px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);font-size:13px;line-height:1.45}
+.rail-detail.warn{border-color:var(--warn);background:var(--warn-soft)}
+.rd-k{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.rail-detail b{display:block;margin-top:1px;font-weight:600;color:var(--ink)}
+.rail-detail p{margin:2px 0 0;color:var(--ink-2)}
+.rail-detail .c{display:none;margin-top:6px;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);overflow-wrap:anywhere}
+.trace.tech .rail-detail .c{display:block}
 .techbtn{margin-left:10px;padding:1px 8px;border:1px solid var(--rule);border-radius:999px;background:transparent;color:var(--ink-2);font:inherit;font-family:var(--f-body);font-size:11px;letter-spacing:0;text-transform:none;cursor:pointer;vertical-align:1px}
 .techbtn:hover{border-color:var(--ink-3);color:var(--ink)}
 .totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-bottom:16px}
@@ -347,7 +373,26 @@ pre.code .cm{color:var(--ink-3)}
 .vd.part{border-color:var(--accent)} .vd.part .vv{color:var(--accent)}
 .eco-why{margin:12px 0 0;font-size:var(--t-sm);color:var(--ink-2);min-height:1.5em}
 .eco-why b{color:var(--warn);font-weight:600}
-@media (max-width:420px){ .verdicts{grid-template-columns:1fr} }
+/* one comparison card: shipped vs rebuild, outcome strip below */
+.verdicts.cmp{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);gap:0;border:1px solid var(--rule);border-radius:12px;background:var(--paper);overflow:hidden}
+.cmp .vd{border:0;border-radius:0;background:transparent;padding:12px 14px}
+.cmp .vsep{position:relative;display:grid;place-items:center}
+.cmp .vsep::before{content:"";position:absolute;top:12px;bottom:12px;left:50%;width:1px;background:var(--rule)}
+.cmp .vsep span{position:relative;padding:3px 0;background:var(--paper);font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.cmp .vd .vv{font-size:15px}
+.cmp .eco-why{grid-column:1/-1;margin:0;padding:10px 14px;border-top:1px solid var(--rule);font-size:13px;min-height:0}
+.cmp .eco-why.agree{background:var(--ok-soft);color:var(--ink)}
+.cmp .eco-why.diff{background:var(--warn-soft);color:var(--ink)}
+.cmp .eco-why b{color:inherit}
+@media (max-width:420px){ .verdicts.cmp{grid-template-columns:1fr} .cmp .vsep{display:none} .cmp .vd + .vsep + .vd{border-top:1px solid var(--rule)} }
+/* rewards: one progress bar with tier ticks */
+.lad2-bar{position:relative;height:8px;margin:10px 0 10px;border-radius:4px;background:var(--rule)}
+.lad2-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--pf,var(--pc));transition:width .5s}
+.lad2-bar .tk{position:absolute;top:-3px;width:2px;height:14px;margin-left:-1px;border-radius:1px;background:var(--ink-3)}
+.lad2-bar .tk.got{background:var(--pc)}
+.lad2-row{display:flex;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2)}
+.lad2-row b{font-weight:600;color:var(--ink)}
+.lad2-row.flash{animation:flash 1.6s ease-out}
 .ladder{display:grid;gap:4px}
 .lad{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:12.5px;padding:4px 10px;border-radius:7px;border:1px solid transparent}
 .lad .lp{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2)}
@@ -799,7 +844,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
       </div>
       <div class="pane ra-side">
         <p class="small-h">Agent activity</p>
-        <ol class="trace" id="rule-trace"></ol>
+        <div class="trace" id="rule-trace"></div>
         <p class="rep">Representational</p>
       </div>
     </div>
@@ -832,7 +877,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
         <div class="rk-map-wrap"><span class="rk-ylab">Likelihood</span><div class="rk-map" id="rk-map" role="img" aria-label="Five by five risk heat map"></div><span class="rk-xlab">Impact</span></div>
         <ol class="rk-reg" id="rk-reg"></ol>
         <p class="small-h" style="margin-top:18px">Rules fired</p>
-        <ol class="trace" id="rk-rules"></ol>
+        <div class="trace" id="rk-rules"></div>
         <p class="rep">Representational</p>
       </div>
     </div>
@@ -895,11 +940,12 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
           <div class="eco-side">
             <p class="small-h">Pick an item to scan</p>
             <div class="tray" id="eco-tray" role="group" aria-label="Items to scan"></div>
-            <div class="verdicts" aria-live="polite">
+            <div class="verdicts cmp" aria-live="polite">
               <div class="vd" id="vd-then"></div>
+              <div class="vsep" aria-hidden="true"><span>vs</span></div>
               <div class="vd" id="vd-now"></div>
+              <p class="eco-why" id="eco-why"></p>
             </div>
-            <p class="eco-why" id="eco-why"></p>
           </div>
         </div>
       </div>
@@ -907,9 +953,9 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
         <div class="toolbar"><p class="small-h" style="margin:0">Trace</p>
           <div class="seg" id="eco-mode" role="group" aria-label="Which pipeline to trace" style="margin:0"><button type="button" aria-pressed="true" data-m="then">Computer vision</button><button type="button" aria-pressed="false" data-m="now">Multimodal LLM</button></div>
         </div>
-        <ol class="trace" id="eco-trace"></ol>
+        <div class="trace" id="eco-trace"></div>
         <p class="small-h">Rewards · <span class="mono num" id="eco-pts">140</span> points</p>
-        <div class="ladder" id="eco-ladder"></div>
+        <div id="eco-ladder"></div>
         <p class="rep">Representational</p>
       </div>
     </div>
@@ -980,7 +1026,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
       </div>
       <div class="pane">
         <p class="small-h">Agent trace</p>
-        <ol class="trace" id="to-trace"></ol>
+        <div class="trace" id="to-trace"></div>
         <div class="totals" aria-live="polite">
           <div><div class="v num" id="t-heated">1,824</div><div class="l">Heated sf</div></div>
           <div><div class="v num" id="t-unheated">684</div><div class="l">Unheated</div></div>
@@ -1107,6 +1153,24 @@ const fmt = n => n.toLocaleString('en-US');
 const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+/* ───── step rail: numbered steps on a line + one detail card ───── */
+// steps: [{t: short label, o: detail, c: code, st: 'done'|'warn'|'run'|'todo'}]
+const railDetail = (s, i, n) => `<span class="rd-k">Step ${i + 1} of ${n}</span><b>${esc(s.t)}</b>`
+  + (s.st === 'todo' ? '<p>Not started yet</p>' : s.o ? `<p>${esc(s.o)}</p>` : '')
+  + (s.c ? `<code class="c">${esc(s.c)}</code>` : '');
+function rail(el, steps, sel) {
+  if (sel == null || sel < 0) { const w = steps.findIndex(s => s.st === 'warn'); sel = w >= 0 ? w : steps.reduce((a, s, i) => s.st !== 'todo' ? i : a, 0); }
+  el._steps = steps; el.classList.add('rail');
+  el.innerHTML = `<ol class="rail-steps">${steps.map((s, i) => `<li class="${s.st}${i === sel ? ' sel' : ''}"><button type="button" data-i="${i}" aria-pressed="${i === sel}" aria-label="Step ${i + 1}: ${esc(s.t)}"><span class="rn">${s.st === 'done' ? '✓' : s.st === 'warn' ? '!' : i + 1}</span><span class="rl">${esc(s.t)}</span></button></li>`).join('')}</ol>`
+    + `<div class="rail-detail${steps[sel].st === 'warn' ? ' warn' : ''}">${railDetail(steps[sel], sel, steps.length)}</div>`;
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('.rail-steps button'); if (!b) return;
+  const el = b.closest('.trace'), i = +b.dataset.i, s = el._steps[i];
+  el.querySelectorAll('.rail-steps li').forEach((li, j) => { li.classList.toggle('sel', j === i); li.querySelector('button').setAttribute('aria-pressed', String(j === i)); });
+  const d = el.querySelector('.rail-detail'); d.className = 'rail-detail' + (s.st === 'warn' ? ' warn' : ''); d.innerHTML = railDetail(s, i, el._steps.length);
+});
+
 /* ───── takeoff ───── */
 {
   const S = 10; // px per foot
@@ -1162,20 +1226,19 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
   [0,240,400].forEach(y => el('line',{x1:-32,y1:y,x2:-20,y2:y,class:'dim'},gW));
   [[120,"24'-0\""],[320,"16'-0\""]].forEach(([y,t]) => { const e = el('text',{x:-34,y,class:'dimt','text-anchor':'middle',transform:`rotate(-90 -34 ${y})`},gW); e.textContent=t; });
 
-  const steps = [ // [plain step, result, technical call]
-    ['Opened the drawing', '1 sheet at 1/4" = 1\'-0"', 'plans.read("A-101.pdf")'],
-    ['Found the walls', '34 wall segments, 4 door openings', 'detect_walls()'],
-    ['Split the plan into rooms', '13 spaces', 'segment_rooms()'],
-    ['Read the dimension labels', '13 of 13 read, 1 uncertain', 'read_dimensions()'],
-    ['Calculated square footage', '2,508 sf gross', 'compute_area()'],
-    ['Sorted heated from unheated space', '1 room needs your review', 'classify(heated | unheated)'],
+  const steps = [ // [short label, detail, technical call]
+    ['Opened plan', 'Opened the drawing: 1 sheet at 1/4" = 1\'-0"', 'plans.read("A-101.pdf")'],
+    ['Walls', 'Found 34 wall segments and 4 door openings', 'detect_walls()'],
+    ['Rooms', 'Split the plan into 13 spaces', 'segment_rooms()'],
+    ['Sizes', 'Read 13 of 13 dimension labels; 1 is uncertain', 'read_dimensions()'],
+    ['Area', 'Calculated 2,508 sf gross', 'compute_area()'],
+    ['Classify', 'Sorted heated from unheated space; 1 room needs your review', 'classify(heated | unheated)'],
   ];
   const traceEl = $('#to-trace');
   function drawTrace(state) { // state: number of completed steps; running index
-    traceEl.innerHTML = steps.map(([t,o,c],i) => {
-      const cls = i < state.done ? (i===steps.length-1 && rooms.some(r=>!r.ok) ? 'done warn' : 'done') : (i===state.run ? 'run' : '');
-      return `<li class="${cls}"><span class="d"></span><span><b>${esc(t)}</b>${i < state.done ? `<span class="o">${esc(o)}</span><code class="c">${esc(c)}</code>` : ''}</span></li>`;
-    }).join('');
+    rail(traceEl, steps.map(([t, o, c], i) => ({t, o: i === state.run ? 'Working…' : o, c,
+      st: i < state.done ? (i === steps.length - 1 && rooms.some(r => !r.ok) ? 'warn' : 'done') : i === state.run ? 'run' : 'todo'})),
+      state.run >= 0 ? state.run : null);
   }
   let sel = 'hall';
   function totals() {
@@ -1229,20 +1292,20 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
   const P = [
     { k:'Discount policy', q:'Give APAC accounts 10% off when they upgrade within 30 days of renewal.',
       fail:6,
-      trace:[['Read the billing data model','3 objects, 41 fields','schema.lookup(Account, Subscription, Order) via MCP'],['Worked out what the policy means','Trigger: an upgrade. Conditions: region and a 30-day window.','plan.intent()'],['Drafted the decision table','Version 1','rules.draft()'],['Tested it against 12 known cases',"11 passed. Case 7 failed: the renewal date was read in UTC instead of the customer's timezone.",'evals.run(12)','warn'],['Fixed the failure',"Version 2 compares dates in the customer's timezone",'rules.revise()'],['Re-ran the tests','All 12 passed','evals.run(12)'],['Checked the safety rules','Reversible, touches no personal data, runs as a dry run first','guardrails.check()'],['Sent to a billing admin for approval','Waiting for a person','request_approval(billing_admin)']],
+      trace:[['Read data','Read the billing data model: 3 objects, 41 fields','schema.lookup(Account, Subscription, Order) via MCP'],['Intent','Trigger: an upgrade. Conditions: region and a 30-day window.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test',"11 of 12 cases passed. Case 7 failed: the renewal date was read in UTC instead of the customer's timezone.",'evals.run(12)','warn'],['Fix',"Version 2 compares dates in the customer's timezone",'rules.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Reversible, touches no personal data, runs as a dry run first','guardrails.check()'],['Approval','Waiting on a billing admin','request_approval(billing_admin)']],
       table:{in:['Region','Event','Days before renewal'], fix:2, orig:'Days before renewal (UTC)', fixed:"Days before renewal (customer's timezone)",
         out:['Discount','Applies to','Sign-off'],
         rows:[['APAC','Upgrade','0–30','10%','Upgrade amount','Billing admin'],['APAC','Upgrade','31 or more','None','—','—'],['All other regions','Any','Any','None','—','—']],
         note:"v2 counts days in the customer's timezone, so an upgrade late on day 30 still qualifies."} },
     { k:'Approval policy', q:'Hold any invoice over $50K for finance approval before it posts.',
       fail:-1,
-      trace:[['Read the billing data model','2 objects, 27 fields','schema.lookup(Invoice, Account) via MCP'],['Worked out what the policy means','Trigger: a new invoice. Gate: the total.','plan.intent()'],['Drafted the decision table','Version 1','rules.draft()'],['Tested it against 12 known cases','All 12 passed','evals.run(12)'],['Checked the safety rules','Only pauses posting. Changes no data.','guardrails.check()'],['Sent to the finance lead for approval','Waiting for a person','request_approval(finance_lead)']],
+      trace:[['Read data','Read the billing data model: 2 objects, 27 fields','schema.lookup(Invoice, Account) via MCP'],['Intent','Trigger: a new invoice. Gate: the total.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test','All 12 cases pass','evals.run(12)'],['Safety','Only pauses posting. Changes no data.','guardrails.check()'],['Approval','Waiting on the finance lead','request_approval(finance_lead)']],
       table:{in:['Invoice total (account currency)'], fix:-1,
         out:['Status','Notify'],
         rows:[['50,000 or more','Hold for approval','Finance lead'],['Under 50,000','Post as normal','—']]} },
     { k:'Retention policy', q:'Purge usage records older than 7 years unless the account is on legal hold.',
       fail:9,
-      trace:[['Read the data model','3 objects, 33 fields','schema.lookup(Usage, Account, LegalHold) via MCP'],['Worked out what the policy means','Action: purge. Exception: legal hold.','plan.intent()'],['Drafted the decision table','Version 1','rules.draft()'],['Tested it against 12 known cases',"11 passed. Case 10 failed: a legal hold on a parent account wasn't applied to its child accounts.",'evals.run(12)','warn'],['Fixed the failure','Version 2 checks for holds up the account hierarchy','rules.revise()'],['Re-ran the tests','All 12 passed','evals.run(12)'],['Checked the safety rules',"Deleted data can't come back, so it archives first and needs 2 approvers",'guardrails.check()'],['Sent to Legal and the data owner for approval','Waiting for two people','request_approval(legal, data_owner)']],
+      trace:[['Read data','Read the data model: 3 objects, 33 fields','schema.lookup(Usage, Account, LegalHold) via MCP'],['Intent','Action: purge. Exception: legal hold.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test',"11 of 12 cases passed. Case 10 failed: a legal hold on a parent account wasn't applied to its child accounts.",'evals.run(12)','warn'],['Fix','Version 2 checks for holds up the account hierarchy','rules.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety',"Deleted data can't come back, so it archives first and needs 2 approvers",'guardrails.check()'],['Approval','Waiting on Legal and the data owner','request_approval(legal, data_owner)']],
       table:{in:['Record age','Legal hold'], fix:1, orig:'Legal hold (this account)', fixed:'Legal hold (this account or a parent)',
         out:['Action','Sign-off'],
         rows:[['Over 7 years','No','Archive, then purge','Legal and data owner'],['Over 7 years','Yes','Keep','—'],['7 years or less','Any','Keep','—']],
@@ -1272,10 +1335,9 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
       + (fixed && T.note ? `<p class="dt-note">${esc(T.note)}</p>` : '');
   }
   // row: [plain step, result, technical call, warn?]
-  const line = (s, cls, show) => `<li class="${cls}"><span class="d"></span><span><b>${esc(s[0])}</b>${show ? `<span class="o">${esc(s[1])}</span><code class="c">${esc(s[2])}</code>` : ''}</span></li>`;
   function final(p) {
     inputEl.textContent = p.q; ready(true);
-    tr.innerHTML = p.trace.map(s => line(s, 'done' + (s[3]?' warn':''), true)).join('');
+    rail(tr, p.trace.map(s => ({t:s[0], o:s[1], c:s[2], st: s[3] ? 'warn' : 'done'})));
     out.innerHTML = dt(p, true); cells.forEach(c => c.className = 'p');
     $('#ev-text').textContent = '12 / 12 cases passed'; const st = $('#ev-state'); st.textContent = 'ready for approval'; st.className = 'state ok';
   }
@@ -1289,7 +1351,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
     let evalRun = 0;
     for (let s = 0; s < p.trace.length; s++) {
       if (me !== token) return;
-      tr.innerHTML = p.trace.map((x,j) => j < s ? line(x, 'done'+(x[3]?' warn':''), true) : j===s ? line(x,'run',false) : line(x,'',false)).join('');
+      rail(tr, p.trace.map((x, j) => ({t:x[0], o: j === s ? 'Working…' : x[1], c:x[2], st: j < s ? (x[3] ? 'warn' : 'done') : j === s ? 'run' : 'todo'})), s);
       const name = p.trace[s][2];
       if (name.startsWith('rules.draft') || name.startsWith('rules.revise')) { await sleep(450); out.innerHTML = dt(p, name.startsWith('rules.revise')); }
       if (name.startsWith('evals.run')) {
@@ -1462,39 +1524,40 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
   function verdicts(d) {
     const t = $('#vd-then'), n = $('#vd-now');
     t.className = 'vd yes';
-    t.innerHTML = `<div class="vk">Shipped · Computer vision</div><div class="vv"><span>Accepted</span><span class="vp">+10</span></div><div class="vs">Matched “${esc(d.mat)}” in the materials list.</div>`;
+    t.innerHTML = `<div class="vk">Computer vision</div><div class="vv"><span>Accepted</span><span class="vp">+10</span></div><div class="vs">Saw “${esc(d.mat)}”</div>`;
     const v = d.now.v, p = v === 'no' ? 0 : 10;
     n.className = 'vd ' + v;
-    n.innerHTML = `<div class="vk">Rebuild · Multimodal LLM</div><div class="vv"><span>${VL[v]}</span><span class="vp">+${p}</span></div><div class="vs">${esc(d.now.prep)}</div>`;
-    $('#eco-why').innerHTML = v === 'yes' ? 'Both agree. The LLM adds the prep step that keeps the bin clean.'
-      : `<b>The computer-vision version pays for this.</b> It could name the material, but not judge the item's condition or apply the program's rules. A rewards app that pays for the wrong item pays people to contaminate the bin.`;
+    n.innerHTML = `<div class="vk">Multimodal LLM</div><div class="vv"><span>${VL[v]}</span><span class="vp">+${p}</span></div><div class="vs">${esc(d.now.prep)}</div>`;
+    const why = $('#eco-why');
+    why.className = 'eco-why ' + (v === 'yes' ? 'agree' : 'diff');
+    why.innerHTML = v === 'yes' ? '<b>Both accept it.</b> The LLM adds the prep step.'
+      : '<b>Computer vision pays for the wrong item.</b> It sees the material, not the condition or the program’s rules.';
     return p;
   }
   function trace(d) {
     const pts = d.now.v === 'no' ? 0 : 10;
-    const rows = mode === 'then' ? [ // [plain step, result, technical call]
-      ['Took the photo', 'Sent as an image', 'camera.capture()'],
-      ['Asked the vision API for labels', d.labels.map(([l,c]) => `${l} ${Math.round(c*100)}%`).join(', '), 'vision.annotate(LABEL_DETECTION, max 30)'],
-      ['Matched a label to a material', `“${d.mat}” is on the materials list`, 'split labels into words → MaterialList'],
-      ['Picked the product', `User confirms “${d.prod || d.n.toLowerCase()}”`, 'recyclableItems[material]'],
-      ['Credited points', '+10 points', 'deposits.add(10)'],
+    const bad = d.now.v !== 'yes';
+    const rows = mode === 'then' ? [ // [short label, detail, technical call, warn?]
+      ['Photo', 'Took the photo and sent it as an image', 'camera.capture()'],
+      ['Labels', 'The vision API returned: ' + d.labels.map(([l,c]) => `${l} ${Math.round(c*100)}%`).join(', '), 'vision.annotate(LABEL_DETECTION, max 30)'],
+      ['Material', `Matched “${d.mat}” on the materials list`, 'split labels into words → MaterialList'],
+      ['Product', `User confirmed “${d.prod || d.n.toLowerCase()}”`, 'recyclableItems[material]'],
+      ['Points', bad ? '+10 points for an item the program shouldn’t accept' : '+10 points', 'deposits.add(10)', bad],
     ] : [
-      ['Took the photo', 'Sent as an image', 'camera.capture()'],
-      ["Loaded the program's rules", 'Accepts paper, cardboard, plastic #1–2, aluminum and steel', 'context: program_rules'],
-      ['Asked a multimodal model what it is', `${d.now.item}. ${d.now.mat}. ${Math.round(d.now.c*100)}% confident.`, `model.classify(image, rules) → { accepted: "${d.now.v}", confidence: ${d.now.c} }`],
-      [d.now.c < .9 ? 'Not sure enough, so it asks the user' : 'Sure enough to skip a question', d.now.c < .9 ? 'Shows the photo and the prep step before crediting' : 'Credited directly', 'if confidence < 0.90 → ask'],
-      ['Credited points', `+${pts} points. ${d.now.prep}`, `deposits.add(${pts})`],
+      ['Photo', 'Took the photo and sent it as an image', 'camera.capture()'],
+      ['Rules', 'Loaded the program’s rules: paper, cardboard, plastic #1–2, aluminum and steel', 'context: program_rules'],
+      ['Classify', `${d.now.item}. ${d.now.mat}. ${Math.round(d.now.c*100)}% confident.`, `model.classify(image, rules) → { accepted: "${d.now.v}", confidence: ${d.now.c} }`],
+      ['Check', d.now.c < .9 ? 'Not sure enough, so it shows the photo and asks the user first' : 'Confident enough to skip asking', 'if confidence < 0.90 → ask'],
+      ['Points', `+${pts} points. ${d.now.prep}`, `deposits.add(${pts})`],
     ];
-    $('#eco-trace').innerHTML = rows.map(([t,o,c]) => `<li class="done"><span class="d"></span><span><b>${esc(t)}</b><span class="o">${esc(o)}</span><code class="c">${esc(c)}</code></span></li>`).join('');
+    rail($('#eco-trace'), rows.map(([t,o,c,w]) => ({t, o, c, st: w ? 'warn' : 'done'})), mode === 'then' ? (bad ? 4 : 2) : 2);
   }
   function ladder(flashIdx) {
     $('#eco-pts').textContent = fmt(pts); $('#eco-pts2').textContent = fmt(pts);
-    const ni = TIERS.findIndex(([p]) => pts < p);
-    $('#eco-ladder').innerHTML = TIERS.map(([p,r],i) => {
-      const st = pts >= p ? 'got' : i === ni ? 'next' : 'locked';
-      const prev = i ? TIERS[i-1][0] : 0, w = st === 'next' ? Math.round((pts - prev) / (p - prev) * 100) : 0;
-      return `<div class="lad ${st}${i===flashIdx?' flash':''}"><span class="lp num">${p} pts</span><span class="lr">${esc(r)}</span><span class="ls">${st==='got'?'unlocked':st==='next'?`${p-pts} to go`:p/10+' items'}</span>${st==='next'?`<div class="lad-bar"><i style="width:${w}%"></i></div>`:''}</div>`;
-    }).join('');
+    const top = TIERS[TIERS.length - 1][0], got = TIERS.filter(([p]) => pts >= p), nx = TIERS.find(([p]) => pts < p);
+    $('#eco-ladder').innerHTML = `<div class="lad2-bar"><i style="width:${Math.min(100, pts / top * 100)}%"></i>${TIERS.map(([p]) => `<span class="tk${pts >= p ? ' got' : ''}" style="left:${p / top * 100}%" title="${p} pts"></span>`).join('')}</div>`
+      + `<div class="lad2-row${flashIdx >= 0 ? ' flash' : ''}"><span>${got.length ? `Unlocked: <b>${esc(got[got.length - 1][1])}</b>` : 'No rewards yet'}</span>`
+      + `<span>${nx ? `Next: <b>${esc(nx[1])}</b> · ${nx[0] - pts} pts to go` : 'All rewards unlocked'}</span></div>`;
   }
   // in-app result card; follows the pipeline switch
   const RT = {yes:'Recyclable', part:'Partly recyclable', no:'Not accepted'};
@@ -1694,11 +1757,11 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
                ['Approval', R.length ? approver.replace(/^the /, '').replace(/^./, c => c.toUpperCase()) : 'Automatic', true],
                ['Monitoring', 'Risk owners, every 12 months', R.length > 0]];
     const rules = [];
-    if (maxIn >= 5) rules.push(['Added privacy review', 'At least one risk is medium or higher', 'if max(inherent) >= 5 → add_stage("privacy_review")']);
-    if (dpia) rules.push(['Added an impact assessment', A.sens ? 'Sensitive data is in scope' : 'Its AI decides about people', 'if sensitive or automated_decisions → add_stage("dpia")']);
-    if (legal) rules.push(['Added legal review', 'Data moves across borders', 'if cross_border → add_stage("legal_review")']);
-    rules.push(R.length ? [`Routed approval to ${approver}`, `Highest risk after controls is ${LV[lvl(maxRes)]}`, `route_approval(max(residual) = ${maxRes})`]
-                        : ['Auto-approved', 'No risks flagged, so review and monitoring are skipped', 'if risks.length == 0 → approve(); skip("monitoring")']);
+    if (maxIn >= 5) rules.push(['Privacy', 'Added a privacy review: at least one risk is medium or higher', 'if max(inherent) >= 5 → add_stage("privacy_review")']);
+    if (dpia) rules.push(['DPIA', 'Added an impact assessment: ' + (A.sens ? 'sensitive data is in scope' : 'its AI decides about people'), 'if sensitive or automated_decisions → add_stage("dpia")']);
+    if (legal) rules.push(['Legal', 'Added a legal review: data moves across borders', 'if cross_border → add_stage("legal_review")']);
+    rules.push(R.length ? ['Route', `Approval goes to ${approver}: highest risk after controls is ${LV[lvl(maxRes)]}`, `route_approval(max(residual) = ${maxRes})`]
+                        : ['Approve', 'Auto-approved: no risks flagged, so review and monitoring are skipped', 'if risks.length == 0 → approve(); skip("monitoring")']);
     return {R, S, rules, maxRes, approver};
   }
   $('#rk-qs').innerHTML = QS.map(([k, q]) => `<div class="rk-q" data-k="${k}"><span>${esc(q)}</span><div class="seg" role="group" aria-label="${esc(q)}"><button type="button" data-v="1">Yes</button><button type="button" data-v="0">No</button></div></div>`).join('');
@@ -1718,7 +1781,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
     $('#rk-reg').innerHTML = m.R.length ? m.R.map((r, i) => { const a = r.L * r.I, b = r.rL * r.rI;
       return `<li><span class="rk-dot">${i + 1}</span><span><b>${esc(r.n)}</b><span class="rk-c">${esc(r.o)} · control: ${esc(r.ctl)}</span></span><span class="rk-s"><span class="lv ${lvl(a)}">${a}</span> → <span class="lv ${lvl(b)}">${b}</span></span></li>`; }).join('')
       : '<li class="rk-none">No risks flagged.</li>';
-    $('#rk-rules').innerHTML = m.rules.map(([t, o, c]) => `<li class="done"><span class="d"></span><span><b>${esc(t)}</b><span class="o">${esc(o)}</span><code class="c">${esc(c)}</code></span></li>`).join('');
+    rail($('#rk-rules'), m.rules.map(([t, o, c]) => ({t, o, c, st:'done'})));
     const out = $('#rk-out'), L = lvl(m.maxRes);
     out.className = 'rk-out ' + (m.R.length ? L : 'lo');
     out.innerHTML = m.R.length
