@@ -176,12 +176,12 @@ h2{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:600;margin-top:12px}
 .rail-steps li::before{content:"";position:absolute;top:12px;left:-50%;right:50%;height:2px;background:var(--rule)}
 .rail-steps li:first-child::before{display:none}
 .rail-steps li.done::before,.rail-steps li.warn::before,.rail-steps li.run::before{background:var(--pf,var(--pc))}
-.rail-steps button{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding:0 2px;border:0;background:none;font:inherit;cursor:pointer}
+.rail-steps button{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding:0 1px;border:0;background:none;font:inherit;cursor:pointer}
 .rn{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:var(--panel);border:2px solid var(--rule);color:var(--ink-3);transition:box-shadow .15s}
 .rail-steps .done .rn{background:var(--pf,var(--pc));border-color:var(--pf,var(--pc));color:var(--pon,var(--accent-ink))}
 .rail-steps .warn .rn{background:var(--warn);border-color:var(--warn);color:#fff}
 .rail-steps .run .rn{border-color:var(--pf,var(--pc));color:var(--pc);animation:pulse .8s infinite}
-.rl{font-size:11px;line-height:1.25;text-align:center;color:var(--ink-3)}
+.rl{font-size:10.5px;line-height:1.25;text-align:center;color:var(--ink-3)}
 .rail-steps .done .rl,.rail-steps .warn .rl,.rail-steps .run .rl{color:var(--ink-2)}
 .rail-steps .sel .rl{color:var(--ink);font-weight:600}
 .rail-steps .sel .rn{box-shadow:0 0 0 4px color-mix(in srgb,var(--pf,var(--pc)) 22%,transparent)}
@@ -317,12 +317,12 @@ pre.code .cm{color:var(--ink-3)}
 @media (max-width:820px){ .jc{grid-template-columns:1fr;justify-items:center} .why,.crew{justify-self:stretch} }
 
 /* ecodrop */
-.eco-facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-bottom:1px solid var(--rule)}
+.eco-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--rule)}
 .eco-facts > div{padding:14px 18px;display:flex;flex-direction:column;gap:2px;min-width:0}
 .eco-facts > div + div{border-left:1px solid var(--rule)}
 .eco-facts .v{font-size:1.35rem;font-weight:600;letter-spacing:-.02em}
 .eco-facts .l{font-size:var(--t-xs);color:var(--ink-2)}
-@media (max-width:820px){ .eco-facts{grid-template-columns:repeat(2,minmax(0,1fr))} .eco-facts > div + div{border-left:0} .eco-facts > div:nth-child(even){border-left:1px solid var(--rule)} .eco-facts > div:nth-child(n+3){border-top:1px solid var(--rule)} .eco-facts > div:last-child{grid-column:1/-1;border-left:0} }
+@media (max-width:820px){ .eco-facts{grid-template-columns:repeat(2,minmax(0,1fr))} .eco-facts > div + div{border-left:0} .eco-facts > div:nth-child(even){border-left:1px solid var(--rule)} .eco-facts > div:nth-child(n+3){border-top:1px solid var(--rule)} }
 .viewfinder{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:12px;background:#1C2B2E;color:#E8F1EF;overflow:hidden;display:grid;place-items:center}
 .vf-c{position:absolute;width:34px;height:34px;border-color:#E8F1EF;border-style:solid;border-width:0;opacity:.9}
 .vf-c.c1{top:22px;left:calc(50% - 110px);border-top-width:2.5px;border-left-width:2.5px;border-top-left-radius:10px}
@@ -719,21 +719,67 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 @media (max-width:820px){ .brief{grid-template-columns:1fr} .brief > div + div{border-left:0;border-top:1px solid var(--rule)} }
 
 /* ——— work tabs ——— */
-.wtabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-bottom:16px}
-.wtab{text-align:left;border:1px solid var(--rule);border-top:3px solid var(--pf,var(--pc));background:color-mix(in srgb,var(--pc) 6%,var(--panel));border-radius:12px;padding:14px 14px 13px;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-width:0;transition:border-color .15s}
-.wtab:hover{border-color:var(--ink-3)}
-.wtab .wk{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--pc)}
-.wtab .wn{font-weight:600;font-size:var(--t-md);letter-spacing:-.01em}
-.wtab .wo{font-size:12.5px;color:var(--ink-2);line-height:1.4}
-.wtab[aria-selected="true"]{background:var(--pf,var(--pc));border-color:var(--pf,var(--pc));color:var(--pon,var(--accent-ink))}
-.wtab[aria-selected="true"] .wk,.wtab[aria-selected="true"] .wo{color:var(--pon,var(--accent-ink));opacity:.8}
-.wpanel .build{margin-bottom:12px;border-top:3px solid var(--pf,var(--pc))}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pcard{display:flex;flex-direction:column;min-width:0;border:1px solid var(--rule);border-radius:16px;background:var(--panel);overflow:hidden;color:inherit;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.pcard:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--pc) 45%,var(--rule));box-shadow:0 18px 40px -22px color-mix(in srgb,var(--pc) 70%,transparent)}
+.pcard:focus-visible{outline:2px solid var(--pc);outline-offset:3px}
+.pv{aspect-ratio:320/168;background:color-mix(in srgb,var(--pf,var(--pc)) 10%,var(--panel));border-bottom:1px solid var(--rule);overflow:hidden}
+.pv svg{display:block;width:100%;height:100%}
+.pv text{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.02em}
+.pv .w{fill:var(--panel);stroke:var(--rule)}
+.pv .wa{fill:var(--panel);stroke:color-mix(in srgb,var(--pc) 55%,var(--rule))}
+.pv .wa.kd{stroke:var(--danger)}
+.pv .dash{stroke-dasharray:3 3}
+.pv .h{fill:color-mix(in srgb,var(--ink) 5%,var(--panel))}
+.pv .l{fill:color-mix(in srgb,var(--ink) 14%,var(--panel))}
+.pv .s{fill:color-mix(in srgb,var(--pf,var(--pc)) 26%,var(--panel))}
+.pv .a{fill:var(--pf,var(--pc))}
+.pv .d{fill:var(--danger)}
+.pv .ka{fill:none;stroke:var(--pc);stroke-width:1.5;stroke-linecap:round}
+.pv .kl{fill:none;stroke:var(--rule)}
+.pv .ring{fill:none;stroke:var(--ink);stroke-width:2}
+.pv .wall{fill:none;stroke:var(--ink-2);stroke-width:3;stroke-linejoin:round}
+.pv .bezel{fill:#15171B}
+.pv .island{fill:#000}
+.pv .cam{fill:none;stroke:var(--pc);stroke-width:2;stroke-linecap:round}
+.pv .tx{fill:var(--ink-2)} .pv .tx.mute{fill:var(--ink-3)}
+.pv .ta{fill:var(--pc);font-weight:600}
+.pv .on{fill:var(--pon,var(--paper));font-weight:600}
+.pv .on2{fill:#fff;font-weight:700}
+.pc-t{flex:1;display:flex;flex-direction:column;gap:4px;padding:16px 20px 18px}
+.pc-t .wk{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--pc)}
+.pc-t .wn{font-weight:600;font-size:var(--t-lg);letter-spacing:-.01em}
+.pc-t .wo{font-size:var(--t-sm);color:var(--ink-2)}
+.pc-go{margin-top:auto;padding-top:12px;display:inline-flex;align-items:center;gap:6px;font-size:var(--t-sm);font-weight:500;color:var(--pc)}
+.pc-go i{font-style:normal;transition:transform .2s ease}
+.pcard:hover .pc-go i{transform:translateX(3px)}
+@media (max-width:1000px){ .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:620px){ .pgrid{grid-template-columns:1fr;gap:12px} .pv{aspect-ratio:320/150} .pc-t{padding:14px 16px 16px;gap:2px} .pc-go{display:none} }
+@media (prefers-reduced-motion:reduce){ .pcard,.pc-go i{transition:none} .pcard:hover{transform:none} }
+.demo{width:min(1360px,calc(100vw - 48px));max-width:none;height:calc(100dvh - 48px);max-height:none;margin:auto;padding:0;border:1px solid var(--rule);border-radius:16px;background:var(--panel);color:var(--ink);overflow:hidden;box-shadow:0 40px 100px -30px rgb(0 0 0 / .45)}
+.demo[open]{display:flex;flex-direction:column;animation:demo-in .24s cubic-bezier(.2,.8,.2,1)}
+.demo::backdrop{background:rgb(9 12 20 / .55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+@keyframes demo-in{from{opacity:0;transform:translateY(14px) scale(.99)}}
+html:has(.demo[open]){overflow:hidden}
+.demo-bar{display:flex;align-items:center;gap:12px;padding:10px 12px 10px 24px;border-top:3px solid var(--pf,var(--pc));border-bottom:1px solid var(--rule)}
+.demo-t{flex:1;min-width:0;display:flex;align-items:baseline;gap:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+.demo-t .k{color:var(--pc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.demo-t .c{color:var(--ink-3)}
+.demo-nav{display:flex;gap:6px}
+.demo-nav button{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--rule);border-radius:10px;background:var(--panel);color:var(--ink);cursor:pointer}
+.demo-nav button:hover{border-color:var(--ink-3)}
+.demo-nav button:focus-visible{outline:2px solid var(--pc);outline-offset:2px}
+.demo-body{flex:1;overflow:auto;overscroll-behavior:contain}
+.demo-foot{display:flex;justify-content:flex-end;padding:16px 24px 24px;border-top:1px solid var(--rule)}
+.demo-foot i{font-style:normal}
+.wpanel .build{margin:0;border:0;border-radius:0}
+@media (max-width:700px){ .demo{width:100vw;height:100dvh;border:0;border-radius:0} .demo-bar{padding-left:16px} .demo-foot{padding:14px 16px 20px} .demo-foot .btn{width:100%;justify-content:center} }
+@media (prefers-reduced-motion:reduce){ .demo[open]{animation:none} }
 .wpanel .chip.a{color:var(--pc);border-color:color-mix(in srgb,var(--pc) 35%,transparent);background:color-mix(in srgb,var(--pc) 9%,transparent)}
 .wpanel .brief dt{color:var(--pc)}
 .wpanel .lad.next{border-color:color-mix(in srgb,var(--pc) 35%,transparent);background:color-mix(in srgb,var(--pc) 9%,transparent)}
 .wpanel .lad.next .ls{color:var(--pc)}
 .wpanel .lad-bar i{background:var(--pc)}
-@media (max-width:900px){ .wtabs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(200px,62%);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory} .wtab{scroll-snap-align:start} }
 .rec-v0{border-top:1px dashed var(--rule)}
 .rec-v0 summary{cursor:pointer;padding:14px 24px;font-size:var(--t-sm);font-weight:500;color:var(--ink-2);list-style:none;display:flex;align-items:center;gap:8px}
 .rec-v0 summary::-webkit-details-marker{display:none}
@@ -807,19 +853,47 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 <section class="sheet wrap" id="work" aria-labelledby="h-work">
   <div class="sheet-head">
     <div><span class="tag"><b>Sheet 01</b> Work</span><h2 id="h-work">Six products you can try</h2></div>
-    <p class="lede">Things I've built or shipped. Each one runs in the browser.</p>
+    <p class="lede">Things I've built or shipped. Open any one to try it in the browser.</p>
   </div>
 
-  <div class="wtabs" id="work-tabs" role="tablist" aria-label="Products">
-    <button class="wtab" role="tab" id="wt-rules" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)" aria-controls="wp-rules" aria-selected="true" type="button"><span class="wk">Enterprise platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span></button>
-    <button class="wtab" role="tab" id="wt-risk" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)" aria-controls="wp-risk" aria-selected="false" type="button"><span class="wk">Enterprise · risk</span><span class="wn">Risk assessment workflows</span><span class="wo">Sends each review to the right approver</span></button>
-    <button class="wtab" role="tab" id="wt-eco" style="--pc:var(--c-eco)" aria-controls="wp-eco" aria-selected="false" type="button"><span class="wk">Startup · vision</span><span class="wn">Ecodrop Technologies</span><span class="wo">Thousands of users, Techstars-backed</span></button>
-    <button class="wtab" role="tab" id="wt-rec" style="--pc:var(--c-rec)" aria-controls="wp-rec" aria-selected="false" type="button"><span class="wk">Speech search</span><span class="wn">Recognito</span><span class="wo">Jump to the second a word is said</span></button>
-    <button class="wtab" role="tab" id="wt-plan" style="--pc:var(--c-plan)" aria-controls="wp-plan" aria-selected="false" type="button"><span class="wk">Multimodal agent</span><span class="wn">Blueprint vision agent</span><span class="wo">Measures every room from a floor plan</span></button>
-    <button class="wtab" role="tab" id="wt-jc" style="--pc:var(--c-jc)" aria-controls="wp-jc" aria-selected="false" type="button"><span class="wk">Multi-agent system</span><span class="wn">Cost-control agent crew</span><span class="wo">Catches duplicate payments and budget overruns</span></button>
+  <div class="pgrid" id="work-grid">
+    <a class="pcard" href="#rules" data-p="rules" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)">
+      <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="w" x="36" y="22" width="248" height="170" rx="10"/><rect class="a" x="50" y="36" width="10" height="10" rx="2"/><rect class="l" x="68" y="38" width="58" height="6" rx="3"/><rect class="s" x="222" y="33" width="48" height="16" rx="8"/><text class="ta" x="246" y="44.5" text-anchor="middle">12/12</text><rect class="h" x="50" y="58" width="220" height="16"/><rect class="l" x="60" y="64" width="28" height="4" rx="2"/><rect class="l" x="112" y="64" width="34" height="4" rx="2"/><rect class="l" x="170" y="64" width="24" height="4" rx="2"/><rect class="l" x="226" y="64" width="30" height="4" rx="2"/><g class="row"><rect class="l" x="60" y="82" width="36" height="5" rx="2.5"/><rect class="l" x="112" y="82" width="44" height="5" rx="2.5"/><rect class="l" x="170" y="82" width="30" height="5" rx="2.5"/><rect class="s" x="222" y="78" width="40" height="13" rx="6.5"/></g><rect class="s" x="50" y="96" width="220" height="22" opacity=".55"/><rect class="l" x="60" y="104" width="30" height="5" rx="2.5"/><rect class="l" x="112" y="104" width="50" height="5" rx="2.5"/><rect class="l" x="170" y="104" width="26" height="5" rx="2.5"/><rect class="a" x="217" y="100" width="50" height="13" rx="6.5"/><text class="on" x="242" y="109.5" text-anchor="middle">10% off</text><rect class="l" x="60" y="126" width="40" height="5" rx="2.5"/><rect class="l" x="112" y="126" width="38" height="5" rx="2.5"/><rect class="l" x="170" y="126" width="32" height="5" rx="2.5"/><rect class="s" x="222" y="122" width="40" height="13" rx="6.5"/><rect class="l" x="60" y="148" width="32" height="5" rx="2.5"/><rect class="l" x="112" y="148" width="46" height="5" rx="2.5"/><rect class="l" x="170" y="148" width="28" height="5" rx="2.5"/><rect class="s" x="222" y="144" width="40" height="13" rx="6.5"/><path class="kl" d="M50 96h220M50 118h220M50 140h220M104 58v120M162 58v120M212 58v120"/></svg></div>
+      <div class="pc-t"><span class="wk">Enterprise platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+    </a>
+    <a class="pcard" href="#risk" data-p="risk" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)">
+      <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="a" x="40" y="28" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="64" y="28" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="88" y="28" width="20" height="20" rx="4" opacity="0.70"/><rect class="a" x="112" y="28" width="20" height="20" rx="4" opacity="0.80"/><rect class="a" x="136" y="28" width="20" height="20" rx="4" opacity="0.90"/><rect class="a" x="40" y="52" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="64" y="52" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="88" y="52" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="112" y="52" width="20" height="20" rx="4" opacity="0.70"/><rect class="a" x="136" y="52" width="20" height="20" rx="4" opacity="0.80"/><rect class="a" x="40" y="76" width="20" height="20" rx="4" opacity="0.30"/><rect class="a" x="64" y="76" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="88" y="76" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="112" y="76" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="136" y="76" width="20" height="20" rx="4" opacity="0.70"/><rect class="a" x="40" y="100" width="20" height="20" rx="4" opacity="0.20"/><rect class="a" x="64" y="100" width="20" height="20" rx="4" opacity="0.30"/><rect class="a" x="88" y="100" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="112" y="100" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="136" y="100" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="40" y="124" width="20" height="20" rx="4" opacity="0.10"/><rect class="a" x="64" y="124" width="20" height="20" rx="4" opacity="0.20"/><rect class="a" x="88" y="124" width="20" height="20" rx="4" opacity="0.30"/><rect class="a" x="112" y="124" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="136" y="124" width="20" height="20" rx="4" opacity="0.50"/><circle class="ring" cx="134" cy="62" r="13"/><path class="kl" d="M210 46v94" stroke-dasharray="0"/><rect class="w" x="196" y="30" width="96" height="22" rx="11"/><circle class="a" cx="210" cy="41" r="5"/><text class="tx" x="222" y="44">Intake</text><rect class="w" x="196" y="62" width="96" height="22" rx="11"/><circle class="a" cx="210" cy="73" r="5"/><text class="tx" x="222" y="76">Assess</text><rect class="w dash" x="196" y="94" width="96" height="22" rx="11"/><circle class="kl" cx="210" cy="105" r="5"/><text class="tx mute" x="222" y="108">Legal · skip</text><rect class="a" x="196" y="126" width="96" height="22" rx="11"/><text class="on" x="244" y="140" text-anchor="middle">Approve</text></svg></div>
+      <div class="pc-t"><span class="wk">Enterprise · risk</span><span class="wn">Risk assessment workflows</span><span class="wo">Sends each review to the right approver</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+    </a>
+    <a class="pcard" href="#eco" data-p="eco" style="--pc:var(--c-eco)">
+      <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><clipPath id="pv-eco"><rect x="117" y="19" width="86" height="175" rx="14"/></clipPath></defs><rect class="w" x="26" y="46" width="72" height="66" rx="9"/><text class="tx" x="36" y="62">Feed</text><circle class="s" cx="40" cy="76" r="5"/><rect class="l" x="50" y="73" width="38" height="5" rx="2.5"/><circle class="s" cx="40" cy="92" r="5"/><rect class="l" x="50" y="89" width="30" height="5" rx="2.5"/><circle class="s" cx="40" cy="104" r="4" opacity=".6"/><rect class="l" x="50" y="102" width="34" height="4" rx="2" opacity=".6"/><rect class="w" x="222" y="58" width="72" height="70" rx="9"/><text class="tx" x="232" y="74">Leaders</text><rect class="s" x="234" y="96" width="14" height="22" rx="2"/><rect class="a" x="251" y="84" width="14" height="34" rx="2"/><rect class="s" x="268" y="102" width="14" height="16" rx="2"/><rect class="bezel" x="112" y="14" width="96" height="190" rx="19"/><g clip-path="url(#pv-eco)"><rect class="h" x="117" y="19" width="86" height="175"/><image href="media/eco/plbottle.webp" x="117" y="19" width="86" height="110" preserveAspectRatio="xMidYMid slice"/><path class="cam" d="M130 44v-8h8M190 44v-8h-8M130 98v8h8M190 98v8h-8"/><rect class="w" x="117" y="114" width="86" height="80" rx="12"/><rect class="a" x="125" y="124" width="66" height="14" rx="7"/><text class="on" x="158" y="134" text-anchor="middle">Recyclable</text><text class="ta" x="126" y="152">+10 pts</text><rect class="l" x="126" y="158" width="60" height="4" rx="2"/></g><rect class="island" x="148" y="23" width="24" height="7" rx="3.5"/></svg></div>
+      <div class="pc-t"><span class="wk">Startup · vision</span><span class="wn">Ecodrop Technologies</span><span class="wo">Thousands of users, Techstars-backed</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+    </a>
+    <a class="pcard" href="#rec" data-p="rec" style="--pc:var(--c-rec)">
+      <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><clipPath id="pv-rec"><rect x="28" y="18" width="264" height="112" rx="8"/></clipPath></defs><g clip-path="url(#pv-rec)"><rect class="h" x="28" y="18" width="264" height="112"/><image href="media/elephants-dream-poster.jpg" x="28" y="18" width="264" height="112" preserveAspectRatio="xMidYMid slice"/></g><rect class="w" x="40" y="30" width="108" height="22" rx="11"/><circle class="ka" cx="54" cy="40" r="4.5"/><path class="ka" d="M57.5 43.5l3.5 3.5"/><text class="ta" x="68" y="44.5">nothing</text><circle cx="160" cy="76" r="15" fill="rgb(0 0 0 / .45)"/><path d="M155 68.5v15l12-7.5z" fill="#fff"/><rect class="l" x="28" y="146" width="264" height="4" rx="2"/><rect class="a" x="28" y="146" width="96" height="4" rx="2"/><rect class="a" x="74" y="140" width="3" height="16" rx="1.5"/><rect class="a" x="152" y="140" width="3" height="16" rx="1.5"/><rect class="a" x="236" y="140" width="3" height="16" rx="1.5"/></svg></div>
+      <div class="pc-t"><span class="wk">Speech search</span><span class="wn">Recognito</span><span class="wo">Jump to the second a word is said</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+    </a>
+    <a class="pcard" href="#plan" data-p="plan" style="--pc:var(--c-plan)">
+      <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="s" x="40" y="20" width="110" height="80"/><path class="wall" d="M40 20h240v160H40zM150 20v52M150 88v12M40 100h110M170 100h40M210 100v80"/><path class="kl" d="M150 72a16 16 0 0 1 16 16" /><path class="ka" d="M50 88h90M50 84v8M140 84v8"/><text class="ta" x="95" y="56" text-anchor="middle">Living</text><text class="tx" x="95" y="70" text-anchor="middle">14′ × 12′</text><text class="tx" x="215" y="62" text-anchor="middle">Kitchen</text><text class="tx" x="125" y="140" text-anchor="middle">Bed 1</text><circle class="d" cx="245" cy="132" r="10"/><text class="on2" x="245" y="136" text-anchor="middle">?</text><text class="tx" x="245" y="158" text-anchor="middle">Bath</text></svg></div>
+      <div class="pc-t"><span class="wk">Multimodal agent</span><span class="wn">Blueprint vision agent</span><span class="wo">Measures every room from a floor plan</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+    </a>
+    <a class="pcard" href="#jc" data-p="jc" style="--pc:var(--c-jc)">
+      <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="w" x="22" y="58" width="96" height="44" rx="12"/><text class="tx" x="34" y="76">Lumber</text><text class="ta" x="34" y="91">$1,240</text><path class="ka" d="M118 80h30M184 80c24 0 30-44 56-44M184 80c24 0 30-12 56-12M184 80c24 0 30 20 56 20M184 80c24 0 30 52 56 52"/><circle class="a" cx="166" cy="80" r="18"/><text class="on" x="166" y="83.5" text-anchor="middle">Lead</text><rect class="wa" x="240" y="25" width="62" height="22" rx="11"/><text class="tx" x="271" y="39.5" text-anchor="middle">File</text><rect class="wa" x="240" y="57" width="62" height="22" rx="11"/><text class="tx" x="271" y="71.5" text-anchor="middle">Duplicates</text><rect class="wa kd" x="240" y="89" width="62" height="22" rx="11"/><text class="tx" x="271" y="103.5" text-anchor="middle">Budget</text><circle class="d" cx="302" cy="89" r="7"/><text class="on2" x="302" y="92" text-anchor="middle">!</text><rect class="wa" x="240" y="121" width="62" height="22" rx="11"/><text class="tx" x="271" y="135.5" text-anchor="middle">Approval</text></svg></div>
+      <div class="pc-t"><span class="wk">Multi-agent system</span><span class="wn">Cost-control agent crew</span><span class="wo">Catches duplicate payments and budget overruns</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+    </a>
   </div>
 
-  <div class="wpanel" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)" role="tabpanel" id="wp-rules" aria-labelledby="wt-rules">
+  <dialog class="demo" id="demo" aria-labelledby="demo-k">
+    <div class="demo-bar">
+      <div class="demo-t"><span class="k" id="demo-k"></span><span class="c" id="demo-c"></span></div>
+      <div class="demo-nav">
+        <button type="button" id="demo-prev" aria-label="Previous product"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button type="button" id="demo-next" aria-label="Next product"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button type="button" id="demo-x" aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <div class="demo-body">
+  <div class="wpanel" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)" id="wp-rules" hidden>
   <!-- Rules -->
   <article class="build" aria-labelledby="h-rules">
     <div class="build-head">
@@ -851,7 +925,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     </div>
   </article>
   </div>
-  <div class="wpanel" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)" role="tabpanel" id="wp-risk" aria-labelledby="wt-risk">
+  <div class="wpanel" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)" id="wp-risk" hidden>
   <!-- Risk workflows -->
   <article class="build" aria-labelledby="h-risk">
     <div class="build-head">
@@ -884,7 +958,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     </div>
   </article>
   </div>
-  <div class="wpanel" style="--pc:var(--c-eco)" role="tabpanel" id="wp-eco" aria-labelledby="wt-eco">
+  <div class="wpanel" style="--pc:var(--c-eco)" id="wp-eco" hidden>
   <!-- Ecodrop -->
   <article class="build" aria-labelledby="h-eco">
     <div class="build-head">
@@ -962,7 +1036,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     </div>
   </article>
   </div>
-  <div class="wpanel" style="--pc:var(--c-rec)" role="tabpanel" id="wp-rec" aria-labelledby="wt-rec">
+  <div class="wpanel" style="--pc:var(--c-rec)" id="wp-rec" hidden>
   <!-- Recognito -->
   <article class="build" aria-labelledby="h-rec">
     <div class="build-head">
@@ -995,7 +1069,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     </div>
   </article>
   </div>
-  <div class="wpanel" style="--pc:var(--c-plan)" role="tabpanel" id="wp-plan" aria-labelledby="wt-plan">
+  <div class="wpanel" style="--pc:var(--c-plan)" id="wp-plan" hidden>
   <!-- Takeoff -->
   <article class="build" aria-labelledby="h-takeoff">
     <div class="build-head">
@@ -1040,7 +1114,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
     </div>
   </article>
   </div>
-  <div class="wpanel" style="--pc:var(--c-jc)" role="tabpanel" id="wp-jc" aria-labelledby="wt-jc">
+  <div class="wpanel" style="--pc:var(--c-jc)" id="wp-jc" hidden>
   <!-- Job cost -->
   <article class="build" aria-labelledby="h-jc">
     <div class="build-head">
@@ -1088,6 +1162,9 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
   </article>
 
   </div>
+      <div class="demo-foot"><button class="btn" type="button" id="demo-more">Next: <span id="demo-more-n"></span> <i aria-hidden="true">→</i></button></div>
+    </div>
+  </dialog>
 </section>
 
 <!-- ═══════════ METHOD ═══════════ -->
@@ -1796,25 +1873,43 @@ document.addEventListener('click', e => {
   render();
 }
 
-/* ───── work tabs ───── */
+/* ───── work: cards open each demo in a dialog ───── */
 {
-  const tabs = [...document.querySelectorAll('#work-tabs [role="tab"]')];
-  function sel(i, focus) {
-    tabs.forEach((t, j) => {
-      const on = j === i;
-      t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-    });
-    const v = $('#rec-video'); if (v && tabs[i].id !== 'wt-rec' && !v.paused) v.pause();
-    if (focus) tabs[i].focus();
+  const dlg = $('#demo'), cards = [...document.querySelectorAll('.pcard')], ids = cards.map(c => c.dataset.p);
+  const panels = ids.map(id => document.getElementById('wp-' + id));
+  const vid = () => $('#rec-video');
+  let cur = 0, opener = null;
+  function show(i) {
+    cur = (i + ids.length) % ids.length;
+    panels.forEach((p, j) => p.hidden = j !== cur);
+    const c = cards[cur], nx = cards[(cur + 1) % ids.length];
+    dlg.setAttribute('style', c.getAttribute('style'));
+    $('#demo-k').textContent = c.querySelector('.wk').textContent;
+    $('#demo-c').textContent = `${cur + 1} / ${ids.length}`;
+    $('#demo-more-n').textContent = nx.querySelector('.wn').textContent;
+    dlg.querySelector('.demo-body').scrollTop = 0;
+    if (ids[cur] !== 'rec' && vid() && !vid().paused) vid().pause();
+    history.replaceState(null, '', '#' + ids[cur]);
   }
-  tabs.forEach((t, i) => t.addEventListener('click', () => sel(i)));
-  $('#work-tabs').addEventListener('keydown', e => {
-    const i = tabs.indexOf(document.activeElement); if (i < 0) return;
-    if (e.key === 'ArrowRight') { e.preventDefault(); sel((i + 1) % tabs.length, true); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); sel((i + tabs.length - 1) % tabs.length, true); }
+  function open(i) { show(i); if (!dlg.open) dlg.showModal(); $('#demo-x').focus(); }
+  cards.forEach((c, i) => c.addEventListener('click', e => { e.preventDefault(); opener = c; open(i); }));
+  $('#demo-prev').addEventListener('click', () => show(cur - 1));
+  $('#demo-next').addEventListener('click', () => show(cur + 1));
+  $('#demo-more').addEventListener('click', () => { show(cur + 1); $('#demo-x').focus(); });
+  $('#demo-x').addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('keydown', e => {
+    if (e.target.closest('input,textarea,select,video,[contenteditable],.rail,[role="tablist"],[aria-pressed]')) return;
+    if (e.key === 'ArrowRight') show(cur + 1);
+    if (e.key === 'ArrowLeft') show(cur - 1);
   });
-  sel(0);
+  dlg.addEventListener('close', () => {
+    if (vid()) vid().pause();
+    history.replaceState(null, '', location.pathname + location.search);
+    (opener || cards[cur]).focus({ preventScroll: true });
+  });
+  const h = location.hash.slice(1);
+  if (ids.includes(h)) { $('#work').scrollIntoView(); open(ids.indexOf(h)); }
 }
 
 /* ───── "Show code" toggle on each agent trace ───── */
