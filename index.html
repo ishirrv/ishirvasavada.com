@@ -821,6 +821,7 @@ html:has(.demo[open]){overflow:hidden}
 .ask-h > div{flex:1;min-width:0}
 .ask-t{margin:0;font-weight:600;font-size:var(--t-md)}
 .ask-s{margin:2px 0 0;font-size:12px;color:var(--ink-3)}
+.ask-s sup{font-size:.8em;line-height:0}
 .ask-x{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--rule);border-radius:9px;background:var(--panel);color:var(--ink);cursor:pointer}
 .ask-x:hover{border-color:var(--ink-3)}
 .ask-log{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:16px 18px 8px;display:flex;flex-direction:column;gap:14px}
@@ -1277,7 +1278,7 @@ html:has(.demo[open]){overflow:hidden}
 </button>
 <section class="ask" id="ask" role="dialog" aria-labelledby="ask-t" hidden>
   <div class="ask-h">
-    <div><p class="ask-t" id="ask-t">Ask about my work</p><p class="ask-s">AI assistant · answers from my resume and this site</p></div>
+    <div><p class="ask-t" id="ask-t">Ask about my work</p><p class="ask-s">AI assistant<sup>*</sup> · answers from my resume and this site</p></div>
     <button class="ask-x" id="ask-x" type="button" aria-label="Close assistant"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
   <div class="ask-log" id="ask-log" aria-live="polite"></div>
@@ -1286,7 +1287,7 @@ html:has(.demo[open]){overflow:hidden}
     <textarea id="ask-in" rows="1" maxlength="600" placeholder="Ask a question" aria-label="Your question"></textarea>
     <button class="ask-send" id="ask-send" type="submit" aria-label="Send" disabled><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
   </form>
-  <p class="ask-note">Answers are AI-generated and can be wrong.</p>
+  <p class="ask-note">*Runs on Claude Haiku, a small model chosen to keep costs low. Answers can be wrong.</p>
 </section>
 
 <script>

@@ -70,11 +70,9 @@ async function chat(req, env, ctx) {
   const t0 = Date.now();
   let res;
   try {
-    res = await client.beta.messages.create({
-      model: env.MODEL || 'claude-opus-5-5',
-      max_tokens: 2048, // cost cap for a public endpoint; answers are ~120 words
-      betas: ['server-side-fallback-2026-07-01'],
-      fallbacks: 'default', // a declined request is retried server-side on Anthropic's recommended model
+    res = await client.messages.create({
+      model: env.MODEL || 'claude-haiku-5-5', // small, low-cost model: short Q&A over a fixed set of facts
+      max_tokens: 2048, // cost cap for a public endpoint; answers are ~120 words, thinking counts toward this
       output_config: { effort: 'low', format: { type: 'json_schema', schema: ANSWER_SCHEMA } },
       cache_control: { type: 'ephemeral' },
       system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
@@ -91,18 +89,15 @@ async function chat(req, env, ctx) {
     return { answer, actions: answer === MSG.offline ? ['email'] : [] };
   }
 
-  // Text after the last fallback boundary is the final model's answer.
-  const fb = res.content.map(b => b.type).lastIndexOf('fallback');
-  const text = res.content.filter((b, i) => i > fb && b.type === 'text').map(b => b.text).join('');
+  const text = res.content.filter(b => b.type === 'text').map(b => b.text).join('');
   let parsed = null;
   if (res.stop_reason !== 'refusal') { try { parsed = JSON.parse(text); } catch { /* truncated or malformed */ } }
   const answer = typeof parsed?.answer === 'string' && parsed.answer.trim() ? parsed.answer.trim() : MSG.refusal;
   const actions = [...new Set((Array.isArray(parsed?.actions) ? parsed.actions : []).filter(a => ACTIONS.includes(a)))].slice(0, 2);
 
   ctx.waitUntil(logChat(env, req, sid, q, answer, res.usage, Date.now() - t0, parsed ? 1 : 0));
-  // The client sends this turn back unchanged next time. Before a fallback boundary, keep only text and the boundary itself.
-  const turn = res.content.filter((b, i) => i >= fb || b.type === 'text' || b.type === 'fallback');
-  return { answer, actions, turn };
+  // The client sends this turn back unchanged next time (thinking blocks included, as the API expects).
+  return { answer, actions, turn: res.content };
 }
 
 function validMessages(m) {
@@ -119,7 +114,7 @@ function validMessages(m) {
       out.push({ role, content: c });
     } else {
       if (!Array.isArray(x.content) || x.content.length === 0 || x.content.length > 16) return null;
-      if (!x.content.every(b => b && typeof b === 'object' && ['text', 'thinking', 'redacted_thinking', 'fallback'].includes(b.type))) return null;
+      if (!x.content.every(b => b && typeof b === 'object' && ['text', 'thinking', 'redacted_thinking'].includes(b.type))) return null;
       out.push({ role, content: x.content });
     }
   }

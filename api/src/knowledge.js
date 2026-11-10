@@ -80,7 +80,7 @@ How he builds with agents (the Method section)
 - Write evals before building; every release must pass them. Computer-use agents click through the product like a real user.
 - Add autonomy gradually; anything that can't be undone, like moving money or deleting data, always needs a person.
 - Pick the model per task, compare models across providers on his own evals, and track cost and speed.
-This assistant is itself a small example: it answers only from approved facts, follows guardrails, and points visitors to the demos.
+This assistant is itself a small example: it answers only from approved facts, follows guardrails, and points visitors to the demos. It runs on Claude Haiku, a small, low-cost model, because short questions over a fixed set of facts don't need a larger one. That's the "pick the model per task" idea in practice.
 
 Skills
 - Product: strategy and roadmaps, discovery, prioritization, cross-functional leadership, go-to-market, pricing and unit economics.
