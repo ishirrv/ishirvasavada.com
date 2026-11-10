@@ -815,7 +815,7 @@ html:has(.demo[open]){overflow:hidden}
 .ask-spark{width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:var(--accent-ink)}
 @keyframes ask-in{from{opacity:0;transform:translateY(12px)}}
 .ask{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:41;width:min(400px,calc(100vw - 32px));height:min(620px,calc(100dvh - 96px));display:flex;flex-direction:column;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:18px;box-shadow:0 30px 80px -24px rgb(0 0 0 / .45);overflow:hidden;animation:ask-pop .22s cubic-bezier(.2,.8,.2,1)}
-.ask[hidden]{display:none}
+.ask[hidden],.ask-fab[hidden]{display:none}
 @keyframes ask-pop{from{opacity:0;transform:translateY(10px) scale(.98)}}
 .ask-h{display:flex;align-items:flex-start;gap:12px;padding:16px 14px 14px 18px;border-bottom:1px solid var(--rule)}
 .ask-h > div{flex:1;min-width:0}
@@ -864,7 +864,7 @@ html:has(.demo[open]){overflow:hidden}
       <a href="#work">Work</a>
       <a href="#method">Method</a>
       <a href="#journey">Journey</a>
-      <a href="#ask" data-ask>Ask AI</a>
+      <a href="#ask" data-ask hidden>Ask AI</a>
       <a class="cta" href="#contact">Contact</a>
     </nav>
   </div>
@@ -1268,7 +1268,7 @@ html:has(.demo[open]){overflow:hidden}
     <a class="btn" href="https://www.linkedin.com/in/ishirvasavada" target="_blank" rel="noopener">LinkedIn ↗</a>
     <a class="btn" href="https://ishirvasavada.com/resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
   </div>
-  <p class="fine">This site keeps simple visit stats without cookies, and saves questions sent to the assistant.</p>
+  <p class="fine" id="fine" hidden>This site keeps simple visit stats without cookies, and saves questions sent to the assistant.</p>
 </section>
 </main>
 
@@ -2033,8 +2033,7 @@ document.querySelectorAll('.trace').forEach(tr => {
   const SUGGEST = ['What has he built with AI agents?', 'Tell me about his risk and compliance work', 'Which demo should I try first?', 'What is his background?'];
   let hist = [], busy = false, opened = false;
 
-  if (API) fab.hidden = false;
-  else document.querySelectorAll('[data-ask]').forEach(a => a.remove());
+  if (API) { fab.hidden = false; $('#fine').hidden = false; document.querySelectorAll('[data-ask]').forEach(a => a.hidden = false); }
 
   const escH = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const md = t => escH(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').split(/\n{2,}/).map(par => {

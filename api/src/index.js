@@ -1,7 +1,7 @@
 // API for ishirvasavada.com: the site assistant (/chat), visit stats (/v, /e) and a private dashboard (/admin).
 import Anthropic from '@anthropic-ai/sdk';
 import { SYSTEM_PROMPT, ACTIONS, ANSWER_SCHEMA } from './knowledge.js';
-import { renderAdmin } from './admin.js';
+import { renderAdmin, renderLogin } from './admin.js';
 
 const ORIGINS = new Set(['https://ishirvasavada.com', 'https://www.ishirvasavada.com']);
 const LIMITS = { perHour: 20, perDay: 400, qChars: 600, turns: 10, bodyBytes: 80_000 };
@@ -38,7 +38,7 @@ export default {
         }
         return new Response(null, { status: 204, headers: cors });
       }
-      if (req.method === 'GET' && url.pathname === '/admin') return admin(url, env);
+      if (req.method === 'GET' && url.pathname === '/admin') return admin(req, url, env);
       if (req.method === 'GET' && url.pathname === '/health') return json({ ok: true, chat: Boolean(env.ANTHROPIC_API_KEY) }, 200, cors);
       return new Response('Not found', { status: 404 });
     } catch (e) {
@@ -122,6 +122,7 @@ function validMessages(m) {
 }
 
 async function logChat(env, req, sid, q, a, usage, ms, ok) {
+  if (sid === 'ci-smoke') return; // the deploy check, not a visitor
   const cf = req.cf || {};
   await env.DB.prepare('INSERT INTO chats (ts, sid, q, a, country, region, city, org, in_tok, out_tok, cache_read, ms, ok) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)')
     .bind(new Date().toISOString(), sid, q, a, cf.country || null, cf.region || null, cf.city || null, cf.asOrganization || null,
@@ -160,9 +161,16 @@ function device(ua) {
 }
 
 /* ───── dashboard ───── */
-async function admin(url, env) {
+async function admin(req, url, env) {
+  if (!env.ADMIN_KEY) return new Response('Not found', { status: 404 });
+  const page = (html, status = 200) => new Response(html, { status, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex', 'Referrer-Policy': 'no-referrer' } });
   const key = url.searchParams.get('key') || '';
-  if (!env.ADMIN_KEY || !(await same(key, env.ADMIN_KEY))) return new Response('Not found', { status: 404 });
+  if (!key) return page(renderLogin());
+  // at most 10 wrong passwords an hour per visitor
+  const hour = Math.floor(Date.now() / 3_600_000), k = `a:${await ipHash(req, env)}:${hour}`;
+  const tries = (await env.DB.prepare('SELECT n FROM limits WHERE k = ?').bind(k).first())?.n || 0;
+  if (tries >= 10) return page(renderLogin('Too many tries. Wait an hour and try again.'), 429);
+  if (!(await same(key, env.ADMIN_KEY))) { await bump(env, k, (hour + 1) * 3_600_000); return page(renderLogin('Wrong password.'), 401); }
   const days = Math.min(Math.max(parseInt(url.searchParams.get('days') || '30', 10) || 30, 1), 365);
   const since = new Date(Date.now() - days * 86_400_000).toISOString();
   const [visits, events, chats, seen] = await Promise.all([
@@ -172,7 +180,7 @@ async function admin(url, env) {
     env.DB.prepare('SELECT iph, MIN(ts) AS first FROM visits GROUP BY iph').all(),
   ]);
   const html = renderAdmin({ key, days, visits: visits.results, events: events.results, chats: chats.results, firstSeen: Object.fromEntries(seen.results.map(r => [r.iph, r.first])) });
-  return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex', 'Referrer-Policy': 'no-referrer' } });
+  return page(html);
 }
 
 /* ───── helpers ───── */

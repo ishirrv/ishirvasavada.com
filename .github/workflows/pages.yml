@@ -1,5 +1,10 @@
-# Builds the site with build.js and publishes dist/ to GitHub Pages.
+# Publishes the site to GitHub Pages, and deploys its API (assistant + visit stats) to Cloudflare.
 # One-time setup: Settings -> Pages -> Source: GitHub Actions.
+# The API needs three repository secrets (Settings -> Secrets and variables -> Actions):
+#   CLOUDFLARE_API_TOKEN  from the "Edit Cloudflare Workers" template, plus the D1: Edit permission
+#   DASHBOARD_PASSWORD    a long password of your choice; it opens the visitor dashboard
+#   ANTHROPIC_API_KEY     turns the assistant on
+# Without them the site is published as a plain static page.
 name: Deploy site
 
 on:
@@ -17,7 +22,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  api:
+    runs-on: ubuntu-latest
+    outputs:
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$DASHBOARD_PASSWORD" ]; then echo "on=true" >> "$GITHUB_OUTPUT"
+          else echo "::notice::Cloudflare secrets are not set, so the site is published without the assistant and visit stats."; fi
+      - if: steps.check.outputs.on == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: deploy
+        if: steps.check.outputs.on == 'true'
+        run: bash api/deploy.sh
+
   build:
+    needs: api
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,6 +56,7 @@ jobs:
         run: node build.js
         env:
           SITE_URL: https://ishirvasavada.com
+          API_URL: ${{ needs.api.outputs.url }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -83,3 +83,12 @@ ${chats.map(c => `<tr><td class="nw">${esc(when(c.ts))}</td><td class="q">${esc(
 </ul></div>
 </div></body></html>`;
 }
+
+export function renderLogin(msg = '') {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Site visitors</title>
+<style>body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#F4F5F2;color:#14181F;font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+@media (prefers-color-scheme:dark){body{background:#0B1019;color:#E6EAF1}input{background:#111826;color:#E6EAF1;border-color:#243045}}
+form{width:min(340px,calc(100vw - 40px));display:flex;flex-direction:column;gap:10px}h1{font-size:20px;margin:0 0 4px}
+input,button{font:inherit;padding:11px 14px;border-radius:10px;border:1px solid #C9CEC6}button{background:#14181F;color:#fff;border-color:#14181F;cursor:pointer}p{margin:0;color:#B4235A;font-size:14px}</style></head>
+<body><form method="get" action="/admin"><h1>Site visitors</h1><input type="password" name="key" placeholder="Dashboard password" autocomplete="current-password" autofocus required>${msg ? `<p>${esc(msg)}</p>` : ''}<button type="submit">Open dashboard</button></form></body></html>`;
+}
