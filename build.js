@@ -9,6 +9,7 @@ const SITE = (process.env.SITE_URL || 'https://ishirvasavada.com').replace(/\/$/
 const root = __dirname;
 const out = path.join(root, 'dist');
 const hasResume = fs.existsSync(path.join(root, 'resume.pdf'));
+const API = (process.env.API_URL || '').replace(/\/$/, ''); // the Worker in api/; leave unset to build without the assistant and stats
 
 let body = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const title = (body.match(/<title>(.*?)<\/title>/) || [, 'Ishir Vasavada'])[1];
@@ -17,6 +18,7 @@ body = body
   .replace(/<title>.*?<\/title>\n?/, '')
   .replace(/<meta name="description"[^>]*>\n?/, '')
   .replace(/<meta name="claude:[^>]*>\n?/, '')
+  .replace(/__API_URL__/g, API || '__API_URL__')
   .replace(/<!--resume-link-->/g, hasResume ? '<a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>' : '');
 
 const shareTitle = 'Ishir Vasavada · Building products people rely on';
