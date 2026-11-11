@@ -87,7 +87,7 @@ h2{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:600;margin-top:12px}
 .hero + .sheet{padding-top:64px}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px 72px;align-items:center}
 .hero h1{font-size:var(--t-2xl);font-weight:600;letter-spacing:-.035em;margin-top:18px}
-.hero h1 em{font-style:normal;color:var(--accent)}
+.hero h1 em{font-style:normal;color:var(--accent-hi,var(--accent))}
 .hero p.intro{font-size:var(--t-lg);color:var(--ink-2);max-width:54ch;margin:22px 0 0}
 .hero p.intro strong{color:var(--ink);font-weight:500}
 .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
@@ -98,7 +98,7 @@ h2{font-size:clamp(1.75rem,3.4vw,2.5rem);font-weight:600;margin-top:12px}
 .who{display:flex;align-items:center;gap:14px}
 .who .name{font-weight:600;font-size:var(--t-lg);letter-spacing:-.01em}
 .who .sub{font-family:var(--f-mono);font-size:var(--t-xs);color:var(--ink-2);letter-spacing:.04em}
-.avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none;background:var(--rule);border:1px solid var(--rule)}
+.avatar{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:none;background:var(--rule);border:1px solid var(--rule)}
 
 
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);margin-top:56px}
@@ -963,7 +963,7 @@ html:has(.demo[open]){overflow:hidden}
   <div class="hero-grid">
     <div>
       <div class="who">
-        <img class="avatar" src="media/ishir-avatar.webp" alt="" width="56" height="56">
+        <img class="avatar" src="media/ishir-portrait.webp" alt="" width="64" height="64">
         <div><div class="name">Ishir Vasavada</div><div class="sub">Product leader · Builder · Techstars founder</div></div>
       </div>
       <h1 id="h-hero">I turn messy problems into <em>products people rely on.</em></h1>
@@ -2166,21 +2166,21 @@ document.querySelectorAll('.trace').forEach(tr => {
   const B = {
     airbnb:     { n: 'Airbnb',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F7F7F7', ink: '#222222', a: '#E00B41', ai: '#FFFFFF', stripe: ['#E61E4D', '#E31C5F', '#D70466'] },
     amazon:     { n: 'Amazon',     s: 'dark',  paper: '#131921', panel: '#1B2330', band: '#232F3E', ink: '#FFFFFF', a: '#FF9900', ai: '#131921', stripe: ['#FF9900'] },
-    anthropic:  { n: 'Anthropic',  s: 'light', paper: '#FAF9F5', panel: '#FFFFFF', band: '#F0EEE6', ink: '#141413', a: '#A8502E', ai: '#FFFFFF', stripe: ['#D97757'], display: '"Newsreader", Georgia, serif', gf: 'Newsreader:opsz,wght@6..72,500;6..72,600' },
-    apple:      { n: 'Apple',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F7', ink: '#1D1D1F', a: '#0066CC', ai: '#FFFFFF', font: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif' },
-    atlassian:  { n: 'Atlassian',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F2F4', ink: '#172B4D', a: '#0C66E4', ai: '#FFFFFF', stripe: ['#0C66E4', '#1D7AFC', '#579DFF'] },
-    google:     { n: 'Google',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F3F4', ink: '#202124', a: '#1967D2', ai: '#FFFFFF', stripe: ['#4285F4', '#EA4335', '#FBBC05', '#34A853'], hard: true, font: '"Roboto", Arial, sans-serif', gf: 'Roboto:wght@400;500;600;700' },
+    anthropic:  { n: 'Anthropic',  s: 'light', paper: '#FAF9F5', panel: '#FFFFFF', band: '#F0EEE6', ink: '#141413', a: '#A8502E', ai: '#FFFFFF', hi: '#D97757', stripe: ['#D97757'], display: '"Newsreader", Georgia, serif', gf: 'Newsreader:opsz,wght@6..72,500;6..72,600' },
+    apple:      { n: 'Apple',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F7', ink: '#1D1D1F', a: '#0066CC', ai: '#FFFFFF', hi: '#0071E3', font: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif' },
+    atlassian:  { n: 'Atlassian',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F0F1F2', ink: '#292A2E', a: '#0052CC', ai: '#FFFFFF', hi: '#1868DB', stripe: ['#1868DB'] },
+    google:     { n: 'Google',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F3F4', ink: '#202124', a: '#1967D2', ai: '#FFFFFF', hi: '#4285F4', stripe: ['#4285F4', '#EA4335', '#FBBC05', '#34A853'], hard: true, font: '"Roboto", Arial, sans-serif', gf: 'Roboto:wght@400;500;600;700' },
     meta:       { n: 'Meta',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F4F7', ink: '#1C2B33', a: '#0064E0', ai: '#FFFFFF', stripe: ['#0064E0', '#0082FB'] },
-    microsoft:  { n: 'Microsoft',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F2F2F2', ink: '#242424', a: '#0067B8', ai: '#FFFFFF', stripe: ['#F25022', '#7FBA00', '#00A4EF', '#FFB900'], hard: true, font: '"Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif' },
-    netflix:    { n: 'Netflix',    s: 'dark',  paper: '#141414', panel: '#181818', band: '#000000', ink: '#FFFFFF', a: '#F0303A', ai: '#FFFFFF', stripe: ['#E50914'] },
+    microsoft:  { n: 'Microsoft',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F2F2F2', ink: '#262626', a: '#0067B8', ai: '#FFFFFF', hi: '#0078D4', stripe: ['#0078D4'], font: '"Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif' },
+    netflix:    { n: 'Netflix',    s: 'dark',  paper: '#141414', panel: '#181818', band: '#000000', ink: '#FFFFFF', a: '#F0303A', ai: '#FFFFFF', hi: '#E50914', stripe: ['#E50914'] },
     nvidia:     { n: 'NVIDIA',     s: 'dark',  paper: '#0A0A0A', panel: '#161616', band: '#1C1C1C', ink: '#FFFFFF', a: '#76B900', ai: '#000000', stripe: ['#76B900'] },
-    openai:     { n: 'OpenAI',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F4F4F4', ink: '#0D0D0D', a: '#0D0D0D', ai: '#FFFFFF' },
-    salesforce: { n: 'Salesforce', s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#EAF5FE', ink: '#032D60', a: '#0B5CAB', ai: '#FFFFFF', stripe: ['#0176D3', '#1B96FF', '#90D0FE'] },
+    openai:     { n: 'OpenAI',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F5', ink: '#000000', a: '#000000', ai: '#FFFFFF' },
+    salesforce: { n: 'Salesforce', s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#EAF5FE', ink: '#032D60', a: '#0B5CAB', ai: '#FFFFFF', hi: '#0099D9', stripe: ['#00B3FF', '#00A1E0', '#0B5CAB'] },
     stripe:     { n: 'Stripe',     s: 'light', paper: '#F6F9FC', panel: '#FFFFFF', band: '#E8EEF5', ink: '#0A2540', a: '#533AFD', ai: '#FFFFFF', stripe: ['#80E9FF', '#7A73FF', '#FF80BF', '#FFB422'] },
-    uber:       { n: 'Uber',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F3F3F3', ink: '#000000', a: '#000000', ai: '#FFFFFF', stripe: ['#000000'] },
+    uber:       { n: 'Uber',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F3F3F3', ink: '#111111', a: '#000000', ai: '#FFFFFF', stripe: ['#000000'] },
     vanta:      { n: 'Vanta',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F0EEFF', ink: '#181822', a: '#5230D7', ai: '#FFFFFF', stripe: ['#260048', '#5E05C4', '#DCDCFF'] },
   };
-  const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink' };
+  const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink', hi: '--accent-hi' };
   const root = document.documentElement, baseScheme = root.getAttribute('data-theme');
   const pill = $('#bp-open'), card = $('#bp'), sel = $('#bp-sel'), label = $('#bp-label'), stripe = $('#brand-stripe'), toast = $('#bp-toast');
   let toastT;
@@ -2199,7 +2199,7 @@ document.querySelectorAll('.trace').forEach(tr => {
       return;
     }
     root.dataset.brand = k; root.setAttribute('data-theme', b.s);
-    for (const [f, v] of Object.entries(VARS)) root.style.setProperty(v, b[f]);
+    for (const [f, v] of Object.entries(VARS)) if (b[f]) root.style.setProperty(v, b[f]);
     if (b.gf && !document.getElementById('gf-' + k)) {
       const l = document.createElement('link'); l.id = 'gf-' + k; l.rel = 'stylesheet';
       l.href = `https://fonts.googleapis.com/css2?family=${b.gf.replace(/ /g, '+')}&display=swap`; document.head.appendChild(l);

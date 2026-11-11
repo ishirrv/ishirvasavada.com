@@ -37,13 +37,13 @@ const head = `<!doctype html>
 <meta property="og:url" content="${SITE}/">
 <meta property="og:title" content="${shareTitle}">
 <meta property="og:description" content="${desc}">
-<meta property="og:image" content="${SITE}/media/og.png">
+<meta property="og:image" content="${SITE}/media/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${shareTitle}">
 <meta name="twitter:description" content="${desc}">
-<meta name="twitter:image" content="${SITE}/media/og.png">
+<meta name="twitter:image" content="${SITE}/media/og-card.png">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
