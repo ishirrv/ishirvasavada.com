@@ -1014,7 +1014,7 @@ html:has(.demo[open]){overflow:hidden}
     <dl class="brief">
       <div><dt>Who it's for</dt><dd>Billing admins and implementation teams at enterprise subscription companies</dd></div>
       <div><dt>Market</dt><dd>Enterprise subscription billing (B2B SaaS)</dd></div>
-      <div><dt>Problem</dt><dd>Every company bills differently. Custom pricing rules lived in custom code, services projects or white-labeled third-party decisioning tools. That slowed every implementation and kept key logic outside the platform.</dd></div>
+      <div><dt>Problem</dt><dd>Our customers each billed differently. Their custom pricing rules lived in custom code, services projects or white-labeled third-party decisioning tools. That slowed implementations and kept key logic outside the platform.</dd></div>
     </dl>
     <div class="build-body ra">
       <div class="pane ra-main">
@@ -1046,7 +1046,7 @@ html:has(.demo[open]){overflow:hidden}
     <dl class="brief">
       <div><dt>Who it's for</dt><dd>Privacy, security and risk teams, plus the business owners who request new vendors and systems</dd></div>
       <div><dt>Market</dt><dd>Privacy, risk and compliance software</dd></div>
-      <div><dt>Problem</dt><dd>Every company assesses risk its own way. Fixed templates couldn't handle that, so routing and approvals moved to email and spreadsheets. Reviews stalled and risks went untracked.</dd></div>
+      <div><dt>Problem</dt><dd>Our customers each assessed risk their own way. Fixed templates couldn't handle that, so routing and approvals moved to email and spreadsheets. Reviews stalled and risks went untracked.</dd></div>
     </dl>
     <div class="build-body rk">
       <div class="pane">
@@ -1079,7 +1079,7 @@ html:has(.demo[open]){overflow:hidden}
     <dl class="brief">
       <div><dt>Who it's for</dt><dd>University students and staff, plus local merchants who fund the rewards</dd></div>
       <div><dt>Market</dt><dd>University recycling and sustainability programs</dd></div>
-      <div><dt>Problem</dt><dd>People want to recycle but don't know what's accepted, and nothing rewards doing it right. Wrong items contaminate whole loads and cost programs money.</dd></div>
+      <div><dt>Problem</dt><dd>Many people want to recycle but aren't sure what's accepted, and little rewards doing it right. Wrong items can contaminate a whole load and cost programs money.</dd></div>
     </dl>
     <div class="eco-facts">
       <div><span class="v num">Thousands</span><span class="l">of users</span></div>
@@ -1190,7 +1190,7 @@ html:has(.demo[open]){overflow:hidden}
     <dl class="brief">
       <div><dt>Who it's for</dt><dd>Estimators and project managers at small residential builders</dd></div>
       <div><dt>Market</dt><dd>Residential construction</dd></div>
-      <div><dt>Problem</dt><dd>Every estimate and material order starts with measuring each room off the drawings by hand. It is slow, and one misread dimension flows into the whole budget.</dd></div>
+      <div><dt>Problem</dt><dd>Each estimate and material order started with measuring rooms off the drawings by hand. It was slow, and one misread dimension flowed into the whole budget.</dd></div>
     </dl>
     <div class="build-body">
       <div class="pane">
@@ -1235,7 +1235,7 @@ html:has(.demo[open]){overflow:hidden}
     <dl class="brief">
       <div><dt>Who it's for</dt><dd>Owners and field crews at small builders, who are not spreadsheet people</dd></div>
       <div><dt>Market</dt><dd>Small construction businesses</dd></div>
-      <div><dt>Problem</dt><dd>Costs get paid on site and never reach the spreadsheet. The budget was always behind, so overruns showed up late.</dd></div>
+      <div><dt>Problem</dt><dd>Costs were paid on site and often didn't reach the spreadsheet. The budget ran behind, so overruns showed up late.</dd></div>
     </dl>
     <div class="jc">
       <div class="phone">
@@ -1282,7 +1282,7 @@ html:has(.demo[open]){overflow:hidden}
 <section class="sheet wrap band" id="method" aria-labelledby="h-method">
   <div class="sheet-head">
     <div><span class="tag"><b>Sheet 02</b> Method</span><h2 id="h-method">How I build with agents</h2></div>
-    <p class="lede">Anyone can call an AI model. The product work is the harness around it: what it can see, how we know it's right and when a person signs off.</p>
+    <p class="lede">I've learned the model call is only one piece. My best results came from building the harness around it: what the agent can see, how we check its work and when a person signs off.</p>
   </div>
 
 
@@ -2052,14 +2052,14 @@ document.addEventListener('click', e => {
 /* ───── method: the harness diagram ───── */
 {
   const H = {
-    harness: ['Build the harness, not just the prompt', 'Reliability comes from what surrounds the model: tools, permissions, memory, context, retries and evals. I design that first.', 'Agent harness · tool use'],
-    context: ['Give agents the right context', 'Most AI mistakes come from missing context, not bad prompts. I connect agents to the systems that hold the data and keep what they see focused.', 'Context engineering · MCP'],
-    agent: ['Start with one agent', 'Most workflows need one capable agent. I add subagents only when steps can run in parallel, like checking a payment for duplicates and against the budget at once.', 'Multi-agent orchestration'],
-    skills: ['Package know-how as skills', 'Repeat work becomes a skill: instructions, scripts and examples an agent loads only when it needs them. Every agent and teammate follows the same playbook.', 'Agent skills'],
+    harness: ['Build the harness, not just the prompt', 'My agents became reliable once I designed what surrounds the model: tools, permissions, memory, context, retries and evals. I now start there.', 'Agent harness · tool use'],
+    context: ['Give agents the right context', 'Most mistakes I have seen came from missing context, not the prompt. I connect agents to the systems that hold the data and keep what they see focused.', 'Context engineering · MCP'],
+    agent: ['Start with one agent', 'One capable agent has handled most workflows I have built. I add subagents only when steps can run in parallel, like checking a payment for duplicates and against the budget at once.', 'Multi-agent orchestration'],
+    skills: ['Package know-how as skills', 'I turn repeat work into skills: instructions, scripts and examples an agent loads only when it needs them. Agents and teammates then follow the same playbook.', 'Agent skills'],
     model: ['Pick the model per task', 'Routine steps use smaller, cheaper models and harder reasoning uses the strongest one. I compare models across providers on our own evals.', 'Model routing'],
-    evals: ['Write the tests first', 'Evals define a good answer before we build, and every release has to pass them. Computer-use agents also click through the product like a real user.', 'Evals · computer use'],
-    approval: ['Add autonomy gradually', "A person approves every action at first. Approvals loosen as results prove reliable. Anything that can't be undone always needs a person.", 'Human-in-the-loop'],
-    runtime: ['Use managed agent platforms', "Hosted runtimes handle sandboxes, memory and long-running sessions. The team's time goes to what users notice: what the agent can access and when it asks.", 'Managed agents'],
+    evals: ['Write the tests first', 'I write evals that define a good answer before we build, and each release has to pass them. Computer-use agents also click through the product like a real user.', 'Evals · computer use'],
+    approval: ['Add autonomy gradually', "A person approves each action at first. I loosen approvals as results prove reliable. Actions that can't be undone stay with a person.", 'Human-in-the-loop'],
+    runtime: ['Use managed agent platforms', "I use hosted runtimes for sandboxes, memory and long-running sessions. That leaves the team's time for what users notice: what the agent can access and when it asks.", 'Managed agents'],
   };
   const keys = Object.keys(H), root = $('#hz'), detail = $('#hz-detail');
   const inline = document.createElement('p'); inline.className = 'hz-inline';
