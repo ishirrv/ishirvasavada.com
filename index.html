@@ -927,7 +927,12 @@ html:has(.demo[open]){overflow:hidden}
 .bp-pill:focus-visible,.bp-x:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .bp-pill[hidden],.bp[hidden],.bp-toast[hidden]{display:none}
 .bp-dot{width:14px;height:14px;border-radius:50%;background:conic-gradient(#4285F4,#E50914,#FF9900,#76B900,#635BFF,#4285F4)}
-:root[data-brand] .bp-dot{background:var(--accent)}
+:root[data-brand] .btn,:root[data-brand] .nav a.cta,:root[data-brand] .email,:root[data-brand] .ask-send,:root[data-brand] .bp select,:root[data-brand] .demo-nav button,:root[data-brand] .ask-x{border-radius:var(--r-btn)}
+:root[data-brand] .btn.primary:not(.ra-gen),:root[data-brand] .nav a.cta,:root[data-brand] .ask-fab,:root[data-brand] .ask-send{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
+:root[data-brand] .btn.primary:not(.ra-gen):hover,:root[data-brand] .nav a.cta:hover{background:var(--btn);border-color:var(--btn);color:var(--btn-ink);filter:brightness(1.12)}
+:root[data-brand] .ask-spark{background:var(--btn-ink);color:var(--btn)}
+:root[data-brand] .ask-m.u{background:var(--btn);color:var(--btn-ink)}
+:root[data-brand] .bp-dot{background:var(--btn)}
 .bp{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:40;width:min(340px,calc(100vw - 32px));padding:18px 18px 14px;border:1px solid var(--rule);border-radius:16px;background:var(--panel);color:var(--ink);box-shadow:0 24px 60px -20px rgb(0 0 0 / .45);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
 .bp-t{margin:0 28px 0 0;font-weight:600;font-size:var(--t-md);letter-spacing:-.01em}
 .bp-s{margin:4px 0 12px;font-size:var(--t-sm);color:var(--ink-2)}
@@ -2162,25 +2167,26 @@ document.querySelectorAll('.trace').forEach(tr => {
 
 /* ───── personalize: restyle the site in the visitor's company colors ───── */
 {
-  // s: color scheme the brand is known for. a: accent, ai: text on accent. stripe: brand colors for the bar at the top (hard: equal blocks).
+  // s: the color scheme the brand is known for. a: accent for links and small text, ai: text on accent. hi: headline color.
+  // btn/bi: button fill and its text, r: button corner radius. stripe: brand colors for the bar at the top (hard: equal blocks).
   const B = {
-    airbnb:     { n: 'Airbnb',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F7F7F7', ink: '#222222', a: '#E00B41', ai: '#FFFFFF', stripe: ['#E61E4D', '#E31C5F', '#D70466'] },
-    amazon:     { n: 'Amazon',     s: 'dark',  paper: '#131921', panel: '#1B2330', band: '#232F3E', ink: '#FFFFFF', a: '#FF9900', ai: '#131921', stripe: ['#FF9900'] },
-    anthropic:  { n: 'Anthropic',  s: 'light', paper: '#FAF9F5', panel: '#FFFFFF', band: '#F0EEE6', ink: '#141413', a: '#A8502E', ai: '#FFFFFF', hi: '#D97757', stripe: ['#D97757'], display: '"Newsreader", Georgia, serif', gf: 'Newsreader:opsz,wght@6..72,500;6..72,600' },
-    apple:      { n: 'Apple',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F7', ink: '#1D1D1F', a: '#0066CC', ai: '#FFFFFF', hi: '#0071E3', font: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif' },
-    atlassian:  { n: 'Atlassian',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F0F1F2', ink: '#292A2E', a: '#0052CC', ai: '#FFFFFF', hi: '#1868DB', stripe: ['#1868DB'] },
-    google:     { n: 'Google',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F3F4', ink: '#202124', a: '#1967D2', ai: '#FFFFFF', hi: '#4285F4', stripe: ['#4285F4', '#EA4335', '#FBBC05', '#34A853'], hard: true, font: '"Roboto", Arial, sans-serif', gf: 'Roboto:wght@400;500;600;700' },
-    meta:       { n: 'Meta',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F4F7', ink: '#1C2B33', a: '#0064E0', ai: '#FFFFFF', stripe: ['#0064E0', '#0082FB'] },
-    microsoft:  { n: 'Microsoft',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F2F2F2', ink: '#262626', a: '#0067B8', ai: '#FFFFFF', hi: '#0078D4', stripe: ['#0078D4'], font: '"Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif' },
-    netflix:    { n: 'Netflix',    s: 'dark',  paper: '#141414', panel: '#181818', band: '#000000', ink: '#FFFFFF', a: '#F0303A', ai: '#FFFFFF', hi: '#E50914', stripe: ['#E50914'] },
-    nvidia:     { n: 'NVIDIA',     s: 'dark',  paper: '#0A0A0A', panel: '#161616', band: '#1C1C1C', ink: '#FFFFFF', a: '#76B900', ai: '#000000', stripe: ['#76B900'] },
-    openai:     { n: 'OpenAI',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F5', ink: '#000000', a: '#000000', ai: '#FFFFFF' },
-    salesforce: { n: 'Salesforce', s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#EAF5FE', ink: '#032D60', a: '#0B5CAB', ai: '#FFFFFF', hi: '#0099D9', stripe: ['#00B3FF', '#00A1E0', '#0B5CAB'] },
-    stripe:     { n: 'Stripe',     s: 'light', paper: '#F6F9FC', panel: '#FFFFFF', band: '#E8EEF5', ink: '#0A2540', a: '#533AFD', ai: '#FFFFFF', stripe: ['#80E9FF', '#7A73FF', '#FF80BF', '#FFB422'] },
-    uber:       { n: 'Uber',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F3F3F3', ink: '#111111', a: '#000000', ai: '#FFFFFF', stripe: ['#000000'] },
-    vanta:      { n: 'Vanta',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F0EEFF', ink: '#181822', a: '#5230D7', ai: '#FFFFFF', stripe: ['#260048', '#5E05C4', '#DCDCFF'] },
+    airbnb:     { n: 'Airbnb',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F7F7F7', ink: '#222222', a: '#E00B41', ai: '#FFFFFF', stripe: ['#E61E4D', '#E31C5F', '#D70466'], btn: '#E00B41', bi: '#FFFFFF', r: '8px', hi: '#FF385C' },
+    amazon:     { n: 'Amazon',     s: 'dark',  paper: '#131921', panel: '#1B2330', band: '#232F3E', ink: '#FFFFFF', a: '#FF9900', ai: '#131921', stripe: ['#FF9900'], btn: '#FFD814', bi: '#0F1111', r: '999px' },
+    anthropic:  { n: 'Anthropic',  s: 'light', paper: '#FAF9F5', panel: '#FFFFFF', band: '#F0EEE6', ink: '#141413', a: '#A8502E', ai: '#FFFFFF', hi: '#D97757', stripe: ['#D97757'], display: '"Newsreader", Georgia, serif', gf: 'Newsreader:opsz,wght@6..72,500;6..72,600', btn: '#141413', bi: '#FAF9F5', r: '10px' },
+    apple:      { n: 'Apple',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F7', ink: '#1D1D1F', a: '#0066CC', ai: '#FFFFFF', hi: '#6E6E73', font: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif', btn: '#1D1D1F', bi: '#FFFFFF', r: '980px' },
+    atlassian:  { n: 'Atlassian',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F0F1F2', ink: '#292A2E', a: '#0052CC', ai: '#FFFFFF', hi: '#1868DB', stripe: ['#1868DB'], btn: '#1868DB', bi: '#FFFFFF', r: '999px' },
+    google:     { n: 'Google',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F3F4', ink: '#202124', a: '#1967D2', ai: '#FFFFFF', hi: '#4285F4', stripe: ['#4285F4', '#EA4335', '#FBBC05', '#34A853'], hard: true, font: '"Roboto", Arial, sans-serif', gf: 'Roboto:wght@400;500;600;700', btn: '#0B57D0', bi: '#FFFFFF', r: '999px' },
+    meta:       { n: 'Meta',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F4F7', ink: '#1C2B33', a: '#0064E0', ai: '#FFFFFF', stripe: ['#0064E0', '#0082FB'], btn: '#0064E0', bi: '#FFFFFF', r: '999px', hi: '#0082FB' },
+    microsoft:  { n: 'Microsoft',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F2F2F2', ink: '#262626', a: '#0067B8', ai: '#FFFFFF', hi: '#0078D4', stripe: ['#0078D4'], font: '"Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif', btn: '#0067B8', bi: '#FFFFFF', r: '2px' },
+    netflix:    { n: 'Netflix',    s: 'dark',  paper: '#141414', panel: '#181818', band: '#000000', ink: '#FFFFFF', a: '#F0303A', ai: '#FFFFFF', hi: '#E50914', stripe: ['#E50914'], btn: '#E50914', bi: '#FFFFFF', r: '4px' },
+    nvidia:     { n: 'NVIDIA',     s: 'dark',  paper: '#0A0A0A', panel: '#161616', band: '#1C1C1C', ink: '#FFFFFF', a: '#76B900', ai: '#000000', stripe: ['#76B900'], btn: '#76B900', bi: '#000000', r: '2px' },
+    openai:     { n: 'OpenAI',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F5', ink: '#000000', a: '#000000', ai: '#FFFFFF', btn: '#000000', bi: '#FFFFFF', r: '999px' },
+    salesforce: { n: 'Salesforce', s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#EAF5FE', ink: '#032D60', a: '#0B5CAB', ai: '#FFFFFF', hi: '#0099D9', stripe: ['#00B3FF', '#00A1E0', '#0B5CAB'], btn: '#0176D3', bi: '#FFFFFF', r: '999px' },
+    stripe:     { n: 'Stripe',     s: 'light', paper: '#F6F9FC', panel: '#FFFFFF', band: '#E8EEF5', ink: '#0A2540', a: '#533AFD', ai: '#FFFFFF', stripe: ['#80E9FF', '#7A73FF', '#FF80BF', '#FFB422'], btn: '#635BFF', bi: '#FFFFFF', r: '999px', hi: '#635BFF' },
+    uber:       { n: 'Uber',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F3F3F3', ink: '#111111', a: '#000000', ai: '#FFFFFF', stripe: ['#000000'], btn: '#000000', bi: '#FFFFFF', r: '8px' },
+    vanta:      { n: 'Vanta',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F0EEFF', ink: '#181822', a: '#5230D7', ai: '#FFFFFF', stripe: ['#260048', '#5E05C4', '#DCDCFF'], btn: '#260048', bi: '#FFFFFF', r: '999px', hi: '#5E05C4' },
   };
-  const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink', hi: '--accent-hi' };
+  const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink', hi: '--accent-hi', btn: '--btn', bi: '--btn-ink', r: '--r-btn' };
   const root = document.documentElement, baseScheme = root.getAttribute('data-theme');
   const pill = $('#bp-open'), card = $('#bp'), sel = $('#bp-sel'), label = $('#bp-label'), stripe = $('#brand-stripe'), toast = $('#bp-toast');
   let toastT;
@@ -2196,9 +2202,11 @@ document.querySelectorAll('.trace').forEach(tr => {
       delete root.dataset.brand;
       if (baseScheme) root.setAttribute('data-theme', baseScheme); else root.removeAttribute('data-theme');
       stripe.hidden = true; label.textContent = 'Personalize'; sel.value = '';
+      document.querySelectorAll('meta[name="theme-color"]').forEach(m => { if (m.dataset.base) m.content = m.dataset.base; });
       return;
     }
     root.dataset.brand = k; root.setAttribute('data-theme', b.s);
+    document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.dataset.base ??= m.content; m.content = b.paper; });
     for (const [f, v] of Object.entries(VARS)) if (b[f]) root.style.setProperty(v, b[f]);
     if (b.gf && !document.getElementById('gf-' + k)) {
       const l = document.createElement('link'); l.id = 'gf-' + k; l.rel = 'stylesheet';
