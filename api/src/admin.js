@@ -32,6 +32,8 @@ export function renderAdmin({ key, days, visits, events, chats, firstSeen }) {
   const activity = s => {
     const out = [];
     const demos = [...new Set(s.ev.filter(e => e.type === 'demo').map(e => DEMO[e.detail] || e.detail))];
+    const theme = s.ev.filter(e => e.type === 'theme' && e.detail && e.detail !== 'none').pop();
+    if (theme) out.push(`Picked ${theme.detail} theme`);
     if (demos.length) out.push(`Opened ${demos.join(', ')}`);
     for (const [t, label] of [['resume', 'Resume'], ['email', 'Copied email'], ['linkedin', 'LinkedIn']]) if (s.ev.some(e => e.type === t)) out.push(label);
     if (s.qs) out.push(`Asked ${s.qs} question${s.qs > 1 ? 's' : ''}`);
@@ -63,7 +65,7 @@ td.nw{white-space:nowrap}.chip{display:inline-block;background:var(--chip);borde
 <h1>Who visited ishirvasavada.com</h1>
 <p class="sub">Last ${days} days · times in Eastern · <span class="range"><a href="?key=${k}&days=7">7 days</a><a href="?key=${k}&days=30">30 days</a><a href="?key=${k}&days=90">90 days</a></span></p>
 <div class="cards">${card(list.length, 'Visits')}${card(returning, 'Returning visitors')}${card(evCount('demo'), 'Demos opened')}${card(evCount('resume'), 'Resume opens')}${card(chats.length, 'Questions asked')}${card(evCount('email') + evCount('linkedin'), 'Email or LinkedIn clicks')}</div>
-<div class="tops">${tops('Where they came from', top(list, source))}${tops('Companies (office networks)', top(list, company))}${tops('Locations', top(list, s => place(s)))}${tops('Demos opened', top(events.filter(e => e.type === 'demo'), e => DEMO[e.detail] || e.detail))}</div>
+<div class="tops">${tops('Where they came from', top(list, source))}${tops('Companies (office networks)', top(list, company))}${tops('Locations', top(list, s => place(s)))}${tops('Demos opened', top(events.filter(e => e.type === 'demo'), e => DEMO[e.detail] || e.detail))}${tops('Company themes picked', top(events.filter(e => e.type === 'theme' && e.detail !== 'none'), e => e.detail))}</div>
 
 <h2>Visits</h2>
 <div class="tbl"><table><thead><tr><th>When</th><th>Came from</th><th>Location</th><th>Network</th><th>Device</th><th>What they did</th><th>Time on site</th></tr></thead><tbody>

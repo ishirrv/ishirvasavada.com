@@ -5,7 +5,7 @@ import { renderAdmin, renderLogin } from './admin.js';
 
 const ORIGINS = new Set(['https://ishirvasavada.com', 'https://www.ishirvasavada.com']);
 const LIMITS = { perHour: 20, perDay: 400, qChars: 600, turns: 10, bodyBytes: 80_000 };
-const EVENTS = new Set(['demo', 'resume', 'email', 'linkedin', 'chat', 'leave']);
+const EVENTS = new Set(['demo', 'resume', 'email', 'linkedin', 'chat', 'leave', 'theme']);
 const BOT = /bot|crawl|spider|slurp|preview|headless|lighthouse|facebookexternalhit|embedly|monitor|curl|wget|python|node-fetch/i;
 
 const MSG = {

@@ -916,6 +916,29 @@ html:has(.demo[open]){overflow:hidden}
   .ask-fab{padding:12px 16px 12px 12px}
 }
 @media (prefers-reduced-motion:reduce){ .ask,.ask-fab{animation:none} .ask-dots i{animation:none} }
+
+/* ───── personalize: company themes ───── */
+:root[data-brand]{--ink-2:color-mix(in srgb,var(--ink) 70%,var(--paper));--ink-3:color-mix(in srgb,var(--ink) 56%,var(--paper));--rule:color-mix(in srgb,var(--ink) 14%,var(--paper));--accent-soft:color-mix(in srgb,var(--accent) 10%,transparent);--accent-mid:color-mix(in srgb,var(--accent) 28%,transparent);--grid:color-mix(in srgb,var(--ink) 4%,transparent)}
+:root.brand-fade *{transition:background-color .45s ease,color .45s ease,border-color .45s ease,fill .45s ease,stroke .45s ease !important}
+.brand-stripe{position:fixed;inset:0 0 auto;height:4px;z-index:30;pointer-events:none}
+.brand-stripe[hidden]{display:none}
+.bp-pill{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:39;display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--panel);color:var(--ink);font:500 13px/1 var(--f-body);cursor:pointer;box-shadow:0 8px 24px -12px rgb(0 0 0 / .35)}
+.bp-pill:hover{border-color:var(--ink-3)}
+.bp-pill:focus-visible,.bp-x:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.bp-pill[hidden],.bp[hidden],.bp-toast[hidden]{display:none}
+.bp-dot{width:14px;height:14px;border-radius:50%;background:conic-gradient(#4285F4,#E50914,#FF9900,#76B900,#635BFF,#4285F4)}
+:root[data-brand] .bp-dot{background:var(--accent)}
+.bp{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:40;width:min(340px,calc(100vw - 32px));padding:18px 18px 14px;border:1px solid var(--rule);border-radius:16px;background:var(--panel);color:var(--ink);box-shadow:0 24px 60px -20px rgb(0 0 0 / .45);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
+.bp-t{margin:0 28px 0 0;font-weight:600;font-size:var(--t-md);letter-spacing:-.01em}
+.bp-s{margin:4px 0 12px;font-size:var(--t-sm);color:var(--ink-2)}
+.bp-x{position:absolute;top:10px;right:10px;width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:8px;background:none;color:var(--ink-2);cursor:pointer}
+.bp-x:hover{background:var(--accent-soft);color:var(--ink)}
+.bp select{width:100%;padding:10px 36px 10px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23808891' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center/16px;color:var(--ink);font:500 var(--t-sm)/1.3 var(--f-body);appearance:none;-webkit-appearance:none;cursor:pointer}
+.bp select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bp-n{margin:10px 0 0;font-size:11px;color:var(--ink-3)}
+.bp-toast{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:calc(max(20px,env(safe-area-inset-bottom)) + 48px);z-index:39;max-width:min(340px,calc(100vw - 32px));padding:10px 14px;border-radius:12px;background:var(--ink);color:var(--paper);font-size:var(--t-sm);box-shadow:0 12px 30px -12px rgb(0 0 0 / .5);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
+@media (max-width:560px){ .bp{left:12px;right:12px;bottom:12px;width:auto} .bp-pill{left:12px;bottom:max(20px,env(safe-area-inset-bottom));padding:10px 13px 10px 11px} }
+@media (prefers-reduced-motion:reduce){ .bp,.bp-toast{animation:none} :root.brand-fade *{transition:none !important} }
 </style>
 
 <header class="top">
@@ -1351,6 +1374,17 @@ html:has(.demo[open]){overflow:hidden}
   <p class="fine" id="fine" hidden>This site keeps simple visit stats without cookies, and saves questions sent to the assistant.</p>
 </section>
 </main>
+
+<div class="brand-stripe" id="brand-stripe" aria-hidden="true" hidden></div>
+<button class="bp-pill" id="bp-open" type="button" aria-controls="bp" aria-expanded="false"><span class="bp-dot" aria-hidden="true"></span><span id="bp-label">Personalize</span></button>
+<section class="bp" id="bp" role="dialog" aria-labelledby="bp-t" aria-describedby="bp-s" hidden>
+  <button class="bp-x" id="bp-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <p class="bp-t" id="bp-t">See this site in your company's style</p>
+  <p class="bp-s" id="bp-s">Pick where you work and the page restyles to match. It's optional.</p>
+  <select id="bp-sel" aria-label="Your company"></select>
+  <p class="bp-n">Colors and type only. Not affiliated with these companies.</p>
+</section>
+<div class="bp-toast" id="bp-toast" role="status" hidden></div>
 
 <button class="ask-fab" id="ask-open" type="button" aria-controls="ask" aria-expanded="false" hidden>
   <span class="ask-spark" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9zM18.5 15l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9z"/></svg></span>
@@ -2125,6 +2159,82 @@ document.querySelectorAll('.trace').forEach(tr => {
   b.addEventListener('click', () => { const on = tr.classList.toggle('tech'); b.setAttribute('aria-pressed', on); b.textContent = on ? 'Hide code' : 'Show code'; });
   label.appendChild(b);
 });
+
+/* ───── personalize: restyle the site in the visitor's company colors ───── */
+{
+  // s: color scheme the brand is known for. a: accent, ai: text on accent. stripe: brand colors for the bar at the top (hard: equal blocks).
+  const B = {
+    airbnb:     { n: 'Airbnb',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F7F7F7', ink: '#222222', a: '#E00B41', ai: '#FFFFFF', stripe: ['#E61E4D', '#E31C5F', '#D70466'] },
+    amazon:     { n: 'Amazon',     s: 'dark',  paper: '#131921', panel: '#1B2330', band: '#232F3E', ink: '#FFFFFF', a: '#FF9900', ai: '#131921', stripe: ['#FF9900'] },
+    anthropic:  { n: 'Anthropic',  s: 'light', paper: '#FAF9F5', panel: '#FFFFFF', band: '#F0EEE6', ink: '#141413', a: '#A8502E', ai: '#FFFFFF', stripe: ['#D97757'], display: '"Newsreader", Georgia, serif', gf: 'Newsreader:opsz,wght@6..72,500;6..72,600' },
+    apple:      { n: 'Apple',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F7', ink: '#1D1D1F', a: '#0066CC', ai: '#FFFFFF', font: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif' },
+    atlassian:  { n: 'Atlassian',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F2F4', ink: '#172B4D', a: '#0C66E4', ai: '#FFFFFF', stripe: ['#0C66E4', '#1D7AFC', '#579DFF'] },
+    google:     { n: 'Google',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F3F4', ink: '#202124', a: '#1967D2', ai: '#FFFFFF', stripe: ['#4285F4', '#EA4335', '#FBBC05', '#34A853'], hard: true, font: '"Roboto", Arial, sans-serif', gf: 'Roboto:wght@400;500;600;700' },
+    meta:       { n: 'Meta',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F1F4F7', ink: '#1C2B33', a: '#0064E0', ai: '#FFFFFF', stripe: ['#0064E0', '#0082FB'] },
+    microsoft:  { n: 'Microsoft',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F2F2F2', ink: '#242424', a: '#0067B8', ai: '#FFFFFF', stripe: ['#F25022', '#7FBA00', '#00A4EF', '#FFB900'], hard: true, font: '"Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif' },
+    netflix:    { n: 'Netflix',    s: 'dark',  paper: '#141414', panel: '#181818', band: '#000000', ink: '#FFFFFF', a: '#F0303A', ai: '#FFFFFF', stripe: ['#E50914'] },
+    nvidia:     { n: 'NVIDIA',     s: 'dark',  paper: '#0A0A0A', panel: '#161616', band: '#1C1C1C', ink: '#FFFFFF', a: '#76B900', ai: '#000000', stripe: ['#76B900'] },
+    openai:     { n: 'OpenAI',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F4F4F4', ink: '#0D0D0D', a: '#0D0D0D', ai: '#FFFFFF' },
+    salesforce: { n: 'Salesforce', s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#EAF5FE', ink: '#032D60', a: '#0B5CAB', ai: '#FFFFFF', stripe: ['#0176D3', '#1B96FF', '#90D0FE'] },
+    stripe:     { n: 'Stripe',     s: 'light', paper: '#F6F9FC', panel: '#FFFFFF', band: '#E8EEF5', ink: '#0A2540', a: '#533AFD', ai: '#FFFFFF', stripe: ['#80E9FF', '#7A73FF', '#FF80BF', '#FFB422'] },
+    uber:       { n: 'Uber',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F3F3F3', ink: '#000000', a: '#000000', ai: '#FFFFFF', stripe: ['#000000'] },
+    vanta:      { n: 'Vanta',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F0EEFF', ink: '#181822', a: '#5230D7', ai: '#FFFFFF', stripe: ['#260048', '#5E05C4', '#DCDCFF'] },
+  };
+  const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink' };
+  const root = document.documentElement, baseScheme = root.getAttribute('data-theme');
+  const pill = $('#bp-open'), card = $('#bp'), sel = $('#bp-sel'), label = $('#bp-label'), stripe = $('#brand-stripe'), toast = $('#bp-toast');
+  let toastT;
+
+  sel.innerHTML = '<option value="">Choose a company</option>' + Object.entries(B).map(([k, b]) => `<option value="${k}">${b.n}</option>`).join('') + '<option value="none">Somewhere else (keep the default look)</option>';
+
+  function apply(k, announce) {
+    const b = B[k];
+    if (announce && !reduce) { root.classList.add('brand-fade'); setTimeout(() => root.classList.remove('brand-fade'), 600); }
+    for (const v of Object.values(VARS)) root.style.removeProperty(v);
+    root.style.removeProperty('--f-body'); root.style.removeProperty('--f-display');
+    if (!b) {
+      delete root.dataset.brand;
+      if (baseScheme) root.setAttribute('data-theme', baseScheme); else root.removeAttribute('data-theme');
+      stripe.hidden = true; label.textContent = 'Personalize'; sel.value = '';
+      return;
+    }
+    root.dataset.brand = k; root.setAttribute('data-theme', b.s);
+    for (const [f, v] of Object.entries(VARS)) root.style.setProperty(v, b[f]);
+    if (b.gf && !document.getElementById('gf-' + k)) {
+      const l = document.createElement('link'); l.id = 'gf-' + k; l.rel = 'stylesheet';
+      l.href = `https://fonts.googleapis.com/css2?family=${b.gf.replace(/ /g, '+')}&display=swap`; document.head.appendChild(l);
+    }
+    if (b.font) { root.style.setProperty('--f-body', b.font); root.style.setProperty('--f-display', b.font); }
+    if (b.display) root.style.setProperty('--f-display', b.display);
+    const c = b.stripe || [];
+    stripe.hidden = !c.length;
+    stripe.style.background = c.length < 2 ? c[0] || '' : `linear-gradient(90deg,${b.hard ? c.map((x, i) => `${x} ${i * 100 / c.length}% ${(i + 1) * 100 / c.length}%`).join(',') : c.join(',')})`;
+    label.textContent = b.n; sel.value = k;
+    if (announce) {
+      toast.textContent = `Hello, ${b.n}. This page is now in your colors.`; toast.hidden = false;
+      clearTimeout(toastT); toastT = setTimeout(() => { toast.hidden = true; }, 7000);
+    }
+  }
+  const open = () => { card.hidden = false; pill.hidden = true; pill.setAttribute('aria-expanded', 'true'); toast.hidden = true; };
+  const close = () => { card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); };
+
+  pill.addEventListener('click', () => { open(); sel.focus({ preventScroll: true }); });
+  $('#bp-x').addEventListener('click', () => { if (!store('iv-brand')) store('iv-brand', 'none'); close(); pill.focus({ preventScroll: true }); });
+  card.addEventListener('keydown', e => { if (e.key === 'Escape') $('#bp-x').click(); });
+  sel.addEventListener('change', () => {
+    const k = sel.value; if (!k) return;
+    store('iv-brand', k); apply(k === 'none' ? null : k, true); close();
+    track('theme', k);
+  });
+
+  // A tagged link (?r=vanta or ?r=vanta-jane) applies that company's look without asking.
+  const q = new URLSearchParams(location.search), tag = (q.get('theme') || q.get('r') || '').toLowerCase();
+  const linked = Object.keys(B).find(k => tag === k || tag.startsWith(k + '-') || tag.startsWith(k + '_'));
+  const saved = store('iv-brand');
+  if (linked) { store('iv-brand', linked); apply(linked, true); }
+  else if (B[saved]) apply(saved, false);
+  else if (!saved) setTimeout(() => { if (card.hidden && !$('#demo').open && $('#ask').hidden) open(); }, 2500);
+}
 
 /* ───── site assistant ───── */
 {
