@@ -59,7 +59,7 @@ button{font:inherit;color:inherit}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(clamp(16px,4vw,56px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,4vw,56px),env(safe-area-inset-right,0px))}
 
 /* ——— header ——— */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--top-bg,color-mix(in srgb,var(--paper) 88%,transparent));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
 .mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;letter-spacing:-.01em}
 .mark svg{display:block}
@@ -2169,6 +2169,7 @@ document.querySelectorAll('.trace').forEach(tr => {
 {
   // s: the color scheme the brand is known for. a: accent for links and small text, ai: text on accent. hi: headline color.
   // btn/bi: button fill and its text, r: button corner radius. stripe: brand colors for the bar at the top (hard: equal blocks).
+  // i2/i3: secondary text colors when the page color needs darker ones. top: header background.
   const B = {
     airbnb:     { n: 'Airbnb',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F7F7F7', ink: '#222222', a: '#E00B41', ai: '#FFFFFF', stripe: ['#E61E4D', '#E31C5F', '#D70466'], btn: '#E00B41', bi: '#FFFFFF', r: '8px', hi: '#FF385C' },
     amazon:     { n: 'Amazon',     s: 'dark',  paper: '#131921', panel: '#1B2330', band: '#232F3E', ink: '#FFFFFF', a: '#FF9900', ai: '#131921', stripe: ['#FF9900'], btn: '#FFD814', bi: '#0F1111', r: '999px' },
@@ -2184,9 +2185,9 @@ document.querySelectorAll('.trace').forEach(tr => {
     salesforce: { n: 'Salesforce', s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#EAF5FE', ink: '#032D60', a: '#0B5CAB', ai: '#FFFFFF', hi: '#0099D9', stripe: ['#00B3FF', '#00A1E0', '#0B5CAB'], btn: '#0176D3', bi: '#FFFFFF', r: '999px' },
     stripe:     { n: 'Stripe',     s: 'light', paper: '#F6F9FC', panel: '#FFFFFF', band: '#E8EEF5', ink: '#0A2540', a: '#533AFD', ai: '#FFFFFF', stripe: ['#80E9FF', '#7A73FF', '#FF80BF', '#FFB422'], btn: '#635BFF', bi: '#FFFFFF', r: '999px', hi: '#635BFF' },
     uber:       { n: 'Uber',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F3F3F3', ink: '#111111', a: '#000000', ai: '#FFFFFF', stripe: ['#000000'], btn: '#000000', bi: '#FFFFFF', r: '8px' },
-    vanta:      { n: 'Vanta',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F0EEFF', ink: '#181822', a: '#5230D7', ai: '#FFFFFF', stripe: ['#260048', '#5E05C4', '#DCDCFF'], btn: '#260048', bi: '#FFFFFF', r: '999px', hi: '#5E05C4' },
+    vanta:      { n: 'Vanta',      s: 'light', paper: '#9A99FF', panel: '#FFFFFF', band: '#FFFFFF', top: '#FFFFFF', ink: '#181822', i2: '#2B2B40', i3: '#33334F', a: '#260048', ai: '#FFFFFF', hi: '#3F0A8F', stripe: ['#5E05C4'], display: '"Newsreader", Georgia, serif', gf: 'Newsreader:opsz,wght@6..72,500;6..72,600', btn: '#260048', bi: '#FFFFFF', r: '999px' },
   };
-  const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink', hi: '--accent-hi', btn: '--btn', bi: '--btn-ink', r: '--r-btn' };
+  const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink', hi: '--accent-hi', btn: '--btn', bi: '--btn-ink', r: '--r-btn', i2: '--ink-2', i3: '--ink-3', top: '--top-bg' };
   const root = document.documentElement, baseScheme = root.getAttribute('data-theme');
   const pill = $('#bp-open'), card = $('#bp'), sel = $('#bp-sel'), label = $('#bp-label'), stripe = $('#brand-stripe'), toast = $('#bp-toast');
   let toastT;
