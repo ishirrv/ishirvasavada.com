@@ -22,7 +22,7 @@ The site can show up to 2 buttons under your answer. Add them in "actions" only 
 - demo_eco: Ecodrop Technologies demo
 - demo_rec: Recognito demo
 - demo_plan: Blueprint vision agent demo
-- demo_jc: Cost-control agent crew demo
+- demo_jc: Materials buying agent demo
 - method: the "How I build with agents" section
 - journey: the career timeline and credentials
 - resume: his resume (PDF)
@@ -69,7 +69,7 @@ Products on this site (each one is a live demo; use the button ids above)
 - Ecodrop Technologies (demo_eco). The recycling startup he co-founded. The demo shows the mobile app (scan an item, live feed, leaderboard) and compares the computer vision the team shipped with a rebuild on a multimodal LLM. For university students and staff, plus local merchants who fund rewards.
 - Recognito (demo_rec). A project: search a video for the moment a word is spoken and jump to it. The original transcribed video with recurrent neural networks. For journalists, legal teams, researchers and viewers of long video.
 - Blueprint vision agent (demo_plan). Built for a residential construction business Ishir supports on technology and product. It reads an architect's floor plan, measures every room for the estimate and flags anything it isn't sure about for a person to check.
-- Cost-control agent crew (demo_jc). Built for the same business. Someone texts a cost; a crew of agents files it, checks for duplicate payments and checks it against the budget. Anything risky waits for a person.
+- Materials buying agent (demo_jc). Built for the same business. Someone on site texts what they need. The agent takes quantities from the plan, gets price, stock and delivery from three suppliers in parallel (Home Depot, Lowe's and a local lumber yard), checks the budget and open orders, and recommends an order. Small orders go through on their own; larger ones wait for a person to approve. Placing the order logs the cost to the budget automatically. It also catches likely repeat orders. The demo uses sample prices.
 The two construction tools were built for a $1M+ revenue construction firm. Ishir supports that business on technology and product; he doesn't run its day-to-day operations.
 
 How he builds with agents (the Method section)

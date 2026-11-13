@@ -1,5 +1,5 @@
 // Private dashboard HTML. Everything is rendered on the server; the page has no scripts.
-const DEMO = { rules: 'Rules engine', risk: 'Risk workflows', eco: 'Ecodrop', rec: 'Recognito', plan: 'Blueprint agent', jc: 'Cost-control crew' };
+const DEMO = { rules: 'Rules engine', risk: 'Risk workflows', eco: 'Ecodrop', rec: 'Recognito', plan: 'Blueprint agent', jc: 'Buying agent' };
 const ISP = /comcast|charter|spectrum|at&t|verizon|t-mobile|cox|frontier|centurylink|lumen|altice|optimum|mediacom|windstream|rcn|google fiber|starlink|vodafone|airtel|jio|bsnl|bt |virgin media|sky |telefonica|orange|deutsche telekom|rogers|bell canada|shaw|telus|cloudflare|amazon|digitalocean|microsoft|oracle|akamai|fastly|ovh|hetzner|linode|apple inc|icloud|private relay/i;
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

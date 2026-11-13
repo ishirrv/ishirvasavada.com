@@ -315,6 +315,30 @@ pre.code .cm{color:var(--ink-3)}
 .why dt{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 .why dd{margin:4px 0 0;color:var(--ink-2);max-width:52ch}
 @media (max-width:820px){ .jc{grid-template-columns:1fr;justify-items:center} .why,.crew{justify-self:stretch} }
+.jc-pick{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:20px 24px 0}
+.jc-pick .small-h{margin:0 6px 0 0}
+.jc-pick .ex{font-family:var(--f-body);font-size:13px;padding:8px 13px;border-radius:999px}
+.jc-pick .ex[aria-pressed="true"]{border-style:solid;border-color:var(--pc);color:var(--pc);background:color-mix(in srgb,var(--pc) 9%,transparent)}
+.thread{display:flex;flex-direction:column;gap:8px}
+.msg{max-width:90%;padding:8px 11px;border-radius:14px;font-size:12.5px;line-height:1.45}
+.msg.me{align-self:flex-end;background:var(--ink);color:var(--paper);border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:var(--panel);border:1px solid var(--rule);border-bottom-left-radius:4px}
+.msg.bot b{font-weight:600}
+.msg .row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.par.q3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.par.q3 .par-l{grid-column:1/-1;position:static;margin:-14px 0 0}
+.par.q3 .ag-f{display:flex;flex-direction:column;gap:1px;margin-top:8px;font-size:12.5px}
+.par.q3 .ag-f:empty{display:none}
+.par.q3 .q-t{font-size:1.25rem;font-weight:600;letter-spacing:-.02em;color:var(--ink);margin-bottom:2px}
+.par.q3 .bad{color:var(--warn);font-weight:500}
+.ag.best{border-color:var(--pc);background:color-mix(in srgb,var(--pc) 9%,transparent);box-shadow:0 0 0 2px color-mix(in srgb,var(--pc) 22%,transparent)}
+.ag.best .ag-n::after{content:"Best";margin-left:8px;padding:1px 7px;border-radius:999px;background:var(--pc);color:var(--paper);font-size:10.5px;font-weight:600;vertical-align:1px}
+@media (max-width:1100px){ .par.q3 .ag-t{display:block;margin:0} }
+@media (max-width:620px){ .par.q3{grid-template-columns:1fr} .par.q3 .ag-t{display:inline;margin-left:6px} .par.q3 .ag-f{flex-direction:row;flex-wrap:wrap;gap:2px 10px;align-items:baseline} }
+.ag-t{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);margin-left:6px;font-weight:400}
+.ag.wait{border-color:var(--pc);background:color-mix(in srgb,var(--pc) 8%,transparent)} .ag.wait .ag-d{border-color:var(--pc);background:var(--pc)}
+.ag.skip{opacity:.5}
+@media (max-width:820px){ .jc-pick{padding:16px 16px 0} }
 
 /* ecodrop */
 .eco-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--rule)}
@@ -1017,8 +1041,8 @@ html:has(.demo[open]){overflow:hidden}
       <div class="pc-t"><span class="wk">Multimodal agent</span><span class="wn">Blueprint vision agent</span><span class="wo">Measures every room from a floor plan</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
     </a>
     <a class="pcard" href="#jc" data-p="jc" style="--pc:var(--c-jc)">
-      <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="w" x="22" y="58" width="96" height="44" rx="12"/><text class="tx" x="34" y="76">Lumber</text><text class="ta" x="34" y="91">$1,240</text><path class="ka" d="M118 80h30M184 80c24 0 30-44 56-44M184 80c24 0 30-12 56-12M184 80c24 0 30 20 56 20M184 80c24 0 30 52 56 52"/><circle class="a" cx="166" cy="80" r="18"/><text class="on" x="166" y="83.5" text-anchor="middle">Lead</text><rect class="wa" x="240" y="25" width="62" height="22" rx="11"/><text class="tx" x="271" y="39.5" text-anchor="middle">File</text><rect class="wa" x="240" y="57" width="62" height="22" rx="11"/><text class="tx" x="271" y="71.5" text-anchor="middle">Duplicates</text><rect class="wa kd" x="240" y="89" width="62" height="22" rx="11"/><text class="tx" x="271" y="103.5" text-anchor="middle">Budget</text><circle class="d" cx="302" cy="89" r="7"/><text class="on2" x="302" y="92" text-anchor="middle">!</text><rect class="wa" x="240" y="121" width="62" height="22" rx="11"/><text class="tx" x="271" y="135.5" text-anchor="middle">Approval</text></svg></div>
-      <div class="pc-t"><span class="wk">Multi-agent system</span><span class="wn">Cost-control agent crew</span><span class="wo">Catches duplicate payments and budget overruns</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+      <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="w" x="18" y="58" width="100" height="44" rx="12"/><text class="tx" x="30" y="76">Need studs</text><text class="ta" x="30" y="91">by Thursday</text><path class="ka" d="M118 80h30M184 80c24 0 30-44 56-44M184 80c24 0 30-12 56-12M184 80c24 0 30 20 56 20M184 80c24 0 30 52 56 52"/><circle class="a" cx="166" cy="80" r="18"/><text class="on" x="166" y="83.5" text-anchor="middle">Buyer</text><rect class="wa" x="240" y="25" width="68" height="22" rx="11"/><text class="tx" x="274" y="39.5" text-anchor="middle">Home Depot</text><rect class="wa" x="240" y="57" width="68" height="22" rx="11"/><text class="tx" x="274" y="71.5" text-anchor="middle">Lowe's</text><rect class="a" x="240" y="89" width="68" height="22" rx="11"/><text class="on" x="274" y="103.5" text-anchor="middle">Local yard</text><rect class="wa" x="240" y="121" width="68" height="22" rx="11"/><text class="tx" x="274" y="135.5" text-anchor="middle">Budget</text></svg></div>
+      <div class="pc-t"><span class="wk">Multi-agent system</span><span class="wn">Materials buying agent</span><span class="wo">Quotes three suppliers, then orders within budget</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
     </a>
   </div>
 
@@ -1254,48 +1278,39 @@ html:has(.demo[open]){overflow:hidden}
   </article>
   </div>
   <div class="wpanel" style="--pc:var(--c-jc)" id="wp-jc" hidden>
-  <!-- Job cost -->
+  <!-- Materials buying -->
   <article class="build" aria-labelledby="h-jc">
     <div class="build-head">
-      <div><h3 id="h-jc">Cost-control agent crew</h3><p>Built for the same business. Text a cost and a crew of agents files it, looks for duplicates and checks it against the budget. Anything risky waits for a person.</p></div>
-      <div class="meta"><span class="chip a">multi-agent</span><span class="chip a">orchestration</span><span class="chip">human approval</span></div>
+      <div><h3 id="h-jc">Materials buying agent</h3><p>Built for the same business. Text what the site needs. The agent takes quantities from the plan, gets quotes from three suppliers at once, checks the budget and recommends an order. Approving it places the order and logs the cost.</p></div>
+      <div class="meta"><span class="chip a">multi-agent</span><span class="chip a">tool calls</span><span class="chip">human approval</span></div>
     </div>
     <dl class="brief">
-      <div><dt>Who it's for</dt><dd>Owners and field crews at small builders, who are not spreadsheet people</dd></div>
+      <div><dt>Who it's for</dt><dd>Owners and site leads at small builders, who are not spreadsheet people</dd></div>
       <div><dt>Market</dt><dd>Small construction businesses</dd></div>
-      <div><dt>Problem</dt><dd>Costs were paid on site and often didn't reach the spreadsheet. The budget ran behind, so overruns showed up late.</dd></div>
+      <div><dt>Problem</dt><dd>Buying materials meant a drive to the store, whatever price was on the shelf and a receipt that often didn't reach the spreadsheet. Orders ran late and the budget ran behind.</dd></div>
     </dl>
+    <div class="jc-pick" id="jc-ex" role="group" aria-label="Example requests">
+      <span class="small-h">Text the agent</span>
+      <button class="ex" type="button" data-s="frame">Framing package for the Lot A garage</button>
+      <button class="ex" type="button" data-s="concrete">20 bags of concrete, needed today</button>
+      <button class="ex" type="button" data-s="drywall">80 sheets of drywall for Lot A</button>
+    </div>
     <div class="jc">
       <div class="phone">
         <div class="screen">
           <div class="sbar"><span>9:41</span><span></span></div>
-          <div class="app-h"><div class="t">Job Cost</div><div class="s">Two-lot build</div></div>
+          <div class="app-h"><div class="t">Site orders</div><div class="s">Two-lot build · buying agent</div></div>
           <div class="app-b">
-            <form class="inrow" id="jc-form" autocomplete="off">
-              <label for="jc-in" class="sr">Describe a cost</label>
-              <input id="jc-in" type="text" value="Silt fence and stakes $162 lot A, paid by partner">
-              <button type="submit">Add</button>
-            </form>
-            <div class="parsed" id="jc-parsed" aria-live="polite"></div>
+            <div class="thread" id="jc-thread" aria-live="polite"></div>
             <div><p class="small-h" style="margin-bottom:6px">Budget used</p><div class="bars" id="jc-bars"></div></div>
-            <div><p class="small-h" style="margin-bottom:0">Latest</p><ul class="ledger" id="jc-ledger"></ul></div>
+            <div><p class="small-h" style="margin-bottom:0">Orders</p><ul class="ledger" id="jc-ledger"></ul></div>
           </div>
         </div>
       </div>
       <div class="crew">
-        <p class="small-h">Agents · run on every entry</p>
+        <p class="small-h">What the agent does</p>
         <div class="crew-flow" id="crew" aria-live="polite"></div>
-        <div class="crew-verdict" id="crew-verdict"></div>
-        <div>
-          <p class="small-h">Try one</p>
-          <div class="examples" id="jc-ex">
-            <button class="ex" type="button">Silt fence and stakes $162 lot A, paid by partner</button>
-            <button class="ex" type="button">Sediment basin rebuild labor $3,600 lot A</button>
-            <button class="ex" type="button">Framing lumber drop 18,400</button>
-            <button class="ex" type="button">Concrete for footings 6.2k, split both lots</button>
-          </div>
-        </div>
-        <p class="rep">Representational</p>
+        <p class="rep">Representational · sample prices</p>
       </div>
     </div>
   </article>
@@ -1663,130 +1678,128 @@ document.addEventListener('click', e => {
   final(P[0]);
 }
 
-/* ───── job cost ───── */
+/* ───── materials buying agent ───── */
 {
-  const budget = [
-    ['Design & engineering', 30000, 24650],
-    ['Permits & fees',       16000, 14280],
-    ['Site prep',            38000, 25000],
-    ['Erosion control',       8000,  4820],
-    ['Foundation',           46000,     0],
-    ['Framing',              92000,     0],
+  const SUP = { hd: 'Home Depot', lw: "Lowe's", yard: 'Local lumber yard' };
+  const LIMIT = 250; // orders at or under this go through without a person
+  const SC = {
+    frame: { msg: 'Framing package for the Lot A garage. Crew starts Thursday.', cat: 'Framing', lot: 'Lot A', what: 'Framing package',
+      items: '180 studs, 24 plates, 30 OSB sheets', src: 'quantities from the Lot A plan',
+      q: { hd: { t: 1616, stock: 'In stock', when: 'Thu 2 PM', bad: 'when' }, lw: { t: 1617, stock: '140 of 180 studs', when: 'Wed 3 PM', bad: 'stock' }, yard: { t: 1399, stock: 'In stock', when: 'Wed 7 AM' } },
+      best: 'yard', why: 'Lowest price, and the only full order that lands before Thursday.',
+      sum: "Delivered Wed 7 AM. That's $217 less than Home Depot, which would arrive late. Lowe's is 40 studs short." },
+    concrete: { msg: '20 bags of concrete mix for the Lot B footings. Need it today.', cat: 'Foundation', lot: 'Lot B', what: 'Concrete mix',
+      items: '20 bags of 80 lb concrete mix', src: 'quantity from the message',
+      q: { hd: { t: 130, stock: '64 bags', when: 'Pickup in 1 hr' }, lw: { t: 128, stock: '31 bags', when: 'Pickup in 2 hr' }, yard: { t: 118, stock: 'In stock', when: 'Tomorrow 7 AM', bad: 'when' } },
+      best: 'hd', why: 'Ready soonest and 2 miles from the site.',
+      sum: "Pickup in 1 hr, 2 miles from the site. The yard is $12 less but can't deliver today." },
+    drywall: { msg: 'Order 80 sheets of drywall for Lot A.', cat: 'Drywall', lot: 'Lot A', what: 'Drywall',
+      items: '80 sheets of 1/2 in. drywall', src: 'quantity from the message', dup: 'Monday',
+      q: { hd: { t: 1317, stock: 'In stock', when: 'Fri 10 AM' }, lw: { t: 1301, stock: 'In stock', when: 'Fri 1 PM' }, yard: { t: 1136, stock: 'In stock', when: 'Thu 7 AM' } },
+      best: 'yard', why: 'Lowest price and the earliest delivery.',
+      sum: "Delivered Thu 7 AM. That's $165 less than Lowe's." },
+  };
+  const BUDGET = [['Foundation', 46000, 31250], ['Framing', 92000, 36400], ['Drywall', 18000, 1136]];
+  const LEDGER = [
+    { w: 'Drywall', c: 'Drywall', lot: 'Lot A', a: 1136, by: 'Local yard', st: 'arrives Fri' },
+    { w: 'Rebar and ties', c: 'Foundation', lot: 'Lot B', a: 2480, by: 'Home Depot', st: 'delivered' },
   ];
-  const B = Object.fromEntries(budget.map(([k,b,a]) => [k,{b,a}]));
-  const ledger = [
-    {w:'Sediment basin labor', c:'Erosion control', lot:'Lot A', a:1800, by:'Partner'},
-    {w:'Silt fence + stakes', c:'Erosion control', lot:'Lot A', a:162, by:'You'},
-    {w:'Tree clearing', c:'Site prep', lot:'Both lots', a:15000, by:'You'},
-  ];
-  const cats = [
-    [/sand ?bag|silt|straw|erosion|sediment|basin|mulch/i, 'Erosion control'],
-    [/concrete|footing|slab|foundation|rebar|waterproof/i, 'Foundation'],
-    [/fram|lumber|stud|truss|sheathing|osb/i, 'Framing'],
-    [/permit|fee|inspection|impact|tap/i, 'Permits & fees'],
-    [/survey|engineer|architect|plan|design|render/i, 'Design & engineering'],
-    [/grad|clear|tree|haul|excavat|site|gravel|dirt/i, 'Site prep'],
-  ];
-  function parse(t) {
-    const f = {};
-    let s = t;
-    const lot = s.match(/\b(?:lot\s*([ab12])|(both|split)(?:\s+lots?)?)\b/i);
-    if (lot) { f.lot = lot[2] ? 'Both lots' : (/[a1]/i.test(lot[1]) ? 'Lot A' : 'Lot B'); s = s.replace(lot[0], ' '); } else { f.lot = 'Lot A'; f.lotA = true; }
-    const by = s.match(/\bpaid by\s+([a-z]+)/i);
-    if (by) { f.by = by[1][0].toUpperCase() + by[1].slice(1).toLowerCase(); s = s.replace(by[0], ' '); } else { f.by = 'You'; }
-    let m = s.match(/\$\s?([\d,]+(?:\.\d+)?)\s?(k)?\b/i) || s.match(/\b([\d,]*\.?\d+)\s?(k)\b/i) || s.match(/\b(\d[\d,]*(?:\.\d+)?)\b/);
-    if (m) { let v = parseFloat(m[1].replace(/,/g,'')); if (m[2]) v *= 1000; f.a = Math.round(v); s = s.replace(m[0], ' '); }
-    const c = cats.find(([re]) => re.test(t)); f.c = c ? c[1] : 'Site prep'; f.cA = !c;
-    let w = s.replace(/\b(paid|spent|for|on|of|to|the|lots?|both|split)\b/gi,' ').replace(/[,.$]/g,' ').replace(/\s+/g,' ').trim();
-    f.w = w ? w[0].toUpperCase() + w.slice(1) : 'Cost';
-    return f;
-  }
-  const CODES = {'Design & engineering':'01-300', 'Permits & fees':'01-410', 'Site prep':'02-200', 'Erosion control':'02-370', 'Foundation':'03-300', 'Framing':'06-100'};
   const AG = [
-    ['orch',   'Orchestrator',      'Routes each entry to the right agents'],
-    ['intake', 'Intake agent',      'Turns the message into a structured entry'],
-    ['code',   'Cost-code agent',   'Files it to a cost code and lot'],
-    ['dup',    'Duplicate checker', 'Compares it with recent payments'],
-    ['budget', 'Budget agent',      'Checks it against the budget'],
-    ['review', 'Reviewer',          'Posts it, or holds it for a person'],
+    ['lead',   'Buying agent',           'Reads the request and works out what to buy'],
+    ['budget', 'Budget and open orders', 'Checks the budget and looks for a repeat order', '2 tool calls'],
+    ['hd',     SUP.hd,                   'Price, stock and delivery', '3 tool calls'],
+    ['lw',     SUP.lw,                   'Price, stock and delivery', '3 tool calls'],
+    ['yard',   SUP.yard,                 'Price, stock and delivery', '3 tool calls'],
+    ['pick',   'Recommendation',         'Picks the order that meets the date at the lowest cost'],
+    ['gate',   'Approval',               `Orders over $${LIMIT} wait for a person`],
+    ['done',   'Order',                  'Places the order, logs the cost, texts the crew', '3 tool calls'],
   ];
-  const agHtml = ([k,n,r]) => `<div class="ag" data-a="${k}"><span class="ag-d"></span><div><div class="ag-n">${n}</div><div class="ag-r">${r}</div><div class="ag-f"></div></div></div>`;
-  $('#crew').innerHTML = agHtml(AG[0]) + agHtml(AG[1]) + `<div class="par"><span class="par-l">in parallel</span>${AG.slice(2,5).map(agHtml).join('')}</div>` + agHtml(AG[5]);
-  const setAg = (k, st, f) => { const el = $(`#crew [data-a="${k}"]`); el.className = 'ag ' + st; el.querySelector('.ag-f').textContent = f || ''; };
-  function check(f) {
-    const r = {};
-    r.orch = ['ok', 'Sent to 5 agents'];
-    r.intake = !f.a ? ['warn', 'No amount found'] : [f.lotA ? 'warn' : 'ok', `$${fmt(f.a)} · ${f.w} · paid by ${f.by}${f.lotA ? ' · lot not stated' : ''}`];
-    r.code = [f.cA ? 'warn' : 'ok', `${CODES[f.c]} ${f.c} · ${f.lotA ? 'lot needed' : f.lot}`];
-    const d = ledger.find(e => e.a === f.a && e.c === f.c && e.lot === f.lot);
-    r.dup = d ? ['warn', `Matches “${d.w}”, $${fmt(d.a)} on ${d.lot}, already logged`] : ['ok', 'No match in recent payments'];
-    const {b, a} = B[f.c], after = a + (f.a || 0);
-    r.budget = after > b ? ['warn', `Puts ${f.c} $${fmt(after - b)} over budget`] : ['ok', `${f.c} at ${Math.round(after / b * 100)}% of budget after this`];
-    const why = [];
-    if (!f.a) why.push('no amount');
-    if (f.lotA) why.push('which lot?');
-    if (d) why.push('possible duplicate');
-    if (after > b) why.push('over budget');
-    r.review = why.length ? ['warn', 'Held for approval: ' + why.join(', ')] : ['ok', 'Posted to the ledger'];
-    r.hold = why.length > 0;
-    return r;
-  }
-  let crewToken = 0, pending = null;
-  function verdict(r, f) {
-    const v = $('#crew-verdict');
-    if (!r) { v.innerHTML = ''; v.className = 'crew-verdict'; return; }
-    v.className = 'crew-verdict ' + (r.hold ? 'warn' : 'ok');
-    v.innerHTML = r.hold
-      ? `<b>Held for you:</b> ${esc(r.review[1].replace('Held for approval: ', ''))}.<div class="row"><button class="mini solid" type="button" data-v="post">Approve and post</button><button class="mini" type="button" data-v="drop">Discard</button></div>`
-      : `<b>Posted.</b> $${fmt(f.a)} to ${esc(CODES[f.c])} ${esc(f.c)}, ${esc(f.lot)}. No person needed.`;
-  }
-  function post(f) {
-    B[f.c].a += f.a; ledger.unshift({w:f.w, c:f.c, lot:f.lot, a:f.a, by:f.by});
-    drawBars(f.c); drawLedger(true);
-  }
-  async function runCrew(f, instant) {
-    const me = ++crewToken, r = check(f), wait = ms => instant ? null : sleep(ms);
-    AG.forEach(([k]) => setAg(k, ''));
-    verdict(null); pending = null;
-    setAg('orch', 'run'); await wait(300); if (me !== crewToken) return; setAg('orch', ...r.orch);
-    setAg('intake', 'run'); await wait(450); if (me !== crewToken) return; setAg('intake', ...r.intake);
-    if (!f.a) { setAg('review', ...r.review); verdict(r, f); return r; }
-    ['code','dup','budget'].forEach(k => setAg(k, 'run')); await wait(500);
-    for (const k of ['code','dup','budget']) { if (me !== crewToken) return; setAg(k, ...r[k]); await wait(160); }
-    setAg('review', 'run'); await wait(400); if (me !== crewToken) return; setAg('review', ...r.review);
-    pending = r.hold ? f : null;
-    if (!r.hold) post(f);
-    verdict(r, f);
-    return r;
-  }
-  $('#crew-verdict').addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b || !pending) return;
-    const f = pending; pending = null;
-    if (b.dataset.v === 'post') { post(f); $('#crew-verdict').className = 'crew-verdict ok'; $('#crew-verdict').innerHTML = `<b>Approved and posted.</b> The reviewer logs your decision as a new test case.`; }
-    else { $('#crew-verdict').className = 'crew-verdict'; $('#crew-verdict').innerHTML = '<b>Discarded.</b> Nothing was posted.'; }
-  });
-  const inp = $('#jc-in'), parsedEl = $('#jc-parsed');
-  function showParsed() {
-    const f = parse(inp.value);
-    const cell = (k, v, as) => `<div class="pf${as?' as':''}"><div class="k"><span>${k}</span>${as?'<em>assumed</em>':''}</div><div class="v">${esc(v)}</div></div>`;
-    parsedEl.innerHTML = cell('Amount', f.a ? '$'+fmt(f.a) : 'missing', !f.a) + cell('Category', f.c, f.cA) + cell('Lot', f.lot, f.lotA) + cell('Paid by', f.by, false);
-    return f;
-  }
+  const agHtml = ([k, n, r, t]) => `<div class="ag" data-a="${k}"><span class="ag-d"></span><div><div class="ag-n">${esc(n)}${t ? `<span class="ag-t">${t}</span>` : ''}</div><div class="ag-r">${esc(r)}</div><div class="ag-f"></div></div></div>`;
+  $('#crew').innerHTML = AG.slice(0, 2).map(agHtml).join('') + `<div class="par q3"><span class="par-l">three quotes in parallel</span>${AG.slice(2, 5).map(agHtml).join('')}</div>` + AG.slice(5).map(agHtml).join('');
+  const setAg = (k, st, f, html) => { const el = $(`#crew [data-a="${k}"]`); el.className = 'ag ' + st; const o = el.querySelector('.ag-f'); if (html) o.innerHTML = f; else o.textContent = f || ''; };
+  const thread = $('#jc-thread');
+  const quote = q => `<b class="q-t num">$${fmt(q.t)}</b><span class="${q.bad === 'stock' ? 'bad' : ''}">${esc(q.stock)}</span><span class="${q.bad === 'when' ? 'bad' : ''}">${esc(q.when)}</span>`;
+  let B, ledger, token = 0, cur = null;
+
+  const say = (cls, html) => { const m = document.createElement('div'); m.className = 'msg ' + cls; m.innerHTML = html; thread.appendChild(m); return m; };
+  const short = k => k === 'yard' ? 'Local yard' : SUP[k];
   function drawBars(hit) {
-    $('#jc-bars').innerHTML = budget.map(([k]) => { const {b,a} = B[k]; const p = a/b; return `<div class="bar${p>1?' over':''}${k===hit?' hit':''}"><div class="bl"><span>${esc(k)}</span><span class="num">${Math.round(p*100)}%</span></div><div class="bt"><div class="bf" style="width:${Math.min(100,p*100)}%"></div></div></div>`; }).join('');
+    $('#jc-bars').innerHTML = BUDGET.map(([k]) => { const { b, a } = B[k], p = a / b; return `<div class="bar${k === hit ? ' hit' : ''}"><div class="bl"><span>${esc(k)}</span><span class="num">${Math.round(p * 100)}%</span></div><div class="bt"><div class="bf" style="width:${Math.min(100, p * 100)}%"></div></div></div>`; }).join('');
   }
   function drawLedger(fresh) {
-    $('#jc-ledger').innerHTML = ledger.slice(0,4).map((e,i) => `<li class="${fresh&&i===0?'new':''}"><span class="w">${esc(e.w)}</span><span class="a num">$${fmt(e.a)}</span><span class="m">${esc(e.c)} · ${esc(e.lot)}${e.lot==='Both lots'?' · 50/50':''}</span><span class="m" style="text-align:right">${esc(e.by)}</span></li>`).join('');
+    $('#jc-ledger').innerHTML = ledger.slice(0, 3).map((e, i) => `<li class="${fresh && i === 0 ? 'new' : ''}"><span class="w">${esc(e.w)}</span><span class="a num">$${fmt(e.a)}</span><span class="m">${esc(e.by)} · ${esc(e.lot)}</span><span class="m" style="text-align:right">${esc(e.st)}</span></li>`).join('');
   }
-  inp.addEventListener('input', showParsed);
-  $('#jc-form').addEventListener('submit', e => {
-    e.preventDefault(); const f = showParsed(); runCrew(f, false);
+  function place(s) {
+    const q = s.q[s.best];
+    B[s.cat].a += q.t; ledger.unshift({ w: s.what, c: s.cat, lot: s.lot, a: q.t, by: short(s.best), st: q.when.toLowerCase().startsWith('pickup') ? q.when.toLowerCase() : 'arrives ' + q.when });
+    drawBars(s.cat); drawLedger(true);
+    setAg('done', 'ok', `Ordered from ${SUP[s.best]} · $${fmt(q.t)} logged to ${s.cat} · crew texted`);
+  }
+  // From the three quotes to a decision: recommend, then order or wait for a person.
+  async function shop(s, me, wait) {
+    ['hd', 'lw', 'yard'].forEach(k => setAg(k, 'run')); await wait(650);
+    for (const k of ['hd', 'lw', 'yard']) { if (me !== token) return; setAg(k, 'ok', quote(s.q[k]), true); await wait(170); }
+    if (me !== token) return;
+    const q = s.q[s.best];
+    setAg('pick', 'run'); await wait(450); if (me !== token) return;
+    setAg(s.best, 'ok best', quote(q), true);
+    setAg('pick', 'ok', `${SUP[s.best]}, $${fmt(q.t)}. ${s.why}`);
+    thread.querySelector('.typing')?.remove();
+    if (q.t <= LIMIT) {
+      setAg('gate', 'ok', `Not needed: $${fmt(q.t)} is under the $${LIMIT} limit`);
+      setAg('done', 'run'); await wait(400); if (me !== token) return;
+      place(s);
+      say('bot', `<b>Ordered from ${esc(SUP[s.best])}, $${fmt(q.t)}.</b> ${esc(s.sum)} It's under your $${LIMIT} limit, so I didn't need to ask. Logged to ${esc(s.cat)}.`);
+    } else {
+      const pct = Math.round((B[s.cat].a + q.t) / B[s.cat].b * 100);
+      setAg('gate', 'wait', `Waiting for you: $${fmt(q.t)} is over the $${LIMIT} limit`);
+      say('bot', `<b>${esc(SUP[s.best])}, $${fmt(q.t)}.</b> ${esc(s.sum)} ${esc(s.cat)} would be at ${pct}% of budget.<div class="row"><button class="mini solid" type="button" data-v="ok">Approve order</button><button class="mini" type="button" data-v="no">Not now</button></div>`);
+    }
+  }
+  async function run(id, instant) {
+    const me = ++token, s = cur = SC[id], wait = ms => instant ? null : sleep(ms);
+    B = Object.fromEntries(BUDGET.map(([k, b, a]) => [k, { b, a }])); ledger = LEDGER.slice();
+    document.querySelectorAll('#jc-ex .ex').forEach(b => b.setAttribute('aria-pressed', b.dataset.s === id));
+    AG.forEach(([k]) => setAg(k, '')); thread.innerHTML = ''; drawBars(); drawLedger();
+    say('me', esc(s.msg));
+    say('bot typing', '<span class="ask-dots" aria-label="Working"><i></i><i></i><i></i></span>');
+    setAg('lead', 'run'); await wait(450); if (me !== token) return;
+    setAg('lead', 'ok', `${s.items} · ${s.src}`);
+    setAg('budget', 'run'); await wait(450); if (me !== token) return;
+    if (s.dup) {
+      setAg('budget', 'warn', `Possible repeat: ${s.items} for ${s.lot} were ordered ${s.dup}`);
+      ['hd', 'lw', 'yard', 'pick', 'done'].forEach(k => setAg(k, 'skip', 'Not run'));
+      setAg('gate', 'wait', 'Waiting for you: is this a second order?');
+      thread.querySelector('.typing')?.remove();
+      say('bot', `<b>This looks like a repeat.</b> ${esc(s.items[0].toUpperCase() + s.items.slice(1))} for ${esc(s.lot)} were ordered ${esc(s.dup)} and arrive Friday. I haven't ordered anything.<div class="row"><button class="mini solid" type="button" data-v="skip">Skip it</button><button class="mini" type="button" data-v="more">Order 80 more</button></div>`);
+      return;
+    }
+    const pct = Math.round((B[s.cat].a + s.q[s.best].t) / B[s.cat].b * 100);
+    setAg('budget', 'ok', `${s.cat} stays under budget, about ${pct}% after this · no open order like it`);
+    await shop(s, me, wait);
+  }
+  thread.addEventListener('click', async e => {
+    const b = e.target.closest('button[data-v]'); if (!b || !cur) return;
+    const s = cur, q = s.q[s.best], v = b.dataset.v;
+    b.closest('.row').remove();
+    if (v === 'ok') {
+      setAg('gate', 'ok', 'Approved by you'); place(s);
+      say('bot', `<b>Ordered.</b> ${esc(q.when.toLowerCase().startsWith('pickup') ? q.when : 'Delivery ' + q.when)} to ${esc(s.lot)}. $${fmt(q.t)} is logged to ${esc(s.cat)} and the crew has the details.`);
+    } else if (v === 'no') {
+      setAg('gate', '', 'Not approved'); say('bot', 'OK, nothing ordered. These quotes hold until 5 PM.');
+    } else if (v === 'skip') {
+      setAg('gate', 'ok', 'You confirmed it was a repeat'); say('bot', "Good catch. Nothing ordered, and Monday's delivery is still on for Friday.");
+    } else if (v === 'more') {
+      const me = ++token;
+      setAg('budget', 'ok', 'You confirmed this is a second order');
+      ['hd', 'lw', 'yard', 'pick', 'gate', 'done'].forEach(k => setAg(k, ''));
+      say('bot typing', '<span class="ask-dots" aria-label="Working"><i></i><i></i><i></i></span>');
+      await shop(s, me, ms => sleep(ms));
+    }
   });
-  $('#jc-ex').addEventListener('click', e => { const b = e.target.closest('.ex'); if (!b) return; inp.value = b.textContent; runCrew(showParsed(), false); });
-  drawBars(); drawLedger();
-  // Opening state: the last entry already went through the crew and posted; the next one is typed and waiting.
-  runCrew(parse('Paid $944 for sandbag labor on lot A'), true);
-  showParsed();
+  $('#jc-ex').addEventListener('click', e => { const b = e.target.closest('.ex'); if (b) run(b.dataset.s, false); });
+  // Opening state: the framing request has been quoted and is waiting for approval.
+  run('frame', true);
 }
 
 /* ───── ecodrop ───── */
@@ -2093,7 +2106,7 @@ document.addEventListener('click', e => {
   const H = {
     harness: ['Build the harness, not just the prompt', 'My agents became reliable once I designed what surrounds the model: tools, permissions, memory, context, retries and evals. I now start there.', 'Agent harness · tool use'],
     context: ['Give agents the right context', 'Most mistakes I have seen came from missing context, not the prompt. I connect agents to the systems that hold the data and keep what they see focused.', 'Context engineering · MCP'],
-    agent: ['Start with one agent', 'One capable agent has handled most workflows I have built. I add subagents only when steps can run in parallel, like checking a payment for duplicates and against the budget at once.', 'Multi-agent orchestration'],
+    agent: ['Start with one agent', 'One capable agent has handled most workflows I have built. I add subagents only when steps can run in parallel, like getting quotes from three suppliers at once.', 'Multi-agent orchestration'],
     skills: ['Package know-how as skills', 'I turn repeat work into skills: instructions, scripts and examples an agent loads only when it needs them. Agents and teammates then follow the same playbook.', 'Agent skills'],
     model: ['Pick the model per task', 'Routine steps use smaller, cheaper models and harder reasoning uses the strongest one. I compare models across providers on our own evals.', 'Model routing'],
     evals: ['Write the tests first', 'I write evals that define a good answer before we build, and each release has to pass them. Computer-use agents also click through the product like a real user.', 'Evals · computer use'],
@@ -2251,7 +2264,7 @@ document.querySelectorAll('.trace').forEach(tr => {
   const EMAIL = 'ishirv00@gmail.com';
   const ACT = {
     demo_rules: ['Open the rules engine demo', 'rules'], demo_risk: ['Open the risk workflows demo', 'risk'], demo_eco: ['Open the Ecodrop demo', 'eco'],
-    demo_rec: ['Open the Recognito demo', 'rec'], demo_plan: ['Open the blueprint agent demo', 'plan'], demo_jc: ['Open the cost-control crew demo', 'jc'],
+    demo_rec: ['Open the Recognito demo', 'rec'], demo_plan: ['Open the blueprint agent demo', 'plan'], demo_jc: ['Open the buying agent demo', 'jc'],
     method: ['How I build with agents', '#method'], journey: ['See my journey', '#journey'],
     resume: ['Resume (PDF)', 'https://ishirvasavada.com/resume.pdf'], linkedin: ['LinkedIn', 'https://www.linkedin.com/in/ishirvasavada'], email: ['Copy email', null],
   };
