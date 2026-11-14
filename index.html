@@ -951,19 +951,39 @@ html:has(.demo[open]){overflow:hidden}
 .bp-pill:focus-visible,.bp-x:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .bp-pill[hidden],.bp[hidden],.bp-toast[hidden]{display:none}
 .bp-dot{width:14px;height:14px;border-radius:50%;background:conic-gradient(#4285F4,#E50914,#FF9900,#76B900,#635BFF,#4285F4)}
-:root[data-brand] .btn,:root[data-brand] .nav a.cta,:root[data-brand] .email,:root[data-brand] .ask-send,:root[data-brand] .bp select,:root[data-brand] .demo-nav button,:root[data-brand] .ask-x{border-radius:var(--r-btn)}
+:root[data-brand] .btn,:root[data-brand] .nav a.cta,:root[data-brand] .email,:root[data-brand] .ask-send,:root[data-brand] .demo-nav button,:root[data-brand] .ask-x{border-radius:var(--r-btn)}
 :root[data-brand] .btn.primary:not(.ra-gen),:root[data-brand] .nav a.cta,:root[data-brand] .ask-fab,:root[data-brand] .ask-send{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
 :root[data-brand] .btn.primary:not(.ra-gen):hover,:root[data-brand] .nav a.cta:hover{background:var(--btn);border-color:var(--btn);color:var(--btn-ink);filter:brightness(1.12)}
 :root[data-brand] .ask-spark{background:var(--btn-ink);color:var(--btn)}
 :root[data-brand] .ask-m.u{background:var(--btn);color:var(--btn-ink)}
 :root[data-brand] .bp-dot{background:var(--btn)}
-.bp{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:40;width:min(340px,calc(100vw - 32px));padding:18px 18px 14px;border:1px solid var(--rule);border-radius:16px;background:var(--panel);color:var(--ink);box-shadow:0 24px 60px -20px rgb(0 0 0 / .45);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
+.bp{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:40;width:min(420px,calc(100vw - 32px));padding:18px 18px 14px;border:1px solid var(--rule);border-radius:16px;background:var(--panel);color:var(--ink);box-shadow:0 24px 60px -20px rgb(0 0 0 / .45);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
 .bp-t{margin:0 28px 0 0;font-weight:600;font-size:var(--t-md);letter-spacing:-.01em}
 .bp-s{margin:4px 0 12px;font-size:var(--t-sm);color:var(--ink-2)}
 .bp-x{position:absolute;top:10px;right:10px;width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:8px;background:none;color:var(--ink-2);cursor:pointer}
 .bp-x:hover{background:var(--accent-soft);color:var(--ink)}
-.bp select{width:100%;padding:10px 36px 10px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23808891' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center/16px;color:var(--ink);font:500 var(--t-sm)/1.3 var(--f-body);appearance:none;-webkit-appearance:none;cursor:pointer}
-.bp select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bp-q{display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid var(--rule);border-radius:12px;background:var(--paper);color:var(--ink-3)}
+.bp-q:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.bp-q input{flex:1;min-width:0;padding:10px 0;border:0;outline:0;background:transparent;color:var(--ink);font:500 var(--t-sm)/1.3 var(--f-body)}
+.bp-q input::placeholder{color:var(--ink-3);font-weight:400}
+.bp-q input::-webkit-search-cancel-button{display:none}
+.bp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px -4px 0;padding:4px;max-height:min(312px,46dvh);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.bp-tile{display:flex;flex-direction:column;gap:6px;padding:6px 6px 8px;border:1px solid var(--rule);border-radius:12px;background:var(--panel);color:var(--ink);font:500 12.5px/1.2 var(--f-body);text-align:left;cursor:pointer;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+.bp-tile:hover,.bp-tile:focus-visible{transform:translateY(-2px);border-color:var(--ink-3);box-shadow:0 8px 18px -12px rgb(0 0 0 / .5);outline:0}
+.bp-tile:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.bp-tile[aria-selected="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.bp-tile[hidden]{display:none}
+.bp-sw{position:relative;display:block;height:46px;border-radius:7px;overflow:hidden;background:var(--t-paper);box-shadow:inset 0 0 0 1px rgb(0 0 0 / .08)}
+.bp-sw::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--t-stripe,transparent)}
+.bp-sw b{position:absolute;left:8px;top:13px;width:44%;height:5px;border-radius:3px;background:var(--t-ink);opacity:.85}
+.bp-sw s{position:absolute;left:8px;top:22px;width:30%;height:5px;border-radius:3px;background:var(--t-hi)}
+.bp-sw i{position:absolute;left:8px;bottom:6px;width:34%;height:9px;border-radius:var(--t-r);background:var(--t-btn)}
+.bp-tile[aria-selected="true"] .bp-sw::after{content:"";position:absolute;right:6px;bottom:6px;width:14px;height:14px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/10px no-repeat;box-shadow:0 1px 3px rgb(0 0 0 / .35)}
+.bp-nm{padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bp-empty{margin:14px 0 4px;font-size:var(--t-sm);color:var(--ink-2)}
+.bp-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule)}
+.bp-reset{padding:0;border:0;background:none;color:var(--accent);font:500 13px/1.3 var(--f-body);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.bp-foot .bp-n{margin:0;text-align:right}
 .bp-n{margin:10px 0 0;font-size:11px;color:var(--ink-3)}
 .bp-toast{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:calc(max(20px,env(safe-area-inset-bottom)) + 48px);z-index:39;max-width:min(340px,calc(100vw - 32px));padding:10px 14px;border-radius:12px;background:var(--ink);color:var(--paper);font-size:var(--t-sm);box-shadow:0 12px 30px -12px rgb(0 0 0 / .5);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
 @media (max-width:560px){ .bp{left:12px;right:12px;bottom:12px;width:auto} .bp-pill{left:12px;bottom:max(20px,env(safe-area-inset-bottom));padding:10px 13px 10px 11px} }
@@ -1401,8 +1421,10 @@ html:has(.demo[open]){overflow:hidden}
   <button class="bp-x" id="bp-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <p class="bp-t" id="bp-t">See this site in your company's style</p>
   <p class="bp-s" id="bp-s">Pick where you work and the page restyles to match. It's optional.</p>
-  <select id="bp-sel" aria-label="Your company"></select>
-  <p class="bp-n">Colors and type only. Not affiliated with these companies.</p>
+  <label class="bp-q"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="bp-in" type="search" placeholder="Search companies" autocomplete="off" spellcheck="false" aria-label="Search companies" aria-controls="bp-grid"></label>
+  <div class="bp-grid" id="bp-grid" role="listbox" aria-label="Companies"></div>
+  <p class="bp-empty" id="bp-empty" hidden>No match. Try another name, or keep the default look.</p>
+  <div class="bp-foot"><button class="bp-reset" id="bp-reset" type="button">Keep the default look</button><span class="bp-n">Colors and type only. Not affiliated.</span></div>
 </section>
 <div class="bp-toast" id="bp-toast" role="status" hidden></div>
 
@@ -2199,13 +2221,30 @@ document.querySelectorAll('.trace').forEach(tr => {
     stripe:     { n: 'Stripe',     s: 'light', paper: '#F6F9FC', panel: '#FFFFFF', band: '#E8EEF5', ink: '#0A2540', a: '#533AFD', ai: '#FFFFFF', stripe: ['#80E9FF', '#7A73FF', '#FF80BF', '#FFB422'], btn: '#635BFF', bi: '#FFFFFF', r: '999px', hi: '#635BFF' },
     uber:       { n: 'Uber',       s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F3F3F3', ink: '#111111', a: '#000000', ai: '#FFFFFF', stripe: ['#000000'], btn: '#000000', bi: '#FFFFFF', r: '8px' },
     vanta:      { n: 'Vanta',      s: 'light', paper: '#9A99FF', panel: '#FFFFFF', band: '#FFFFFF', top: '#FFFFFF', ink: '#181822', i2: '#2B2B40', i3: '#33334F', a: '#260048', ai: '#FFFFFF', hi: '#3F0A8F', stripe: ['#5E05C4'], display: '"Newsreader", Georgia, serif', gf: 'Newsreader:opsz,wght@6..72,500;6..72,600', btn: '#260048', bi: '#FFFFFF', r: '999px' },
+    adobe:      { n: 'Adobe',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F8F8F8', ink: '#000000', a: '#274DEA', ai: '#FFFFFF', hi: '#EB1000', stripe: ['#EB1000'], font: '"Source Sans 3", "Adobe Clean", Arial, sans-serif', gf: 'Source Sans 3:wght@400;500;600;700', btn: '#3B63FB', bi: '#FFFFFF', r: '999px' },
+    databricks: { n: 'Databricks', s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F9F7F4', ink: '#1B3139', a: '#D01400', ai: '#FFFFFF', hi: '#FF3621', stripe: ['#FF3621'], font: '"DM Sans", Arial, sans-serif', gf: 'DM Sans:wght@400;500;600;700', btn: '#EB1600', bi: '#FFFFFF', r: '0px' },
+    datadog:    { n: 'Datadog',    s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F6F1FB', ink: '#110617', a: '#632CA6', ai: '#FFFFFF', hi: '#632CA6', stripe: ['#632CA6', '#7700FF'], btn: '#632CA6', bi: '#FFFFFF', r: '4px' },
+    linkedin:   { n: 'LinkedIn',   s: 'light', paper: '#F4F2EE', panel: '#FFFFFF', band: '#FFFFFF', top: '#FFFFFF', ink: '#191919', i2: '#3D3D3D', i3: '#5E5E5E', a: '#0A66C2', ai: '#FFFFFF', hi: '#0A66C2', stripe: ['#0A66C2'], font: '"Source Sans 3", -apple-system, "Segoe UI", sans-serif', gf: 'Source Sans 3:wght@400;500;600;700', btn: '#0A66C2', bi: '#FFFFFF', r: '999px' },
+    mongodb:    { n: 'MongoDB',    s: 'light', paper: '#FDFEEC', panel: '#FFFFFF', band: '#F1F4DC', ink: '#001E2B', a: '#00684A', ai: '#FFFFFF', hi: '#00A35C', stripe: ['#00ED64'], btn: '#00ED64', bi: '#001E2B', r: '4px' },
+    servicenow: { n: 'ServiceNow', s: 'dark',  paper: '#032D42', panel: '#0A3A52', band: '#02222F', ink: '#FFFFFF', a: '#62D84E', ai: '#032D42', hi: '#62D84E', stripe: ['#62D84E'], btn: '#62D84E', bi: '#032D42', r: '999px' },
+    shopify:    { n: 'Shopify',    s: 'dark',  paper: '#000000', panel: '#0E1011', band: '#02090A', ink: '#FFFFFF', a: '#36F4A4', ai: '#000000', hi: '#36F4A4', stripe: ['#36F4A4'], font: '"Inter", Helvetica, Arial, sans-serif', gf: 'Inter:wght@400;500;600;700', btn: '#FFFFFF', bi: '#000000', r: '999px' },
+    snowflake:  { n: 'Snowflake',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#EAF6FC', ink: '#24323A', a: '#11567F', ai: '#FFFFFF', hi: '#1E94D0', stripe: ['#29B5E8'], font: '"Lato", Arial, sans-serif', gf: 'Lato:wght@400;700;900', btn: '#11567F', bi: '#FFFFFF', r: '999px' },
+    spotify:    { n: 'Spotify',    s: 'dark',  paper: '#121212', panel: '#181818', band: '#000000', ink: '#FFFFFF', a: '#1ED760', ai: '#000000', hi: '#1ED760', stripe: ['#1ED760'], btn: '#1ED760', bi: '#000000', r: '999px' },
+    twilio:     { n: 'Twilio',     s: 'dark',  paper: '#000D25', panel: '#0B1B3A', band: '#00081A', ink: '#FFFFFF', a: '#6FA2FF', ai: '#000D25', hi: '#F22F46', stripe: ['#F22F46'], btn: '#1866EE', bi: '#FFFFFF', r: '999px' },
   };
   const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink', hi: '--accent-hi', btn: '--btn', bi: '--btn-ink', r: '--r-btn', i2: '--ink-2', i3: '--ink-3', top: '--top-bg' };
   const root = document.documentElement, baseScheme = root.getAttribute('data-theme');
-  const pill = $('#bp-open'), card = $('#bp'), sel = $('#bp-sel'), label = $('#bp-label'), stripe = $('#brand-stripe'), toast = $('#bp-toast');
-  let toastT;
+  const pill = $('#bp-open'), card = $('#bp'), grid = $('#bp-grid'), search = $('#bp-in'), label = $('#bp-label'), stripe = $('#brand-stripe'), toast = $('#bp-toast');
+  let toastT, current = null, previewT;
+  const stripeCss = b => { const c = b.stripe || []; return c.length < 2 ? (c[0] || 'transparent') : `linear-gradient(90deg,${b.hard ? c.map((x, i) => `${x} ${i * 100 / c.length}% ${(i + 1) * 100 / c.length}%`).join(',') : c.join(',')})`; };
 
-  sel.innerHTML = '<option value="">Choose a company</option>' + Object.entries(B).map(([k, b]) => `<option value="${k}">${b.n}</option>`).join('') + '<option value="none">Somewhere else (keep the default look)</option>';
+  // One swatch per company: its page color, text, headline color, button and top band.
+  grid.innerHTML = Object.entries(B).sort((x, y) => x[1].n.localeCompare(y[1].n)).map(([k, b]) =>
+    `<button class="bp-tile" type="button" role="option" aria-selected="false" data-k="${k}" style="--t-paper:${b.paper};--t-ink:${b.ink};--t-hi:${b.hi || b.a};--t-btn:${b.btn || b.a};--t-r:${b.r || '6px'};--t-stripe:${stripeCss(b)}"><span class="bp-sw" aria-hidden="true"><b></b><s></s><i></i></span><span class="bp-nm">${b.n}</span></button>`).join('');
+  const tiles = [...grid.querySelectorAll('.bp-tile')];
+  search.placeholder = `Search ${tiles.length} companies`;
+  const visible = () => tiles.filter(t => !t.hidden);
+  const mark = k => tiles.forEach(t => t.setAttribute('aria-selected', t.dataset.k === k));
 
   function apply(k, announce) {
     const b = B[k];
@@ -2215,7 +2254,7 @@ document.querySelectorAll('.trace').forEach(tr => {
     if (!b) {
       delete root.dataset.brand;
       if (baseScheme) root.setAttribute('data-theme', baseScheme); else root.removeAttribute('data-theme');
-      stripe.hidden = true; label.textContent = 'Personalize'; sel.value = '';
+      stripe.hidden = true; label.textContent = 'Personalize';
       document.querySelectorAll('meta[name="theme-color"]').forEach(m => { if (m.dataset.base) m.content = m.dataset.base; });
       return;
     }
@@ -2228,33 +2267,62 @@ document.querySelectorAll('.trace').forEach(tr => {
     }
     if (b.font) { root.style.setProperty('--f-body', b.font); root.style.setProperty('--f-display', b.font); }
     if (b.display) root.style.setProperty('--f-display', b.display);
-    const c = b.stripe || [];
-    stripe.hidden = !c.length;
-    stripe.style.background = c.length < 2 ? c[0] || '' : `linear-gradient(90deg,${b.hard ? c.map((x, i) => `${x} ${i * 100 / c.length}% ${(i + 1) * 100 / c.length}%`).join(',') : c.join(',')})`;
-    label.textContent = b.n; sel.value = k;
+    stripe.hidden = !(b.stripe || []).length;
+    stripe.style.background = stripeCss(b);
+    label.textContent = b.n;
     if (announce) {
       toast.textContent = `Hello, ${b.n}. This page is now in your colors.`; toast.hidden = false;
       clearTimeout(toastT); toastT = setTimeout(() => { toast.hidden = true; }, 7000);
     }
   }
-  const open = () => { card.hidden = false; pill.hidden = true; pill.setAttribute('aria-expanded', 'true'); toast.hidden = true; };
-  const close = () => { card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); };
+  const open = () => { card.hidden = false; pill.hidden = true; pill.setAttribute('aria-expanded', 'true'); toast.hidden = true; mark(current); };
+  const close = () => { clearTimeout(previewT); if ((root.dataset.brand || null) !== current) apply(current, false); card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); search.value = ''; filter(); };
+  function choose(k) {
+    current = k === 'none' ? null : k; clearTimeout(previewT);
+    store('iv-brand', k); apply(current, true); mark(current);
+    card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); search.value = ''; filter();
+    track('theme', k);
+  }
+  function filter() {
+    const q = search.value.trim().toLowerCase();
+    tiles.forEach(t => { t.hidden = !!q && !B[t.dataset.k].n.toLowerCase().includes(q) && !t.dataset.k.includes(q); });
+    $('#bp-empty').hidden = visible().length > 0;
+  }
+  search.addEventListener('input', filter);
+  search.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); visible()[0]?.focus(); }
+    if (e.key === 'Enter') { e.preventDefault(); const v = visible(); if (v.length) choose(v[0].dataset.k); }
+  });
+  grid.addEventListener('click', e => { const t = e.target.closest('.bp-tile'); if (t) choose(t.dataset.k); });
+  grid.addEventListener('keydown', e => {
+    const v = visible(), i = v.indexOf(document.activeElement); if (i < 0) return;
+    const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+    const go = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: cols, ArrowUp: -cols }[e.key];
+    if (go === undefined) return;
+    e.preventDefault();
+    if (e.key === 'ArrowUp' && i < cols) { search.focus(); return; }
+    v[Math.max(0, Math.min(v.length - 1, i + go))].focus();
+  });
+  // Desktop: hovering or focusing a swatch previews it; leaving the grid restores the current look.
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const preview = k => { clearTimeout(previewT); previewT = setTimeout(() => { if (!card.hidden && (root.dataset.brand || null) !== k) apply(k, false); }, 90); };
+  if (canHover) {
+    grid.addEventListener('pointerover', e => { const t = e.target.closest('.bp-tile'); if (t) preview(t.dataset.k); });
+    grid.addEventListener('pointerleave', () => preview(current));
+  }
+  grid.addEventListener('focusin', e => { const t = e.target.closest('.bp-tile'); if (t && canHover) preview(t.dataset.k); });
+  $('#bp-reset').addEventListener('click', () => choose('none'));
 
-  pill.addEventListener('click', () => { open(); sel.focus({ preventScroll: true }); });
+  pill.addEventListener('click', () => { open(); search.focus({ preventScroll: true }); });
   $('#bp-x').addEventListener('click', () => { if (!store('iv-brand')) store('iv-brand', 'none'); close(); pill.focus({ preventScroll: true }); });
   card.addEventListener('keydown', e => { if (e.key === 'Escape') $('#bp-x').click(); });
-  sel.addEventListener('change', () => {
-    const k = sel.value; if (!k) return;
-    store('iv-brand', k); apply(k === 'none' ? null : k, true); close();
-    track('theme', k);
-  });
 
   // A tagged link (?r=vanta or ?r=vanta-jane) applies that company's look without asking.
   const q = new URLSearchParams(location.search), tag = (q.get('theme') || q.get('r') || '').toLowerCase();
   const linked = Object.keys(B).find(k => tag === k || tag.startsWith(k + '-') || tag.startsWith(k + '_'));
   const saved = store('iv-brand');
-  if (linked) { store('iv-brand', linked); apply(linked, true); }
-  else if (B[saved]) apply(saved, false);
+  if (linked) { store('iv-brand', linked); current = linked; apply(linked, true); }
+  else if (B[saved]) { current = saved; apply(saved, false); }
   else if (!saved) setTimeout(() => { if (card.hidden && !$('#demo').open && $('#ask').hidden) open(); }, 2500);
 }
 
