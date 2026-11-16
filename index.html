@@ -1096,13 +1096,19 @@ html:has(.demo[open]){overflow:hidden}
 .e-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px}
 .e-card{position:relative;display:flex;flex-direction:column;gap:16px;padding:22px;border:1px solid var(--rule);border-radius:16px;background:var(--panel)}
 .e-card::before{content:"“";position:absolute;top:6px;right:18px;font:700 64px/1 Georgia,serif;color:var(--accent);opacity:.18}
-.e-q{margin:0;font-size:15px;line-height:1.55;color:var(--ink)}
+.e-q{margin:0;padding-right:30px;font-size:15px;line-height:1.55;color:var(--ink)}
 .e-q.ph{color:var(--ink-3);font-style:italic}
 .e-p{display:flex;align-items:center;gap:12px;margin-top:auto}
 .e-av{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:var(--ec);color:#fff;font-weight:600;object-fit:cover}
 .e-nm{font-weight:600;font-size:14px}
 .e-ti{font-size:12.5px;color:var(--ink-2)}
 .e-note{margin:10px 0 0;font-size:12px;color:var(--warn)}
+.e-r{display:block;margin-top:2px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.02em;color:var(--ink-3)}
+.e-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.e-head .small-h{margin:0}
+.e-src{font-size:13px;color:var(--accent);text-decoration:none}
+.e-src:hover{text-decoration:underline}
+.e-av{font-size:13px;letter-spacing:.02em}
 @media (max-width:900px){ .e-row{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:85%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px} .e-card{scroll-snap-align:start} }
 /* ⌘K command palette */
 .k-btn{display:inline-flex;align-items:center;gap:8px;padding:6px 8px 6px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--panel);color:var(--ink-2);font:inherit;font-size:12px;cursor:pointer;margin-right:4px}
@@ -1546,7 +1552,7 @@ html:has(.demo[open]){overflow:hidden}
   <div class="shelf" id="shelf"></div>
 
   <div class="endorse" id="endorse">
-    <p class="small-h">What people say</p>
+    <div class="e-head"><p class="small-h">What people say</p><a class="e-src" href="https://www.linkedin.com/in/ishirvasavada/details/recommendations/" target="_blank" rel="noopener">Recommendations on LinkedIn ↗</a></div>
     <div class="e-row" id="e-row"></div>
   </div>
 </section>
@@ -2242,12 +2248,15 @@ document.addEventListener('click', e => {
 
   // Recommendations from LinkedIn, copied word for word. Leave q empty until the real text is in.
   const E = [
-    { n: 'Shane', t: '', q: '', c: '#3B6FD8' },
-    { n: 'Zoe', t: '', q: '', c: '#C2477B' },
-    { n: 'Monica', t: '', q: '', c: '#2E8F6E' },
+    { n: 'Shane Wiggins', i: 'SW', t: 'Building the Control Plane for AI', r: 'Managed Ishir directly', c: '#3B6FD8',
+      q: 'We had the great privilege and honor seeing Ishir blossom into a core role on our Product Management team. It was remarkable to see how quickly he onboarded, executed and excelled while owning a key platform initiative.' },
+    { n: 'Zoey (Zhenghe) Zhang', i: 'ZZ', t: 'Senior Product Designer at ServiceTitan', r: 'Worked with Ishir on the same team', c: '#C2477B',
+      q: 'I worked closely with Ishir on the Object Manager product at OneTrust. Ishir always provided detailed and comprehensive documentations to help me and the team understand the business context and requirements.' },
+    { n: 'Mounika Kasaram', i: 'MK', t: 'Solution Architect at Capgemini', r: 'Was senior to Ishir', c: '#2E8F6E',
+      q: 'I worked with Ishir directly as an Engineering Manager. He is a true team player and has a calm personality that made it seamless to work with him.' },
   ];
   const ready = E.every(e => e.q);
-  $('#e-row').innerHTML = E.map(e => `<figure class="e-card" style="--ec:${e.c};margin:0"><blockquote class="e-q${e.q ? '' : ' ph'}">${e.q ? esc(e.q) : 'Their LinkedIn recommendation goes here, word for word.'}</blockquote><figcaption class="e-p">${e.img ? `<img class="e-av" src="${e.img}" alt="">` : `<span class="e-av" aria-hidden="true">${esc(e.n[0])}</span>`}<span><span class="e-nm" style="display:block">${esc(e.n)}</span><span class="e-ti">${esc(e.t || 'Title and company')}</span></span></figcaption></figure>`).join('') + (ready ? '' : '');
+  $('#e-row').innerHTML = E.map(e => `<figure class="e-card" style="--ec:${e.c};margin:0"><blockquote class="e-q${e.q ? '' : ' ph'}">${e.q ? esc(e.q) : 'Their LinkedIn recommendation goes here, word for word.'}</blockquote><figcaption class="e-p">${e.img ? `<img class="e-av" src="${e.img}" alt="">` : `<span class="e-av" aria-hidden="true">${esc(e.i || e.n[0])}</span>`}<span><span class="e-nm" style="display:block">${esc(e.n)}</span><span class="e-ti" style="display:block">${esc(e.t || 'Title and company')}</span>${e.r ? `<span class="e-r">${esc(e.r)}</span>` : ''}</span></figcaption></figure>`).join('');
   if (!ready) {
     if (/(^|\.)ishirvasavada\.com$/.test(location.hostname)) $('#endorse').hidden = true;
     else $('#endorse').insertAdjacentHTML('beforeend', '<p class="e-note">Preview only: waiting for the recommendation text, titles and photos.</p>');
@@ -2564,8 +2573,6 @@ document.querySelectorAll('.trace').forEach(tr => {
   const ST = [
     { k: 'New industry', h: 'Learning how buildings get built', p: 'I stepped into residential construction to support a builder on technology and operations. That meant learning the engineering behind site work, then streamlining how the business runs. Two of my agent demos came out of it.', tags: ['Site work', 'Operations', 'Agents'],
       art: `<svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice"><defs><pattern id="stg" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(255,255,255,.09)"/></pattern></defs><rect width="400" height="700" fill="#0F3460"/><rect width="400" height="700" fill="url(#stg)"/><g fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round" opacity=".9"><path d="M60 120h280v260H60z"/><path d="M200 120v120M60 240h180M240 240v140M270 240h70"/><path d="M200 210a30 30 0 0 1 30 30" stroke-width="1.6" opacity=".6"/></g><g stroke="#7FD1FF" stroke-width="2"><path d="M60 100h140M60 94v12M200 94v12"/></g><text x="130" y="92" fill="#7FD1FF" font-family="ui-monospace,monospace" font-size="14" text-anchor="middle">14′ 0″</text><g fill="#FFC857"><circle cx="300" cy="330" r="16"/></g><text x="300" y="335" fill="#0F3460" font-family="ui-monospace,monospace" font-size="15" font-weight="700" text-anchor="middle">?</text><g fill="rgba(255,255,255,.75)" font-family="ui-monospace,monospace" font-size="12"><text x="130" y="185" text-anchor="middle">LIVING</text><text x="290" y="185" text-anchor="middle">KITCHEN</text><text x="150" y="315" text-anchor="middle">BED 1</text></g></svg>` },
-    { k: 'Off the clock', h: 'Chasing adventure', p: 'I look for experiences that push me out of my comfort zone. Lately that means scuba diving.', tags: ['Scuba diving'],
-      art: `<svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sts" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B8CB0"/><stop offset=".55" stop-color="#0A4C6E"/><stop offset="1" stop-color="#03182B"/></linearGradient><linearGradient id="str" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="400" height="700" fill="url(#sts)"/><path d="M90 0l40 0 -70 520 -40 0zM210 0l30 0 10 560 -50 0zM320 0l40 0 30 480 -40 0z" fill="url(#str)"/><g><circle class="st-bub" cx="120" cy="700" r="6"/><circle class="st-bub" cx="140" cy="760" r="4" style="animation-delay:-2s"/><circle class="st-bub" cx="270" cy="720" r="7" style="animation-delay:-4s"/><circle class="st-bub" cx="290" cy="800" r="3" style="animation-delay:-1s"/><circle class="st-bub" cx="200" cy="780" r="5" style="animation-delay:-3s"/></g><g fill="#FF8A5B" opacity=".9"><path d="M250 300c18-14 40-14 56 0-16 14-38 14-56 0zM306 300l16-10v20z"/></g><g fill="#FFC857" opacity=".85"><path d="M90 380c12-9 27-9 38 0-11 9-26 9-38 0zM128 380l11-7v14z"/></g><g fill="#0B3A4F"><path d="M0 640c40-50 70-60 90-30s30-60 60-50 20 70 50 60 40-90 80-70 40 80 70 60 30-40 50-30v120H0z"/></g></svg>` },
     { k: 'Advisor', h: 'Where climate meets finance', p: 'I advised an organization focused on climate-related financial risk, where my finance background and product thinking meet.', tags: ['Climate risk', 'Finance'],
       art: (() => { const c = ['#08306B', '#08519C', '#2171B5', '#4292C6', '#6BAED6', '#9ECAE1', '#C6DBEF', '#DEEBF7', '#FEE0D2', '#FCBBA1', '#FC9272', '#FB6A4A', '#EF3B2C', '#CB181D', '#A50F15', '#67000D']; const seq = [0,2,1,3,2,4,3,5,4,6,5,7,6,8,7,9,8,10,9,11,10,12,11,13,12,14,13,15,14,15]; return `<svg viewBox="0 0 400 700" preserveAspectRatio="none">${seq.map((v, i) => `<rect x="${i * 400 / seq.length}" width="${400 / seq.length + .5}" height="700" fill="${c[v]}"/>`).join('')}</svg>`; })() },
   ];
