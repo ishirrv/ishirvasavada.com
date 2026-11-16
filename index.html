@@ -1150,7 +1150,7 @@ html:has(.demo[open]){overflow:hidden}
         <div><div class="name">Ishir Vasavada</div><div class="sub">Product leader · Builder · Techstars founder</div></div>
       </div>
       <h1 id="h-hero">I turn messy problems into <em>products people rely on.</em></h1>
-      <p class="intro">6+ years across enterprise software, startups and finance. I've owned a <strong>$20MM ARR</strong> product portfolio, co-founded a Techstars-backed startup, and I still build hands-on, AI included.</p>
+      <p class="intro">6+ years across enterprise software, startups and finance, with products tied to <strong>$50MM+</strong> in revenue, deals and savings. I own a <strong>$20MM ARR</strong> portfolio, co-founded a Techstars-backed startup, and still build hands-on, AI included.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#work">See the work ↓</a>
         <a class="btn" href="https://www.linkedin.com/in/ishirvasavada" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -1158,8 +1158,8 @@ html:has(.demo[open]){overflow:hidden}
       </div>
     </div>
     <div class="stats" aria-label="Impact">
+      <a class="stat go" href="#journey" data-go="journey"><div class="v num">$50MM+</div><div class="l">in revenue, deals and savings from products I've led</div><span class="proof">See it by role <span aria-hidden="true">→</span></span></a>
       <a class="stat go" href="#rules" data-go="rules"><div class="v num">$20MM</div><div class="l">ARR product portfolio I own</div><span class="proof">Try the rules engine <span aria-hidden="true">→</span></span></a>
-      <a class="stat go" href="#zuora" data-go="zuora"><div class="v num">$15MM</div><div class="l">in deals from a new data-center launch</div><span class="proof">See it in my journey <span aria-hidden="true">→</span></span></a>
       <a class="stat go" href="#risk" data-go="risk"><div class="v num">3,500+</div><div class="l">enterprise customers on products I launched</div><span class="proof">Try the risk workflows <span aria-hidden="true">→</span></span></a>
       <a class="stat go" href="#eco" data-go="eco"><div class="v num">$200K+</div><div class="l">raised for the startup I co-founded</div><span class="proof">Try the Ecodrop app <span aria-hidden="true">→</span></span></a>
     </div>
@@ -2569,6 +2569,7 @@ document.querySelectorAll('.trace').forEach(tr => {
     e.preventDefault();
     const go = a.dataset.go;
     if (go === 'zuora') document.dispatchEvent(new CustomEvent('iv:role', { detail: 'Zuora' }));
+    else if (go === 'journey') $('#journey').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
     else $(`.pcard[data-p="${go}"]`)?.click();
     track('proof', go);
   }));

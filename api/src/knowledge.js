@@ -35,7 +35,7 @@ The site can show up to 2 buttons under your answer. Add them in "actions" only 
 About Ishir
 
 Summary
-Product manager with 6+ years across enterprise software, startups and finance. He owns a $20MM ARR product portfolio at Zuora, co-founded a Techstars-backed startup, and builds hands-on, including with AI. Site headline: "I turn messy problems into products people rely on." Based in Atlanta, GA. U.S. citizen. Email: ishirv00@gmail.com. LinkedIn: linkedin.com/in/ishirvasavada.
+Product manager with 6+ years across enterprise software, startups and finance. Products he has led are tied to $50MM+ in revenue, deals and savings: $20MM ARR portfolio, $15MM deal flow and $2MM a year saved at Zuora; $5MM+ incremental revenue at OneTrust; $10MM+ in project renewals at Capgemini. He owns a $20MM ARR product portfolio at Zuora, co-founded a Techstars-backed startup, and builds hands-on, including with AI. Site headline: "I turn messy problems into products people rely on." Based in Atlanta, GA. U.S. citizen. Email: ishirv00@gmail.com. LinkedIn: linkedin.com/in/ishirvasavada.
 
 Experience
 1. Senior Product Manager, Platform Foundations, Zuora (Atlanta, Aug 2022 to present)
