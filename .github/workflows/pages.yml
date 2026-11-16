@@ -1,9 +1,9 @@
 # Publishes the site to GitHub Pages, and deploys its API (assistant + visit stats) to Cloudflare.
 # One-time setup: Settings -> Pages -> Source: GitHub Actions.
-# The API needs three repository secrets (Settings -> Secrets and variables -> Actions):
-#   CLOUDFLARE_API_TOKEN  from the "Edit Cloudflare Workers" template, plus the D1: Edit permission
+# The API needs two repository secrets (Settings -> Secrets and variables -> Actions):
+#   CLOUDFLARE_API_TOKEN  from the "Edit Cloudflare Workers" template, plus D1: Edit and Workers AI: Read
 #   DASHBOARD_PASSWORD    a long password of your choice; it opens the visitor dashboard
-#   ANTHROPIC_API_KEY     turns the assistant on
+# The assistant runs on an open model on Cloudflare Workers AI, within its free daily allowance.
 # Without them the site is published as a plain static page.
 name: Deploy site
 
@@ -29,7 +29,6 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
-      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - id: check

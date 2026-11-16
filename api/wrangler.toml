@@ -5,7 +5,10 @@ compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 
 [vars]
-MODEL = "claude-haiku-5-5"
+MODEL = "@cf/google/gemma-4-26b-a4b-it"
+
+[ai]
+binding = "AI"
 
 [[d1_databases]]
 binding = "DB"

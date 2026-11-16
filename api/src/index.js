@@ -1,5 +1,4 @@
 // API for ishirvasavada.com: the site assistant (/chat), visit stats (/v, /e) and a private dashboard (/admin).
-import Anthropic from '@anthropic-ai/sdk';
 import { SYSTEM_PROMPT, ACTIONS, ANSWER_SCHEMA } from './knowledge.js';
 import { renderAdmin, renderLogin } from './admin.js';
 
@@ -13,6 +12,7 @@ const MSG = {
   offline: "The assistant is offline right now. Please email Ishir at ishirv00@gmail.com.",
   busy: "The assistant is busy right now. Please try again in a minute.",
   refusal: "I can't help with that one. Ask me about Ishir's products, experience or how he builds with AI.",
+  daily: "The assistant has answered all it can for today. Please email Ishir at ishirv00@gmail.com, or try again tomorrow.",
   turns: "This conversation is getting long. Start a new one, or email Ishir at ishirv00@gmail.com.",
 };
 
@@ -39,7 +39,7 @@ export default {
         return new Response(null, { status: 204, headers: cors });
       }
       if (req.method === 'GET' && url.pathname === '/admin') return admin(req, url, env);
-      if (req.method === 'GET' && url.pathname === '/health') return json({ ok: true, chat: Boolean(env.ANTHROPIC_API_KEY) }, 200, cors);
+      if (req.method === 'GET' && url.pathname === '/health') return json({ ok: true, chat: Boolean(env.AI) }, 200, cors);
       return new Response('Not found', { status: 404 });
     } catch (e) {
       console.error(e);
@@ -57,47 +57,49 @@ async function chat(req, env, ctx) {
   if (messages.filter(m => m.role === 'user').length > LIMITS.turns) return { answer: MSG.turns, actions: ['email'], reset: true };
   const q = messages[messages.length - 1].content;
 
+  // The release check (api/eval) sends the dashboard password, so it skips the rate limits and isn't logged as a visitor.
+  const isEval = Boolean(env.ADMIN_KEY) && req.headers.get('X-Eval-Key') === env.ADMIN_KEY;
   const iph = await ipHash(req, env);
   const now = Date.now(), hour = Math.floor(now / 3_600_000);
-  const [perIp, perDay] = await Promise.all([
+  const [perIp, perDay] = isEval ? [0, 0] : await Promise.all([
     bump(env, `h:${iph}:${hour}`, (hour + 1) * 3_600_000),
     bump(env, `d:${new Date(now).toISOString().slice(0, 10)}`, now + 2 * 86_400_000),
   ]);
-  if (perIp > LIMITS.perHour || perDay > LIMITS.perDay) return { answer: MSG.limit, actions: ['email'] };
-  if (!env.ANTHROPIC_API_KEY) return { answer: MSG.offline, actions: ['email'] };
+  if (!isEval && (perIp > LIMITS.perHour || perDay > LIMITS.perDay)) return { answer: MSG.limit, actions: ['email'] };
+  if (!env.AI) return { answer: MSG.offline, actions: ['email'] };
 
-  const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, baseURL: env.ANTHROPIC_BASE_URL || undefined, maxRetries: 1, timeout: 45_000 });
+  // An open model on Cloudflare Workers AI, inside the free daily allowance: short Q&A over a fixed set of facts doesn't need more.
   const t0 = Date.now();
   let res;
   try {
-    res = await client.messages.create({
-      model: env.MODEL || 'claude-haiku-5-5', // small, low-cost model: short Q&A over a fixed set of facts
-      max_tokens: 2048, // cost cap for a public endpoint; answers are ~120 words, thinking counts toward this
-      output_config: { effort: 'low', format: { type: 'json_schema', schema: ANSWER_SCHEMA } },
-      cache_control: { type: 'ephemeral' },
-      system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
-      messages,
+    res = await env.AI.run(env.MODEL || '@cf/google/gemma-4-26b-a4b-it', {
+      messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages.map(m => ({ role: m.role, content: typeof m.content === 'string' ? m.content : m.content.filter(b => b.type === 'text').map(b => b.text).join('') }))],
+      max_completion_tokens: 600, // answers are ~120 words; also a cap for a public endpoint
+      temperature: 0.2,
+      chat_template_kwargs: { enable_thinking: false }, // no reasoning step: faster, and a smaller share of the free allowance
+      response_format: { type: 'json_schema', json_schema: { name: 'answer', schema: ANSWER_SCHEMA, strict: true } },
     });
   } catch (e) {
-    let answer = MSG.busy;
-    if (e instanceof Anthropic.AuthenticationError || e instanceof Anthropic.PermissionDeniedError) answer = MSG.offline;
-    else if (e instanceof Anthropic.BadRequestError) console.error('bad request', e.message);
-    else if (e instanceof Anthropic.RateLimitError) console.error('rate limited');
-    else if (e instanceof Anthropic.APIError) console.error('api error', e.status, e.message);
-    else console.error('chat error', e);
-    ctx.waitUntil(logChat(env, req, sid, q, `[error] ${e?.status ?? ''} ${e?.message ?? e}`.slice(0, 300), null, Date.now() - t0, 0));
-    return { answer, actions: answer === MSG.offline ? ['email'] : [] };
+    const m = String(e?.message ?? e);
+    const answer = /daily free allocation|neurons|4006|quota|capacity/i.test(m) ? MSG.daily : MSG.busy;
+    console.error('chat error', m);
+    ctx.waitUntil(logChat(env, req, sid, q, `[error] ${m}`.slice(0, 300), null, Date.now() - t0, 0));
+    return { answer, actions: answer === MSG.daily ? ['email'] : [] };
   }
 
-  const text = res.content.filter(b => b.type === 'text').map(b => b.text).join('');
+  const choice = res?.choices?.[0];
+  const raw = choice?.message?.content ?? res?.response;
   let parsed = null;
-  if (res.stop_reason !== 'refusal') { try { parsed = JSON.parse(text); } catch { /* truncated or malformed */ } }
-  const answer = typeof parsed?.answer === 'string' && parsed.answer.trim() ? parsed.answer.trim() : MSG.refusal;
+  if (raw && typeof raw === 'object') parsed = raw;
+  else if (typeof raw === 'string') { try { parsed = JSON.parse(raw.trim().replace(/^```(?:json)?\s*|\s*```$/g, '')); } catch { /* truncated or malformed */ } }
+  // A plain-text reply (no JSON) is still shown, without buttons; an empty one gets the fallback line.
+  const plain = !parsed && typeof raw === 'string' && !/^\s*[{\[`]/.test(raw) ? raw.trim().slice(0, 1200) : '';
+  const answer = typeof parsed?.answer === 'string' && parsed.answer.trim() ? parsed.answer.trim() : plain || MSG.refusal;
   const actions = [...new Set((Array.isArray(parsed?.actions) ? parsed.actions : []).filter(a => ACTIONS.includes(a)))].slice(0, 2);
 
-  ctx.waitUntil(logChat(env, req, sid, q, answer, res.usage, Date.now() - t0, parsed ? 1 : 0));
-  // The client sends this turn back unchanged next time (thinking blocks included, as the API expects).
-  return { answer, actions, turn: res.content };
+  if (!isEval) ctx.waitUntil(logChat(env, req, sid, q, answer, res?.usage, Date.now() - t0, parsed ? 1 : 0));
+  // The page sends this turn back with the next question, so the model sees its earlier answers in the same format.
+  return { answer, actions, turn: [{ type: 'text', text: JSON.stringify({ answer, actions }) }] };
 }
 
 function validMessages(m) {
@@ -126,7 +128,7 @@ async function logChat(env, req, sid, q, a, usage, ms, ok) {
   const cf = req.cf || {};
   await env.DB.prepare('INSERT INTO chats (ts, sid, q, a, country, region, city, org, in_tok, out_tok, cache_read, ms, ok) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)')
     .bind(new Date().toISOString(), sid, q, a, cf.country || null, cf.region || null, cf.city || null, cf.asOrganization || null,
-      usage ? (usage.input_tokens || 0) + (usage.cache_creation_input_tokens || 0) : null, usage?.output_tokens ?? null, usage?.cache_read_input_tokens ?? null, ms, ok)
+      usage?.prompt_tokens ?? null, usage?.completion_tokens ?? null, usage?.prompt_tokens_details?.cached_tokens ?? null, ms, ok)
     .run();
 }
 
