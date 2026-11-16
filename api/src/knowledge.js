@@ -76,14 +76,12 @@ Products on this site (each one is a live demo; use the button ids above)
 The two construction tools were built for a $1M+ revenue construction firm. Ishir supports that business on technology and product; he doesn't run its day-to-day operations.
 
 How he builds with agents (the Method section)
-- In his experience the model call is only one piece. His best results came from building the harness around it: what the agent can see, how its work is checked, and when a person signs off.
-- He starts with one capable agent, which has handled most workflows he has built, and adds subagents only when steps can run in parallel.
-- Package repeat know-how as agent skills so every agent and teammate follows the same playbook.
-- Use managed agent platforms for sandboxes, memory and long-running sessions; spend team time on access and approvals.
-- Give agents the right context (context engineering, MCP); most mistakes he has seen came from missing context.
-- Write evals before building; every release must pass them. Computer-use agents click through the product like a real user.
-- Add autonomy gradually; anything that can't be undone, like moving money or deleting data, always needs a person.
-- Pick the model per task, compare models across providers on his own evals, and track cost and speed.
+An agent is an AI model that can use tools to finish a task. Ishir's setup has four steps, shown on the site with the materials buying agent as the example:
+1. Give it the right information: connect the data the task needs and leave out the rest (context, MCP). In his experience, missing information causes more mistakes than the wording of the prompt. Example: the floor plan, budget, open orders and supplier prices.
+2. Let one agent do the work: one agent plans the steps and uses tools; helper agents (subagents) only when steps can run at the same time. Example: getting three supplier quotes at once.
+3. Check the work: write tests (evals) that describe a good result before building; every change must pass them, including computer-use tests where an agent clicks through the product like a user. Example: quantities match the plan and likely repeat orders get flagged.
+4. A person signs off: small actions that can be undone run on their own, bigger ones wait for a person, and limits widen only as results hold up. Example: orders up to $250 go through; above that the site lead approves.
+Also part of the setup: reusable instructions (agent skills), the smallest model that handles each step well (compared across providers on his own tests), and hosted agent platforms for long-running tasks.
 This assistant is itself a small example: it answers only from approved facts, follows guardrails, and points visitors to the demos. It runs on Gemma, an open-source model, on Cloudflare's free tier, because short questions over a fixed set of facts don't need a larger paid model. That's the "pick the model per task" idea in practice.
 
 Skills
