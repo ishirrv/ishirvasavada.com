@@ -62,7 +62,7 @@ button{font:inherit;color:inherit}
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--top-bg,color-mix(in srgb,var(--paper) 88%,transparent));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
 .mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;letter-spacing:-.01em}
-.mark svg{display:block}
+.mark img{display:block;width:28px;height:28px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--rule)}
 .nav{display:flex;gap:4px;align-items:center}
 .nav a{font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.08em;text-decoration:none;color:var(--ink-2);padding:8px 10px;border-radius:6px}
 .nav a:hover{color:var(--ink);background:var(--accent-soft)}
@@ -929,6 +929,16 @@ html:has(.demo[open]){overflow:hidden}
 
 /* ═════════ redesign: role lens, proof stats, stories, journey cards, badges, endorsements, ⌘K ═════════ */
 /* proof stats */
+.range{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 24px;align-items:start;margin-top:44px;padding-top:18px;border-top:1px solid var(--rule)}
+.range-k{margin:0;padding-top:9px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.range ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.rg-i{display:flex;flex-direction:column;gap:4px;width:100%;height:100%;padding:10px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--panel);color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:border-color .15s ease,transform .15s ease}
+.rg-i:hover{border-color:var(--ink-3);transform:translateY(-1px)}
+.rg-i:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rg-i b{font-weight:600;font-size:var(--t-sm)}
+.rg-i small{display:block;font-size:12.5px;line-height:1.4;color:var(--ink-2)}
+@media (max-width:1100px){ .range ul{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (max-width:620px){ .range{grid-template-columns:1fr;margin-top:32px} .range-k{padding-top:0} .range ul{grid-template-columns:repeat(2,minmax(0,1fr))} }
 .stat.go{display:block;color:inherit;text-decoration:none;cursor:pointer;transition:background .2s ease}
 .stat.go .proof{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:var(--accent);opacity:.75;transition:opacity .2s ease,gap .2s ease}
 .stat.go:hover .proof,.stat.go:focus-visible .proof{opacity:1;gap:9px}
@@ -978,8 +988,6 @@ html:has(.demo[open]){overflow:hidden}
 @media (max-width:1100px){ .jrow{grid-auto-columns:minmax(260px,calc((100% - 32px)/3))} }
 @media (max-width:700px){ .jrow{grid-auto-columns:82%} .jarrows{display:none} }
 /* range chips + badge shelf */
-.range{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.range span{padding:7px 12px;border:1px solid var(--rule);border-radius:999px;background:var(--panel);font-size:13px}
 .shelf-h{margin:36px 0 12px}
 .shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
 .badge{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--rule);border-radius:14px;background:var(--panel)}
@@ -1046,7 +1054,7 @@ html:has(.demo[open]){overflow:hidden}
 <header class="top">
   <div class="wrap">
     <a class="mark" href="#top" aria-label="Ishir Vasavada, home">
-      <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="var(--accent)"/><g fill="none" stroke="var(--accent-ink)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 30v16"/><path d="M27 31l8.5 15L48 16"/></g><circle cx="17.5" cy="18.5" r="5" fill="var(--accent-ink)"/></svg>
+      <img src="media/ishir-mark.webp" alt="" width="28" height="28">
       <span>Ishir Vasavada</span>
     </a>
     <nav class="nav" aria-label="Sections">
@@ -1067,7 +1075,7 @@ html:has(.demo[open]){overflow:hidden}
     <div>
       <div class="who">
         <img class="avatar" src="media/ishir-portrait.webp" alt="" width="64" height="64">
-        <div><div class="name">Ishir Vasavada</div><div class="sub">Product leader · Builder · Techstars founder</div></div>
+        <div><div class="name">Ishir Vasavada</div><div class="sub">Product generalist · Builder · Techstars founder</div></div>
       </div>
       <h1 id="h-hero">I turn messy problems into <em>products people rely on.</em></h1>
       <p class="intro">6+ years across enterprise software, startups and finance, with products tied to <strong>$50MM+</strong> in revenue, deals and savings. I co-founded a Techstars-backed startup and still build hands-on, AI included.</p>
@@ -1084,6 +1092,7 @@ html:has(.demo[open]){overflow:hidden}
       <a class="stat go" href="#eco" data-go="eco"><div class="v num">$200K+</div><div class="l">raised for the startup I co-founded</div><span class="proof">Try the Ecodrop app <span aria-hidden="true">→</span></span></a>
     </div>
   </div>
+  <div class="range" aria-labelledby="h-range"><p class="range-k" id="h-range">Range</p><ul><li><button type="button" class="rg-i" data-t="role" data-v="Goldman Sachs"><b>Finance</b><small>Portfolio analysis for wealth clients at Goldman Sachs</small></button></li><li><button type="button" class="rg-i" data-t="role" data-v="Capgemini"><b>Consulting</b><small>Led the technical plan for a site rebuild at Capgemini</small></button></li><li><button type="button" class="rg-i" data-t="role" data-v="Zuora"><b>Product</b><small>Platform products at Zuora and OneTrust</small></button></li><li><button type="button" class="rg-i" data-t="role" data-v="OneTrust"><b>Go-to-market</b><small>An upsell strategy that added $5MM+ at OneTrust</small></button></li><li><button type="button" class="rg-i" data-t="work" data-v=""><b>Engineering</b><small>I build hands-on. Every demo here runs live</small></button></li><li><button type="button" class="rg-i" data-t="role" data-v="Ecodrop Technologies"><b>Founder</b><small>App, hardware, partners and fundraising at Ecodrop</small></button></li></ul></div>
 </section>
 
 <!-- ═══════════ WORK ═══════════ -->
@@ -1427,9 +1436,6 @@ html:has(.demo[open]){overflow:hidden}
 
   <div class="jarrows" aria-hidden="false"><button type="button" id="j-prev" aria-label="Previous roles"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="j-next" aria-label="More roles"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
   <div class="jrow" id="jrow" aria-label="Roles, newest first"></div>
-
-  <p class="small-h shelf-h">Range</p>
-  <div class="range"><span>Strategy, discovery and go-to-market</span><span>Technical depth, from architecture to data</span><span>Pricing and unit economics</span><span>Hands-on building, from apps to agents</span></div>
 
   <p class="small-h shelf-h">Credentials</p>
   <div class="shelf" id="shelf"></div>
@@ -2335,6 +2341,14 @@ document.querySelectorAll('.trace').forEach(tr => {
   const k = (new URLSearchParams(location.search).get('theme') || '').toLowerCase();
   if (B[k]) apply(k);
 }
+
+/* ───── range: each kind of work links to its proof ───── */
+document.querySelector('.range ul').addEventListener('click', e => {
+  const b = e.target.closest('.rg-i'); if (!b) return;
+  if (b.dataset.t === 'role') document.dispatchEvent(new CustomEvent('iv:role', { detail: b.dataset.v }));
+  else $('#work').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  track('proof', 'range-' + b.querySelector('b').textContent.toLowerCase());
+});
 
 /* ───── hero: numbers count up, and each one links to its proof ───── */
 {

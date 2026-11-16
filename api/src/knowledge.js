@@ -64,6 +64,7 @@ Experience
 5. Private Wealth Management & Advisory Intern, Goldman Sachs (Atlanta, Jul 2018 to Jun 2019)
 - Supported financial analysis and portfolio strategy that added 100 to 125 basis points to investment returns and cut tax liabilities by 10%+ for high-net-worth clients.
 
+Range (he describes himself as a product generalist): finance at Goldman Sachs, consulting at Capgemini, platform product management at Zuora and OneTrust, go-to-market (the OneTrust upsell strategy), hands-on building (the demos on this site), and founding Ecodrop (app, hardware, partners, fundraising).
 Career path: started in finance, moved into technology consulting, then product management. Co-founding a startup taught him to build from zero, and he brings that to enterprise products.
 
 Products on this site (each one is a live demo; use the button ids above)
