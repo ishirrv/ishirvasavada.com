@@ -996,49 +996,6 @@ html:has(.demo[open]){overflow:hidden}
 .stat.go:hover .proof,.stat.go:focus-visible .proof{opacity:1;gap:9px}
 .stat.go:hover .v{color:var(--accent-hi,var(--accent))}
 .stat.go:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
-/* story ring on the avatar */
-.av-btn{position:relative;flex:none;padding:3px;border:0;border-radius:50%;background:conic-gradient(from 200deg,var(--accent),var(--accent-hi,var(--accent)),#F2A93B,var(--accent));cursor:pointer;transition:transform .2s ease}
-.av-btn:hover{transform:scale(1.04)}
-.av-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.av-btn .avatar{display:block;border:3px solid var(--paper)}
-.av-btn.seen{background:var(--rule)}
-.av-hint{position:absolute;right:-4px;bottom:-2px;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--paper);border:2px solid var(--paper)}
-/* stories */
-.stories{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgb(6 8 12 / .78);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);animation:st-in .25s ease}
-.stories[hidden]{display:none}
-@keyframes st-in{from{opacity:0}}
-.st-card{position:relative;width:min(400px,100vw);height:min(700px,100dvh);border-radius:22px;overflow:hidden;color:#fff;background:#111;box-shadow:0 40px 100px -30px rgb(0 0 0 / .8);user-select:none;-webkit-user-select:none}
-.st-card::before{content:"";position:absolute;inset:0 0 auto;height:140px;z-index:2;background:linear-gradient(rgb(0 0 0 / .5),transparent);pointer-events:none}
-.st-bars{position:absolute;inset:14px 14px auto;z-index:3;display:flex;gap:4px}
-.st-bars i{flex:1;height:3px;border-radius:2px;background:rgb(255 255 255 / .3);overflow:hidden}
-.st-bars i b{display:block;height:100%;width:0;background:#fff}
-.st-bars i.done b{width:100%}
-.st-head{position:absolute;inset:28px 14px auto;z-index:3;display:flex;align-items:center;gap:10px}
-.st-head img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1.5px solid rgb(255 255 255 / .8)}
-.st-head .nm{font-weight:600;font-size:14px}
-.st-head .kk{font-size:12px;opacity:.75}
-.st-head .grow{flex:1;min-width:0}
-.st-x{width:34px;height:34px;display:grid;place-items:center;border:0;border-radius:50%;background:rgb(0 0 0 / .25);color:#fff;cursor:pointer}
-.st-x:focus-visible,.st-nav:focus-visible{outline:2px solid #fff;outline-offset:2px}
-.st-slide{position:absolute;inset:0;display:none}
-.st-slide.on{display:block;animation:st-fade .35s ease}
-@keyframes st-fade{from{opacity:.2;transform:scale(1.02)}}
-.st-art{position:absolute;inset:0}
-.st-art svg{position:absolute;inset:0;width:100%;height:100%}
-.st-copy{position:absolute;inset:auto 0 0;z-index:2;pointer-events:none;padding:90px 24px 30px;background:linear-gradient(transparent,rgb(0 0 0 / .72) 42%)}
-.st-copy .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
-.st-copy h3{margin:8px 0 10px;font-family:var(--f-display);font-size:1.75rem;line-height:1.12;letter-spacing:-.02em;color:#fff}
-.st-copy p{margin:0;font-size:15px;line-height:1.5;color:rgb(255 255 255 / .9)}
-.st-tag{display:inline-flex;margin:14px 6px 0 0;padding:5px 10px;border-radius:999px;background:rgb(255 255 255 / .16);font-size:12px;font-weight:500}
-.st-tap{position:absolute;top:70px;bottom:0;z-index:3;width:38%;border:0;background:none;cursor:pointer}
-.st-tap.prev{left:0}.st-tap.next{right:0;width:62%}
-.st-nav{position:absolute;top:50%;z-index:4;width:40px;height:40px;margin-top:-20px;display:grid;place-items:center;border:0;border-radius:50%;background:rgb(255 255 255 / .9);color:#111;cursor:pointer;box-shadow:0 6px 18px rgb(0 0 0 / .35)}
-.st-nav.prev{left:calc(50% - 200px - 60px)}.st-nav.next{right:calc(50% - 200px - 60px)}
-.st-nav[disabled]{opacity:.25;cursor:default}
-.st-bub{fill:rgb(255 255 255 / .55);animation:st-bub 6s linear infinite}
-@keyframes st-bub{from{transform:translateY(0)}to{transform:translateY(-760px)}}
-@media (max-width:520px){ .st-card{border-radius:0;height:100dvh} .st-nav{display:none} }
-@media (prefers-reduced-motion:reduce){ .stories,.st-slide.on{animation:none} .st-bub{animation:none} }
 /* role lens */
 .lens{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:-8px 0 14px}
 .lens .small-h{margin:0 6px 0 0}
@@ -1093,10 +1050,13 @@ html:has(.demo[open]){overflow:hidden}
 .badge .bs{font-size:12px;color:var(--ink-3);margin-top:2px}
 /* endorsements */
 .endorse{margin-top:56px}
-.e-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px}
+.e-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px;align-items:stretch}
 .e-card{position:relative;display:flex;flex-direction:column;gap:16px;padding:22px;border:1px solid var(--rule);border-radius:16px;background:var(--panel)}
 .e-card::before{content:"“";position:absolute;top:6px;right:18px;font:700 64px/1 Georgia,serif;color:var(--accent);opacity:.18}
-.e-q{margin:0;padding-right:30px;font-size:15px;line-height:1.55;color:var(--ink)}
+.e-q{margin:0;padding-right:30px;font-size:14.5px;line-height:1.6;color:var(--ink)}
+.e-q p{margin:0}.e-q p + p{margin-top:10px}
+.e-nm,.e-ti{display:block}
+.e-co{color:var(--ink);font-weight:500}
 .e-q.ph{color:var(--ink-3);font-style:italic}
 .e-p{display:flex;align-items:center;gap:12px;margin-top:auto}
 .e-av{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:var(--ec);color:#fff;font-weight:600;object-fit:cover}
@@ -1168,7 +1128,7 @@ html:has(.demo[open]){overflow:hidden}
   <div class="hero-grid">
     <div>
       <div class="who">
-        <button class="av-btn" type="button" aria-label="Watch my stories"><img class="avatar" src="media/ishir-portrait.webp" alt="" width="64" height="64"><span class="av-hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <img class="avatar" src="media/ishir-portrait.webp" alt="" width="64" height="64">
         <div><div class="name">Ishir Vasavada</div><div class="sub">Product leader · Builder · Techstars founder</div></div>
       </div>
       <h1 id="h-hero">I turn messy problems into <em>products people rely on.</em></h1>
@@ -1584,17 +1544,6 @@ html:has(.demo[open]){overflow:hidden}
   <div class="bp-foot"><button class="bp-reset" id="bp-reset" type="button">Keep the default look</button><span class="bp-n">Colors and type only. Not affiliated.</span></div>
 </section>
 <div class="bp-toast" id="bp-toast" role="status" hidden></div>
-
-<div class="stories" id="stories" role="dialog" aria-modal="true" aria-label="Stories" hidden>
-  <button class="st-nav prev" type="button" id="st-prev" aria-label="Previous story"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-  <div class="st-card" id="st-card">
-    <div class="st-bars" id="st-bars"></div>
-    <div class="st-head"><img src="media/ishir-portrait.webp" alt=""><div class="grow"><div class="nm">Ishir Vasavada</div><div class="kk" id="st-k"></div></div><button class="st-x" type="button" id="st-x" aria-label="Close stories"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-    <div id="st-slides"></div>
-    <button class="st-tap prev" type="button" tabindex="-1" aria-hidden="true"></button><button class="st-tap next" type="button" tabindex="-1" aria-hidden="true"></button>
-  </div>
-  <button class="st-nav next" type="button" id="st-next" aria-label="Next story"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-</div>
 
 <dialog class="kpal" id="kpal" aria-label="Search the site">
   <div class="kpal-q"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="kpal-in" type="text" placeholder="Jump to a demo, section or action" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="kpal-l" aria-label="Search"><kbd>esc</kbd></div>
@@ -2249,18 +2198,17 @@ document.addEventListener('click', e => {
   // Recommendations from LinkedIn, copied word for word. Leave q empty until the real text is in.
   const E = [
     { n: 'Shane Wiggins', i: 'SW', t: 'Building the Control Plane for AI', r: 'Managed Ishir directly', c: '#3B6FD8',
-      q: 'We had the great privilege and honor seeing Ishir blossom into a core role on our Product Management team. It was remarkable to see how quickly he onboarded, executed and excelled while owning a key platform initiative.' },
-    { n: 'Zoey (Zhenghe) Zhang', i: 'ZZ', t: 'Senior Product Designer at ServiceTitan', r: 'Worked with Ishir on the same team', c: '#C2477B',
-      q: 'I worked closely with Ishir on the Object Manager product at OneTrust. Ishir always provided detailed and comprehensive documentations to help me and the team understand the business context and requirements.' },
-    { n: 'Mounika Kasaram', i: 'MK', t: 'Solution Architect at Capgemini', r: 'Was senior to Ishir', c: '#2E8F6E',
-      q: 'I worked with Ishir directly as an Engineering Manager. He is a true team player and has a calm personality that made it seamless to work with him.' },
+      q: ['We had the great privilege and honor seeing Ishir blossom into a core role on our Product Management team. It was remarkable to see how quickly he onboarded, executed and excelled while owning a key platform initiative. Ishir maintains his cool, calm and collected demeanor while providing clear and meaningful guidance to the team of customers, engineers, UX designers, tech writers and consultants.',
+          'Ishir is an absolute pleasure to work with and a product professional; any team would be lucky to land him.'] },
+    { n: 'Zoey (Zhenghe) Zhang', i: 'ZZ', t: 'Senior Product Designer', co: 'ServiceTitan', r: 'Worked with Ishir on the same team', c: '#C2477B',
+      q: ['I worked closely with Ishir on the Object Manager product at OneTrust. Ishir always provided detailed and comprehensive documentations to help me and the team understand the business context and requirements. His understanding of product goals helped in shaping the UX solutions and building a frictionless experience for our users. He is detail-oriented, making sure that each action item gets addressed before the next sync meeting. I enjoyed working with Ishir -- he would be a great asset to any team.'] },
+    { n: 'Mounika Kasaram', i: 'MK', t: 'Solution Architect', co: 'Capgemini', r: 'Was senior to Ishir but didn’t manage Ishir directly', c: '#2E8F6E',
+      q: ['I worked with Ishir directly as an Engineering Manager. He is a true team player and has a calm personality that made it seamless to work with him.',
+          'He had thorough understanding of the business requirements and ensured clear communication of technical specs across multiple Dev teams. Resultantly, the final product was delivered on time and solved client needs. He will be a great ally for any Technical team he works with.'] },
   ];
-  const ready = E.every(e => e.q);
-  $('#e-row').innerHTML = E.map(e => `<figure class="e-card" style="--ec:${e.c};margin:0"><blockquote class="e-q${e.q ? '' : ' ph'}">${e.q ? esc(e.q) : 'Their LinkedIn recommendation goes here, word for word.'}</blockquote><figcaption class="e-p">${e.img ? `<img class="e-av" src="${e.img}" alt="">` : `<span class="e-av" aria-hidden="true">${esc(e.i || e.n[0])}</span>`}<span><span class="e-nm" style="display:block">${esc(e.n)}</span><span class="e-ti" style="display:block">${esc(e.t || 'Title and company')}</span>${e.r ? `<span class="e-r">${esc(e.r)}</span>` : ''}</span></figcaption></figure>`).join('');
-  if (!ready) {
-    if (/(^|\.)ishirvasavada\.com$/.test(location.hostname)) $('#endorse').hidden = true;
-    else $('#endorse').insertAdjacentHTML('beforeend', '<p class="e-note">Preview only: waiting for the recommendation text, titles and photos.</p>');
-  }
+  const ready = E.every(e => e.q && e.q.length);
+  $('#e-row').innerHTML = E.map(e => `<figure class="e-card" style="--ec:${e.c};margin:0"><blockquote class="e-q">${e.q.map(t => `<p>${esc(t)}</p>`).join('')}</blockquote><figcaption class="e-p"><span class="e-av" aria-hidden="true">${esc(e.i)}</span><span><span class="e-nm">${esc(e.n)}</span><span class="e-ti">${esc(e.t)}${e.co ? ` <span class="e-co">· ${esc(e.co)}</span>` : ''}</span><span class="e-r">${esc(e.r)}</span></span></figcaption></figure>`).join('');
+  if (!ready) $('#endorse').hidden = true;
 }
 
 /* ───── risk workflows ───── */
@@ -2568,59 +2516,6 @@ document.querySelectorAll('.trace').forEach(tr => {
   });
 }
 
-/* ───── stories behind the photo ───── */
-{
-  const ST = [
-    { k: 'New industry', h: 'Learning how buildings get built', p: 'I stepped into residential construction to support a builder on technology and operations. That meant learning the engineering behind site work, then streamlining how the business runs. Two of my agent demos came out of it.', tags: ['Site work', 'Operations', 'Agents'],
-      art: `<svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice"><defs><pattern id="stg" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(255,255,255,.09)"/></pattern></defs><rect width="400" height="700" fill="#0F3460"/><rect width="400" height="700" fill="url(#stg)"/><g fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round" opacity=".9"><path d="M60 120h280v260H60z"/><path d="M200 120v120M60 240h180M240 240v140M270 240h70"/><path d="M200 210a30 30 0 0 1 30 30" stroke-width="1.6" opacity=".6"/></g><g stroke="#7FD1FF" stroke-width="2"><path d="M60 100h140M60 94v12M200 94v12"/></g><text x="130" y="92" fill="#7FD1FF" font-family="ui-monospace,monospace" font-size="14" text-anchor="middle">14′ 0″</text><g fill="#FFC857"><circle cx="300" cy="330" r="16"/></g><text x="300" y="335" fill="#0F3460" font-family="ui-monospace,monospace" font-size="15" font-weight="700" text-anchor="middle">?</text><g fill="rgba(255,255,255,.75)" font-family="ui-monospace,monospace" font-size="12"><text x="130" y="185" text-anchor="middle">LIVING</text><text x="290" y="185" text-anchor="middle">KITCHEN</text><text x="150" y="315" text-anchor="middle">BED 1</text></g></svg>` },
-  ];
-  const box = $('#stories'), slides = $('#st-slides'), bars = $('#st-bars'), av = $('.av-btn');
-  const DUR = 6500;
-  let i = 0, t0 = 0, held = 0, raf = 0, paused = false, opener = null;
-  slides.innerHTML = ST.map(s => `<div class="st-slide"><div class="st-art">${s.art}</div><div class="st-copy"><div class="k">${esc(s.k)}</div><h3>${esc(s.h)}</h3><p>${esc(s.p)}</p>${s.tags.map(t => `<span class="st-tag">${esc(t)}</span>`).join('')}</div></div>`).join('');
-  bars.innerHTML = ST.map(() => '<i><b></b></i>').join('');
-  const all = [...slides.children], bi = [...bars.children];
-  function show(n) {
-    if (n < 0) n = 0;
-    if (n >= ST.length) { close(); return; }
-    i = n; t0 = performance.now(); held = 0;
-    all.forEach((s, j) => s.classList.toggle('on', j === i));
-    bi.forEach((b, j) => { b.classList.toggle('done', j < i); b.firstChild.style.width = j < i ? '100%' : '0'; });
-    $('#st-k').textContent = ST.length > 1 ? `${ST[i].k} · ${i + 1} of ${ST.length}` : ST[i].k;
-    $('#st-prev').disabled = i === 0;
-    $('#st-prev').hidden = $('#st-next').hidden = ST.length < 2;
-  }
-  function tick(t) {
-    if (box.hidden) return;
-    if (!paused && !reduce) {
-      const k = (t - t0 - held) / DUR;
-      bi[i].firstChild.style.width = Math.min(100, k * 100) + '%';
-      if (k >= 1) show(i + 1);
-    }
-    raf = requestAnimationFrame(tick);
-  }
-  let pauseAt = 0;
-  const pause = on => { if (on && !paused) { paused = true; pauseAt = performance.now(); } else if (!on && paused) { paused = false; held += performance.now() - pauseAt; } };
-  function open() {
-    opener = document.activeElement; box.hidden = false; document.documentElement.style.overflow = 'hidden';
-    show(0); cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);
-    $('#st-x').focus({ preventScroll: true }); av.classList.add('seen'); store('iv-stories', '1'); track('story', 'open');
-  }
-  function close() { box.hidden = true; cancelAnimationFrame(raf); document.documentElement.style.overflow = ''; (opener || av).focus?.({ preventScroll: true }); }
-  if (store('iv-stories')) av.classList.add('seen');
-  av.addEventListener('click', open);
-  $('#st-x').addEventListener('click', close);
-  $('#st-prev').addEventListener('click', () => show(i - 1)); $('#st-next').addEventListener('click', () => show(i + 1));
-  box.querySelector('.st-tap.prev').addEventListener('click', () => show(i - 1));
-  box.querySelector('.st-tap.next').addEventListener('click', () => show(i + 1));
-  box.addEventListener('click', e => { if (e.target === box) close(); });
-  box.addEventListener('keydown', e => { if (e.key === 'Escape') close(); if (e.key === 'ArrowRight') show(i + 1); if (e.key === 'ArrowLeft') show(i - 1); });
-  const card = $('#st-card');
-  card.addEventListener('pointerdown', () => pause(true)); ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev => card.addEventListener(ev, () => pause(false)));
-  document.addEventListener('visibilitychange', () => pause(document.hidden));
-  document.addEventListener('iv:stories', open);
-}
-
 /* ───── ⌘K command palette ───── */
 {
   const pal = $('#kpal'), inp = $('#kpal-in'), list = $('#kpal-l');
@@ -2634,7 +2529,6 @@ document.querySelectorAll('.trace').forEach(tr => {
   C.push({ g: 'Actions', n: 'Copy email', h: 'ishirv00@gmail.com', i: 'mail', run: () => { navigator.clipboard?.writeText('ishirv00@gmail.com'); track('email'); } });
   C.push({ g: 'Actions', n: 'Open resume (PDF)', i: 'file', run: () => { open('https://ishirvasavada.com/resume.pdf', '_blank', 'noopener'); track('resume'); } });
   C.push({ g: 'Actions', n: 'Open LinkedIn', i: 'link', run: () => { open('https://www.linkedin.com/in/ishirvasavada', '_blank', 'noopener'); track('linkedin'); } });
-  C.push({ g: 'Actions', n: 'Watch my stories', i: 'play', run: () => document.dispatchEvent(new Event('iv:stories')) });
   C.push({ g: 'Actions', n: 'See this site in your company\'s style', i: 'brush', run: () => $('#bp-open').click() });
   if (API) C.push({ g: 'Actions', n: 'Ask the AI assistant', i: 'chat', run: () => $('#ask-open').click() });
   document.querySelectorAll('.bp-tile').forEach(t => C.push({ g: 'Company looks', n: `${t.textContent.trim()} look`, i: 'theme', more: true, run: () => document.dispatchEvent(new CustomEvent('iv:brand', { detail: t.dataset.k })) }));
