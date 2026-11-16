@@ -704,6 +704,25 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .ra-chip{border:1px solid var(--rule);background:var(--panel);border-radius:999px;padding:5px 12px;font-size:12.5px;color:var(--ink-2);cursor:pointer}
 .ra-chip:hover{border-color:var(--ink-3);color:var(--ink)}
 .ra-chip[aria-pressed="true"]{border-color:var(--pc);color:var(--pc);background:color-mix(in srgb,var(--pc) 9%,var(--panel))}
+.ra-pick{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 12px}
+.ra-pick-k{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-right:4px}
+.ra-opt{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px dashed var(--rule);border-radius:8px;font-size:12.5px;color:var(--ink-3);transition:all .25s ease}
+.ra-opt.on{border-style:solid;border-color:var(--pc);color:var(--ink);background:color-mix(in srgb,var(--pc) 10%,var(--panel));font-weight:500}
+.ra-opt.on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pc)}
+.ra-why{flex-basis:100%;margin:4px 0 0;font-size:13px;color:var(--ink-2);min-height:1.45em}
+.dtree{padding:14px 16px 16px;font-size:13.5px}
+.dtree ul{list-style:none;margin:0;padding:0 0 0 18px;border-left:1.5px solid var(--rule)}
+.dtree > ul{padding-left:0;border-left:0}
+.dtree li{position:relative;margin:6px 0}
+.dtree ul ul > li::before{content:"";position:absolute;left:-18px;top:.75em;width:12px;border-top:1.5px solid var(--rule)}
+.dtree .q{font-weight:600;color:var(--ink)}
+.dtree .q.fix{color:var(--ok)}
+.dtree .br{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-right:6px}
+.dtree .out{display:inline-block;padding:2px 9px;border-radius:999px;background:color-mix(in srgb,var(--pc) 12%,var(--panel));color:var(--ink);font-size:12.5px}
+.fncode{margin:0;padding:12px 0;overflow-x:auto;font:12.5px/1.65 var(--f-mono);color:var(--ink)}
+.fncode span{display:block;padding:0 16px;white-space:pre}
+.fncode span.fix{background:color-mix(in srgb,var(--ok) 13%,transparent);box-shadow:inset 3px 0 0 var(--ok)}
+.fncode .cm{color:var(--ink-3)}
 .ra-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:14px}
 .ra-tests{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:12px;color:var(--ink-2)}
 .ra .evals{display:flex;gap:3px;margin:0}
@@ -900,69 +919,13 @@ html:has(.demo[open]){overflow:hidden}
 
 /* ───── personalize: company themes ───── */
 :root[data-brand]{--ink-2:color-mix(in srgb,var(--ink) 70%,var(--paper));--ink-3:color-mix(in srgb,var(--ink) 56%,var(--paper));--rule:color-mix(in srgb,var(--ink) 14%,var(--paper));--accent-soft:color-mix(in srgb,var(--accent) 10%,transparent);--accent-mid:color-mix(in srgb,var(--accent) 28%,transparent);--grid:color-mix(in srgb,var(--ink) 4%,transparent)}
-:root.brand-fade *{transition:background-color .45s ease,color .45s ease,border-color .45s ease,fill .45s ease,stroke .45s ease !important}
 .brand-stripe{position:fixed;inset:0 0 auto;height:4px;z-index:30;pointer-events:none}
 .brand-stripe[hidden]{display:none}
-.bp-pill{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:39;display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--panel);color:var(--ink);font:500 13px/1 var(--f-body);cursor:pointer;box-shadow:0 8px 24px -12px rgb(0 0 0 / .35)}
-.bp-pill:hover{border-color:var(--ink-3)}
-.bp-pill:focus-visible,.bp-x:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.bp-pill[hidden],.bp[hidden],.bp-toast[hidden]{display:none}
-.bp-dot{width:14px;height:14px;border-radius:50%;background:conic-gradient(#4285F4,#E50914,#FF9900,#76B900,#635BFF,#4285F4)}
 :root[data-brand] .btn,:root[data-brand] .nav a.cta,:root[data-brand] .email,:root[data-brand] .ask-send,:root[data-brand] .demo-nav button,:root[data-brand] .ask-x{border-radius:var(--r-btn)}
 :root[data-brand] .btn.primary:not(.ra-gen),:root[data-brand] .nav a.cta,:root[data-brand] .ask-fab,:root[data-brand] .ask-send{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
 :root[data-brand] .btn.primary:not(.ra-gen):hover,:root[data-brand] .nav a.cta:hover{background:var(--btn);border-color:var(--btn);color:var(--btn-ink);filter:brightness(1.12)}
 :root[data-brand] .ask-spark{background:var(--btn-ink);color:var(--btn)}
 :root[data-brand] .ask-m.u{background:var(--btn);color:var(--btn-ink)}
-:root[data-brand] .bp-dot{background:var(--btn)}
-.bp{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:40;width:min(460px,calc(100vw - 32px));padding:16px 16px 12px;border:1px solid var(--rule);border-radius:16px;background:var(--panel);color:var(--ink);box-shadow:0 24px 60px -20px rgb(0 0 0 / .45);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
-.bp[data-mode="mini"]{width:min(340px,calc(100vw - 32px));padding:14px 14px 10px}
-.bp-t{margin:0 28px 0 0;font-weight:600;font-size:var(--t-md);letter-spacing:-.01em;line-height:1.25}
-.bp[data-mode="mini"] .bp-t{font-size:15px}
-.bp-s{margin:2px 0 10px;font-size:var(--t-sm);color:var(--ink-2)}
-.bp-x{position:absolute;top:8px;right:8px;width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:8px;background:none;color:var(--ink-2);cursor:pointer}
-.bp-x:hover{background:var(--accent-soft);color:var(--ink)}
-.bp-q{display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);color:var(--ink-3)}
-.bp-q:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.bp-q input{flex:1;min-width:0;padding:9px 0;border:0;outline:0;background:transparent;color:var(--ink);font:500 var(--t-sm)/1.3 var(--f-body)}
-.bp-q input::placeholder{color:var(--ink-3);font-weight:400}
-.bp-q input::-webkit-search-cancel-button{display:none}
-/* first visit: a short row of well-known names */
-.bp-pop{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.bp-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px 5px 6px;border:1px solid var(--rule);border-radius:999px;background:var(--panel);color:var(--ink);font:500 12.5px/1.2 var(--f-body);cursor:pointer;transition:border-color .15s ease,transform .15s ease}
-.bp-chip:hover,.bp-chip:focus-visible{border-color:var(--ink-3);transform:translateY(-1px);outline:0}
-.bp-chip:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.bp-chip i{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--t-paper) 0 50%,var(--t-btn) 50% 100%);box-shadow:inset 0 0 0 1px rgb(0 0 0 / .14)}
-/* full view: type filters and a dense grid */
-.bp-cats{display:flex;gap:6px;margin:10px -16px 0;padding:0 16px 2px;overflow-x:auto;scrollbar-width:none;scroll-padding-inline:16px}
-.bp-cats::-webkit-scrollbar{display:none}
-.bp-cat{flex:none;padding:5px 10px;border:1px solid var(--rule);border-radius:999px;background:none;color:var(--ink-2);font:500 12px/1.2 var(--f-body);white-space:nowrap;cursor:pointer}
-.bp-cat:hover{color:var(--ink);border-color:var(--ink-3)}
-.bp-cat[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.bp-cat:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.bp-cat small{margin-left:4px;font-size:11px;opacity:.65}
-.bp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:10px -4px 0;padding:4px;max-height:min(264px,40dvh);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;align-content:start}
-.bp[data-mode="mini"] :is(.bp-cats,.bp-grid,.bp-empty,.bp-reset),.bp[data-mode="full"] :is(.bp-pop,.bp-all){display:none}
-.bp-tile{display:flex;flex-direction:column;gap:5px;padding:5px 5px 6px;border:1px solid var(--rule);border-radius:10px;background:var(--panel);color:var(--ink);font:500 12px/1.2 var(--f-body);text-align:left;cursor:pointer;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
-.bp-tile:hover,.bp-tile:focus-visible{transform:translateY(-2px);border-color:var(--ink-3);box-shadow:0 8px 18px -12px rgb(0 0 0 / .5);outline:0}
-.bp-tile:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.bp-tile[aria-selected="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
-.bp-tile[hidden]{display:none}
-.bp-sw{position:relative;display:block;height:34px;border-radius:6px;overflow:hidden;background:var(--t-paper);box-shadow:inset 0 0 0 1px rgb(0 0 0 / .08)}
-.bp-sw::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:var(--t-stripe,transparent)}
-.bp-sw b{position:absolute;left:6px;top:9px;width:46%;height:4px;border-radius:2px;background:var(--t-ink);opacity:.85}
-.bp-sw s{position:absolute;left:6px;top:16px;width:30%;height:4px;border-radius:2px;background:var(--t-hi)}
-.bp-sw i{position:absolute;left:6px;bottom:4px;width:36%;height:7px;border-radius:var(--t-r);background:var(--t-btn)}
-.bp-tile[aria-selected="true"] .bp-sw::after{content:"";position:absolute;right:4px;bottom:4px;width:13px;height:13px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/9px no-repeat;box-shadow:0 1px 3px rgb(0 0 0 / .35)}
-.bp-nm{padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bp-empty{margin:12px 0 4px;font-size:var(--t-sm);color:var(--ink-2)}
-.bp-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding-top:9px;border-top:1px solid var(--rule)}
-.bp-reset,.bp-all{padding:0;border:0;background:none;color:var(--accent);font:500 13px/1.3 var(--f-body);cursor:pointer;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
-.bp-reset:focus-visible,.bp-all:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-.bp-foot .bp-n{margin:0;text-align:right}
-.bp-n{margin:10px 0 0;font-size:11px;color:var(--ink-3)}
-.bp-toast{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:calc(max(20px,env(safe-area-inset-bottom)) + 48px);z-index:39;max-width:min(340px,calc(100vw - 32px));padding:10px 14px;border-radius:12px;background:var(--ink);color:var(--paper);font-size:var(--t-sm);box-shadow:0 12px 30px -12px rgb(0 0 0 / .5);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
-@media (max-width:560px){ .bp,.bp[data-mode="mini"]{left:12px;right:12px;bottom:12px;width:auto} .bp-cats{margin-inline:-14px;padding-inline:14px} .bp-pill{left:12px;bottom:max(20px,env(safe-area-inset-bottom));padding:10px 13px 10px 11px} }
-@media (prefers-reduced-motion:reduce){ .bp,.bp-toast{animation:none} :root.brand-fade *{transition:none !important} }
 
 /* ═════════ redesign: role lens, proof stats, stories, journey cards, badges, endorsements, ⌘K ═════════ */
 /* proof stats */
@@ -1068,8 +1031,8 @@ html:has(.demo[open]){overflow:hidden}
 /* dark mode: depth and glow */
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .hero{background:radial-gradient(55% 75% at 14% 22%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 72%),radial-gradient(40% 60% at 92% 30%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%)} }
 :root[data-theme="dark"] .hero{background:radial-gradient(55% 75% at 14% 22%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 72%),radial-gradient(40% 60% at 92% 30%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%)}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .pcard,:root:not([data-theme="light"]) .jcard,:root:not([data-theme="light"]) .badge,:root:not([data-theme="light"]) .e-card,:root:not([data-theme="light"]) .mx-step,:root:not([data-theme="light"]) .demo,:root:not([data-theme="light"]) .ask,:root:not([data-theme="light"]) .bp,:root:not([data-theme="light"]) .kpal,:root:not([data-theme="light"]) .btn:not(.primary){box-shadow:inset 0 1px 0 rgb(255 255 255 / .045)} }
-:root[data-theme="dark"] .pcard,:root[data-theme="dark"] .jcard,:root[data-theme="dark"] .badge,:root[data-theme="dark"] .e-card,:root[data-theme="dark"] .mx-step,:root[data-theme="dark"] .demo,:root[data-theme="dark"] .ask,:root[data-theme="dark"] .bp,:root[data-theme="dark"] .kpal,:root[data-theme="dark"] .btn:not(.primary){box-shadow:inset 0 1px 0 rgb(255 255 255 / .045)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .pcard,:root:not([data-theme="light"]) .jcard,:root:not([data-theme="light"]) .badge,:root:not([data-theme="light"]) .e-card,:root:not([data-theme="light"]) .mx-step,:root:not([data-theme="light"]) .demo,:root:not([data-theme="light"]) .ask,:root:not([data-theme="light"]) .kpal,:root:not([data-theme="light"]) .btn:not(.primary){box-shadow:inset 0 1px 0 rgb(255 255 255 / .045)} }
+:root[data-theme="dark"] .pcard,:root[data-theme="dark"] .jcard,:root[data-theme="dark"] .badge,:root[data-theme="dark"] .e-card,:root[data-theme="dark"] .mx-step,:root[data-theme="dark"] .demo,:root[data-theme="dark"] .ask,:root[data-theme="dark"] .kpal,:root[data-theme="dark"] .btn:not(.primary){box-shadow:inset 0 1px 0 rgb(255 255 255 / .045)}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .pcard:hover{box-shadow:inset 0 1px 0 rgb(255 255 255 / .06),0 18px 40px -22px color-mix(in srgb,var(--pc) 60%,transparent)} }
 :root[data-theme="dark"] .pcard:hover{box-shadow:inset 0 1px 0 rgb(255 255 255 / .06),0 18px 40px -22px color-mix(in srgb,var(--pc) 60%,transparent)}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .band{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)} }
@@ -1173,7 +1136,7 @@ html:has(.demo[open]){overflow:hidden}
   <!-- Rules -->
   <article class="build" aria-labelledby="h-rules">
     <div class="build-head">
-      <div><h3 id="h-rules">Agentic rules engine</h3><p>Based on the agentic rules engine I launched. Describe a billing policy in plain English. An agent turns it into a decision table, tests it, fixes what fails, then waits for approval.</p></div>
+      <div><h3 id="h-rules">Agentic rules engine</h3><p>Based on the agentic rules engine I launched. Describe a billing policy in plain English. An agent picks the right feature for it (a decision table, a decision tree or a JavaScript function), builds the rule, tests it, fixes what fails, then waits for approval.</p></div>
       <div class="meta"><span class="chip a">MCP context</span><span class="chip a">evals</span><span class="chip">guardrails</span></div>
     </div>
     <dl class="brief">
@@ -1187,6 +1150,7 @@ html:has(.demo[open]){overflow:hidden}
         <p class="ra-label" id="ra-label">Describe a policy in plain English</p>
         <div class="ra-box"><div class="ra-input" id="ra-input" aria-labelledby="ra-label"></div><button class="btn primary ra-gen" type="button" id="ra-gen">Generate</button></div>
         <div class="ra-chips" id="prompts" role="group" aria-label="Example policies"></div>
+        <div class="ra-pick" id="ra-pick" aria-live="polite"><span class="ra-pick-k">Feature</span><span class="ra-opt" data-t="table">Decision table</span><span class="ra-opt" data-t="tree">Decision tree</span><span class="ra-opt" data-t="fn">JavaScript function</span><p class="ra-why" id="ra-why"></p></div>
         <div class="dtable" id="rule-out" aria-live="polite"></div>
         <div class="ra-foot">
           <div class="ra-tests"><div class="evals" id="evals" aria-hidden="true"></div><span id="ev-text">12 / 12 cases passed</span></div>
@@ -1492,20 +1456,6 @@ html:has(.demo[open]){overflow:hidden}
 </main>
 
 <div class="brand-stripe" id="brand-stripe" aria-hidden="true" hidden></div>
-<button class="bp-pill" id="bp-open" type="button" aria-controls="bp" aria-expanded="false"><span class="bp-dot" aria-hidden="true"></span><span id="bp-label">Personalize</span></button>
-<section class="bp" id="bp" role="dialog" aria-labelledby="bp-t" aria-describedby="bp-s" data-mode="full" hidden>
-  <button class="bp-x" id="bp-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  <p class="bp-t" id="bp-t">See this site in your company's colors</p>
-  <p class="bp-s" id="bp-s">Optional. Pick where you work.</p>
-  <label class="bp-q"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="bp-in" type="search" placeholder="Search companies" autocomplete="off" spellcheck="false" aria-label="Search companies" aria-controls="bp-grid"></label>
-  <div class="bp-pop" id="bp-pop" aria-label="Popular"></div>
-  <div class="bp-cats" id="bp-cats" role="tablist" aria-label="Filter by type"></div>
-  <div class="bp-grid" id="bp-grid" role="listbox" aria-label="Companies"></div>
-  <p class="bp-empty" id="bp-empty" hidden>No match. Try another name, or keep the default look.</p>
-  <div class="bp-foot"><button class="bp-reset" id="bp-reset" type="button">Keep the default look</button><button class="bp-all" id="bp-all" type="button">Browse all</button><span class="bp-n">Colors and type only. Not affiliated.</span></div>
-</section>
-<div class="bp-toast" id="bp-toast" role="status" hidden></div>
-
 <dialog class="kpal" id="kpal" aria-label="Search the site">
   <div class="kpal-q"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="kpal-in" type="text" placeholder="Jump to a demo, section or action" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="kpal-l" aria-label="Search"><kbd>esc</kbd></div>
   <div class="kpal-l" id="kpal-l" role="listbox"></div>
@@ -1704,40 +1654,58 @@ document.addEventListener('click', e => {
 
 /* ───── rules ───── */
 {
+  // Each policy goes to the feature that fits it: a table for lookups, a tree for if-then steps, a function for custom math.
+  const KIND = { table: 'decision table', tree: 'decision tree', fn: 'JavaScript function' };
   const P = [
-    { k:'Discount policy', q:'Give APAC accounts 10% off when they upgrade within 30 days of renewal.',
+    { k:'Discount policy', type:'table', why:'A decision table: the rule is a lookup on a few fixed values (region, event, days before renewal).',
+      q:'Give APAC accounts 10% off when they upgrade within 30 days of renewal.',
       fail:6,
-      trace:[['Read data','Read the billing data model: 3 objects, 41 fields','schema.lookup(Account, Subscription, Order) via MCP'],['Understand','Trigger: an upgrade. Conditions: region and a 30-day window.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test',"11 of 12 cases passed. Case 7 failed: the renewal date was read in UTC instead of the customer's timezone.",'evals.run(12)','warn'],['Fix',"Version 2 compares dates in the customer's timezone",'rules.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Reversible, touches no personal data, runs as a dry run first','guardrails.check()'],['Approval','Waiting on a billing admin','request_approval(billing_admin)']],
+      trace:[['Read data','Read the billing data model: 3 objects, 41 fields','schema.lookup(Account, Subscription, Order) via MCP'],['Understand','Trigger: an upgrade. Conditions: region and a 30-day window.','plan.intent()'],['Choose feature','Decision table: a lookup on fixed values','route(intent) → decision_table'],['Draft','Drafted version 1 of the decision table','tables.draft()'],['Test',"11 of 12 cases passed. Case 7 failed: the renewal date was read in UTC instead of the customer's timezone.",'evals.run(12)','warn'],['Fix',"Version 2 compares dates in the customer's timezone",'tables.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Reversible, touches no personal data, runs as a dry run first','guardrails.check()'],['Approval','Waiting on a billing admin','request_approval(billing_admin)']],
       table:{in:['Region','Event','Days before renewal'], fix:2, orig:'Days before renewal (UTC)', fixed:"Days before renewal (customer's timezone)",
         out:['Discount','Applies to','Sign-off'],
         rows:[['APAC','Upgrade','0–30','10%','Upgrade amount','Billing admin'],['APAC','Upgrade','31 or more','None','—','—'],['All other regions','Any','Any','None','—','—']],
         note:"v2 counts days in the customer's timezone, so an upgrade late on day 30 still qualifies."} },
-    { k:'Approval policy', q:'Hold any invoice over $50K for finance approval before it posts.',
-      fail:-1,
-      trace:[['Read data','Read the billing data model: 2 objects, 27 fields','schema.lookup(Invoice, Account) via MCP'],['Understand','Trigger: a new invoice. Gate: the total.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test','All 12 cases pass','evals.run(12)'],['Safety','Only pauses posting. Changes no data.','guardrails.check()'],['Approval','Waiting on the finance lead','request_approval(finance_lead)']],
-      table:{in:['Invoice total (account currency)'], fix:-1,
-        out:['Status','Notify'],
-        rows:[['50,000 or more','Hold for approval','Finance lead'],['Under 50,000','Post as normal','—']]} },
-    { k:'Retention policy', q:'Purge usage records older than 7 years unless the account is on legal hold.',
+    { k:'Approval routing', type:'tree', why:'A decision tree: each answer decides the next question, and the order of the questions matters.',
+      q:'Credit memos go to the controller. Invoices over $50K need finance approval, plus sales ops if the customer is new.',
+      fail:4,
+      trace:[['Read data','Read the billing data model: 3 objects, 30 fields','schema.lookup(Invoice, CreditMemo, Account) via MCP'],['Understand','Three checks: document type, total, customer age.','plan.intent()'],['Choose feature','Decision tree: if-then steps in a set order','route(intent) → decision_tree'],['Draft','Drafted version 1 of the decision tree','trees.draft()'],['Test','11 of 12 cases passed. Case 5 failed: a $60K credit memo went to finance instead of the controller.','evals.run(12)','warn'],['Fix','Version 2 checks for credit memos first','trees.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Only routes approvals. Changes no amounts.','guardrails.check()'],['Approval','Waiting on the finance lead','request_approval(finance_lead)']],
+      tree:{
+        v1:{q:'Total is $50K or more?', yes:{q:'Customer for under 90 days?', yes:{out:'Finance lead, then sales ops'}, no:{out:'Finance lead'}}, no:{q:'Is it a credit memo?', yes:{out:'Controller'}, no:{out:'Post as normal'}}},
+        v2:{q:'Is it a credit memo?', fix:true, yes:{out:'Controller'}, no:{q:'Total is $50K or more?', yes:{q:'Customer for under 90 days?', yes:{out:'Finance lead, then sales ops'}, no:{out:'Finance lead'}}, no:{out:'Post as normal'}}},
+        note:'v2 asks about credit memos first, so a large credit memo still goes to the controller.'} },
+    { k:'Usage pricing', type:'fn', why:'A JavaScript function: the charge needs custom math (free allowance, a per-call rate, a monthly cap and proration).',
+      q:'First 10,000 API calls a month are free, then $0.002 each, capped at $500 a month.',
+      fail:3,
+      trace:[['Read data','Read the usage data model: 2 objects, 18 fields','schema.lookup(Usage, Subscription) via MCP'],['Understand','A free allowance, a rate and a monthly cap.','plan.intent()'],['Choose feature','JavaScript function: custom math','route(intent) → js_function'],['Draft','Drafted version 1 of the function','functions.draft()'],['Test','11 of 12 cases passed. Case 4 failed: an account that started mid-month got the full allowance and cap.','evals.run(12)','warn'],['Fix','Version 2 prorates the allowance and cap by days active','functions.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Runs in a sandbox. Read-only access to usage.','guardrails.check()'],['Approval','Waiting on a billing admin','request_approval(billing_admin)']],
+      fn:{
+        v1:['function usageCharge(calls) {','  const free = 10000, rate = 0.002, cap = 500;','  const billable = Math.max(0, calls - free);','  return Math.min(billable * rate, cap);','}'],
+        v2:['function usageCharge(calls, daysActive, daysInMonth) {','  const share = daysActive / daysInMonth;  // part of the month the account was active','  const free = Math.round(10000 * share), rate = 0.002, cap = 500 * share;','  const billable = Math.max(0, calls - free);','  return Math.round(Math.min(billable * rate, cap) * 100) / 100;','}'],
+        fixed:[0,1,2,4],
+        note:'v2 prorates the free calls and the cap for accounts that start partway through a month.'} },
+    { k:'Retention policy', type:'table', why:'A decision table: two fixed inputs (record age, legal hold) decide one action.',
+      q:'Purge usage records older than 7 years unless the account is on legal hold.',
       fail:9,
-      trace:[['Read data','Read the data model: 3 objects, 33 fields','schema.lookup(Usage, Account, LegalHold) via MCP'],['Understand','Action: purge. Exception: legal hold.','plan.intent()'],['Draft','Drafted version 1 of the decision table','rules.draft()'],['Test',"11 of 12 cases passed. Case 10 failed: a legal hold on a parent account wasn't applied to its child accounts.",'evals.run(12)','warn'],['Fix','Version 2 checks for holds up the account hierarchy','rules.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety',"Deleted data can't come back, so it archives first and needs 2 approvers",'guardrails.check()'],['Approval','Waiting on Legal and the data owner','request_approval(legal, data_owner)']],
+      trace:[['Read data','Read the data model: 3 objects, 33 fields','schema.lookup(Usage, Account, LegalHold) via MCP'],['Understand','Action: purge. Exception: legal hold.','plan.intent()'],['Choose feature','Decision table: a lookup on fixed values','route(intent) → decision_table'],['Draft','Drafted version 1 of the decision table','tables.draft()'],['Test',"11 of 12 cases passed. Case 10 failed: a legal hold on a parent account wasn't applied to its child accounts.",'evals.run(12)','warn'],['Fix','Version 2 checks for holds up the account hierarchy','tables.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety',"Deleted data can't come back, so it archives first and needs 2 approvers",'guardrails.check()'],['Approval','Waiting on Legal and the data owner','request_approval(legal, data_owner)']],
       table:{in:['Record age','Legal hold'], fix:1, orig:'Legal hold (this account)', fixed:'Legal hold (this account or a parent)',
         out:['Action','Sign-off'],
         rows:[['Over 7 years','No','Archive, then purge','Legal and data owner'],['Over 7 years','Yes','Keep','—'],['7 years or less','Any','Keep','—']],
         note:'v2 checks parent accounts too, so a hold at the top of a hierarchy protects every account under it.'} },
   ];
-  const box = $('#prompts'), out = $('#rule-out'), tr = $('#rule-trace'), ev = $('#evals');
+  const box = $('#prompts'), out = $('#rule-out'), tr = $('#rule-trace'), ev = $('#evals'), opts = [...document.querySelectorAll('.ra-opt')], why = $('#ra-why');
   for (let i = 0; i < 12; i++) ev.appendChild(document.createElement('i'));
   const cells = [...ev.children];
   box.innerHTML = '<span class="ra-try">Try</span>' + P.map((p,i) => `<button class="ra-chip" type="button" aria-pressed="${i===0}" data-i="${i}">${esc(p.k)}</button>`).join('');
   const inputEl = $('#ra-input'), ap = $('#ra-approve');
   let curI = 0;
+  function pickShow(p) { opts.forEach(o => o.classList.toggle('on', !!p && o.dataset.t === p.type)); why.textContent = p ? p.why : 'Choosing the feature that fits this rule…'; }
   function ready(on) { ap.disabled = !on; ap.className = 'btn primary'; ap.textContent = 'Approve and publish'; }
   ap.addEventListener('click', () => {
     ap.disabled = true; ap.className = 'btn done'; ap.textContent = 'Published as a dry run';
     const st = $('#ev-state'); st.textContent = 'live in dry run'; st.className = 'state ok';
   });
   $('#ra-gen').addEventListener('click', () => run(curI));
+  const cap = (label, v) => `<div class="dt-cap"><span>${label}</span><span>${v ? 'v2' : 'v1'}</span></div>`;
+  const note = (T, v2) => v2 && T.note ? `<p class="dt-note">${esc(T.note)}</p>` : '';
   // decision table: input columns, then outcome columns; one row per case, first match wins
   function dt(p, v2) {
     const T = p.table, fixed = v2 && T.fix >= 0;
@@ -1745,30 +1713,43 @@ document.addEventListener('click', e => {
       + T.out.map(h => `<th class="o">${esc(h)}</th>`).join('');
     const labels = T.in.map((h, i) => i === T.fix ? (fixed ? T.fixed : T.orig) : h).concat(T.out);
     const body = T.rows.map((r, ri) => `<tr><td class="n">${ri + 1}</td>${r.map((c, ci) => `<td data-l="${esc(labels[ci])}" class="${ci >= T.in.length ? 'o' : ''}${ci === T.fix && fixed ? ' fix' : ''}">${esc(c)}</td>`).join('')}</tr>`).join('');
-    return `<div class="dt-cap"><span>Decision table · first matching row wins</span><span>${fixed ? 'v2' : 'v1'}</span></div>`
-      + `<div class="dt-scroll"><table class="dt"><thead><tr><th class="n">#</th>${head}</tr></thead><tbody>${body}</tbody></table></div>`
-      + (fixed && T.note ? `<p class="dt-note">${esc(T.note)}</p>` : '');
+    return cap('Decision table · first matching row wins', v2)
+      + `<div class="dt-scroll"><table class="dt"><thead><tr><th class="n">#</th>${head}</tr></thead><tbody>${body}</tbody></table></div>` + note(T, v2);
   }
+  // decision tree: a question per node, Yes / No branches, outcomes at the leaves
+  function tree(p, v2) {
+    const node = n => n.out ? `<span class="out">${esc(n.out)}</span>`
+      : `<span class="q${n.fix ? ' fix' : ''}">${esc(n.q)}</span><ul><li><span class="br">Yes</span>${node(n.yes)}</li><li><span class="br">No</span>${node(n.no)}</li></ul>`;
+    return cap('Decision tree · start at the top, follow each answer', v2) + `<div class="dtree"><ul><li>${node(v2 ? p.tree.v2 : p.tree.v1)}</li></ul></div>` + note(p.tree, v2);
+  }
+  // function: the code, with the lines that changed in v2 highlighted
+  function fn(p, v2) {
+    const F = p.fn, lines = v2 ? F.v2 : F.v1;
+    const html = lines.map((l, i) => { const [c, cm] = l.split('  //'); return `<span class="${v2 && F.fixed.includes(i) ? 'fix' : ''}">${esc(c)}${cm ? `<i class="cm">  //${esc(cm)}</i>` : ''}</span>`; }).join('');
+    return cap('JavaScript function · runs on each invoice', v2) + `<pre class="fncode"><code>${html}</code></pre>` + note(F, v2);
+  }
+  const render = (p, v2) => ({ table: dt, tree, fn })[p.type](p, v2);
   // row: [plain step, result, technical call, warn?]
   function final(p) {
-    inputEl.textContent = p.q; ready(true);
+    inputEl.textContent = p.q; ready(true); pickShow(p);
     rail(tr, p.trace.map(s => ({t:s[0], o:s[1], c:s[2], st: s[3] ? 'warn' : 'done'})));
-    out.innerHTML = dt(p, true); cells.forEach(c => c.className = 'p');
+    out.innerHTML = render(p, true); cells.forEach(c => c.className = 'p');
     $('#ev-text').textContent = '12 / 12 cases passed'; const st = $('#ev-state'); st.textContent = 'ready for approval'; st.className = 'state ok';
   }
   let token = 0;
   async function run(i) {
     const me = ++token, p = P[i]; curI = i;
     box.querySelectorAll('.ra-chip').forEach(b => b.setAttribute('aria-pressed', b.dataset.i == i));
-    inputEl.textContent = p.q; ready(false);
-    out.innerHTML = '<p class="dt-wait">Drafting the decision table…</p>'; cells.forEach(c => c.className = '');
+    inputEl.textContent = p.q; ready(false); pickShow(null);
+    out.innerHTML = '<p class="dt-wait">Reading the request…</p>'; cells.forEach(c => c.className = '');
     const st = $('#ev-state'); st.textContent = 'working'; st.className = 'state'; $('#ev-text').textContent = '0 / 12 cases run';
     let evalRun = 0;
     for (let s = 0; s < p.trace.length; s++) {
       if (me !== token) return;
       rail(tr, p.trace.map((x, j) => ({t:x[0], o: j === s ? 'Working…' : x[1], c:x[2], st: j < s ? (x[3] ? 'warn' : 'done') : j === s ? 'run' : 'todo'})), s);
       const name = p.trace[s][2];
-      if (name.startsWith('rules.draft') || name.startsWith('rules.revise')) { await sleep(450); out.innerHTML = dt(p, name.startsWith('rules.revise')); }
+      if (name.startsWith('route(')) { await sleep(350); pickShow(p); out.innerHTML = `<p class="dt-wait">Drafting the ${KIND[p.type]}…</p>`; }
+      if (/\.draft\(|\.revise\(/.test(name)) { await sleep(450); out.innerHTML = render(p, /\.revise\(/.test(name)); }
       if (name.startsWith('evals.run')) {
         evalRun++;
         for (let c = 0; c < 12; c++) { if (me !== token) return; const f = evalRun===1 && c===p.fail; cells[c].className = f ? 'f' : 'p'; $('#ev-text').textContent = `${c+1} / 12 cases run`; await sleep(60); }
@@ -2284,7 +2265,7 @@ document.querySelectorAll('.trace').forEach(tr => {
   label.appendChild(b);
 });
 
-/* ───── personalize: restyle the site in the visitor's company colors ───── */
+/* ───── company colors: only via a private ?theme= link ───── */
 {
   // s: the color scheme the brand is known for. a: accent for links and small text, ai: text on accent. hi: headline color.
   // btn/bi: button fill and its text, r: button corner radius. stripe: brand colors for the bar at the top (hard: equal blocks).
@@ -2333,151 +2314,26 @@ document.querySelectorAll('.trace').forEach(tr => {
     workday:    { n: 'Workday',    s: 'light', paper: '#F6F5F1', panel: '#FFFFFF', band: '#EDEBE4', ink: '#0F2E66', a: '#0F2E66', ai: '#FFFFFF', stripe: ['#FFDA61'], btn: '#0F2E66', bi: '#FFFFFF', r: '999px' },
   };
   const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink', hi: '--accent-hi', btn: '--btn', bi: '--btn-ink', r: '--r-btn', i2: '--ink-2', i3: '--ink-3', top: '--top-bg' };
-  const root = document.documentElement, baseScheme = root.getAttribute('data-theme');
-  const pill = $('#bp-open'), card = $('#bp'), grid = $('#bp-grid'), cats = $('#bp-cats'), pop = $('#bp-pop'), search = $('#bp-in'), label = $('#bp-label'), stripe = $('#brand-stripe'), toast = $('#bp-toast');
-  let toastT, current = null, previewT;
+  const root = document.documentElement, stripe = $('#brand-stripe');
   const stripeCss = b => { const c = b.stripe || []; return c.length < 2 ? (c[0] || 'transparent') : `linear-gradient(90deg,${b.hard ? c.map((x, i) => `${x} ${i * 100 / c.length}% ${(i + 1) * 100 / c.length}%`).join(',') : c.join(',')})`; };
-
-  // Types for the filter row (a company can be in more than one), other names people search by, and the first-visit shortlist.
-  const CATS = [
-    ['big', 'Big tech', 'amazon apple google meta microsoft netflix nvidia oracle cisco adobe'],
-    ['ai', 'AI', 'anthropic openai perplexity glean palantir nvidia databricks'],
-    ['data', 'Data & cloud', 'databricks snowflake datadog mongodb cloudflare twilio palantir servicenow'],
-    ['sec', 'Security', 'vanta okta crowdstrike cloudflare'],
-    ['saas', 'SaaS', 'salesforce servicenow atlassian workday hubspot notion figma canva adobe intuit shopify twilio linkedin'],
-    ['fin', 'Fintech', 'stripe paypal intuit'],
-    ['con', 'Consumer', 'airbnb uber doordash spotify netflix apple linkedin shopify'],
-  ];
-  const AKA = { meta: 'facebook instagram whatsapp', google: 'alphabet youtube gcp deepmind waymo', microsoft: 'azure github xbox', amazon: 'aws', openai: 'chatgpt', anthropic: 'claude', salesforce: 'slack tableau mulesoft', atlassian: 'jira confluence trello', intuit: 'turbotax quickbooks mailchimp credit karma', paypal: 'venmo braintree', cisco: 'webex splunk', oracle: 'netsuite', uber: 'uber eats', doordash: 'wolt', crowdstrike: 'falcon', apple: 'iphone' };
-  const POP = ['google', 'microsoft', 'amazon', 'apple', 'meta', 'salesforce', 'stripe', 'openai'];
-  const sty = b => `--t-paper:${b.paper};--t-ink:${b.ink};--t-hi:${b.hi || b.a};--t-btn:${b.btn || b.a};--t-r:${b.r || '6px'};--t-stripe:${stripeCss(b)}`;
-
-  // One swatch per company: its page color, text, headline color, button and top band.
-  grid.innerHTML = Object.entries(B).sort((x, y) => x[1].n.localeCompare(y[1].n)).map(([k, b]) =>
-    `<button class="bp-tile" type="button" role="option" aria-selected="false" data-k="${k}" style="${sty(b)}"><span class="bp-sw" aria-hidden="true"><b></b><s></s><i></i></span><span class="bp-nm">${b.n}</span></button>`).join('');
-  pop.innerHTML = POP.map(k => `<button class="bp-chip" type="button" data-k="${k}" style="${sty(B[k])}"><i aria-hidden="true"></i>${B[k].n}</button>`).join('');
-  const tiles = [...grid.querySelectorAll('.bp-tile')], chips = [...pop.children];
-  cats.innerHTML = [['all', 'All', ''], ...CATS].map(([id, n, ks], i) => `<button class="bp-cat" type="button" role="tab" aria-selected="${!i}" data-c="${id}">${n}<small>${ks ? ks.split(' ').length : tiles.length}</small></button>`).join('');
-  const catOf = Object.fromEntries(CATS.map(([id, , ks]) => [id, ks.split(' ')]));
-  let cat = 'all', shown = tiles;
-  search.placeholder = `Search ${tiles.length} companies`;
-  $('#bp-all').textContent = `Browse all ${tiles.length}`;
-  const visible = () => shown;
-  const mark = k => tiles.forEach(t => t.setAttribute('aria-selected', t.dataset.k === k));
-  const mode = m => { card.dataset.mode = m; };
-
-  function apply(k, announce) {
+  function apply(k) {
     const b = B[k];
-    if (announce && !reduce) { root.classList.add('brand-fade'); setTimeout(() => root.classList.remove('brand-fade'), 600); }
-    for (const v of Object.values(VARS)) root.style.removeProperty(v);
-    root.style.removeProperty('--f-body'); root.style.removeProperty('--f-display');
-    if (!b) {
-      delete root.dataset.brand;
-      if (baseScheme) root.setAttribute('data-theme', baseScheme); else root.removeAttribute('data-theme');
-      stripe.hidden = true; label.textContent = 'Personalize';
-      document.querySelectorAll('meta[name="theme-color"]').forEach(m => { if (m.dataset.base) m.content = m.dataset.base; });
-      return;
-    }
     root.dataset.brand = k; root.setAttribute('data-theme', b.s);
-    document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.dataset.base ??= m.content; m.content = b.paper; });
+    document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.content = b.paper; });
     for (const [f, v] of Object.entries(VARS)) if (b[f]) root.style.setProperty(v, b[f]);
-    if (b.gf && !document.getElementById('gf-' + b.gf.split(':')[0].replace(/ /g, ''))) {
-      const l = document.createElement('link'); l.id = 'gf-' + b.gf.split(':')[0].replace(/ /g, ''); l.rel = 'stylesheet';
+    if (b.gf) {
+      const l = document.createElement('link'); l.rel = 'stylesheet';
       l.href = `https://fonts.googleapis.com/css2?family=${b.gf.replace(/ /g, '+')}&display=swap`; document.head.appendChild(l);
     }
     if (b.font) { root.style.setProperty('--f-body', b.font); root.style.setProperty('--f-display', b.font); }
     if (b.display) root.style.setProperty('--f-display', b.display);
     stripe.hidden = !(b.stripe || []).length;
     stripe.style.background = stripeCss(b);
-    label.textContent = b.n;
-    if (announce) {
-      toast.textContent = `Hello, ${b.n}. This page is now in your colors.`; toast.hidden = false;
-      clearTimeout(toastT); toastT = setTimeout(() => { toast.hidden = true; }, 7000);
-    }
   }
-  const open = m => { mode(m || 'full'); card.hidden = false; pill.hidden = true; pill.setAttribute('aria-expanded', 'true'); toast.hidden = true; mark(current); };
-  const reset = () => { search.value = ''; setCat('all'); };
-  const close = () => { clearTimeout(previewT); if ((root.dataset.brand || null) !== current) apply(current, false); card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); reset(); };
-  function choose(k) {
-    current = k === 'none' ? null : k; clearTimeout(previewT);
-    store('iv-brand', k); apply(current, true); mark(current);
-    card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); reset();
-    track('theme', k);
-  }
-  function setCat(c) {
-    cat = c; cats.querySelectorAll('.bp-cat').forEach(b => b.setAttribute('aria-selected', b.dataset.c === c)); filter();
-  }
-  // Search: names first, then the start of any word (including other names like "aws" or "jira"), then anywhere.
-  const score = (k, q) => {
-    const n = B[k].n.toLowerCase(), words = `${n} ${k} ${AKA[k] || ''}`.split(/[\s.&-]+/);
-    if (n.startsWith(q) || k.startsWith(q)) return 1;
-    if (words.some(w => w.startsWith(q))) return 2;
-    if (q.length > 2 && `${n} ${AKA[k] || ''}`.includes(q)) return 3;
-    return 0;
-  };
-  function filter() {
-    const q = search.value.trim().toLowerCase();
-    const list = tiles.map((t, i) => [t, q ? score(t.dataset.k, q) : (cat === 'all' || catOf[cat].includes(t.dataset.k)) ? 1 : 0, i]);
-    list.forEach(([t, sc]) => { t.hidden = !sc; t.style.order = sc ? sc : ''; });
-    shown = list.filter(x => x[1]).sort((x, y) => x[1] - y[1] || x[2] - y[2]).map(x => x[0]);
-    $('#bp-empty').hidden = shown.length > 0;
-    grid.scrollTop = 0;
-  }
-  search.addEventListener('input', () => {
-    if (search.value.trim()) { if (card.dataset.mode === 'mini') mode('full'); if (cat !== 'all') { cat = 'all'; cats.querySelectorAll('.bp-cat').forEach(b => b.setAttribute('aria-selected', b.dataset.c === 'all')); } }
-    filter();
-  });
-  search.addEventListener('keydown', e => {
-    if (e.key === 'ArrowDown') { e.preventDefault(); (card.dataset.mode === 'mini' ? chips : shown)[0]?.focus(); }
-    if (e.key === 'Enter') { e.preventDefault(); if (search.value.trim() && shown.length) choose(shown[0].dataset.k); }
-  });
-  cats.addEventListener('click', e => { const c = e.target.closest('.bp-cat'); if (!c) return; search.value = ''; setCat(c.dataset.c); c.scrollIntoView({ block: 'nearest', inline: 'nearest' }); });
-  cats.addEventListener('keydown', e => {
-    const bs = [...cats.children], i = bs.indexOf(document.activeElement), d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-    if (d && i > -1) { e.preventDefault(); const n = bs[(i + d + bs.length) % bs.length]; n.focus(); n.click(); }
-    if (e.key === 'ArrowDown') { e.preventDefault(); shown[0]?.focus(); }
-  });
-  $('#bp-all').addEventListener('click', () => { mode('full'); (cats.querySelector('[aria-selected="true"]') || search).focus({ preventScroll: true }); });
-  grid.addEventListener('click', e => { const t = e.target.closest('.bp-tile'); if (t) choose(t.dataset.k); });
-  pop.addEventListener('click', e => { const t = e.target.closest('.bp-chip'); if (t) choose(t.dataset.k); });
-  grid.addEventListener('keydown', e => {
-    const v = shown, i = v.indexOf(document.activeElement); if (i < 0) return;
-    const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
-    const go = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: cols, ArrowUp: -cols }[e.key];
-    if (go === undefined) return;
-    e.preventDefault();
-    if (e.key === 'ArrowUp' && i < cols) { (cats.querySelector('[aria-selected="true"]') || search).focus(); return; }
-    v[Math.max(0, Math.min(v.length - 1, i + go))].focus();
-  });
-  pop.addEventListener('keydown', e => {
-    const i = chips.indexOf(document.activeElement), d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
-    if (d === undefined || i < 0) return; e.preventDefault();
-    if (i + d < 0) search.focus(); else chips[Math.min(chips.length - 1, i + d)].focus();
-  });
-  // Desktop: hovering or focusing a swatch previews it; leaving the list restores the current look.
-  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const preview = k => { clearTimeout(previewT); previewT = setTimeout(() => { if (!card.hidden && (root.dataset.brand || null) !== k) apply(k, false); }, 90); };
-  for (const el of [grid, pop]) {
-    if (canHover) {
-      el.addEventListener('pointerover', e => { const t = e.target.closest('[data-k]'); if (t) preview(t.dataset.k); });
-      el.addEventListener('pointerleave', () => preview(current));
-    }
-    el.addEventListener('focusin', e => { const t = e.target.closest('[data-k]'); if (t && canHover) preview(t.dataset.k); });
-  }
-  $('#bp-reset').addEventListener('click', () => choose('none'));
-  document.addEventListener('iv:brand', e => choose(e.detail));
-
-  pill.addEventListener('click', () => { open('full'); search.focus({ preventScroll: true }); });
-  $('#bp-x').addEventListener('click', () => { if (!store('iv-brand')) store('iv-brand', 'none'); close(); pill.focus({ preventScroll: true }); });
-  card.addEventListener('keydown', e => { if (e.key === 'Escape') $('#bp-x').click(); });
-
-  // A tagged link (?r=vanta or ?r=vanta-jane) applies that company's look without asking.
-  const q = new URLSearchParams(location.search), tag = (q.get('theme') || q.get('r') || '').toLowerCase();
-  const linked = Object.keys(B).find(k => tag === k || tag.startsWith(k + '-') || tag.startsWith(k + '_'));
-  const saved = store('iv-brand');
-  if (linked) { store('iv-brand', linked); current = linked; apply(linked, true); }
-  else if (B[saved]) { current = saved; apply(saved, false); }
-  else if (!saved) setTimeout(() => { if (card.hidden && !$('#demo').open && $('#ask').hidden) open('mini'); }, 2500);
+  // Not offered to visitors. Only a private link like ?theme=vanta shows a company's colors, for that page view only.
+  try { localStorage.removeItem('iv-brand'); } catch { /* storage blocked */ }
+  const k = (new URLSearchParams(location.search).get('theme') || '').toLowerCase();
+  if (B[k]) apply(k);
 }
 
 /* ───── hero: numbers count up, and each one links to its proof ───── */
@@ -2536,9 +2392,7 @@ document.querySelectorAll('.trace').forEach(tr => {
   C.push({ g: 'Actions', n: 'Copy email', h: 'ishirv00@gmail.com', i: 'mail', run: () => { navigator.clipboard?.writeText('ishirv00@gmail.com'); track('email'); } });
   C.push({ g: 'Actions', n: 'Open resume (PDF)', i: 'file', run: () => { open('https://ishirvasavada.com/resume.pdf', '_blank', 'noopener'); track('resume'); } });
   C.push({ g: 'Actions', n: 'Open LinkedIn', i: 'link', run: () => { open('https://www.linkedin.com/in/ishirvasavada', '_blank', 'noopener'); track('linkedin'); } });
-  C.push({ g: 'Actions', n: 'See this site in your company\'s style', i: 'brush', run: () => $('#bp-open').click() });
   if (API) C.push({ g: 'Actions', n: 'Ask the AI assistant', i: 'chat', run: () => $('#ask-open').click() });
-  document.querySelectorAll('.bp-tile').forEach(t => C.push({ g: 'Company looks', n: `${t.textContent.trim()} look`, i: 'theme', more: true, run: () => document.dispatchEvent(new CustomEvent('iv:brand', { detail: t.dataset.k })) }));
   let shown = [], sel = 0;
   function draw() {
     const q = inp.value.trim().toLowerCase();
