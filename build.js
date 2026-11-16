@@ -31,6 +31,8 @@ const head = `<!doctype html>
 <meta name="description" content="${desc}">
 <link rel="canonical" href="${SITE}/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#F1F3EF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0B1019" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
@@ -53,7 +55,7 @@ fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 fs.writeFileSync(path.join(out, 'index.html'), head + body + '\n</body>\n</html>\n');
 fs.cpSync(path.join(root, 'media'), path.join(out, 'media'), { recursive: true });
-fs.copyFileSync(path.join(root, 'favicon.svg'), path.join(out, 'favicon.svg'));
+for (const f of ['favicon.svg', 'favicon-32.png', 'apple-touch-icon.png']) fs.copyFileSync(path.join(root, f), path.join(out, f));
 if (hasResume) fs.copyFileSync(path.join(root, 'resume.pdf'), path.join(out, 'resume.pdf'));
 fs.writeFileSync(path.join(out, 'CNAME'), new URL(SITE).host + '\n');
 fs.writeFileSync(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
