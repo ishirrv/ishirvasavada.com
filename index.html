@@ -957,36 +957,54 @@ html:has(.demo[open]){overflow:hidden}
 :root[data-brand] .ask-spark{background:var(--btn-ink);color:var(--btn)}
 :root[data-brand] .ask-m.u{background:var(--btn);color:var(--btn-ink)}
 :root[data-brand] .bp-dot{background:var(--btn)}
-.bp{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:40;width:min(420px,calc(100vw - 32px));padding:18px 18px 14px;border:1px solid var(--rule);border-radius:16px;background:var(--panel);color:var(--ink);box-shadow:0 24px 60px -20px rgb(0 0 0 / .45);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
-.bp-t{margin:0 28px 0 0;font-weight:600;font-size:var(--t-md);letter-spacing:-.01em}
-.bp-s{margin:4px 0 12px;font-size:var(--t-sm);color:var(--ink-2)}
-.bp-x{position:absolute;top:10px;right:10px;width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:8px;background:none;color:var(--ink-2);cursor:pointer}
+.bp{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom));z-index:40;width:min(460px,calc(100vw - 32px));padding:16px 16px 12px;border:1px solid var(--rule);border-radius:16px;background:var(--panel);color:var(--ink);box-shadow:0 24px 60px -20px rgb(0 0 0 / .45);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
+.bp[data-mode="mini"]{width:min(340px,calc(100vw - 32px));padding:14px 14px 10px}
+.bp-t{margin:0 28px 0 0;font-weight:600;font-size:var(--t-md);letter-spacing:-.01em;line-height:1.25}
+.bp[data-mode="mini"] .bp-t{font-size:15px}
+.bp-s{margin:2px 0 10px;font-size:var(--t-sm);color:var(--ink-2)}
+.bp-x{position:absolute;top:8px;right:8px;width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:8px;background:none;color:var(--ink-2);cursor:pointer}
 .bp-x:hover{background:var(--accent-soft);color:var(--ink)}
-.bp-q{display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid var(--rule);border-radius:12px;background:var(--paper);color:var(--ink-3)}
+.bp-q{display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);color:var(--ink-3)}
 .bp-q:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.bp-q input{flex:1;min-width:0;padding:10px 0;border:0;outline:0;background:transparent;color:var(--ink);font:500 var(--t-sm)/1.3 var(--f-body)}
+.bp-q input{flex:1;min-width:0;padding:9px 0;border:0;outline:0;background:transparent;color:var(--ink);font:500 var(--t-sm)/1.3 var(--f-body)}
 .bp-q input::placeholder{color:var(--ink-3);font-weight:400}
 .bp-q input::-webkit-search-cancel-button{display:none}
-.bp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px -4px 0;padding:4px;max-height:min(312px,46dvh);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
-.bp-tile{display:flex;flex-direction:column;gap:6px;padding:6px 6px 8px;border:1px solid var(--rule);border-radius:12px;background:var(--panel);color:var(--ink);font:500 12.5px/1.2 var(--f-body);text-align:left;cursor:pointer;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+/* first visit: a short row of well-known names */
+.bp-pop{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.bp-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px 5px 6px;border:1px solid var(--rule);border-radius:999px;background:var(--panel);color:var(--ink);font:500 12.5px/1.2 var(--f-body);cursor:pointer;transition:border-color .15s ease,transform .15s ease}
+.bp-chip:hover,.bp-chip:focus-visible{border-color:var(--ink-3);transform:translateY(-1px);outline:0}
+.bp-chip:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.bp-chip i{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--t-paper) 0 50%,var(--t-btn) 50% 100%);box-shadow:inset 0 0 0 1px rgb(0 0 0 / .14)}
+/* full view: type filters and a dense grid */
+.bp-cats{display:flex;gap:6px;margin:10px -16px 0;padding:0 16px 2px;overflow-x:auto;scrollbar-width:none;scroll-padding-inline:16px}
+.bp-cats::-webkit-scrollbar{display:none}
+.bp-cat{flex:none;padding:5px 10px;border:1px solid var(--rule);border-radius:999px;background:none;color:var(--ink-2);font:500 12px/1.2 var(--f-body);white-space:nowrap;cursor:pointer}
+.bp-cat:hover{color:var(--ink);border-color:var(--ink-3)}
+.bp-cat[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.bp-cat:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bp-cat small{margin-left:4px;font-size:11px;opacity:.65}
+.bp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:10px -4px 0;padding:4px;max-height:min(264px,40dvh);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;align-content:start}
+.bp[data-mode="mini"] :is(.bp-cats,.bp-grid,.bp-empty,.bp-reset),.bp[data-mode="full"] :is(.bp-pop,.bp-all){display:none}
+.bp-tile{display:flex;flex-direction:column;gap:5px;padding:5px 5px 6px;border:1px solid var(--rule);border-radius:10px;background:var(--panel);color:var(--ink);font:500 12px/1.2 var(--f-body);text-align:left;cursor:pointer;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
 .bp-tile:hover,.bp-tile:focus-visible{transform:translateY(-2px);border-color:var(--ink-3);box-shadow:0 8px 18px -12px rgb(0 0 0 / .5);outline:0}
 .bp-tile:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
 .bp-tile[aria-selected="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
 .bp-tile[hidden]{display:none}
-.bp-sw{position:relative;display:block;height:46px;border-radius:7px;overflow:hidden;background:var(--t-paper);box-shadow:inset 0 0 0 1px rgb(0 0 0 / .08)}
-.bp-sw::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--t-stripe,transparent)}
-.bp-sw b{position:absolute;left:8px;top:13px;width:44%;height:5px;border-radius:3px;background:var(--t-ink);opacity:.85}
-.bp-sw s{position:absolute;left:8px;top:22px;width:30%;height:5px;border-radius:3px;background:var(--t-hi)}
-.bp-sw i{position:absolute;left:8px;bottom:6px;width:34%;height:9px;border-radius:var(--t-r);background:var(--t-btn)}
-.bp-tile[aria-selected="true"] .bp-sw::after{content:"";position:absolute;right:6px;bottom:6px;width:14px;height:14px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/10px no-repeat;box-shadow:0 1px 3px rgb(0 0 0 / .35)}
+.bp-sw{position:relative;display:block;height:34px;border-radius:6px;overflow:hidden;background:var(--t-paper);box-shadow:inset 0 0 0 1px rgb(0 0 0 / .08)}
+.bp-sw::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:var(--t-stripe,transparent)}
+.bp-sw b{position:absolute;left:6px;top:9px;width:46%;height:4px;border-radius:2px;background:var(--t-ink);opacity:.85}
+.bp-sw s{position:absolute;left:6px;top:16px;width:30%;height:4px;border-radius:2px;background:var(--t-hi)}
+.bp-sw i{position:absolute;left:6px;bottom:4px;width:36%;height:7px;border-radius:var(--t-r);background:var(--t-btn)}
+.bp-tile[aria-selected="true"] .bp-sw::after{content:"";position:absolute;right:4px;bottom:4px;width:13px;height:13px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/9px no-repeat;box-shadow:0 1px 3px rgb(0 0 0 / .35)}
 .bp-nm{padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bp-empty{margin:14px 0 4px;font-size:var(--t-sm);color:var(--ink-2)}
-.bp-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule)}
-.bp-reset{padding:0;border:0;background:none;color:var(--accent);font:500 13px/1.3 var(--f-body);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.bp-empty{margin:12px 0 4px;font-size:var(--t-sm);color:var(--ink-2)}
+.bp-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding-top:9px;border-top:1px solid var(--rule)}
+.bp-reset,.bp-all{padding:0;border:0;background:none;color:var(--accent);font:500 13px/1.3 var(--f-body);cursor:pointer;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.bp-reset:focus-visible,.bp-all:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 .bp-foot .bp-n{margin:0;text-align:right}
 .bp-n{margin:10px 0 0;font-size:11px;color:var(--ink-3)}
 .bp-toast{position:fixed;left:max(20px,env(safe-area-inset-left));bottom:calc(max(20px,env(safe-area-inset-bottom)) + 48px);z-index:39;max-width:min(340px,calc(100vw - 32px));padding:10px 14px;border-radius:12px;background:var(--ink);color:var(--paper);font-size:var(--t-sm);box-shadow:0 12px 30px -12px rgb(0 0 0 / .5);animation:ask-pop .25s cubic-bezier(.2,.8,.2,1)}
-@media (max-width:560px){ .bp{left:12px;right:12px;bottom:12px;width:auto} .bp-pill{left:12px;bottom:max(20px,env(safe-area-inset-bottom));padding:10px 13px 10px 11px} }
+@media (max-width:560px){ .bp,.bp[data-mode="mini"]{left:12px;right:12px;bottom:12px;width:auto} .bp-cats{margin-inline:-14px;padding-inline:14px} .bp-pill{left:12px;bottom:max(20px,env(safe-area-inset-bottom));padding:10px 13px 10px 11px} }
 @media (prefers-reduced-motion:reduce){ .bp,.bp-toast{animation:none} :root.brand-fade *{transition:none !important} }
 
 /* ═════════ redesign: role lens, proof stats, stories, journey cards, badges, endorsements, ⌘K ═════════ */
@@ -1534,14 +1552,16 @@ html:has(.demo[open]){overflow:hidden}
 
 <div class="brand-stripe" id="brand-stripe" aria-hidden="true" hidden></div>
 <button class="bp-pill" id="bp-open" type="button" aria-controls="bp" aria-expanded="false"><span class="bp-dot" aria-hidden="true"></span><span id="bp-label">Personalize</span></button>
-<section class="bp" id="bp" role="dialog" aria-labelledby="bp-t" aria-describedby="bp-s" hidden>
+<section class="bp" id="bp" role="dialog" aria-labelledby="bp-t" aria-describedby="bp-s" data-mode="full" hidden>
   <button class="bp-x" id="bp-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  <p class="bp-t" id="bp-t">See this site in your company's style</p>
-  <p class="bp-s" id="bp-s">Pick where you work and the page restyles to match. It's optional.</p>
+  <p class="bp-t" id="bp-t">See this site in your company's colors</p>
+  <p class="bp-s" id="bp-s">Optional. Pick where you work.</p>
   <label class="bp-q"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="bp-in" type="search" placeholder="Search companies" autocomplete="off" spellcheck="false" aria-label="Search companies" aria-controls="bp-grid"></label>
+  <div class="bp-pop" id="bp-pop" aria-label="Popular"></div>
+  <div class="bp-cats" id="bp-cats" role="tablist" aria-label="Filter by type"></div>
   <div class="bp-grid" id="bp-grid" role="listbox" aria-label="Companies"></div>
   <p class="bp-empty" id="bp-empty" hidden>No match. Try another name, or keep the default look.</p>
-  <div class="bp-foot"><button class="bp-reset" id="bp-reset" type="button">Keep the default look</button><span class="bp-n">Colors and type only. Not affiliated.</span></div>
+  <div class="bp-foot"><button class="bp-reset" id="bp-reset" type="button">Keep the default look</button><button class="bp-all" id="bp-all" type="button">Browse all</button><span class="bp-n">Colors and type only. Not affiliated.</span></div>
 </section>
 <div class="bp-toast" id="bp-toast" role="status" hidden></div>
 
@@ -2197,7 +2217,7 @@ document.addEventListener('click', e => {
 
   // Recommendations from LinkedIn, copied word for word. Leave q empty until the real text is in.
   const E = [
-    { n: 'Shane Wiggins', i: 'SW', t: 'Building the Control Plane for AI', r: 'Managed Ishir directly', c: '#3B6FD8',
+    { n: 'Shane Wiggins', i: 'SW', t: 'VP, AI Strategy & Products', co: 'Bigeye', r: 'Managed Ishir directly', c: '#3B6FD8',
       q: ['We had the great privilege and honor seeing Ishir blossom into a core role on our Product Management team. It was remarkable to see how quickly he onboarded, executed and excelled while owning a key platform initiative. Ishir maintains his cool, calm and collected demeanor while providing clear and meaningful guidance to the team of customers, engineers, UX designers, tech writers and consultants.',
           'Ishir is an absolute pleasure to work with and a product professional; any team would be lucky to land him.'] },
     { n: 'Zoey (Zhenghe) Zhang', i: 'ZZ', t: 'Senior Product Designer', co: 'ServiceTitan', r: 'Worked with Ishir on the same team', c: '#C2477B',
@@ -2378,20 +2398,55 @@ document.querySelectorAll('.trace').forEach(tr => {
     snowflake:  { n: 'Snowflake',  s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#EAF6FC', ink: '#24323A', a: '#11567F', ai: '#FFFFFF', hi: '#1E94D0', stripe: ['#29B5E8'], font: '"Lato", Arial, sans-serif', gf: 'Lato:wght@400;700;900', btn: '#11567F', bi: '#FFFFFF', r: '999px' },
     spotify:    { n: 'Spotify',    s: 'dark',  paper: '#121212', panel: '#181818', band: '#000000', ink: '#FFFFFF', a: '#1ED760', ai: '#000000', hi: '#1ED760', stripe: ['#1ED760'], btn: '#1ED760', bi: '#000000', r: '999px' },
     twilio:     { n: 'Twilio',     s: 'dark',  paper: '#000D25', panel: '#0B1B3A', band: '#00081A', ink: '#FFFFFF', a: '#6FA2FF', ai: '#000D25', hi: '#F22F46', stripe: ['#F22F46'], btn: '#1866EE', bi: '#FFFFFF', r: '999px' },
+    canva:      { n: 'Canva',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F4F0FE', ink: '#0F1015', a: '#7D2AE8', ai: '#FFFFFF', hi: '#8B3DFF', stripe: ['#00C4CC', '#7D2AE8'], btn: '#8B3DFF', bi: '#FFFFFF', r: '12px' },
+    cisco:      { n: 'Cisco',      s: 'dark',  paper: '#07182D', panel: '#0D2440', band: '#000000', ink: '#FFFFFF', a: '#02C8FF', ai: '#07182D', hi: '#02C8FF', stripe: ['#02C8FF'], btn: '#FFFFFF', bi: '#07182D', r: '999px' },
+    cloudflare: { n: 'Cloudflare', s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#FFF6EF', ink: '#1D1F20', a: '#C2410C', ai: '#FFFFFF', hi: '#E8540F', stripe: ['#FF5F08', '#FF9910'], btn: '#D4450B', bi: '#FFFFFF', r: '8px' },
+    crowdstrike:{ n: 'CrowdStrike',s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F4F4F4', ink: '#000000', a: '#D60000', ai: '#FFFFFF', hi: '#EC0000', stripe: ['#EC0000'], btn: '#EC0000', bi: '#FFFFFF', r: '8px' },
+    doordash:   { n: 'DoorDash',   s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F7F7F7', ink: '#191919', a: '#D91400', ai: '#FFFFFF', hi: '#EB1700', stripe: ['#EB1700'], btn: '#EB1700', bi: '#FFFFFF', r: '999px' },
+    figma:      { n: 'Figma',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F5', ink: '#000000', a: '#7B3FF2', ai: '#FFFFFF', hi: '#874FFF', stripe: ['#FF3737', '#FF7237', '#874FFF', '#00B6FF', '#24CB71'], hard: true, btn: '#000000', bi: '#FFFFFF', r: '8px' },
+    glean:      { n: 'Glean',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F4F5FE', ink: '#333333', a: '#343CED', ai: '#FFFFFF', hi: '#343CED', stripe: ['#343CED'], btn: '#343CED', bi: '#FFFFFF', r: '999px' },
+    hubspot:    { n: 'HubSpot',    s: 'light', paper: '#FCFCFA', panel: '#FFFFFF', band: '#F5F2EC', ink: '#1F1F1F', a: '#C83A00', ai: '#FFFFFF', hi: '#FF4800', stripe: ['#FF4800'], display: '"Newsreader", Georgia, serif', gf: 'Newsreader:opsz,wght@6..72,500;6..72,600', btn: '#D63D00', bi: '#FFFFFF', r: '8px' },
+    intuit:     { n: 'Intuit',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F4F5F8', ink: '#21262A', a: '#1A5FE6', ai: '#FFFFFF', hi: '#236CFF', stripe: ['#236CFF'], btn: '#236CFF', bi: '#FFFFFF', r: '999px' },
+    notion:     { n: 'Notion',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F6F5F4', ink: '#191919', a: '#006ACB', ai: '#FFFFFF', hi: '#0075DE', btn: '#0075DE', bi: '#FFFFFF', r: '8px' },
+    okta:       { n: 'Okta',       s: 'light', paper: '#FBFBFA', panel: '#FFFFFF', band: '#F1F1EF', ink: '#191919', a: '#0131FF', ai: '#FFFFFF', hi: '#0131FF', stripe: ['#0131FF'], btn: '#0131FF', bi: '#FFFFFF', r: '999px' },
+    oracle:     { n: 'Oracle',     s: 'light', paper: '#FBF9F8', panel: '#FFFFFF', band: '#F1EFED', ink: '#161513', a: '#B43B2A', ai: '#FFFFFF', hi: '#C74634', stripe: ['#C74634'], btn: '#312D2A', bi: '#FFFFFF', r: '4px' },
+    palantir:   { n: 'Palantir',   s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F2F2F2', ink: '#1E1F2B', a: '#1E1F2B', ai: '#FFFFFF', stripe: ['#1E2124'], btn: '#1E2124', bi: '#FFFFFF', r: '0px' },
+    paypal:     { n: 'PayPal',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F7FA', ink: '#001C64', a: '#0066F5', ai: '#FFFFFF', hi: '#0070E0', stripe: ['#003087', '#0070E0'], btn: '#002991', bi: '#FFFFFF', r: '999px' },
+    workday:    { n: 'Workday',    s: 'light', paper: '#F6F5F1', panel: '#FFFFFF', band: '#EDEBE4', ink: '#0F2E66', a: '#0F2E66', ai: '#FFFFFF', stripe: ['#FFDA61'], btn: '#0F2E66', bi: '#FFFFFF', r: '999px' },
   };
   const VARS = { paper: '--paper', panel: '--panel', band: '--band', ink: '--ink', a: '--accent', ai: '--accent-ink', hi: '--accent-hi', btn: '--btn', bi: '--btn-ink', r: '--r-btn', i2: '--ink-2', i3: '--ink-3', top: '--top-bg' };
   const root = document.documentElement, baseScheme = root.getAttribute('data-theme');
-  const pill = $('#bp-open'), card = $('#bp'), grid = $('#bp-grid'), search = $('#bp-in'), label = $('#bp-label'), stripe = $('#brand-stripe'), toast = $('#bp-toast');
+  const pill = $('#bp-open'), card = $('#bp'), grid = $('#bp-grid'), cats = $('#bp-cats'), pop = $('#bp-pop'), search = $('#bp-in'), label = $('#bp-label'), stripe = $('#brand-stripe'), toast = $('#bp-toast');
   let toastT, current = null, previewT;
   const stripeCss = b => { const c = b.stripe || []; return c.length < 2 ? (c[0] || 'transparent') : `linear-gradient(90deg,${b.hard ? c.map((x, i) => `${x} ${i * 100 / c.length}% ${(i + 1) * 100 / c.length}%`).join(',') : c.join(',')})`; };
 
+  // Types for the filter row (a company can be in more than one), other names people search by, and the first-visit shortlist.
+  const CATS = [
+    ['big', 'Big tech', 'amazon apple google meta microsoft netflix nvidia oracle cisco adobe'],
+    ['ai', 'AI', 'anthropic openai perplexity glean palantir nvidia databricks'],
+    ['data', 'Data & cloud', 'databricks snowflake datadog mongodb cloudflare twilio palantir servicenow'],
+    ['sec', 'Security', 'vanta okta crowdstrike cloudflare'],
+    ['saas', 'SaaS', 'salesforce servicenow atlassian workday hubspot notion figma canva adobe intuit shopify twilio linkedin'],
+    ['fin', 'Fintech', 'stripe paypal intuit'],
+    ['con', 'Consumer', 'airbnb uber doordash spotify netflix apple linkedin shopify'],
+  ];
+  const AKA = { meta: 'facebook instagram whatsapp', google: 'alphabet youtube gcp deepmind waymo', microsoft: 'azure github xbox', amazon: 'aws', openai: 'chatgpt', anthropic: 'claude', salesforce: 'slack tableau mulesoft', atlassian: 'jira confluence trello', intuit: 'turbotax quickbooks mailchimp credit karma', paypal: 'venmo braintree', cisco: 'webex splunk', oracle: 'netsuite', uber: 'uber eats', doordash: 'wolt', crowdstrike: 'falcon', apple: 'iphone' };
+  const POP = ['google', 'microsoft', 'amazon', 'apple', 'meta', 'salesforce', 'stripe', 'openai'];
+  const sty = b => `--t-paper:${b.paper};--t-ink:${b.ink};--t-hi:${b.hi || b.a};--t-btn:${b.btn || b.a};--t-r:${b.r || '6px'};--t-stripe:${stripeCss(b)}`;
+
   // One swatch per company: its page color, text, headline color, button and top band.
   grid.innerHTML = Object.entries(B).sort((x, y) => x[1].n.localeCompare(y[1].n)).map(([k, b]) =>
-    `<button class="bp-tile" type="button" role="option" aria-selected="false" data-k="${k}" style="--t-paper:${b.paper};--t-ink:${b.ink};--t-hi:${b.hi || b.a};--t-btn:${b.btn || b.a};--t-r:${b.r || '6px'};--t-stripe:${stripeCss(b)}"><span class="bp-sw" aria-hidden="true"><b></b><s></s><i></i></span><span class="bp-nm">${b.n}</span></button>`).join('');
-  const tiles = [...grid.querySelectorAll('.bp-tile')];
+    `<button class="bp-tile" type="button" role="option" aria-selected="false" data-k="${k}" style="${sty(b)}"><span class="bp-sw" aria-hidden="true"><b></b><s></s><i></i></span><span class="bp-nm">${b.n}</span></button>`).join('');
+  pop.innerHTML = POP.map(k => `<button class="bp-chip" type="button" data-k="${k}" style="${sty(B[k])}"><i aria-hidden="true"></i>${B[k].n}</button>`).join('');
+  const tiles = [...grid.querySelectorAll('.bp-tile')], chips = [...pop.children];
+  cats.innerHTML = [['all', 'All', ''], ...CATS].map(([id, n, ks], i) => `<button class="bp-cat" type="button" role="tab" aria-selected="${!i}" data-c="${id}">${n}<small>${ks ? ks.split(' ').length : tiles.length}</small></button>`).join('');
+  const catOf = Object.fromEntries(CATS.map(([id, , ks]) => [id, ks.split(' ')]));
+  let cat = 'all', shown = tiles;
   search.placeholder = `Search ${tiles.length} companies`;
-  const visible = () => tiles.filter(t => !t.hidden);
+  $('#bp-all').textContent = `Browse all ${tiles.length}`;
+  const visible = () => shown;
   const mark = k => tiles.forEach(t => t.setAttribute('aria-selected', t.dataset.k === k));
+  const mode = m => { card.dataset.mode = m; };
 
   function apply(k, announce) {
     const b = B[k];
@@ -2408,8 +2463,8 @@ document.querySelectorAll('.trace').forEach(tr => {
     root.dataset.brand = k; root.setAttribute('data-theme', b.s);
     document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.dataset.base ??= m.content; m.content = b.paper; });
     for (const [f, v] of Object.entries(VARS)) if (b[f]) root.style.setProperty(v, b[f]);
-    if (b.gf && !document.getElementById('gf-' + k)) {
-      const l = document.createElement('link'); l.id = 'gf-' + k; l.rel = 'stylesheet';
+    if (b.gf && !document.getElementById('gf-' + b.gf.split(':')[0].replace(/ /g, ''))) {
+      const l = document.createElement('link'); l.id = 'gf-' + b.gf.split(':')[0].replace(/ /g, ''); l.rel = 'stylesheet';
       l.href = `https://fonts.googleapis.com/css2?family=${b.gf.replace(/ /g, '+')}&display=swap`; document.head.appendChild(l);
     }
     if (b.font) { root.style.setProperty('--f-body', b.font); root.style.setProperty('--f-display', b.font); }
@@ -2422,46 +2477,79 @@ document.querySelectorAll('.trace').forEach(tr => {
       clearTimeout(toastT); toastT = setTimeout(() => { toast.hidden = true; }, 7000);
     }
   }
-  const open = () => { card.hidden = false; pill.hidden = true; pill.setAttribute('aria-expanded', 'true'); toast.hidden = true; mark(current); };
-  const close = () => { clearTimeout(previewT); if ((root.dataset.brand || null) !== current) apply(current, false); card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); search.value = ''; filter(); };
+  const open = m => { mode(m || 'full'); card.hidden = false; pill.hidden = true; pill.setAttribute('aria-expanded', 'true'); toast.hidden = true; mark(current); };
+  const reset = () => { search.value = ''; setCat('all'); };
+  const close = () => { clearTimeout(previewT); if ((root.dataset.brand || null) !== current) apply(current, false); card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); reset(); };
   function choose(k) {
     current = k === 'none' ? null : k; clearTimeout(previewT);
     store('iv-brand', k); apply(current, true); mark(current);
-    card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); search.value = ''; filter();
+    card.hidden = true; pill.hidden = false; pill.setAttribute('aria-expanded', 'false'); reset();
     track('theme', k);
   }
+  function setCat(c) {
+    cat = c; cats.querySelectorAll('.bp-cat').forEach(b => b.setAttribute('aria-selected', b.dataset.c === c)); filter();
+  }
+  // Search: names first, then the start of any word (including other names like "aws" or "jira"), then anywhere.
+  const score = (k, q) => {
+    const n = B[k].n.toLowerCase(), words = `${n} ${k} ${AKA[k] || ''}`.split(/[\s.&-]+/);
+    if (n.startsWith(q) || k.startsWith(q)) return 1;
+    if (words.some(w => w.startsWith(q))) return 2;
+    if (q.length > 2 && `${n} ${AKA[k] || ''}`.includes(q)) return 3;
+    return 0;
+  };
   function filter() {
     const q = search.value.trim().toLowerCase();
-    tiles.forEach(t => { t.hidden = !!q && !B[t.dataset.k].n.toLowerCase().includes(q) && !t.dataset.k.includes(q); });
-    $('#bp-empty').hidden = visible().length > 0;
+    const list = tiles.map((t, i) => [t, q ? score(t.dataset.k, q) : (cat === 'all' || catOf[cat].includes(t.dataset.k)) ? 1 : 0, i]);
+    list.forEach(([t, sc]) => { t.hidden = !sc; t.style.order = sc ? sc : ''; });
+    shown = list.filter(x => x[1]).sort((x, y) => x[1] - y[1] || x[2] - y[2]).map(x => x[0]);
+    $('#bp-empty').hidden = shown.length > 0;
+    grid.scrollTop = 0;
   }
-  search.addEventListener('input', filter);
-  search.addEventListener('keydown', e => {
-    if (e.key === 'ArrowDown') { e.preventDefault(); visible()[0]?.focus(); }
-    if (e.key === 'Enter') { e.preventDefault(); const v = visible(); if (v.length) choose(v[0].dataset.k); }
+  search.addEventListener('input', () => {
+    if (search.value.trim()) { if (card.dataset.mode === 'mini') mode('full'); if (cat !== 'all') { cat = 'all'; cats.querySelectorAll('.bp-cat').forEach(b => b.setAttribute('aria-selected', b.dataset.c === 'all')); } }
+    filter();
   });
+  search.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); (card.dataset.mode === 'mini' ? chips : shown)[0]?.focus(); }
+    if (e.key === 'Enter') { e.preventDefault(); if (search.value.trim() && shown.length) choose(shown[0].dataset.k); }
+  });
+  cats.addEventListener('click', e => { const c = e.target.closest('.bp-cat'); if (!c) return; search.value = ''; setCat(c.dataset.c); c.scrollIntoView({ block: 'nearest', inline: 'nearest' }); });
+  cats.addEventListener('keydown', e => {
+    const bs = [...cats.children], i = bs.indexOf(document.activeElement), d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+    if (d && i > -1) { e.preventDefault(); const n = bs[(i + d + bs.length) % bs.length]; n.focus(); n.click(); }
+    if (e.key === 'ArrowDown') { e.preventDefault(); shown[0]?.focus(); }
+  });
+  $('#bp-all').addEventListener('click', () => { mode('full'); (cats.querySelector('[aria-selected="true"]') || search).focus({ preventScroll: true }); });
   grid.addEventListener('click', e => { const t = e.target.closest('.bp-tile'); if (t) choose(t.dataset.k); });
+  pop.addEventListener('click', e => { const t = e.target.closest('.bp-chip'); if (t) choose(t.dataset.k); });
   grid.addEventListener('keydown', e => {
-    const v = visible(), i = v.indexOf(document.activeElement); if (i < 0) return;
+    const v = shown, i = v.indexOf(document.activeElement); if (i < 0) return;
     const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
     const go = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: cols, ArrowUp: -cols }[e.key];
     if (go === undefined) return;
     e.preventDefault();
-    if (e.key === 'ArrowUp' && i < cols) { search.focus(); return; }
+    if (e.key === 'ArrowUp' && i < cols) { (cats.querySelector('[aria-selected="true"]') || search).focus(); return; }
     v[Math.max(0, Math.min(v.length - 1, i + go))].focus();
   });
-  // Desktop: hovering or focusing a swatch previews it; leaving the grid restores the current look.
+  pop.addEventListener('keydown', e => {
+    const i = chips.indexOf(document.activeElement), d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    if (d === undefined || i < 0) return; e.preventDefault();
+    if (i + d < 0) search.focus(); else chips[Math.min(chips.length - 1, i + d)].focus();
+  });
+  // Desktop: hovering or focusing a swatch previews it; leaving the list restores the current look.
   const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const preview = k => { clearTimeout(previewT); previewT = setTimeout(() => { if (!card.hidden && (root.dataset.brand || null) !== k) apply(k, false); }, 90); };
-  if (canHover) {
-    grid.addEventListener('pointerover', e => { const t = e.target.closest('.bp-tile'); if (t) preview(t.dataset.k); });
-    grid.addEventListener('pointerleave', () => preview(current));
+  for (const el of [grid, pop]) {
+    if (canHover) {
+      el.addEventListener('pointerover', e => { const t = e.target.closest('[data-k]'); if (t) preview(t.dataset.k); });
+      el.addEventListener('pointerleave', () => preview(current));
+    }
+    el.addEventListener('focusin', e => { const t = e.target.closest('[data-k]'); if (t && canHover) preview(t.dataset.k); });
   }
-  grid.addEventListener('focusin', e => { const t = e.target.closest('.bp-tile'); if (t && canHover) preview(t.dataset.k); });
   $('#bp-reset').addEventListener('click', () => choose('none'));
   document.addEventListener('iv:brand', e => choose(e.detail));
 
-  pill.addEventListener('click', () => { open(); search.focus({ preventScroll: true }); });
+  pill.addEventListener('click', () => { open('full'); search.focus({ preventScroll: true }); });
   $('#bp-x').addEventListener('click', () => { if (!store('iv-brand')) store('iv-brand', 'none'); close(); pill.focus({ preventScroll: true }); });
   card.addEventListener('keydown', e => { if (e.key === 'Escape') $('#bp-x').click(); });
 
@@ -2471,7 +2559,7 @@ document.querySelectorAll('.trace').forEach(tr => {
   const saved = store('iv-brand');
   if (linked) { store('iv-brand', linked); current = linked; apply(linked, true); }
   else if (B[saved]) { current = saved; apply(saved, false); }
-  else if (!saved) setTimeout(() => { if (card.hidden && !$('#demo').open && $('#ask').hidden) open(); }, 2500);
+  else if (!saved) setTimeout(() => { if (card.hidden && !$('#demo').open && $('#ask').hidden) open('mini'); }, 2500);
 }
 
 /* ───── hero: numbers count up, and each one links to its proof ───── */
