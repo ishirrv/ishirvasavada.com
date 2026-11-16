@@ -2573,8 +2573,6 @@ document.querySelectorAll('.trace').forEach(tr => {
   const ST = [
     { k: 'New industry', h: 'Learning how buildings get built', p: 'I stepped into residential construction to support a builder on technology and operations. That meant learning the engineering behind site work, then streamlining how the business runs. Two of my agent demos came out of it.', tags: ['Site work', 'Operations', 'Agents'],
       art: `<svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice"><defs><pattern id="stg" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(255,255,255,.09)"/></pattern></defs><rect width="400" height="700" fill="#0F3460"/><rect width="400" height="700" fill="url(#stg)"/><g fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round" opacity=".9"><path d="M60 120h280v260H60z"/><path d="M200 120v120M60 240h180M240 240v140M270 240h70"/><path d="M200 210a30 30 0 0 1 30 30" stroke-width="1.6" opacity=".6"/></g><g stroke="#7FD1FF" stroke-width="2"><path d="M60 100h140M60 94v12M200 94v12"/></g><text x="130" y="92" fill="#7FD1FF" font-family="ui-monospace,monospace" font-size="14" text-anchor="middle">14′ 0″</text><g fill="#FFC857"><circle cx="300" cy="330" r="16"/></g><text x="300" y="335" fill="#0F3460" font-family="ui-monospace,monospace" font-size="15" font-weight="700" text-anchor="middle">?</text><g fill="rgba(255,255,255,.75)" font-family="ui-monospace,monospace" font-size="12"><text x="130" y="185" text-anchor="middle">LIVING</text><text x="290" y="185" text-anchor="middle">KITCHEN</text><text x="150" y="315" text-anchor="middle">BED 1</text></g></svg>` },
-    { k: 'Advisor', h: 'Where climate meets finance', p: 'I advised an organization focused on climate-related financial risk, where my finance background and product thinking meet.', tags: ['Climate risk', 'Finance'],
-      art: (() => { const c = ['#08306B', '#08519C', '#2171B5', '#4292C6', '#6BAED6', '#9ECAE1', '#C6DBEF', '#DEEBF7', '#FEE0D2', '#FCBBA1', '#FC9272', '#FB6A4A', '#EF3B2C', '#CB181D', '#A50F15', '#67000D']; const seq = [0,2,1,3,2,4,3,5,4,6,5,7,6,8,7,9,8,10,9,11,10,12,11,13,12,14,13,15,14,15]; return `<svg viewBox="0 0 400 700" preserveAspectRatio="none">${seq.map((v, i) => `<rect x="${i * 400 / seq.length}" width="${400 / seq.length + .5}" height="700" fill="${c[v]}"/>`).join('')}</svg>`; })() },
   ];
   const box = $('#stories'), slides = $('#st-slides'), bars = $('#st-bars'), av = $('.av-btn');
   const DUR = 6500;
@@ -2588,8 +2586,9 @@ document.querySelectorAll('.trace').forEach(tr => {
     i = n; t0 = performance.now(); held = 0;
     all.forEach((s, j) => s.classList.toggle('on', j === i));
     bi.forEach((b, j) => { b.classList.toggle('done', j < i); b.firstChild.style.width = j < i ? '100%' : '0'; });
-    $('#st-k').textContent = `${ST[i].k} · ${i + 1} of ${ST.length}`;
+    $('#st-k').textContent = ST.length > 1 ? `${ST[i].k} · ${i + 1} of ${ST.length}` : ST[i].k;
     $('#st-prev').disabled = i === 0;
+    $('#st-prev').hidden = $('#st-next').hidden = ST.length < 2;
   }
   function tick(t) {
     if (box.hidden) return;
