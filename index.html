@@ -61,7 +61,8 @@ button{font:inherit;color:inherit}
 /* ——— header ——— */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--top-bg,color-mix(in srgb,var(--paper) 88%,transparent));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
-.mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;letter-spacing:-.01em}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;letter-spacing:-.01em;transition:opacity .25s ease,transform .25s ease}
+.mark.off{opacity:0;transform:translateY(-4px);pointer-events:none}
 .mark img{display:block;width:28px;height:28px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--rule)}
 .nav{display:flex;gap:4px;align-items:center}
 .nav a{font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.08em;text-decoration:none;color:var(--ink-2);padding:8px 10px;border-radius:6px}
@@ -1053,7 +1054,7 @@ html:has(.demo[open]){overflow:hidden}
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="#top" aria-label="Ishir Vasavada, home">
+    <a class="mark off" href="#top" aria-label="Ishir Vasavada, home">
       <img src="media/ishir-mark.webp" alt="" width="28" height="28">
       <span>Ishir Vasavada</span>
     </a>
@@ -2349,6 +2350,13 @@ document.querySelector('.range ul').addEventListener('click', e => {
   else $('#work').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
   track('proof', 'range-' + b.querySelector('b').textContent.toLowerCase());
 });
+
+/* ───── header name: shown only once the hero's name has scrolled away, so it never appears twice ───── */
+{
+  const mark = $('.mark'), who = $('.who');
+  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => mark.classList.toggle('off', e.isIntersecting), { rootMargin: '-56px 0px 0px 0px' }).observe(who);
+  else mark.classList.remove('off');
+}
 
 /* ───── hero: numbers count up, and each one links to its proof ───── */
 {
