@@ -869,7 +869,9 @@ html:has(.demo[open]){overflow:hidden}
 .contact h2{font-size:clamp(2rem,5vw,3.5rem);max-width:18ch}
 .contact .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;align-items:center}
 .contact-line{font-size:var(--t-lg);color:var(--ink-2);max-width:52ch;margin:16px 0 0}
-.email{font-family:var(--f-mono);font-size:var(--t-md);line-height:1.4;padding:11px 16px;border:1px solid var(--ink);border-radius:8px;user-select:all;background:var(--panel)}
+.mail{display:inline-flex}
+.mail .btn.primary{display:inline-flex;align-items:center;gap:8px;border-top-right-radius:0;border-bottom-right-radius:0}
+.mail #copy{border-top-left-radius:0;border-bottom-left-radius:0;margin-left:-1px;min-width:76px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ───── site assistant ───── */
@@ -1454,11 +1456,10 @@ html:has(.demo[open]){overflow:hidden}
 <!-- ═══════════ CONTACT ═══════════ -->
 <section class="contact wrap band" id="contact" aria-labelledby="h-contact">
   <span class="tag"><b>Sheet 04</b> Contact</span>
-  <h2 id="h-contact" style="margin-top:14px">Let's talk product.</h2>
-  <p class="contact-line">I'm always up for a conversation about building products and how the PM role is changing. Email is the fastest way to reach me.</p>
+  <h2 id="h-contact" style="margin-top:14px">Let's build something people rely on.</h2>
+  <p class="contact-line">Hiring for a product role, starting something new, or stuck on a product problem? Send me a note. I'm happy to walk through any of these demos on a call.</p>
   <div class="row">
-    <span class="email" id="email">ishirv00@gmail.com</span>
-    <button class="btn" type="button" id="copy">Copy email</button>
+    <div class="mail"><a class="btn primary" id="mailto" href="mailto:ishirv00@gmail.com?subject=Hi%20Ishir"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg><span id="email">ishirv00@gmail.com</span></a><button class="btn" type="button" id="copy" aria-label="Copy email address">Copy</button></div>
     <a class="btn" href="https://www.linkedin.com/in/ishirvasavada" target="_blank" rel="noopener">LinkedIn ↗</a>
     <a class="btn" href="https://ishirvasavada.com/resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
   </div>
@@ -2525,8 +2526,9 @@ $('#copy').addEventListener('click', async e => {
   const b = e.currentTarget, t = $('#email').textContent;
   track('email');
   try { await navigator.clipboard.writeText(t); b.textContent = 'Copied'; }
-  catch { const r = document.createRange(); r.selectNodeContents($('#email')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected, press ⌘C'; }
-  setTimeout(() => b.textContent = 'Copy email', 2200);
+  catch { const r = document.createRange(); r.selectNodeContents($('#email')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Press ⌘C'; }
+  setTimeout(() => b.textContent = 'Copy', 2200);
 });
+$('#mailto').addEventListener('click', () => track('email'));
 })();
 </script>

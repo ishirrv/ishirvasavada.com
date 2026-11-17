@@ -98,7 +98,7 @@ Certifications
 AWS Certified AI Practitioner; Azure AI Fundamentals (AI-900); Agentic AI (Andrew Ng); Google Cloud Generative AI Leader; AI Product Management Certification (Product School); Certified Scrum Product Owner (CSPO); Product Analytics (Product School); SAFe 5 Agile.
 
 Contact
-Email is the fastest way to reach him: ishirv00@gmail.com. He's happy to talk about building products and how the PM role is changing.`;
+Email is the fastest way to reach him: ishirv00@gmail.com. He's open to product roles, new ventures and product problems, and happy to walk through any of the demos on a call.`;
 
 export const ACTIONS = ['demo_rules', 'demo_risk', 'demo_eco', 'demo_rec', 'demo_plan', 'demo_jc', 'method', 'journey', 'resume', 'email', 'linkedin'];
 
