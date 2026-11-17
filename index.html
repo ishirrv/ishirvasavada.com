@@ -1002,7 +1002,7 @@ html:has(.demo[open]){overflow:hidden}
 .badge .bt{font-size:13.5px;font-weight:600;line-height:1.3}
 .badge .bs{font-size:12px;color:var(--ink-3);margin-top:2px}
 /* endorsements */
-.endorse{margin-top:56px}
+.endorse{scroll-margin-top:84px;margin-top:56px}
 .e-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px;align-items:stretch}
 .e-card{position:relative;display:flex;flex-direction:column;gap:16px;padding:22px;border:1px solid var(--rule);border-radius:16px;background:var(--panel)}
 .e-card::before{content:"“";position:absolute;top:6px;right:18px;font:700 64px/1 Georgia,serif;color:var(--accent);opacity:.18}
@@ -1069,6 +1069,7 @@ html:has(.demo[open]){overflow:hidden}
       <a href="#work">Work</a>
       <a href="#method">Method</a>
       <a href="#journey">Journey</a>
+      <a href="#endorse">Recommendations</a>
       <a href="#ask" data-ask hidden>Ask AI</a>
       <a class="cta" href="#contact">Contact</a>
     </nav>
@@ -1095,7 +1096,7 @@ html:has(.demo[open]){overflow:hidden}
     <div class="stats" aria-label="Impact">
       <a class="stat go" href="#journey" data-go="journey"><div class="v num">$50MM+</div><div class="l">in revenue, deals and savings from products I've led</div><span class="proof">See it by role <span aria-hidden="true">→</span></span></a>
       <a class="stat go" href="#rules" data-go="rules"><div class="v num">3×</div><div class="l">faster customer setup with the agentic rules engine</div><span class="proof">Try the rules engine <span aria-hidden="true">→</span></span></a>
-      <a class="stat go" href="#risk" data-go="risk"><div class="v num">3,500+</div><div class="l">enterprise customers on products I launched</div><span class="proof">Try the risk workflows <span aria-hidden="true">→</span></span></a>
+      <a class="stat go" href="#risk" data-go="risk"><div class="v num">3,500+</div><div class="l">enterprise customers on products I launched</div><span class="proof">Try the privacy assessments <span aria-hidden="true">→</span></span></a>
       <a class="stat go" href="#eco" data-go="eco"><div class="v num">$200K+</div><div class="l">raised for the startup I co-founded</div><span class="proof">Try the Ecodrop app <span aria-hidden="true">→</span></span></a>
     </div>
   </div>
@@ -1114,11 +1115,11 @@ html:has(.demo[open]){overflow:hidden}
   <div class="pgrid" id="work-grid">
     <a class="pcard" href="#rules" data-p="rules" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)">
       <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="w" x="36" y="22" width="248" height="170" rx="10"/><rect class="a" x="50" y="36" width="10" height="10" rx="2"/><rect class="l" x="68" y="38" width="58" height="6" rx="3"/><rect class="s" x="222" y="33" width="48" height="16" rx="8"/><text class="ta" x="246" y="44.5" text-anchor="middle">12/12</text><rect class="h" x="50" y="58" width="220" height="16"/><rect class="l" x="60" y="64" width="28" height="4" rx="2"/><rect class="l" x="112" y="64" width="34" height="4" rx="2"/><rect class="l" x="170" y="64" width="24" height="4" rx="2"/><rect class="l" x="226" y="64" width="30" height="4" rx="2"/><g class="row"><rect class="l" x="60" y="82" width="36" height="5" rx="2.5"/><rect class="l" x="112" y="82" width="44" height="5" rx="2.5"/><rect class="l" x="170" y="82" width="30" height="5" rx="2.5"/><rect class="s" x="222" y="78" width="40" height="13" rx="6.5"/></g><rect class="s" x="50" y="96" width="220" height="22" opacity=".55"/><rect class="l" x="60" y="104" width="30" height="5" rx="2.5"/><rect class="l" x="112" y="104" width="50" height="5" rx="2.5"/><rect class="l" x="170" y="104" width="26" height="5" rx="2.5"/><rect class="a" x="217" y="100" width="50" height="13" rx="6.5"/><text class="on" x="242" y="109.5" text-anchor="middle">10% off</text><rect class="l" x="60" y="126" width="40" height="5" rx="2.5"/><rect class="l" x="112" y="126" width="38" height="5" rx="2.5"/><rect class="l" x="170" y="126" width="32" height="5" rx="2.5"/><rect class="s" x="222" y="122" width="40" height="13" rx="6.5"/><rect class="l" x="60" y="148" width="32" height="5" rx="2.5"/><rect class="l" x="112" y="148" width="46" height="5" rx="2.5"/><rect class="l" x="170" y="148" width="28" height="5" rx="2.5"/><rect class="s" x="222" y="144" width="40" height="13" rx="6.5"/><path class="kl" d="M50 96h220M50 118h220M50 140h220M104 58v120M162 58v120M212 58v120"/></svg></div>
-      <div class="pc-t"><span class="wk">Enterprise platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+      <div class="pc-t"><span class="wk">Zuora · Billing platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
     </a>
     <a class="pcard" href="#risk" data-p="risk" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)">
       <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="a" x="40" y="28" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="64" y="28" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="88" y="28" width="20" height="20" rx="4" opacity="0.70"/><rect class="a" x="112" y="28" width="20" height="20" rx="4" opacity="0.80"/><rect class="a" x="136" y="28" width="20" height="20" rx="4" opacity="0.90"/><rect class="a" x="40" y="52" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="64" y="52" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="88" y="52" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="112" y="52" width="20" height="20" rx="4" opacity="0.70"/><rect class="a" x="136" y="52" width="20" height="20" rx="4" opacity="0.80"/><rect class="a" x="40" y="76" width="20" height="20" rx="4" opacity="0.30"/><rect class="a" x="64" y="76" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="88" y="76" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="112" y="76" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="136" y="76" width="20" height="20" rx="4" opacity="0.70"/><rect class="a" x="40" y="100" width="20" height="20" rx="4" opacity="0.20"/><rect class="a" x="64" y="100" width="20" height="20" rx="4" opacity="0.30"/><rect class="a" x="88" y="100" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="112" y="100" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="136" y="100" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="40" y="124" width="20" height="20" rx="4" opacity="0.10"/><rect class="a" x="64" y="124" width="20" height="20" rx="4" opacity="0.20"/><rect class="a" x="88" y="124" width="20" height="20" rx="4" opacity="0.30"/><rect class="a" x="112" y="124" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="136" y="124" width="20" height="20" rx="4" opacity="0.50"/><circle class="ring" cx="134" cy="62" r="13"/><path class="kl" d="M210 46v94" stroke-dasharray="0"/><rect class="w" x="196" y="30" width="96" height="22" rx="11"/><circle class="a" cx="210" cy="41" r="5"/><text class="tx" x="222" y="44">Intake</text><rect class="w" x="196" y="62" width="96" height="22" rx="11"/><circle class="a" cx="210" cy="73" r="5"/><text class="tx" x="222" y="76">Assess</text><rect class="w dash" x="196" y="94" width="96" height="22" rx="11"/><circle class="kl" cx="210" cy="105" r="5"/><text class="tx mute" x="222" y="108">Legal · skip</text><rect class="a" x="196" y="126" width="96" height="22" rx="11"/><text class="on" x="244" y="140" text-anchor="middle">Approve</text></svg></div>
-      <div class="pc-t"><span class="wk">Enterprise · risk</span><span class="wn">Risk assessment workflows</span><span class="wo">Sends each review to the right approver</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+      <div class="pc-t"><span class="wk">OneTrust · Data privacy</span><span class="wn">Privacy risk assessments</span><span class="wo">Sends each review to the right approver</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
     </a>
     <a class="pcard" href="#eco" data-p="eco" style="--pc:var(--c-eco)">
       <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><clipPath id="pv-eco"><rect x="117" y="19" width="86" height="175" rx="14"/></clipPath></defs><rect class="w" x="26" y="46" width="72" height="66" rx="9"/><text class="tx" x="36" y="62">Feed</text><circle class="s" cx="40" cy="76" r="5"/><rect class="l" x="50" y="73" width="38" height="5" rx="2.5"/><circle class="s" cx="40" cy="92" r="5"/><rect class="l" x="50" y="89" width="30" height="5" rx="2.5"/><circle class="s" cx="40" cy="104" r="4" opacity=".6"/><rect class="l" x="50" y="102" width="34" height="4" rx="2" opacity=".6"/><rect class="w" x="222" y="58" width="72" height="70" rx="9"/><text class="tx" x="232" y="74">Leaders</text><rect class="s" x="234" y="96" width="14" height="22" rx="2"/><rect class="a" x="251" y="84" width="14" height="34" rx="2"/><rect class="s" x="268" y="102" width="14" height="16" rx="2"/><rect class="bezel" x="112" y="14" width="96" height="190" rx="19"/><g clip-path="url(#pv-eco)"><rect class="h" x="117" y="19" width="86" height="175"/><image href="media/eco/plbottle.webp" x="117" y="19" width="86" height="110" preserveAspectRatio="xMidYMid slice"/><path class="cam" d="M130 44v-8h8M190 44v-8h-8M130 98v8h8M190 98v8h-8"/><rect class="w" x="117" y="114" width="86" height="80" rx="12"/><rect class="a" x="125" y="124" width="66" height="14" rx="7"/><text class="on" x="158" y="134" text-anchor="middle">Recyclable</text><text class="ta" x="126" y="152">+10 pts</text><rect class="l" x="126" y="158" width="60" height="4" rx="2"/></g><rect class="island" x="148" y="23" width="24" height="7" rx="3.5"/></svg></div>
@@ -1130,11 +1131,11 @@ html:has(.demo[open]){overflow:hidden}
     </a>
     <a class="pcard" href="#plan" data-p="plan" style="--pc:var(--c-plan)">
       <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="s" x="40" y="20" width="110" height="80"/><path class="wall" d="M40 20h240v160H40zM150 20v52M150 88v12M40 100h110M170 100h40M210 100v80"/><path class="kl" d="M150 72a16 16 0 0 1 16 16" /><path class="ka" d="M50 88h90M50 84v8M140 84v8"/><text class="ta" x="95" y="56" text-anchor="middle">Living</text><text class="tx" x="95" y="70" text-anchor="middle">14′ × 12′</text><text class="tx" x="215" y="62" text-anchor="middle">Kitchen</text><text class="tx" x="125" y="140" text-anchor="middle">Bed 1</text><circle class="d" cx="245" cy="132" r="10"/><text class="on2" x="245" y="136" text-anchor="middle">?</text><text class="tx" x="245" y="158" text-anchor="middle">Bath</text></svg></div>
-      <div class="pc-t"><span class="wk">Multimodal agent</span><span class="wn">Blueprint vision agent</span><span class="wo">Measures every room from a floor plan</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+      <div class="pc-t"><span class="wk">Construction · $1M+ revenue</span><span class="wn">Blueprint vision agent</span><span class="wo">Measures every room from a floor plan</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
     </a>
     <a class="pcard" href="#jc" data-p="jc" style="--pc:var(--c-jc)">
       <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="w" x="18" y="58" width="100" height="44" rx="12"/><text class="tx" x="30" y="76">Need studs</text><text class="ta" x="30" y="91">by Thursday</text><path class="ka" d="M118 80h30M184 80c24 0 30-44 56-44M184 80c24 0 30-12 56-12M184 80c24 0 30 20 56 20M184 80c24 0 30 52 56 52"/><circle class="a" cx="166" cy="80" r="18"/><text class="on" x="166" y="83.5" text-anchor="middle">Buyer</text><rect class="wa" x="240" y="25" width="68" height="22" rx="11"/><text class="tx" x="274" y="39.5" text-anchor="middle">Home Depot</text><rect class="wa" x="240" y="57" width="68" height="22" rx="11"/><text class="tx" x="274" y="71.5" text-anchor="middle">Lowe's</text><rect class="a" x="240" y="89" width="68" height="22" rx="11"/><text class="on" x="274" y="103.5" text-anchor="middle">Local yard</text><rect class="wa" x="240" y="121" width="68" height="22" rx="11"/><text class="tx" x="274" y="135.5" text-anchor="middle">Budget</text></svg></div>
-      <div class="pc-t"><span class="wk">Multi-agent system</span><span class="wn">Materials buying agent</span><span class="wo">Quotes three suppliers, then orders within budget</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
+      <div class="pc-t"><span class="wk">Construction · $1M+ revenue</span><span class="wn">Materials buying agent</span><span class="wo">Quotes three suppliers, then orders within budget</span><span class="pc-go">Try it <i aria-hidden="true">→</i></span></div>
     </a>
   </div>
 
@@ -1185,7 +1186,7 @@ html:has(.demo[open]){overflow:hidden}
   <!-- Risk workflows -->
   <article class="build" aria-labelledby="h-risk">
     <div class="build-head">
-      <div><h3 id="h-risk">Risk assessment workflows</h3><p>Based on the custom workflows for risk assessments from my time at OneTrust. Answer the intake questions and the workflow builds itself: risks get scored, stages are added or skipped by rule, and approval goes to the right person.</p></div>
+      <div><h3 id="h-risk">Privacy risk assessments</h3><p>Built at OneTrust: custom workflows for privacy impact and vendor risk assessments. Answer the intake questions and the workflow builds itself: risks get scored, stages are added or skipped by rule, and approval goes to the right person.</p></div>
       <div class="meta"><span class="chip a">workflow rules</span><span class="chip a">risk scoring</span><span class="chip">approvals</span></div>
     </div>
     <dl class="brief">
@@ -1329,7 +1330,7 @@ html:has(.demo[open]){overflow:hidden}
   <!-- Takeoff -->
   <article class="build" aria-labelledby="h-takeoff">
     <div class="build-head">
-      <div><h3 id="h-takeoff">Blueprint vision agent</h3><p>Built for a residential construction business I support on technology and product. It reads an architect's floor plan, measures every room for the estimate and flags anything it isn't sure about.</p></div>
+      <div><h3 id="h-takeoff">Blueprint vision agent</h3><p>Built for a residential construction company with $1M+ in annual revenue, which I support on technology and product. It reads an architect's floor plan, measures every room for the estimate and flags anything it isn't sure about.</p></div>
       <div class="meta"><span class="chip a">vision</span><span class="chip a">document extraction</span><span class="chip">human review</span></div>
     </div>
     <dl class="brief">
@@ -1374,7 +1375,7 @@ html:has(.demo[open]){overflow:hidden}
   <!-- Materials buying -->
   <article class="build" aria-labelledby="h-jc">
     <div class="build-head">
-      <div><h3 id="h-jc">Materials buying agent</h3><p>Built for the same business. Text what the site needs. The agent takes quantities from the plan, gets quotes from three suppliers at once, checks the budget and recommends an order. Approving it places the order and logs the cost.</p></div>
+      <div><h3 id="h-jc">Materials buying agent</h3><p>Built for the same $1M+ revenue construction company. Text what the site needs. The agent takes quantities from the plan, gets quotes from three suppliers at once, checks the budget and recommends an order. Approving it places the order and logs the cost.</p></div>
       <div class="meta"><span class="chip a">multi-agent</span><span class="chip a">tool calls</span><span class="chip">human approval</span></div>
     </div>
     <dl class="brief">
@@ -2407,7 +2408,7 @@ document.querySelectorAll('.trace').forEach(tr => {
   const ico = d => `<span class="ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg></span>`;
   const C = [];
   document.querySelectorAll('.pcard').forEach(c => C.push({ g: 'Demos', n: c.querySelector('.wn').textContent, h: c.querySelector('.wk').textContent, i: 'demo', run: () => c.click() }));
-  [['Work', 'work'], ['How I build with agents', 'method'], ['Journey', 'journey'], ['Contact', 'contact']].forEach(([n, id]) => C.push({ g: 'Go to', n, i: 'go', run: () => $('#' + id).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }) }));
+  [['Work', 'work'], ['How I build with agents', 'method'], ['Journey', 'journey'], ['Recommendations: what people say', 'endorse'], ['Contact', 'contact']].forEach(([n, id]) => C.push({ g: 'Go to', n, i: 'go', run: () => $('#' + id).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }) }));
   C.push({ g: 'Actions', n: 'Copy email', h: 'ishirv00@gmail.com', i: 'mail', run: () => { navigator.clipboard?.writeText('ishirv00@gmail.com'); track('email'); } });
   C.push({ g: 'Actions', n: 'Open resume (PDF)', i: 'file', run: () => { open('https://ishirvasavada.com/resume.pdf', '_blank', 'noopener'); track('resume'); } });
   C.push({ g: 'Actions', n: 'Open LinkedIn', i: 'link', run: () => { open('https://www.linkedin.com/in/ishirvasavada', '_blank', 'noopener'); track('linkedin'); } });
@@ -2441,7 +2442,7 @@ document.querySelectorAll('.trace').forEach(tr => {
   const fab = $('#ask-open'), panel = $('#ask'), log = $('#ask-log'), form = $('#ask-f'), input = $('#ask-in'), send = $('#ask-send'), sugg = $('#ask-sugg');
   const EMAIL = 'ishirv00@gmail.com';
   const ACT = {
-    demo_rules: ['Open the rules engine demo', 'rules'], demo_risk: ['Open the risk workflows demo', 'risk'], demo_eco: ['Open the Ecodrop demo', 'eco'],
+    demo_rules: ['Open the rules engine demo', 'rules'], demo_risk: ['Open the privacy risk assessments demo', 'risk'], demo_eco: ['Open the Ecodrop demo', 'eco'],
     demo_rec: ['Open the Recognito demo', 'rec'], demo_plan: ['Open the blueprint agent demo', 'plan'], demo_jc: ['Open the buying agent demo', 'jc'],
     method: ['How I build with agents', '#method'], journey: ['See my journey', '#journey'],
     resume: ['Resume (PDF)', 'https://ishirvasavada.com/resume.pdf'], linkedin: ['LinkedIn', 'https://www.linkedin.com/in/ishirvasavada'], email: ['Copy email', null],

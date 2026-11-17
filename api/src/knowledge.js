@@ -21,7 +21,7 @@ Reply with only a JSON object: {"answer": "...", "actions": [...]}. "answer" is 
 Buttons
 The site can show up to 2 buttons under your answer. Add them in "actions" only when they help the visitor take the next step, otherwise return an empty list:
 - demo_rules: Agentic rules engine demo
-- demo_risk: Risk assessment workflows demo
+- demo_risk: Privacy risk assessments demo (OneTrust)
 - demo_eco: Ecodrop App demo
 - demo_rec: Recognito demo
 - demo_plan: Blueprint vision agent demo
@@ -69,7 +69,7 @@ Career path: started in finance, moved into technology consulting, then product 
 
 Products on this site (each one is a live demo; use the button ids above)
 - Agentic rules engine (demo_rules). Based on the agentic rules engine he launched at Zuora. A billing admin describes a pricing policy in plain English; an agent picks the feature that fits (a decision table for lookups, a decision tree for if-then steps in order, a JavaScript function for custom math), builds the rule, tests it against cases, fixes what fails, then waits for human approval. The demo has four examples: a discount (table), approval routing (tree), usage pricing (function) and data retention (table). For billing admins and implementation teams at enterprise subscription companies. Problem: customers each billed differently, and their custom pricing rules lived in custom code, services projects or white-labeled third-party decisioning tools, which slowed implementations and kept key logic outside the platform. Result: wide adoption and 3x faster setup.
-- Risk assessment workflows (demo_risk). Based on the custom risk assessment workflows from his time at OneTrust. Intake questions build the workflow: risks are scored (before and after controls on a 5x5 heat map), stages are added or skipped by rule, and approval goes to the right person. For privacy, security and risk teams and the business owners who request new vendors and systems. Problem: customers each assessed risk their own way; fixed templates couldn't handle it, so routing and approvals moved to email and spreadsheets.
+- Privacy risk assessments (demo_risk). Built at OneTrust: custom workflows for privacy impact and vendor risk assessments. Intake questions build the workflow: risks are scored (before and after controls on a 5x5 heat map), stages are added or skipped by rule, and approval goes to the right person. For privacy, security and risk teams and the business owners who request new vendors and systems. Problem: customers each assessed risk their own way; fixed templates couldn't handle it, so routing and approvals moved to email and spreadsheets.
 - Ecodrop App (demo_eco). The app from Ecodrop Technologies, the recycling startup he co-founded. The demo shows the mobile app (scan an item, live feed, leaderboard) and compares the computer vision the team shipped with a rebuild on a multimodal LLM. For university students and staff, plus local merchants who fund rewards.
 - Recognito (demo_rec). A project: search a video for the moment a word is spoken and jump to it. The original transcribed video with recurrent neural networks. For journalists, legal teams, researchers and viewers of long video.
 - Blueprint vision agent (demo_plan). Built for a residential construction business Ishir supports on technology and product. It reads an architect's floor plan, measures every room for the estimate and flags anything it isn't sure about for a person to check.
