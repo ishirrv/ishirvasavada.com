@@ -930,16 +930,20 @@ html:has(.demo[open]){overflow:hidden}
 
 /* ═════════ redesign: role lens, proof stats, stories, journey cards, badges, endorsements, ⌘K ═════════ */
 /* proof stats */
-.range{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 24px;align-items:start;margin-top:44px;padding-top:18px;border-top:1px solid var(--rule)}
-.range-k{margin:0;padding-top:9px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-.range ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
-.rg-i{display:flex;flex-direction:column;gap:4px;width:100%;height:100%;padding:10px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--panel);color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:border-color .15s ease,transform .15s ease}
-.rg-i:hover{border-color:var(--ink-3);transform:translateY(-1px)}
-.rg-i:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.rg-i b{font-weight:600;font-size:var(--t-sm)}
-.rg-i small{display:block;font-size:12.5px;line-height:1.4;color:var(--ink-2)}
-@media (max-width:1100px){ .range ul{grid-template-columns:repeat(3,minmax(0,1fr))} }
-@media (max-width:620px){ .range{grid-template-columns:1fr;margin-top:32px} .range-k{padding-top:0} .range ul{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.range{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 24px;align-items:center;margin-top:44px;padding-top:18px;border-top:1px solid var(--rule)}
+.range-k{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.ticker{display:grid;gap:10px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.tk-row{display:flex;width:max-content;animation:tk 60s linear infinite}
+.tk-row.r{animation-direction:reverse;animation-duration:70s}
+.ticker:hover .tk-row{animation-play-state:paused}
+.tk-track{display:flex;gap:10px;margin:0;padding:4px 10px 4px 0;list-style:none}
+.stk{flex:none;padding:7px 14px;border:1px solid var(--rule);border-radius:999px;background:var(--panel);color:var(--ink);font-size:var(--t-sm);font-weight:500;white-space:nowrap;box-shadow:0 1px 0 color-mix(in srgb,var(--ink) 10%,transparent),0 4px 10px -8px rgb(0 0 0 / .35);transform:rotate(-1.2deg)}
+.stk:nth-child(even){transform:rotate(1deg)}
+.stk:nth-child(3n){transform:rotate(-.4deg)}
+.stk.a{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+@keyframes tk{to{transform:translateX(-50%)}}
+@media (max-width:620px){ .range{grid-template-columns:1fr;margin-top:32px} .stk{padding:6px 12px;font-size:13px} }
+@media (prefers-reduced-motion:reduce){ .tk-row{animation:none;width:auto} .tk-row .tk-track[aria-hidden]{display:none} .tk-track{flex-wrap:wrap} .ticker{-webkit-mask-image:none;mask-image:none} }
 .stat.go{display:block;color:inherit;text-decoration:none;cursor:pointer;transition:background .2s ease}
 .stat.go .proof{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:var(--accent);opacity:.75;transition:opacity .2s ease,gap .2s ease}
 .stat.go:hover .proof,.stat.go:focus-visible .proof{opacity:1;gap:9px}
@@ -1093,7 +1097,7 @@ html:has(.demo[open]){overflow:hidden}
       <a class="stat go" href="#eco" data-go="eco"><div class="v num">$200K+</div><div class="l">raised for the startup I co-founded</div><span class="proof">Try the Ecodrop app <span aria-hidden="true">→</span></span></a>
     </div>
   </div>
-  <div class="range" aria-labelledby="h-range"><p class="range-k" id="h-range">Range</p><ul><li><button type="button" class="rg-i" data-t="role" data-v="Goldman Sachs"><b>Finance</b><small>Portfolio analysis for wealth clients at Goldman Sachs</small></button></li><li><button type="button" class="rg-i" data-t="role" data-v="Capgemini"><b>Consulting</b><small>Led the technical plan for a site rebuild at Capgemini</small></button></li><li><button type="button" class="rg-i" data-t="role" data-v="Zuora"><b>Product</b><small>Platform products at Zuora and OneTrust</small></button></li><li><button type="button" class="rg-i" data-t="role" data-v="OneTrust"><b>Go-to-market</b><small>An upsell strategy that added $5MM+ at OneTrust</small></button></li><li><button type="button" class="rg-i" data-t="work" data-v=""><b>Engineering</b><small>I build hands-on. Every demo here runs live</small></button></li><li><button type="button" class="rg-i" data-t="role" data-v="Ecodrop Technologies"><b>Founder</b><small>App, hardware, partners and fundraising at Ecodrop</small></button></li></ul></div>
+  <div class="range" aria-labelledby="h-range"><p class="range-k" id="h-range">Skills</p><div class="ticker"><div class="tk-row l"><ul class="tk-track"><li class="stk a">Product taste</li><li class="stk">Customer discovery</li><li class="stk a">Pricing & packaging</li><li class="stk">Unit economics</li><li class="stk">Business models</li><li class="stk">Go-to-market</li><li class="stk">Prioritization</li><li class="stk">Experimentation</li><li class="stk">SQL & analytics</li><li class="stk">0 → 1</li><li class="stk">Spec writing</li></ul><ul class="tk-track" aria-hidden="true"><li class="stk a">Product taste</li><li class="stk">Customer discovery</li><li class="stk a">Pricing & packaging</li><li class="stk">Unit economics</li><li class="stk">Business models</li><li class="stk">Go-to-market</li><li class="stk">Prioritization</li><li class="stk">Experimentation</li><li class="stk">SQL & analytics</li><li class="stk">0 → 1</li><li class="stk">Spec writing</li></ul></div><div class="tk-row r"><ul class="tk-track"><li class="stk a">Prototyping in code</li><li class="stk a">Agentic workflows</li><li class="stk a">LLM evals</li><li class="stk">Human-in-the-loop design</li><li class="stk">Model selection & cost</li><li class="stk">Platform & APIs</li><li class="stk">Data modeling</li><li class="stk">Privacy & compliance</li><li class="stk">Mobile apps</li><li class="stk">Stakeholder alignment</li></ul><ul class="tk-track" aria-hidden="true"><li class="stk a">Prototyping in code</li><li class="stk a">Agentic workflows</li><li class="stk a">LLM evals</li><li class="stk">Human-in-the-loop design</li><li class="stk">Model selection & cost</li><li class="stk">Platform & APIs</li><li class="stk">Data modeling</li><li class="stk">Privacy & compliance</li><li class="stk">Mobile apps</li><li class="stk">Stakeholder alignment</li></ul></div></div></div>
 </section>
 
 <!-- ═══════════ WORK ═══════════ -->
@@ -2342,14 +2346,6 @@ document.querySelectorAll('.trace').forEach(tr => {
   const k = (new URLSearchParams(location.search).get('theme') || '').toLowerCase();
   if (B[k]) apply(k);
 }
-
-/* ───── range: each kind of work links to its proof ───── */
-document.querySelector('.range ul').addEventListener('click', e => {
-  const b = e.target.closest('.rg-i'); if (!b) return;
-  if (b.dataset.t === 'role') document.dispatchEvent(new CustomEvent('iv:role', { detail: b.dataset.v }));
-  else $('#work').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
-  track('proof', 'range-' + b.querySelector('b').textContent.toLowerCase());
-});
 
 /* ───── header name: shown only once the hero's name has scrolled away, so it never appears twice ───── */
 {
