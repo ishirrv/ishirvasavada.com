@@ -68,7 +68,17 @@ button{font:inherit;color:inherit}
 .nav a{font-family:var(--f-mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.08em;text-decoration:none;color:var(--ink-2);padding:8px 10px;border-radius:6px}
 .nav a:hover{color:var(--ink);background:var(--accent-soft)}
 .nav a.cta{color:var(--accent-ink);background:var(--accent)}
-@media (max-width:640px){ .nav a:not(.cta){display:none} }
+.m-btn{display:none}
+.m-menu[hidden]{display:none}
+@media (max-width:640px){
+  .nav a:not(.cta){display:none}
+  .m-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--panel);color:var(--ink);font:500 13px/1 var(--f-body);cursor:pointer}
+  .m-btn[aria-expanded="true"]{border-color:var(--ink-3)}
+  .m-menu{position:absolute;top:calc(100% + 6px);right:12px;left:12px;z-index:25;display:grid;gap:2px;padding:6px;border:1px solid var(--rule);border-radius:14px;background:var(--panel);box-shadow:0 18px 40px -16px rgb(0 0 0 / .35)}
+  .m-menu a{display:flex;justify-content:space-between;align-items:center;padding:13px 12px;border-radius:9px;color:var(--ink);font-size:15px;font-weight:500;text-decoration:none}
+  .m-menu a:active,.m-menu a:hover{background:var(--accent-soft)}
+  .m-menu a::after{content:"→";color:var(--ink-3)}
+}
 
 /* ——— sheet labels ——— */
 .sheet{padding-block:88px 24px}
@@ -244,6 +254,7 @@ table.dt{width:100%;min-width:440px;border-collapse:collapse;font-size:13px}
   .dt td::before{content:attr(data-l);color:var(--ink-3);font-size:12px;text-align:left}
   .dt td.n{justify-content:flex-start;gap:4px;font-family:var(--f-body);font-size:12px;font-weight:600;color:var(--ink-2)}
   .dt td.n::before{content:"Rule";color:var(--ink-2)}
+  .dt.obj td.n::before{content:"Field"}
 }
 .dt-wait{margin:0;padding:14px 12px;font-size:13px;color:var(--ink-3)}
 pre.code{margin:0;font-family:var(--f-mono);font-size:12.5px;line-height:1.6;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto;white-space:pre;color:var(--ink)}
@@ -1073,8 +1084,10 @@ html:has(.demo[open]){overflow:hidden}
       <a href="#journey">Journey</a>
       <a href="#endorse">Recommendations</a>
       <a href="#ask" data-ask hidden>Ask AI</a>
+      <button class="m-btn" id="m-btn" type="button" aria-expanded="false" aria-controls="m-menu"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</button>
       <a class="cta" href="#contact">Contact</a>
     </nav>
+    <div class="m-menu" id="m-menu" hidden></div>
   </div>
 </header>
 
@@ -1116,7 +1129,7 @@ html:has(.demo[open]){overflow:hidden}
   <div class="pgrid" id="work-grid">
     <a class="pcard" href="#rules" data-p="rules" style="--pc:var(--c-rules);--pf:var(--f-rules);--pon:var(--on-rules)">
       <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="w" x="36" y="22" width="248" height="170" rx="10"/><rect class="a" x="50" y="36" width="10" height="10" rx="2"/><rect class="l" x="68" y="38" width="58" height="6" rx="3"/><rect class="s" x="222" y="33" width="48" height="16" rx="8"/><text class="ta" x="246" y="44.5" text-anchor="middle">12/12</text><rect class="h" x="50" y="58" width="220" height="16"/><text class="tx" x="60" y="69">Region</text><text class="tx" x="112" y="69">Event</text><text class="tx" x="170" y="69">Days</text><text class="tx" x="222" y="69">Discount</text><g class="row"><rect class="l" x="60" y="82" width="36" height="5" rx="2.5"/><rect class="l" x="112" y="82" width="44" height="5" rx="2.5"/><rect class="l" x="170" y="82" width="30" height="5" rx="2.5"/><rect class="s" x="222" y="78" width="40" height="13" rx="6.5"/></g><rect class="s" x="50" y="96" width="220" height="22" opacity=".55"/><text class="tx" x="60" y="109.5" style="fill:var(--ink)">APAC</text><text class="tx" x="112" y="109.5" style="fill:var(--ink)">Upgrade</text><text class="tx" x="170" y="109.5" style="fill:var(--ink)">0–30</text><rect class="a" x="217" y="100" width="50" height="13" rx="6.5"/><text class="on" x="242" y="109.5" text-anchor="middle">10% off</text><rect class="l" x="60" y="126" width="40" height="5" rx="2.5"/><rect class="l" x="112" y="126" width="38" height="5" rx="2.5"/><rect class="l" x="170" y="126" width="32" height="5" rx="2.5"/><rect class="s" x="222" y="122" width="40" height="13" rx="6.5"/><rect class="l" x="60" y="148" width="32" height="5" rx="2.5"/><rect class="l" x="112" y="148" width="46" height="5" rx="2.5"/><rect class="l" x="170" y="148" width="28" height="5" rx="2.5"/><rect class="s" x="222" y="144" width="40" height="13" rx="6.5"/><path class="kl" d="M50 96h220M50 118h220M50 140h220M104 58v120M162 58v120M212 58v120"/></svg></div>
-      <div class="pc-t"><span class="wk">Zuora · Billing platform</span><span class="wn">Agentic rules engine</span><span class="wo">Wide adoption, 3× faster setup</span></div>
+      <div class="pc-t"><span class="wk">Zuora · Billing platform</span><span class="wn">Agentic rules engine</span><span class="wo">Custom objects and rules, 3× faster setup</span></div>
     </a>
     <a class="pcard" href="#risk" data-p="risk" style="--pc:var(--c-risk);--pf:var(--f-risk);--pon:var(--on-risk)">
       <div class="pv"><svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect class="a" x="40" y="28" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="64" y="28" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="88" y="28" width="20" height="20" rx="4" opacity="0.70"/><rect class="a" x="112" y="28" width="20" height="20" rx="4" opacity="0.80"/><rect class="a" x="136" y="28" width="20" height="20" rx="4" opacity="0.90"/><rect class="a" x="40" y="52" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="64" y="52" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="88" y="52" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="112" y="52" width="20" height="20" rx="4" opacity="0.70"/><rect class="a" x="136" y="52" width="20" height="20" rx="4" opacity="0.80"/><rect class="a" x="40" y="76" width="20" height="20" rx="4" opacity="0.30"/><rect class="a" x="64" y="76" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="88" y="76" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="112" y="76" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="136" y="76" width="20" height="20" rx="4" opacity="0.70"/><rect class="a" x="40" y="100" width="20" height="20" rx="4" opacity="0.20"/><rect class="a" x="64" y="100" width="20" height="20" rx="4" opacity="0.30"/><rect class="a" x="88" y="100" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="112" y="100" width="20" height="20" rx="4" opacity="0.50"/><rect class="a" x="136" y="100" width="20" height="20" rx="4" opacity="0.60"/><rect class="a" x="40" y="124" width="20" height="20" rx="4" opacity="0.10"/><rect class="a" x="64" y="124" width="20" height="20" rx="4" opacity="0.20"/><rect class="a" x="88" y="124" width="20" height="20" rx="4" opacity="0.30"/><rect class="a" x="112" y="124" width="20" height="20" rx="4" opacity="0.40"/><rect class="a" x="136" y="124" width="20" height="20" rx="4" opacity="0.50"/><circle class="ring" cx="134" cy="62" r="13"/><path class="kl" d="M210 46v94" stroke-dasharray="0"/><rect class="w" x="196" y="30" width="96" height="22" rx="11"/><circle class="a" cx="210" cy="41" r="5"/><text class="tx" x="222" y="44">Intake</text><rect class="w" x="196" y="62" width="96" height="22" rx="11"/><circle class="a" cx="210" cy="73" r="5"/><text class="tx" x="222" y="76">Assess</text><rect class="w dash" x="196" y="94" width="96" height="22" rx="11"/><circle class="kl" cx="210" cy="105" r="5"/><text class="tx mute" x="222" y="108">Legal · skip</text><rect class="a" x="196" y="126" width="96" height="22" rx="11"/><text class="on" x="244" y="140" text-anchor="middle">Approve</text></svg></div>
@@ -1154,7 +1167,7 @@ html:has(.demo[open]){overflow:hidden}
   <!-- Rules -->
   <article class="build" aria-labelledby="h-rules">
     <div class="build-head">
-      <div><h3 id="h-rules">Agentic rules engine</h3><p>Based on the agentic rules engine I launched. Describe a billing policy in plain English. An agent picks the right feature for it (a decision table, a decision tree or a JavaScript function), builds the rule, tests it, fixes what fails, then waits for approval.</p></div>
+      <div><h3 id="h-rules">Agentic rules engine and custom objects</h3><p>Based on the agentic rules engine and custom objects I launched. Describe a billing policy in plain English. An agent picks the right feature for it (a decision table, a decision tree, a JavaScript function, or a custom object when the data doesn't exist yet), builds it, tests it, fixes what fails, then waits for approval.</p></div>
       <div class="meta"><span class="chip a">MCP context</span><span class="chip a">evals</span><span class="chip">guardrails</span></div>
     </div>
     <dl class="brief">
@@ -1168,7 +1181,7 @@ html:has(.demo[open]){overflow:hidden}
         <p class="ra-label" id="ra-label">Describe a policy in plain English</p>
         <div class="ra-box"><div class="ra-input" id="ra-input" aria-labelledby="ra-label"></div><button class="btn primary ra-gen" type="button" id="ra-gen">Generate</button></div>
         <div class="ra-chips" id="prompts" role="group" aria-label="Example policies"></div>
-        <div class="ra-pick" id="ra-pick" aria-live="polite"><span class="ra-pick-k">Feature</span><span class="ra-opt" data-t="table">Decision table</span><span class="ra-opt" data-t="tree">Decision tree</span><span class="ra-opt" data-t="fn">JavaScript function</span><p class="ra-why" id="ra-why"></p></div>
+        <div class="ra-pick" id="ra-pick" aria-live="polite"><span class="ra-pick-k">Feature</span><span class="ra-opt" data-t="table">Decision table</span><span class="ra-opt" data-t="tree">Decision tree</span><span class="ra-opt" data-t="fn">JavaScript function</span><span class="ra-opt" data-t="obj">Custom object</span><p class="ra-why" id="ra-why"></p></div>
         <div class="dtable" id="rule-out" aria-live="polite"></div>
         <div class="ra-foot">
           <div class="ra-tests"><div class="evals" id="evals" aria-hidden="true"></div><span id="ev-text">12 / 12 cases passed</span></div>
@@ -1669,7 +1682,7 @@ document.addEventListener('click', e => {
 /* ───── rules ───── */
 {
   // Each policy goes to the feature that fits it: a table for lookups, a tree for if-then steps, a function for custom math.
-  const KIND = { table: 'decision table', tree: 'decision tree', fn: 'JavaScript function' };
+  const KIND = { table: 'decision table', tree: 'decision tree', fn: 'JavaScript function', obj: 'custom object' };
   const P = [
     { k:'Discount policy', type:'table', why:'A decision table: the rule is a lookup on a few fixed values (region, event, days before renewal).',
       q:'Give APAC accounts 10% off when they upgrade within 30 days of renewal.',
@@ -1696,6 +1709,14 @@ document.addEventListener('click', e => {
         v2:['function usageCharge(calls, daysActive, daysInMonth) {','  const share = daysActive / daysInMonth;  // part of the month the account was active','  const free = Math.round(10000 * share), rate = 0.002, cap = 500 * share;','  const billable = Math.max(0, calls - free);','  return Math.round(Math.min(billable * rate, cap) * 100) / 100;','}'],
         fixed:[0,1,2,4],
         note:'v2 prorates the free calls and the cap for accounts that start partway through a month.'} },
+    { k:'Partner rebates', type:'obj', why:"A custom object: partner tier isn't in the billing data model yet, so the agent adds a Partner object the rules can read.",
+      q:'Track resellers by partner tier, and give Gold partners a 12% rebate on renewals.',
+      fail:2,
+      trace:[['Read data','Read the billing data model: no partner or tier fields','schema.lookup(Account, Subscription) via MCP'],['Understand','Needs a partner tier per reseller, then a rebate by tier.','plan.intent()'],['Choose feature','Custom object first, then a decision table on its Tier','route(intent) → custom_object'],['Draft','Drafted the Partner object and its fields','objects.draft()'],['Test','11 of 12 cases passed. Case 3 failed: Tier was free text, so "gold" didn\'t match "Gold".','evals.run(12)','warn'],['Fix','Version 2 makes Tier a picklist','objects.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Adds an object and fields only. Changes no existing data.','guardrails.check()'],['Approval','Waiting on a billing admin','request_approval(billing_admin)']],
+      obj:{ name:'Partner', fix:1,
+        v1:[['Account','Lookup → Account','Yes'],['Tier','Text','Yes'],['Rebate %','Number','Yes'],['Renewal only','Checkbox','No']],
+        v2:[['Account','Lookup → Account','Yes'],['Tier','Picklist: Silver, Gold, Platinum','Yes'],['Rebate %','Number','Yes'],['Renewal only','Checkbox','No']],
+        note:'v2 makes Tier a picklist, so every partner gets one of three exact values and the rebate rule can match on it.'} },
     { k:'Retention policy', type:'table', why:'A decision table: two fixed inputs (record age, legal hold) decide one action.',
       q:'Purge usage records older than 7 years unless the account is on legal hold.',
       fail:9,
@@ -1742,7 +1763,13 @@ document.addEventListener('click', e => {
     const html = lines.map((l, i) => { const [c, cm] = l.split('  //'); return `<span class="${v2 && F.fixed.includes(i) ? 'fix' : ''}">${esc(c)}${cm ? `<i class="cm">  //${esc(cm)}</i>` : ''}</span>`; }).join('');
     return cap('JavaScript function · runs on each invoice', v2) + `<pre class="fncode"><code>${html}</code></pre>` + note(F, v2);
   }
-  const render = (p, v2) => ({ table: dt, tree, fn })[p.type](p, v2);
+  // custom object: its fields, with the one changed in v2 highlighted
+  function ob(p, v2) {
+    const O = p.obj, rows = v2 ? O.v2 : O.v1, L = ['Field', 'Type', 'Required'];
+    const body = rows.map((r, ri) => `<tr><td class="n">${ri + 1}</td>${r.map((c, ci) => `<td data-l="${L[ci]}" class="${ci === 2 ? 'o' : ''}${v2 && ri === O.fix ? ' fix' : ''}">${esc(c)}</td>`).join('')}</tr>`).join('');
+    return cap(`Custom object · ${O.name}`, v2) + `<div class="dt-scroll"><table class="dt obj"><thead><tr><th class="n">#</th><th>Field</th><th>Type</th><th class="o">Required</th></tr></thead><tbody>${body}</tbody></table></div>` + note(O, v2);
+  }
+  const render = (p, v2) => ({ table: dt, tree, fn, obj: ob })[p.type](p, v2);
   // row: [plain step, result, technical call, warn?]
   function final(p) {
     inputEl.textContent = p.q; ready(true); pickShow(p);
@@ -2355,6 +2382,22 @@ document.querySelectorAll('.trace').forEach(tr => {
   const mark = $('.mark'), who = $('.who');
   if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => mark.classList.toggle('off', e.isIntersecting), { rootMargin: '-56px 0px 0px 0px' }).observe(who);
   else mark.classList.remove('off');
+}
+
+/* ───── phone menu: the same section links as the desktop header ───── */
+{
+  const btn = $('#m-btn'), menu = $('#m-menu');
+  const LABEL = { '#method': 'How I build with agents', '#endorse': 'Recommendations' };
+  const build = () => { menu.innerHTML = [...document.querySelectorAll('.nav a:not(.cta)')].filter(a => !a.hidden)
+    .map(a => `<a href="${a.getAttribute('href')}"${a.hasAttribute('data-ask') ? ' data-ask' : ''}>${LABEL[a.getAttribute('href')] || a.textContent}</a>`).join(''); };
+  const set = open => { if (open) build(); menu.hidden = !open; btn.setAttribute('aria-expanded', open); };
+  btn.addEventListener('click', e => { e.stopPropagation(); set(menu.hidden); });
+  menu.addEventListener('click', e => {
+    const a = e.target.closest('a'); if (!a) return; set(false);
+    if (a.hasAttribute('data-ask')) { e.preventDefault(); $('#ask-open')?.click(); }
+  });
+  document.addEventListener('click', e => { if (!menu.hidden && !menu.contains(e.target)) set(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) { set(false); btn.focus(); } });
 }
 
 /* ───── hero: numbers count up, and each one links to its proof ───── */
