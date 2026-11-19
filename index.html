@@ -71,7 +71,7 @@ button{font:inherit;color:inherit}
 .m-btn{display:none}
 .m-menu[hidden]{display:none}
 @media (max-width:640px){
-  .nav a:not(.cta){display:none}
+  .nav a{display:none}
   .m-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--panel);color:var(--ink);font:500 13px/1 var(--f-body);cursor:pointer}
   .m-btn[aria-expanded="true"]{border-color:var(--ink-3)}
   .m-menu{position:absolute;top:calc(100% + 6px);right:12px;left:12px;z-index:25;display:grid;gap:2px;padding:6px;border:1px solid var(--rule);border-radius:14px;background:var(--panel);box-shadow:0 18px 40px -16px rgb(0 0 0 / .35)}
@@ -2388,7 +2388,7 @@ document.querySelectorAll('.trace').forEach(tr => {
 {
   const btn = $('#m-btn'), menu = $('#m-menu');
   const LABEL = { '#method': 'How I build with agents', '#endorse': 'Recommendations' };
-  const build = () => { menu.innerHTML = [...document.querySelectorAll('.nav a:not(.cta)')].filter(a => !a.hidden)
+  const build = () => { menu.innerHTML = [...document.querySelectorAll('.nav a')].filter(a => !a.hidden)
     .map(a => `<a href="${a.getAttribute('href')}"${a.hasAttribute('data-ask') ? ' data-ask' : ''}>${LABEL[a.getAttribute('href')] || a.textContent}</a>`).join(''); };
   const set = open => { if (open) build(); menu.hidden = !open; btn.setAttribute('aria-expanded', open); };
   btn.addEventListener('click', e => { e.stopPropagation(); set(menu.hidden); });
