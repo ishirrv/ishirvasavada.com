@@ -1183,7 +1183,7 @@ html:has(.demo[open]){overflow:hidden}
     </dl>
     <div class="build-body ra">
       <div class="pane ra-main">
-        <div class="ra-bar"><span class="ra-app"><i aria-hidden="true"></i>Rules studio</span><span class="ra-crumb">Billing · Policies · Draft</span><span id="ev-state" class="state ok">ready for approval</span></div>
+        <div class="ra-bar"><span class="ra-app"><i aria-hidden="true"></i>Rules studio</span><span class="ra-crumb" id="ra-crumb">Billing · Policies · Draft</span><span id="ev-state" class="state ok">ready for approval</span></div>
         <p class="ra-label" id="ra-label">Describe a policy in plain English</p>
         <div class="ra-box"><div class="ra-input" id="ra-input" aria-labelledby="ra-label"></div><button class="btn primary ra-gen" type="button" id="ra-gen">Generate</button></div>
         <div class="ra-chips" id="prompts" role="group" aria-label="Example policies"></div>
@@ -1723,6 +1723,14 @@ document.addEventListener('click', e => {
         v1:[['Account','Lookup → Account','Yes'],['Tier','Text','Yes'],['Rebate %','Number','Yes'],['Renewal only','Checkbox','No']],
         v2:[['Account','Lookup → Account','Yes'],['Tier','Picklist: Silver, Gold, Platinum','Yes'],['Rebate %','Number','Yes'],['Renewal only','Checkbox','No']],
         note:'v2 makes Tier a picklist, so every partner gets one of three exact values and the rebate rule can match on it.'} },
+    { k:'Tenant config', area:'Tenants', type:'tree', why:'A decision tree: whether a change can self-serve depends on a chain of checks, and the upgrade freeze has to come first.',
+      q:'Let tenants change their IP allowlist and maintenance window themselves. SAML and private networking changes need an SRE, and nothing applies during an upgrade.',
+      fail:7,
+      trace:[['Read data','Read the tenant config model: 4 settings and the maintenance calendar','schema.lookup(Tenant, ConfigChange, MaintenanceWindow) via MCP'],['Understand','Who approves depends on the setting and on whether an upgrade is running.','plan.intent()'],['Choose feature','Decision tree: checks in a set order','route(intent) → decision_tree'],['Draft','Drafted version 1 of the decision tree','trees.draft()'],['Test','11 of 12 cases passed. Case 8 failed: an IP allowlist edit applied mid-upgrade, because the tree checked the setting before the upgrade freeze.','evals.run(12)','warn'],['Fix','Version 2 checks for a running upgrade first','trees.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Changes queue instead of applying. Every change keeps an audit entry and a rollback.','guardrails.check()'],['Approval','Waiting on the SRE lead','request_approval(sre_lead)']],
+      tree:{
+        v1:{q:'IP allowlist or maintenance window?', yes:{out:'Apply now (self-serve)'}, no:{q:'Upgrade running on this tenant?', yes:{out:'Queue until the upgrade ends'}, no:{out:'SRE approves (SAML, private networking)'}}},
+        v2:{q:'Upgrade running on this tenant?', fix:true, yes:{out:'Queue until the upgrade ends'}, no:{q:'IP allowlist or maintenance window?', yes:{out:'Apply now (self-serve)'}, no:{out:'SRE approves (SAML, private networking)'}}},
+        note:'v2 checks for a running upgrade first, so no change, self-serve or not, lands in the middle of maintenance.'} },
     { k:'Retention policy', type:'table', why:'A decision table: two fixed inputs (record age, legal hold) decide one action.',
       q:'Purge usage records older than 7 years unless the account is on legal hold.',
       fail:9,
@@ -1735,9 +1743,12 @@ document.addEventListener('click', e => {
   const box = $('#prompts'), out = $('#rule-out'), tr = $('#rule-trace'), ev = $('#evals'), opts = [...document.querySelectorAll('.ra-opt')], why = $('#ra-why');
   for (let i = 0; i < 12; i++) ev.appendChild(document.createElement('i'));
   const cells = [...ev.children];
-  box.innerHTML = '<span class="ra-try">Try</span>' + P.map((p,i) => `<button class="ra-chip" type="button" aria-pressed="${i===0}" data-i="${i}">${esc(p.k)}</button>`).join('');
+  // A private ?theme=gitlab link opens on the tenant example.
+  const first = new URLSearchParams(location.search).get('theme') === 'gitlab' ? Math.max(0, P.findIndex(p => p.k === 'Tenant config')) : 0;
+  box.innerHTML = '<span class="ra-try">Try</span>' + P.map((p,i) => `<button class="ra-chip" type="button" aria-pressed="${i===first}" data-i="${i}">${esc(p.k)}</button>`).join('');
   const inputEl = $('#ra-input'), ap = $('#ra-approve');
-  let curI = 0;
+  let curI = first;
+  const crumb = $('#ra-crumb'), area = p => { crumb.textContent = `${p.area || 'Billing'} · Policies · Draft`; };
   function pickShow(p) { opts.forEach(o => o.classList.toggle('on', !!p && o.dataset.t === p.type)); why.textContent = p ? p.why : 'Choosing the feature that fits this rule…'; }
   function ready(on) { ap.disabled = !on; ap.className = 'btn primary'; ap.textContent = 'Approve and publish'; }
   ap.addEventListener('click', () => {
@@ -1778,7 +1789,7 @@ document.addEventListener('click', e => {
   const render = (p, v2) => ({ table: dt, tree, fn, obj: ob })[p.type](p, v2);
   // row: [plain step, result, technical call, warn?]
   function final(p) {
-    inputEl.textContent = p.q; ready(true); pickShow(p);
+    area(p); inputEl.textContent = p.q; ready(true); pickShow(p);
     rail(tr, p.trace.map(s => ({t:s[0], o:s[1], c:s[2], st: s[3] ? 'warn' : 'done'})));
     out.innerHTML = render(p, true); cells.forEach(c => c.className = 'p');
     $('#ev-text').textContent = '12 / 12 cases passed'; const st = $('#ev-state'); st.textContent = 'ready for approval'; st.className = 'state ok';
@@ -1787,7 +1798,7 @@ document.addEventListener('click', e => {
   async function run(i) {
     const me = ++token, p = P[i]; curI = i;
     box.querySelectorAll('.ra-chip').forEach(b => b.setAttribute('aria-pressed', b.dataset.i == i));
-    inputEl.textContent = p.q; ready(false); pickShow(null);
+    area(p); inputEl.textContent = p.q; ready(false); pickShow(null);
     out.innerHTML = '<p class="dt-wait">Reading the request…</p>'; cells.forEach(c => c.className = '');
     const st = $('#ev-state'); st.textContent = 'working'; st.className = 'state'; $('#ev-text').textContent = '0 / 12 cases run';
     let evalRun = 0;
@@ -1808,7 +1819,7 @@ document.addEventListener('click', e => {
     if (me === token) final(p);
   }
   box.addEventListener('click', e => { const b = e.target.closest('.ra-chip'); if (b) run(+b.dataset.i); });
-  final(P[0]);
+  final(P[first]);
 }
 
 /* ───── materials buying agent ───── */
@@ -2365,6 +2376,7 @@ document.querySelectorAll('.trace').forEach(tr => {
     crowdstrike:{ n: 'CrowdStrike',s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F4F4F4', ink: '#000000', a: '#D60000', ai: '#FFFFFF', hi: '#EC0000', stripe: ['#EC0000'], btn: '#EC0000', bi: '#FFFFFF', r: '8px' },
     doordash:   { n: 'DoorDash',   s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F7F7F7', ink: '#191919', a: '#D91400', ai: '#FFFFFF', hi: '#EB1700', stripe: ['#EB1700'], btn: '#EB1700', bi: '#FFFFFF', r: '999px' },
     figma:      { n: 'Figma',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F5F5F5', ink: '#000000', a: '#7B3FF2', ai: '#FFFFFF', hi: '#874FFF', stripe: ['#FF3737', '#FF7237', '#874FFF', '#00B6FF', '#24CB71'], hard: true, btn: '#000000', bi: '#FFFFFF', r: '8px' },
+    gitlab:     { n: 'GitLab',     s: 'light', paper: '#FCFBFC', panel: '#FFFFFF', band: '#F3F1F5', ink: '#18171D', a: '#C43B1F', ai: '#FFFFFF', hi: '#E24329', stripe: ['#E24329', '#FC6D26', '#FCA326'], font: '"Inter", "GitLab Sans", Helvetica, Arial, sans-serif', gf: 'Inter:wght@400;500;600;700', btn: '#18171D', bi: '#FCFBFC', r: '4px' },
     glean:      { n: 'Glean',      s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F4F5FE', ink: '#333333', a: '#343CED', ai: '#FFFFFF', hi: '#343CED', stripe: ['#343CED'], btn: '#343CED', bi: '#FFFFFF', r: '999px' },
     hubspot:    { n: 'HubSpot',    s: 'light', paper: '#FCFCFA', panel: '#FFFFFF', band: '#F5F2EC', ink: '#1F1F1F', a: '#C83A00', ai: '#FFFFFF', hi: '#FF4800', stripe: ['#FF4800'], display: '"Newsreader", Georgia, serif', gf: 'Newsreader:opsz,wght@6..72,500;6..72,600', btn: '#D63D00', bi: '#FFFFFF', r: '8px' },
     intuit:     { n: 'Intuit',     s: 'light', paper: '#FFFFFF', panel: '#FFFFFF', band: '#F4F5F8', ink: '#21262A', a: '#1A5FE6', ai: '#FFFFFF', hi: '#236CFF', stripe: ['#236CFF'], btn: '#236CFF', bi: '#FFFFFF', r: '999px' },
