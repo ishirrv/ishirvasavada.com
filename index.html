@@ -1690,6 +1690,14 @@ document.addEventListener('click', e => {
   // Each policy goes to the feature that fits it: a table for lookups, a tree for if-then steps, a function for custom math.
   const KIND = { table: 'decision table', tree: 'decision tree', fn: 'JavaScript function', obj: 'custom object' };
   const P = [
+    { k:'Tenant config', area:'Tenants', type:'tree', why:'A decision tree: whether a change can self-serve depends on a chain of checks, and the upgrade freeze has to come first.',
+      q:'Let tenants change their IP allowlist and maintenance window themselves. SAML and private networking changes need an SRE, and nothing applies during an upgrade.',
+      fail:7,
+      trace:[['Read data','Read the tenant config model: 4 settings and the maintenance calendar','schema.lookup(Tenant, ConfigChange, MaintenanceWindow) via MCP'],['Understand','Who approves depends on the setting and on whether an upgrade is running.','plan.intent()'],['Choose feature','Decision tree: checks in a set order','route(intent) → decision_tree'],['Draft','Drafted version 1 of the decision tree','trees.draft()'],['Test','11 of 12 cases passed. Case 8 failed: an IP allowlist edit applied mid-upgrade, because the tree checked the setting before the upgrade freeze.','evals.run(12)','warn'],['Fix','Version 2 checks for a running upgrade first','trees.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Changes queue instead of applying. Every change keeps an audit entry and a rollback.','guardrails.check()'],['Approval','Waiting on the SRE lead','request_approval(sre_lead)']],
+      tree:{
+        v1:{q:'IP allowlist or maintenance window?', yes:{out:'Apply now (self-serve)'}, no:{q:'Upgrade running on this tenant?', yes:{out:'Queue until the upgrade ends'}, no:{out:'SRE approves (SAML, private networking)'}}},
+        v2:{q:'Upgrade running on this tenant?', fix:true, yes:{out:'Queue until the upgrade ends'}, no:{q:'IP allowlist or maintenance window?', yes:{out:'Apply now (self-serve)'}, no:{out:'SRE approves (SAML, private networking)'}}},
+        note:'v2 checks for a running upgrade first, so no change, self-serve or not, lands in the middle of maintenance.'} },
     { k:'Discount policy', type:'table', why:'A decision table: the rule is a lookup on a few fixed values (region, event, days before renewal).',
       q:'Give APAC accounts 10% off when they upgrade within 30 days of renewal.',
       fail:6,
@@ -1723,14 +1731,6 @@ document.addEventListener('click', e => {
         v1:[['Account','Lookup → Account','Yes'],['Tier','Text','Yes'],['Rebate %','Number','Yes'],['Renewal only','Checkbox','No']],
         v2:[['Account','Lookup → Account','Yes'],['Tier','Picklist: Silver, Gold, Platinum','Yes'],['Rebate %','Number','Yes'],['Renewal only','Checkbox','No']],
         note:'v2 makes Tier a picklist, so every partner gets one of three exact values and the rebate rule can match on it.'} },
-    { k:'Tenant config', area:'Tenants', type:'tree', why:'A decision tree: whether a change can self-serve depends on a chain of checks, and the upgrade freeze has to come first.',
-      q:'Let tenants change their IP allowlist and maintenance window themselves. SAML and private networking changes need an SRE, and nothing applies during an upgrade.',
-      fail:7,
-      trace:[['Read data','Read the tenant config model: 4 settings and the maintenance calendar','schema.lookup(Tenant, ConfigChange, MaintenanceWindow) via MCP'],['Understand','Who approves depends on the setting and on whether an upgrade is running.','plan.intent()'],['Choose feature','Decision tree: checks in a set order','route(intent) → decision_tree'],['Draft','Drafted version 1 of the decision tree','trees.draft()'],['Test','11 of 12 cases passed. Case 8 failed: an IP allowlist edit applied mid-upgrade, because the tree checked the setting before the upgrade freeze.','evals.run(12)','warn'],['Fix','Version 2 checks for a running upgrade first','trees.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Changes queue instead of applying. Every change keeps an audit entry and a rollback.','guardrails.check()'],['Approval','Waiting on the SRE lead','request_approval(sre_lead)']],
-      tree:{
-        v1:{q:'IP allowlist or maintenance window?', yes:{out:'Apply now (self-serve)'}, no:{q:'Upgrade running on this tenant?', yes:{out:'Queue until the upgrade ends'}, no:{out:'SRE approves (SAML, private networking)'}}},
-        v2:{q:'Upgrade running on this tenant?', fix:true, yes:{out:'Queue until the upgrade ends'}, no:{q:'IP allowlist or maintenance window?', yes:{out:'Apply now (self-serve)'}, no:{out:'SRE approves (SAML, private networking)'}}},
-        note:'v2 checks for a running upgrade first, so no change, self-serve or not, lands in the middle of maintenance.'} },
     { k:'Retention policy', type:'table', why:'A decision table: two fixed inputs (record age, legal hold) decide one action.',
       q:'Purge usage records older than 7 years unless the account is on legal hold.',
       fail:9,
@@ -1743,8 +1743,7 @@ document.addEventListener('click', e => {
   const box = $('#prompts'), out = $('#rule-out'), tr = $('#rule-trace'), ev = $('#evals'), opts = [...document.querySelectorAll('.ra-opt')], why = $('#ra-why');
   for (let i = 0; i < 12; i++) ev.appendChild(document.createElement('i'));
   const cells = [...ev.children];
-  // A private ?theme=gitlab link opens on the tenant example.
-  const first = new URLSearchParams(location.search).get('theme') === 'gitlab' ? Math.max(0, P.findIndex(p => p.k === 'Tenant config')) : 0;
+  const first = 0;
   box.innerHTML = '<span class="ra-try">Try</span>' + P.map((p,i) => `<button class="ra-chip" type="button" aria-pressed="${i===first}" data-i="${i}">${esc(p.k)}</button>`).join('');
   const inputEl = $('#ra-input'), ap = $('#ra-approve');
   let curI = first;
