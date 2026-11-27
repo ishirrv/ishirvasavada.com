@@ -1530,7 +1530,7 @@ const tracking = API && !store('iv-owner') && !navigator.globalPrivacyControl;
 function track(type, detail) {
   if (!tracking) return;
   const body = JSON.stringify(type === 'visit'
-    ? { sid, path: location.pathname + location.hash, ref: new URLSearchParams(location.search).get('r') || new URLSearchParams(location.search).get('utm_source'), referrer: document.referrer, w: innerWidth }
+    ? { sid, path: location.pathname + location.hash, ref: new URLSearchParams(location.search).get('r') || new URLSearchParams(location.search).get('utm_source') || location.pathname.replace(/^\/+|\/+$/g, '') || null, referrer: document.referrer, w: innerWidth }
     : { sid, type, detail: detail == null ? undefined : String(detail) });
   try { navigator.sendBeacon(API + (type === 'visit' ? '/v' : '/e'), body); } catch { /* stats are best-effort */ }
 }
@@ -2405,7 +2405,9 @@ document.querySelectorAll('.trace').forEach(tr => {
   }
   // Not offered to visitors. Only a private link like ?theme=vanta shows a company's colors, for that page view only.
   try { localStorage.removeItem('iv-brand'); } catch { /* storage blocked */ }
-  const k = (new URLSearchParams(location.search).get('theme') || '').toLowerCase();
+  // A short company link (/gitlab) or a ?theme= link shows that company's colors.
+  const slug = location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
+  const k = (new URLSearchParams(location.search).get('theme') || (B[slug] ? slug : '')).toLowerCase();
   if (B[k]) apply(k);
 }
 

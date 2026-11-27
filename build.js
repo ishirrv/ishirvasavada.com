@@ -57,6 +57,12 @@ fs.writeFileSync(path.join(out, 'index.html'), head + body + '\n</body>\n</html>
 fs.cpSync(path.join(root, 'media'), path.join(out, 'media'), { recursive: true });
 for (const f of ['favicon-32.png', 'favicon-192.png', 'apple-touch-icon.png']) fs.copyFileSync(path.join(root, f), path.join(out, f));
 if (hasResume) fs.copyFileSync(path.join(root, 'resume.pdf'), path.join(out, 'resume.pdf'));
+// Short company links (ishirvasavada.com/gitlab): the same page at its own path, with that company's look.
+// The page picks the look and the visit tag from its path. Paths are made absolute so files still load.
+const LINKS = ['gitlab'];
+const page = head.replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"') + body + '\n</body>\n</html>\n';
+const abs = page.replace(/(src|href)="(?!https?:|#|\/|mailto:|data:|tel:|\$)/g, '$1="/').replace(/(["'`])media\//g, '$1/media/');
+for (const slug of LINKS) { fs.mkdirSync(path.join(out, slug), { recursive: true }); fs.writeFileSync(path.join(out, slug, 'index.html'), abs); }
 fs.writeFileSync(path.join(out, 'CNAME'), new URL(SITE).host + '\n');
 fs.writeFileSync(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
 fs.writeFileSync(path.join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${SITE}/</loc></url></urlset>\n`);
