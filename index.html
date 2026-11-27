@@ -724,7 +724,9 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .ra-chip[aria-pressed="true"]{border-color:var(--pc);color:var(--pc);background:color-mix(in srgb,var(--pc) 9%,var(--panel))}
 .ra-pick{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 12px}
 .ra-pick-k{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-right:4px}
-.ra-opt{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px dashed var(--rule);border-radius:8px;font-size:12.5px;color:var(--ink-3);transition:all .25s ease}
+.ra-opt{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px dashed var(--rule);border-radius:8px;background:none;font:inherit;font-size:12.5px;color:var(--ink-2);cursor:pointer;transition:all .25s ease}
+.ra-opt:hover{border-style:solid;border-color:var(--ink-3);color:var(--ink)}
+.ra-opt:focus-visible{outline:2px solid var(--pc);outline-offset:2px}
 .ra-opt.on{border-style:solid;border-color:var(--pc);color:var(--ink);background:color-mix(in srgb,var(--pc) 10%,var(--panel));font-weight:500}
 .ra-opt.on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pc)}
 .ra-why{flex-basis:100%;margin:4px 0 0;font-size:13px;color:var(--ink-2);min-height:1.45em}
@@ -1187,7 +1189,7 @@ html:has(.demo[open]){overflow:hidden}
         <p class="ra-label" id="ra-label">Describe a policy in plain English</p>
         <div class="ra-box"><div class="ra-input" id="ra-input" aria-labelledby="ra-label"></div><button class="btn primary ra-gen" type="button" id="ra-gen">Generate</button></div>
         <div class="ra-chips" id="prompts" role="group" aria-label="Example policies"></div>
-        <div class="ra-pick" id="ra-pick" aria-live="polite"><span class="ra-pick-k">Feature</span><span class="ra-opt" data-t="table">Decision table</span><span class="ra-opt" data-t="tree">Decision tree</span><span class="ra-opt" data-t="fn">JavaScript function</span><span class="ra-opt" data-t="obj">Custom object</span><p class="ra-why" id="ra-why"></p></div>
+        <div class="ra-pick" id="ra-pick" aria-live="polite"><span class="ra-pick-k">Feature</span><button type="button" class="ra-opt" data-t="table" title="See an example built as a decision table">Decision table</button><button type="button" class="ra-opt" data-t="tree" title="See an example built as a decision tree">Decision tree</button><button type="button" class="ra-opt" data-t="fn" title="See an example built as a JavaScript function">JavaScript function</button><button type="button" class="ra-opt" data-t="obj" title="See an example that needs a custom object">Custom object</button><p class="ra-why" id="ra-why"></p></div>
         <div class="dtable" id="rule-out" aria-live="polite"></div>
         <div class="ra-foot">
           <div class="ra-tests"><div class="evals" id="evals" aria-hidden="true"></div><span id="ev-text">12 / 12 cases passed</span></div>
@@ -1690,14 +1692,14 @@ document.addEventListener('click', e => {
   // Each policy goes to the feature that fits it: a table for lookups, a tree for if-then steps, a function for custom math.
   const KIND = { table: 'decision table', tree: 'decision tree', fn: 'JavaScript function', obj: 'custom object' };
   const P = [
-    { k:'Tenant config', area:'Tenants', type:'tree', why:'A decision tree: whether a change can self-serve depends on a chain of checks, and the upgrade freeze has to come first.',
-      q:'Let tenants change their IP allowlist and maintenance window themselves. SAML and private networking changes need an SRE, and nothing applies during an upgrade.',
-      fail:7,
-      trace:[['Read data','Read the tenant config model: 4 settings and the maintenance calendar','schema.lookup(Tenant, ConfigChange, MaintenanceWindow) via MCP'],['Understand','Who approves depends on the setting and on whether an upgrade is running.','plan.intent()'],['Choose feature','Decision tree: checks in a set order','route(intent) → decision_tree'],['Draft','Drafted version 1 of the decision tree','trees.draft()'],['Test','11 of 12 cases passed. Case 8 failed: an IP allowlist edit applied mid-upgrade, because the tree checked the setting before the upgrade freeze.','evals.run(12)','warn'],['Fix','Version 2 checks for a running upgrade first','trees.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Changes queue instead of applying. Every change keeps an audit entry and a rollback.','guardrails.check()'],['Approval','Waiting on the SRE lead','request_approval(sre_lead)']],
+    { k:'Upgrade scheduling', area:'Instances', type:'tree', why:'A decision tree: the upgrade date depends on a chain of checks, and a change freeze has to win over everything else.',
+      q:"Upgrade each customer during their chosen maintenance window, give them 3 days' notice, and skip any week they've marked as a change freeze.",
+      fail:5,
+      trace:[['Read data','Read the instance model: maintenance windows, notices and change freezes','schema.lookup(Instance, MaintenanceWindow, ChangeFreeze) via MCP'],['Understand','Timing depends on the window, the notice and any freeze.','plan.intent()'],['Choose feature','Decision tree: checks in a set order','route(intent) → decision_tree'],['Draft','Drafted version 1 of the decision tree','trees.draft()'],['Test',"11 of 12 cases passed. Case 6 failed: an upgrade ran during a customer's quarter-end change freeze, because version 1 never checked the freeze calendar.",'evals.run(12)','warn'],['Fix','Version 2 checks for a change freeze first','trees.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Every upgrade can roll back, and the customer hears from us before and after.','guardrails.check()'],['Approval','Waiting on the platform operations lead','request_approval(platform_ops_lead)']],
       tree:{
-        v1:{q:'IP allowlist or maintenance window?', yes:{out:'Apply now (self-serve)'}, no:{q:'Upgrade running on this tenant?', yes:{out:'Queue until the upgrade ends'}, no:{out:'SRE approves (SAML, private networking)'}}},
-        v2:{q:'Upgrade running on this tenant?', fix:true, yes:{out:'Queue until the upgrade ends'}, no:{q:'IP allowlist or maintenance window?', yes:{out:'Apply now (self-serve)'}, no:{out:'SRE approves (SAML, private networking)'}}},
-        note:'v2 checks for a running upgrade first, so no change, self-serve or not, lands in the middle of maintenance.'} },
+        v1:{q:"Inside the customer's maintenance window?", yes:{q:'Notice sent 3+ days ago?', yes:{out:'Upgrade now'}, no:{out:'Send notice, upgrade next window'}}, no:{out:'Wait for the next window'}},
+        v2:{q:'Customer in a change freeze this week?', fix:true, yes:{out:'Skip to the first window after the freeze'}, no:{q:"Inside the customer's maintenance window?", yes:{q:'Notice sent 3+ days ago?', yes:{out:'Upgrade now'}, no:{out:'Send notice, upgrade next window'}}, no:{out:'Wait for the next window'}}},
+        note:'v2 checks the change freeze first, so no customer gets an upgrade during quarter-end or any week they asked to keep quiet.'} },
     { k:'Discount policy', type:'table', why:'A decision table: the rule is a lookup on a few fixed values (region, event, days before renewal).',
       q:'Give APAC accounts 10% off when they upgrade within 30 days of renewal.',
       fail:6,
@@ -1748,7 +1750,7 @@ document.addEventListener('click', e => {
   const inputEl = $('#ra-input'), ap = $('#ra-approve');
   let curI = first;
   const crumb = $('#ra-crumb'), area = p => { crumb.textContent = `${p.area || 'Billing'} · Policies · Draft`; };
-  function pickShow(p) { opts.forEach(o => o.classList.toggle('on', !!p && o.dataset.t === p.type)); why.textContent = p ? p.why : 'Choosing the feature that fits this rule…'; }
+  function pickShow(p) { opts.forEach(o => { o.classList.toggle('on', !!p && o.dataset.t === p.type); o.setAttribute('aria-pressed', !!p && o.dataset.t === p.type); }); why.textContent = p ? p.why : 'Choosing the feature that fits this rule…'; }
   function ready(on) { ap.disabled = !on; ap.className = 'btn primary'; ap.textContent = 'Approve and publish'; }
   ap.addEventListener('click', () => {
     ap.disabled = true; ap.className = 'btn done'; ap.textContent = 'Published as a dry run';
@@ -1818,6 +1820,8 @@ document.addEventListener('click', e => {
     if (me === token) final(p);
   }
   box.addEventListener('click', e => { const b = e.target.closest('.ra-chip'); if (b) run(+b.dataset.i); });
+  // Picking a feature shows an example the agent built with it.
+  $('#ra-pick').addEventListener('click', e => { const o = e.target.closest('.ra-opt'); if (!o) return; const t = o.dataset.t; run(P[curI].type === t ? curI : P.findIndex(p => p.type === t)); });
   final(P[first]);
 }
 
