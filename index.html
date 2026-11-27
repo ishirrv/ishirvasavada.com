@@ -736,6 +736,7 @@ mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding
 .ra-opt:hover{border-style:solid;border-color:var(--ink-3);color:var(--ink)}
 .ra-opt:focus-visible{outline:2px solid var(--pc);outline-offset:2px}
 .ra-opt.on{border-style:solid;border-color:var(--pc);color:var(--ink);background:color-mix(in srgb,var(--pc) 10%,var(--panel));font-weight:500}
+.ra-opt.rec::after{content:"Agent's pick";margin-left:2px;padding:1px 6px;border-radius:999px;background:color-mix(in srgb,var(--pc) 16%,transparent);font-size:10.5px;font-weight:500;color:var(--ink-2)}
 .ra-opt.on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pc)}
 .ra-why{flex-basis:100%;margin:4px 0 0;font-size:13px;color:var(--ink-2);min-height:1.45em}
 .dtree{padding:14px 16px 16px;font-size:13.5px}
@@ -1703,6 +1704,9 @@ document.addEventListener('click', e => {
     { k:'Upgrade scheduling', area:'Instances', type:'tree', why:'A decision tree: the upgrade date depends on a chain of checks, and a change freeze has to win over everything else.',
       q:"Upgrade each customer during their chosen maintenance window, give them 3 days' notice, and skip any week they've marked as a change freeze.",
       fail:5,
+      alt:{ table:{in:['Change freeze','In window','Notice sent (days)'], out:['Action','Message'], rows:[['= Yes','any','any','Wait','Skipped: change freeze'],['= No','= Yes','≥ 3','Upgrade now','Upgrade started'],['= No','= Yes','< 3','Send notice','Upgrade next window'],['= No','= No','any','Wait','Next window']]},
+        fn:['function upgradeAction(instance) {','  if (instance.inChangeFreeze) return "skip until after the freeze";','  if (!instance.inMaintenanceWindow) return "wait for the next window";','  return instance.noticeDays >= 3 ? "upgrade now" : "send notice, upgrade next window";','}'],
+        why:{ table:"It works as a table too, because row order does what the tree's order does. The tree makes 'freeze first' easier to see.", fn:"It works as code, but customers' admins and support can't read or change it without a developer." } },
       trace:[['Read data','Read the instance model: maintenance windows, notices and change freezes','schema.lookup(Instance, MaintenanceWindow, ChangeFreeze) via MCP'],['Understand','Timing depends on the window, the notice and any freeze.','plan.intent()'],['Choose feature','Decision tree: checks in a set order','route(intent) → decision_tree'],['Draft','Drafted version 1 of the decision tree','trees.draft()'],['Test',"11 of 12 cases passed. Case 6 failed: an upgrade ran during a customer's quarter-end change freeze, because version 1 never checked the freeze calendar.",'evals.run(12)','warn'],['Fix','Version 2 checks for a change freeze first','trees.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Every upgrade can roll back, and the customer hears from us before and after.','guardrails.check()'],['Approval','Waiting on the platform operations lead','request_approval(platform_ops_lead)']],
       tree:{
         v1:{q:"Inside the customer's maintenance window?", yes:{q:'Notice sent 3+ days ago?', yes:{out:'Upgrade now'}, no:{out:'Send notice, upgrade next window'}}, no:{out:'Wait for the next window'}},
@@ -1711,6 +1715,9 @@ document.addEventListener('click', e => {
     { k:'Discount policy', type:'table', why:'A decision table: the rule is a lookup on a few fixed values (region, event, days before renewal).',
       q:'Give APAC accounts 10% off when they upgrade within 30 days of renewal.',
       fail:6,
+      alt:{ tree:{q:'Region is APAC?', yes:{q:'Order is an upgrade?', yes:{q:'Within 30 days of renewal (local time)?', yes:{out:'10% off the upgrade'}, no:{out:'No discount'}}, no:{out:'No discount'}}, no:{out:'No discount'}},
+        fn:['function renewalDiscount(order) {','  const days = daysToRenewal(order, order.account.timezone);','  const eligible = order.account.region === "APAC" && order.type === "upgrade" && days <= 30;','  return eligible ? 0.10 : 0;','}'],
+        why:{ tree:"It works as a tree, but every 'no' branch ends the same way. The table says it in three rows.", fn:"It works as code, but a billing admin can't change the region or the window without a developer." } },
       trace:[['Read data','Read the billing data model: 3 objects, 41 fields','schema.lookup(Account, Subscription, Order) via MCP'],['Understand','Trigger: an upgrade. Conditions: region and a 30-day window.','plan.intent()'],['Choose feature','Decision table: a lookup on fixed values','route(intent) → decision_table'],['Draft','Drafted version 1 of the decision table','tables.draft()'],['Test',"11 of 12 cases passed. Case 7 failed: the renewal date was read in UTC instead of the customer's timezone.",'evals.run(12)','warn'],['Fix',"Version 2 compares dates in the customer's timezone",'tables.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Reversible, touches no personal data, runs as a dry run first','guardrails.check()'],['Approval','Waiting on a billing admin','request_approval(billing_admin)']],
       table:{in:['Region','Order type','Days to renewal'], fix:2, orig:'Days to renewal (UTC)', fixed:'Days to renewal (local)',
         out:['Discount','Apply to','Message'],
@@ -1719,6 +1726,9 @@ document.addEventListener('click', e => {
     { k:'Approval routing', type:'tree', why:'A decision tree: each answer decides the next question, and the order of the questions matters.',
       q:'Credit memos go to the controller. Invoices over $50K need finance approval, plus sales ops if the customer is new.',
       fail:4,
+      alt:{ table:{in:['Document','Total','Customer age (days)'], out:['Approver'], rows:[['= Credit memo','any','any','Controller'],['= Invoice','≥ 50,000','< 90','Finance lead, then sales ops'],['= Invoice','≥ 50,000','≥ 90','Finance lead'],['= Invoice','< 50,000','any','Post as normal']]},
+        fn:['function approvers(doc) {','  if (doc.type === "credit_memo") return ["controller"];','  if (doc.total < 50000) return [];','  return doc.customerAgeDays < 90 ? ["finance_lead", "sales_ops"] : ["finance_lead"];','}'],
+        why:{ table:"It works as a table if the rows stay in the right order. The tree shows why credit memos are checked first.", fn:"It works as code, but the routing becomes invisible to the finance team that owns it." } },
       trace:[['Read data','Read the billing data model: 3 objects, 30 fields','schema.lookup(Invoice, CreditMemo, Account) via MCP'],['Understand','Three checks: document type, total, customer age.','plan.intent()'],['Choose feature','Decision tree: if-then steps in a set order','route(intent) → decision_tree'],['Draft','Drafted version 1 of the decision tree','trees.draft()'],['Test','11 of 12 cases passed. Case 5 failed: a $60K credit memo went to finance instead of the controller.','evals.run(12)','warn'],['Fix','Version 2 checks for credit memos first','trees.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Only routes approvals. Changes no amounts.','guardrails.check()'],['Approval','Waiting on the finance lead','request_approval(finance_lead)']],
       tree:{
         v1:{q:'Total is $50K or more?', yes:{q:'Customer for under 90 days?', yes:{out:'Finance lead, then sales ops'}, no:{out:'Finance lead'}}, no:{q:'Is it a credit memo?', yes:{out:'Controller'}, no:{out:'Post as normal'}}},
@@ -1727,6 +1737,9 @@ document.addEventListener('click', e => {
     { k:'Usage pricing', type:'fn', why:'A JavaScript function: the charge needs custom math (free allowance, a per-call rate, a monthly cap and proration).',
       q:'First 10,000 API calls a month are free, then $0.002 each, capped at $500 a month.',
       fail:3,
+      alt:{ table:{in:['Calls this month'], out:['Rate','Message'], rows:[['≤ 10,000','$0','Free allowance'],['> 10,000','$0.002 per call','Capped at $500']]},
+        tree:{q:'Over the free allowance?', yes:{q:'Charge above the $500 cap?', yes:{out:'Charge $500'}, no:{out:'Charge $0.002 per extra call'}}, no:{out:'No charge'}},
+        why:{ table:"A table can hold the tiers, but not the proration for a partial month. That's why the agent picked a function.", tree:"A tree shows the steps, but it can't prorate the allowance and cap. The function can." } },
       trace:[['Read data','Read the usage data model: 2 objects, 18 fields','schema.lookup(Usage, Subscription) via MCP'],['Understand','A free allowance, a rate and a monthly cap.','plan.intent()'],['Choose feature','JavaScript function: custom math','route(intent) → js_function'],['Draft','Drafted version 1 of the function','functions.draft()'],['Test','11 of 12 cases passed. Case 4 failed: an account that started mid-month got the full allowance and cap.','evals.run(12)','warn'],['Fix','Version 2 prorates the allowance and cap by days active','functions.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety','Runs in a sandbox. Read-only access to usage.','guardrails.check()'],['Approval','Waiting on a billing admin','request_approval(billing_admin)']],
       fn:{
         v1:['function usageCharge(calls) {','  const free = 10000, rate = 0.002, cap = 500;','  const billable = Math.max(0, calls - free);','  return Math.min(billable * rate, cap);','}'],
@@ -1736,6 +1749,9 @@ document.addEventListener('click', e => {
     { k:'Retention policy', type:'table', why:'A decision table: two fixed inputs (record age, legal hold) decide one action.',
       q:'Purge usage records older than 7 years unless the account is on legal hold.',
       fail:9,
+      alt:{ tree:{q:'Record older than 7 years?', yes:{q:'Legal hold on the account or a parent?', yes:{out:'Keep'}, no:{out:'Archive, then purge'}}, no:{out:'Keep'}},
+        fn:['function retentionAction(record) {','  if (record.ageYears <= 7) return "keep";','  return hasLegalHold(record.account, { includeParents: true }) ? "keep" : "archive_then_purge";','}'],
+        why:{ tree:"It works as a tree too. The table is easier for Legal to audit: one row per outcome.", fn:"It works as code, but Legal can't review it the way they can review a table." } },
       trace:[['Read data','Read the data model: 3 objects, 33 fields','schema.lookup(Usage, Account, LegalHold) via MCP'],['Understand','Action: purge. Exception: legal hold.','plan.intent()'],['Choose feature','Decision table: a lookup on fixed values','route(intent) → decision_table'],['Draft','Drafted version 1 of the decision table','tables.draft()'],['Test',"11 of 12 cases passed. Case 10 failed: a legal hold on a parent account wasn't applied to its child accounts.",'evals.run(12)','warn'],['Fix','Version 2 checks for holds up the account hierarchy','tables.revise()'],['Retest','All 12 cases pass','evals.run(12)'],['Safety',"Deleted data can't come back, so it archives first and needs 2 approvers",'guardrails.check()'],['Approval','Waiting on Legal and the data owner','request_approval(legal, data_owner)']],
       table:{in:['Record age (years)','Legal hold'], fix:1, orig:'Legal hold (account)', fixed:'Legal hold (account or parent)',
         out:['Action','Message'],
@@ -1750,7 +1766,11 @@ document.addEventListener('click', e => {
   const inputEl = $('#ra-input'), ap = $('#ra-approve');
   let curI = first;
   const crumb = $('#ra-crumb'), area = p => { crumb.textContent = `${p.area || 'Billing'} · Policies · Draft`; };
-  function pickShow(p) { opts.forEach(o => { o.classList.toggle('on', !!p && o.dataset.t === p.type); o.setAttribute('aria-pressed', !!p && o.dataset.t === p.type); }); why.textContent = p ? p.why : 'Choosing the feature that fits this rule…'; }
+  // t is the feature on screen; the agent's own pick (p.type) keeps its label either way
+  function pickShow(p, t = p && p.type) {
+    opts.forEach(o => { o.classList.toggle('on', !!p && o.dataset.t === t); o.classList.toggle('rec', !!p && o.dataset.t === p.type); o.setAttribute('aria-pressed', !!p && o.dataset.t === t); });
+    why.textContent = !p ? 'Choosing the feature that fits this rule…' : t === p.type ? p.why : `You picked a ${KIND[t]}. ${p.alt.why[t]}`;
+  }
   function ready(on) { ap.disabled = !on; ap.className = 'btn primary'; ap.textContent = 'Approve and publish'; }
   ap.addEventListener('click', () => {
     ap.disabled = true; ap.className = 'btn done'; ap.textContent = 'Published as a dry run';
@@ -1785,6 +1805,11 @@ document.addEventListener('click', e => {
     return cap('JavaScript function · runs on each invoice', v2) + `<pre class="fncode"><code>${html}</code></pre>` + note(F, v2);
   }
   const render = (p, v2) => ({ table: dt, tree, fn })[p.type](p, v2);
+  // The same policy built with a feature the agent didn't pick (final version only)
+  const renderAs = (p, t) => t === p.type ? render(p, true)
+    : t === 'table' ? dt({ table: { ...p.alt.table, fix: -1 } }, true)
+    : t === 'tree' ? tree({ tree: { v1: p.alt.tree, v2: p.alt.tree } }, true)
+    : fn({ fn: { v1: p.alt.fn, v2: p.alt.fn, fixed: [] } }, true);
   // row: [plain step, result, technical call, warn?]
   function final(p) {
     area(p); inputEl.textContent = p.q; ready(true); pickShow(p);
@@ -1818,7 +1843,13 @@ document.addEventListener('click', e => {
   }
   box.addEventListener('click', e => { const b = e.target.closest('.ra-chip'); if (b) run(+b.dataset.i); });
   // Picking a feature shows an example the agent built with it.
-  $('#ra-pick').addEventListener('click', e => { const o = e.target.closest('.ra-opt'); if (!o) return; const t = o.dataset.t; run(P[curI].type === t ? curI : P.findIndex(p => p.type === t)); });
+  // Picking a feature shows the same policy built that way; the agent's pick stays labeled.
+  $('#ra-pick').addEventListener('click', e => {
+    const o = e.target.closest('.ra-opt'); if (!o) return;
+    const p = P[curI], t = o.dataset.t;
+    token++; final(p);   // finish any run in progress first
+    pickShow(p, t); out.innerHTML = renderAs(p, t);
+  });
   final(P[first]);
 }
 
